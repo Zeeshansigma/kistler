@@ -242,13 +242,9 @@ background: #ef3f1e;
   {%- endfor -%}
 
   <div>
-<<<<<<< Updated upstream
     <p>
       <a class="clear-all-btn" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
     </p>
-=======
-    <p><a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a></p>
->>>>>>> Stashed changes
 
     {%- for filter in collection.filters -%}
       {%- if filter.type == "price_range" -%}
