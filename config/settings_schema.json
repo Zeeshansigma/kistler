@@ -196,13 +196,13 @@
       {
         "type": "text",
         "id": "checkbox_filtering",
-        "label": "Add Metafield Key",
+        "label": "Add Metafield Key for Checkbox",
         "info": "Add Comma Sperated values"
       },
       {
         "type": "text",
         "id": "swatches_filtering",
-        "label": "Add Metafield Key",
+        "label": "Add Metafield Key for Swatches",
         "info": "Add Comma Sperated values"
       }
     ]
