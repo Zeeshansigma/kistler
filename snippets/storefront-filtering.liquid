@@ -32,6 +32,15 @@
     font-size: 1.4rem;
     font-weight: 400;
 }
+.filtering-group h3 {
+    width: 100%;
+    display: block;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    margin-bottom: 0;
+}
+
 </style>
 
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
@@ -50,7 +59,7 @@
 
     <details class="store_filtering-{{ filter.label }}" style="display: block;">
       <summary>
-        <div>
+        <div class="heading-filters">
           <span>{{ filter.label }}</span>
 
           {%- if filter.active_values.size > 0 -%}
