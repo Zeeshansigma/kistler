@@ -1,0 +1,224 @@
+
+
+<section class="section section--video-slideshow section--video-slideshow--{{ section.id }}
+{% if section.settings.full_width %}section--video-slideshow--full-width{% endif %}
+{% unless section.settings.top_padding %}section--video-slideshow--no-top-padding{% endunless %}
+{% unless section.settings.bottom_padding %}section--video-slideshow--no-bottom-padding{% endunless %}" {{ section.shopify_attributes }}>
+ 
+    <style>
+        {% if section.settings.video_overlay_color != blank %}
+        .section--video-slideshow--{{ section.id }} .video__image:after {
+            background-color: {{ section.settings.video_overlay_color | color_modify: 'alpha', 0.75 }};
+        }
+        {% endif %}
+
+        {% if section.settings.bkgd_color %}
+        .section--video-slideshow--{{ section.id }} { background-color: {{ section.settings.bkgd_color }}; }
+        {% endif %}
+
+        {% if section.settings.text_color %}
+        .section--video-slideshow--{{ section.id }},
+        .section--video-slideshow--{{ section.id }} .video-slideshow__heading { color: {{ section.settings.text_color }}; }
+        {% endif %}
+    </style>
+  
+  <div class="container">
+    {% if section.settings.title != blank %}<h2 class="video-slideshow__heading">{{ section.settings.title }}</h2>{% endif %}
+    {% if section.settings.description != blank %}<div class="video-slideshow__description">{{ section.settings.description }}</div>{% endif %}
+
+    <div class="swiper-wrap">
+        <div id="video-swiper--{{ section.id }}" class="swiper-container video-swiper">
+            <div class="swiper-wrapper">
+                {% for block in section.blocks %}
+                    <div class="swiper-slide">
+                        <div class="video-container">
+                            <div class="yt-player" data-id="{{block.settings.video_url.id}}"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="swiper-button-prev {% if section.settings.invert_arrows %}swiper-button-white{% else %}swiper-button-black{% endif %}"></div>
+        <div class="swiper-button-next {% if section.settings.invert_arrows %}swiper-button-white{% else %}swiper-button-black{% endif %}"></div>
+    </div>
+
+    <div id="video-thumbs-swiper--{{ section.id }}" class="thumbs-swiper-container video-thumb-swiper {% if section.settings.invert_arrows %}invert-arrows{% endif %}">
+        <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+                <div class="swiper-slide">
+                    <figure class="lazy video__image" data-src="{{ block.settings.image | img_url: '400x' }}">
+                        <figcaption class="video__content">
+                          <div class="video__play">{% include 'icon-play.svg' %}</div>
+                        </figcaption>
+                    </figure>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            (function($) {
+                $(function() {
+                    var players = [];
+
+                    // Include YT script if needed
+                    if (!$('#yt_iframe_api').length) {
+                        var tag = document.createElement('script');
+
+                        tag.id = 'yt_iframe_api';
+                        tag.src = 'https://www.youtube.com/iframe_api';
+
+                        var firstScriptTag = document.getElementsByTagName('script')[0];
+                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                    }
+
+                    window.queueOnYoutubeIframeAPIReady(function () {
+                        var slides = $('#video-swiper--{{ section.id }} .swiper-slide');
+                        
+                        slides.each(function(indx, el) {
+                            var slide_yt_player = $(el).find('.yt-player');
+                            var player = new YT.Player(slide_yt_player.get(0), {
+                                height: '390',
+                                width: '640',
+                                videoId: slide_yt_player.data('id'),
+                                playerVars: {
+                                    autoplay: 0,
+                                    modestbranding: 1,
+                                    playsinline: 1,
+                                    rel: 0
+                                }
+                            });
+
+                            players.push(player);
+                        });
+                    });
+
+                    var thumbSwiper = new Swiper('.section--video-slideshow--{{ section.id }} .thumbs-swiper-container', {
+                        slidesPerView: 3.5,
+                        spaceBetween: 10,
+                        freeMode: {
+                            enabled: true,
+                            sticky: true
+                        },
+                        slideToClickedSlide: true,
+                        centerInsufficientSlides: true,
+                        watchSlidesProgress: true,
+                        breakpoints: {
+                            768: { // when window width is <= 768px
+                                slidesPerView: 2.5,
+                                spaceBetweenSlides: 20
+                            }
+                        }
+                    });
+
+                    var videoSlideshowSwiper = new Swiper('.section--video-slideshow--{{ section.id }} .swiper-container', {
+                        effect: 'slide',
+                        spaceBetween: 0,
+                        slidesPerView: 1,
+                        centeredSlides: true,
+                        navigation: {
+                            nextEl: '.section--video-slideshow--{{ section.id }} .swiper-button-next',
+                            prevEl: '.section--video-slideshow--{{ section.id }} .swiper-button-prev'
+                        },
+                        on: {
+                            slideChange: function() {        
+                                players[videoSlideshowSwiper.previousIndex].pauseVideo();
+
+                                // if (thumbSwiper.clickedIndex === videoSlideshowSwiper.activeIndex) {
+                                //     players[videoSlideshowSwiper.activeIndex].playVideo();
+                                // }
+                            }
+                        },
+                        thumbs: {
+                            swiper: thumbSwiper
+                        }
+                    });
+
+                    
+
+                });
+            })(jQuery)
+        });
+    </script>
+</section>
+
+{% schema %}
+  {
+    "name": "Video Slideshow",
+    "settings": [
+        {
+            "type":"color",
+            "id":"bkgd_color",
+            "label":"Background Color",
+            "default":"#fff"
+        },
+        {
+            "type":"color",
+            "id":"text_color",
+            "label":"Text Color",
+            "default":"#1a1a1a"
+        },
+        {
+            "type":"checkbox",
+            "id":"full_width",
+            "label":"Full Width?"
+        },
+        {
+            "type":"checkbox",
+            "id":"top_padding",
+            "label":"Top Padding?",
+            "default":true
+        },
+        {
+            "type":"checkbox",
+            "id":"bottom_padding",
+            "label":"Bottom Padding?",
+            "default":true
+        },
+        {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+        },
+        {
+            "type": "richtext",
+            "id":"description",
+            "label":"Description"
+        },
+        {
+            "type":"checkbox",
+            "id":"invert_arrows",
+            "label":"Invert arrow navigation color?"
+        },
+        {
+            "type":"color",
+            "id":"video_overlay_color",
+            "label":"Video placeholder overlay color"
+        }
+    ],
+    "blocks": [
+        {
+        "type":"video-slide",
+        "name":"Video slide",
+        "settings": [
+            {
+                "type": "video_url",
+                "id": "video_url",
+                "label": "YouTube Video URL",
+                "accept": ["youtube"]
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Placeholder Image"
+            }
+        ]}
+    ],
+    "presets": [{
+      "name": "Video Slideshow",
+      "category": "Content"
+    }]
+  }
+{% endschema %}

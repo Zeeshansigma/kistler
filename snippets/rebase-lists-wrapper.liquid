@@ -1,0 +1,60 @@
+<main class="content content--has-sidebar content--sidebar-left">
+  <div class="container">
+    {% include 'page-utility' %}
+  </div>
+  <div class="container">
+    <div class="row row--gutters row--reversed">
+      <section class="page-main column column--xs-12 column--md-9">
+        <header class="page-header">
+          <h1>Wishlist</h1>
+        </header>
+        <div class="page-content" id="customer_orders">
+          <style>
+            .lists-manager-wrapper {position:relative;z-index:100;width:100%;margin:0 auto;padding:20px 0 40px;font-size:16px;line-height: 1.5;}
+            .lists-manager-content {border:1px solid #f7f7f7;border-top:0;padding:30px 0;}
+            .lists-manager-tabs {background:#f7f7f7;width:100%;position: relative;}
+            .lists-manager-tabs ul {margin:0;padding:0;width:100%;max-width:600px;display:table;table-layout: fixed;}
+            .lists-manager-tabs ul li.lists-manager-tab {display: table-cell;text-align:center;margin:0;line-height: 1;}
+            .lists-manager-tab a,
+            .lists-manager-tab a:link,
+            .lists-manager-tab a:visited {font-size:17px;display: block;width:100%;padding:17px 40px;color:#999;position: relative;}
+            .lists-manager-tab--active a,
+            .lists-manager-tab--active a:link,
+            .lists-manager-tab--active a:visited {background:#fff;color:#252a2b;}
+            .lists-manager-tab--active:first-child a {border-left: 1px solid #f7f7f7;}
+            .lists-manager-tab--active a::before {position: absolute;top:0px;left:0;width:100%;content:'';display: block;height:2px;background:{{ shop.email_accent_color }};}
+            #account-details {font-size:13px;line-height: 1;display:block;margin:0 0 30px;}
+            #return-arrow {display:inline-block;fill:#666;width:auto;height:28px;margin-right: 4px;vertical-align: -10px;}
+            @media screen and (max-width: 59em) {
+              .lists-manager-tab a,
+              .lists-manager-tab a:link,
+              .lists-manager-tab a:visited {font-size:15px;padding:14px 20px;}
+            }
+          </style>
+          <main class="lists-manager-wrapper">
+            <header class="lists-manager-header">
+              <nav class="lists-manager-tabs">
+                <ul>
+                  {% for type in active_list_types %}
+                  {%- assign type_prefs = type | split:'|' -%}
+                  {%- assign type_handle = type_prefs[0] -%}
+                  {%- assign type_title = type_prefs[1]  -%}
+                  <li class="lists-manager-tab{% if type_handle == list_type %} lists-manager-tab--active{% endif %}">
+                    <a href="{{ path_prefix }}/lists/{{ type_handle }}?uid={{customer.id}}" title="{{ type_title }}">{{ type_title }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </nav>
+            </header>
+            <div class="lists-manager-content">
+              {{ lists_content }}
+            </div>
+          </main>
+        </div>
+      </section>
+      <div class="page-sidebar column column--xs-12 column--md-3">
+        {% include 'customer-sidebar-nav' %}
+      </div>
+    </div>
+  </div>
+</main>

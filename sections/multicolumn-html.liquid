@@ -1,0 +1,97 @@
+<section class="section section--multicolumn-html section--multicolumn-html--{{ section.id }}
+    {% if section.settings.full_width %}section--multicolumn-html--full-width{% endif %}
+    {% unless section.settings.top_padding %}section--multicolumn-html--no-top-padding{% endunless %}
+    {% unless section.settings.bottom_padding %}section--multicolumn-html--no-bottom-padding{% endunless %}" 
+{{ section.shopify_attributes }}>
+    <style>
+        {% if section.settings.bkgd_color %}
+        .section--multicolumn-html--{{ section.id }} { background-color: {{ section.settings.bkgd_color }}; }
+        {% endif %}
+
+        {% if section.settings.text_color %}
+        .section--multicolumn-html--{{ section.id }} .multicolumn-content { color: {{ section.settings.text_color }}; }
+        {% endif %}
+    </style>
+
+    <div class="container">
+        {% if section.settings.title != blank %}
+            <h2 class="section--multicolumn-html-title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        <div class="multicolumn-wrap">
+            {% for block in section.blocks %}
+                <div class="multicolumn multicolumn-{{ forloop.index }}">
+                    {% if block.settings.html_content %}
+                        <div class="multicolumn-content">{{ block.settings.html_content }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Multi-column html",
+    "max_blocks": 5,
+    "settings": [
+        {
+            "type": "header",
+            "content": "Design Settings"
+        },
+        {
+            "type":"color",
+            "id":"bkgd_color",
+            "label":"Background Color",
+            "default":"#fff"
+        },
+        {
+            "type":"color",
+            "id":"text_color",
+            "label":"Text Color",
+            "default":"#1a1a1a"
+        },
+        {
+            "type":"checkbox",
+            "id":"full_width",
+            "label":"Full Width?"
+        },
+        {
+            "type":"checkbox",
+            "id":"top_padding",
+            "label":"Top Padding?",
+            "default":true
+        },
+        {
+            "type":"checkbox",
+            "id":"bottom_padding",
+            "label":"Bottom Padding?",
+            "default":true
+        },
+        {
+            "type": "header",
+            "content": "Content Settings"
+        },
+        {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+        }
+    ],
+    "blocks": [{
+        "type":"multi-column-html-block",
+        "name":"Multi-column html block",
+        "settings":[ 
+          {
+            "type":"html",
+            "id":"html_content",
+            "label":"HTML Content"
+          }
+        ]
+    }],
+    "presets": [{
+        "name": "Multi-column html",
+        "category": "Content"
+    }]
+}
+{% endschema %}

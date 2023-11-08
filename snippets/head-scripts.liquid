@@ -1,0 +1,46 @@
+<script src="{{ 'theme-libs.js' | asset_url }}" defer></script>
+<script src="{{ 'theme-custom.min.js' | asset_url }}" defer></script>
+<script src="{{ 'swiper.min.js' | asset_url }}" defer></script>
+
+{% if template contains 'product' %}
+  <script src="{{ 'bundle.product.min.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% if template contains 'collection' %}
+  <script src="{{ 'bundle.collection.min.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% if template contains 'cart' %}
+  <script src="{{ 'bundle.cart.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'assembly-cart-helper.js' | asset_url }}" defer></script>
+{% endif %}
+
+<script src="{{ 'api.jquery.js' | shopify_asset_url }}" defer></script>
+
+{% if template contains 'gift_card' %}
+  <script src="{{ 'modernizr.gift-card.js' | shopify_asset_url }}" defer></script>
+  <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+  <script type='text/javascript'>
+    function selectText(element) {
+      var doc = document;
+      var text = doc.getElementById(element);
+
+      if (doc.body.createTextRange) { // ms
+        var range = doc.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+      } else if (window.getSelection) { // moz, opera, webkit
+        var selection = window.getSelection();
+        var range = doc.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+  </script>
+{% endif %}
+
+{% if template contains 'customers' %}
+  <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+  <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+{% endif %}

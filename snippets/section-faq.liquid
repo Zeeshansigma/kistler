@@ -1,0 +1,121 @@
+<section class="section section--faq faq faq--{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="section-content container" data-allow-toggle>
+    <h2 class="faq__section-heading">{{ block.settings.section_heading }}</h2>
+    <div class="faq-items">
+      {%- if block.settings.show_faq_1 -%}
+        <div class="faq-item faq-item--selected">
+          <h3 class="faq-item__title">
+            <div role="button"
+              id="faq1Title"
+              aria-controls="faq1Content"
+              aria-expanded="true">
+              <span class="faq-item__title-toggle-icon" role="presentation">&minus;</span>
+              {{ block.settings.title_1 }}
+            </div>
+          </h3>
+          <div role="region" 
+            id="faq1Content" 
+            class="faq-item__content" 
+            aria-labelledby="faq1Title">
+            {{ block.settings.content_1 }}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_faq_2 -%}
+        <div class="faq-item">
+          <h3 class="faq-item__title">
+            <div role="button"
+              id="faq2Title"
+              aria-controls="faq2Content"
+              aria-expanded="false">
+              <span class="faq-item__title-toggle-icon" role="presentation">&plus;</span>
+              {{ block.settings.title_2 }}
+            </div>
+          </h3>
+          <div role="region" 
+            id="faq2Content" 
+            class="faq-item__content faq-item__content--hidden" 
+            aria-labelledby="faq2Title">
+            {{ block.settings.content_2 }}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_faq_3 -%}
+        <div class="faq-item">
+          <h3 class="faq-item__title">
+            <div role="button"
+              id="faq3Title"
+              aria-controls="faq3Content"
+              aria-expanded="false">
+              <span class="faq-item__title-toggle-icon" role="presentation">&plus;</span>
+              {{ block.settings.title_3 }}
+            </div>
+          </h3>
+          <div role="region" 
+            id="faq3Content" 
+            class="faq-item__content faq-item__content--hidden" 
+            aria-labelledby="faq3Title">
+            {{ block.settings.content_3 }}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_faq_4 -%}
+        <div class="faq-item">
+          <h3 class="faq-item__title">
+            <div role="button"
+              id="faq4Title"
+              aria-controls="faq4Content"
+              aria-expanded="false">
+              <span class="faq-item__title-toggle-icon" role="presentation">&plus;</span>
+              {{ block.settings.title_4 }}
+            </div>
+          </h3>
+          <div role="region" 
+            id="faq4Content" 
+            class="faq-item__content faq-item__content--hidden" 
+            aria-labelledby="faq4Title">
+            {{ block.settings.content_4 }}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_faq_5 -%}
+        <div class="faq-item">
+          <h3 class="faq-item__title">
+            <div role="button"
+              id="faq5Title"
+              aria-controls="faq5Content"
+              aria-expanded="false">
+              <span class="faq-item__title-toggle-icon" role="presentation">&plus;</span>
+              {{ block.settings.title_5 }}
+            </div>
+          </h3>
+          <div role="region" 
+            id="faq5Content" 
+            class="faq-item__content faq-item__content--hidden" 
+            aria-labelledby="faq5Title">
+            {{ block.settings.content_5 }}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_faq_6 -%}
+        <div class="faq-item">
+          <h3 class="faq-item__title">
+            <div role="button"
+              id="faq6Title"
+              aria-controls="faq6Content"
+              aria-expanded="false">
+              <span class="faq-item__title-toggle-icon" role="presentation">&plus;</span>
+              {{ block.settings.title_6 }}
+            </div>
+          </h3>
+          <div role="region" 
+            id="faq6Content" 
+            class="faq-item__content faq-item__content--hidden" 
+            aria-labelledby="faq6Title">
+            {{ block.settings.content_6 }}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

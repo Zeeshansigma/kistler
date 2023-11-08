@@ -1,0 +1,31 @@
+{% assign featured_prod = all_products[block.settings.product] %}
+
+{% if featured_prod != blank and featured_prod.available %}
+  <section class="section section--featured-product featured-product featured-product--{{ block.id }}" {{ block.shopify_attributes }}>
+    <style>.featured-product--{{ block.id }} { background: {{ block.settings.bg_color }};}</style>
+    <div class="section-content{% unless block.settings.padding %} section-content--padding-none{% else %} section-content--padding-wide{% endunless %}">
+      <div class="featured-product__container">
+        <a class="featured-product__image" href="{{ featured_prod.url }}" title="{{ featured_prod.title | strip_html | escape }}">
+          {% assign img = featured_prod.featured_image %}
+          {% if block.settings.image != blank %}
+            {% assign img = block.settings.image %}
+          {% endif %}
+          <img class="lazy" data-srcset="{{ img | img_url: '1600x' }} 2x, {{ img | img_url: '800x' }} 1x" data-src="{{ img | img_url: '800x' }}" data-default-image="{{ img | img_url: '1600x' }}" alt="{{ img.alt | escape }}">
+        </a>
+        <div class="featured-product__content">
+          <div class="featured-product__preheading">Featured Product</div>
+          <h3 class="featured-product__heading">{% if block.settings.heading != blank %}{{ block.settings.heading }}{% else %}{{ featured_prod.title }}{% endif %}</h3>
+          <div class="featured-product__meta">
+            <div class="featured-product__meta-price">
+              {% unless featured_prod.price_min == featured_prod.price_max %}<span>From</span>{% endunless %}<span>From</span> {{ featured_prod.price_min | money }}
+            </div>
+          </div>
+          <div class="featured-product__description">
+            {% if block.settings.description != blank %}{{ block.settings.description }}{% else %}{{ featured_prod.description | truncate_words: '10' }}{% endif %}
+          </div>
+          <a href="{{ featured_prod.url }}" class="featured-product__action btn btn--large">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

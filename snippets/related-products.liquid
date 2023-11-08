@@ -1,0 +1,92 @@
+{%- if product.tags contains "Fishing Rod" -%}
+   <div data-fera-container="431340" data-product_id="{{ product.id }}"></div>
+{%- endif -%}
+
+{% if article %}
+  {% if article.metafields.kistler.related_products %}
+    {% assign related_product_handles = article.metafields.kistler.related_products | split: '|' %}
+  {% endif %}
+{% elsif product %}
+  {% if product.metafields.kistler.related_products %}
+    {% assign related_product_handles = product.metafields.kistler.related_products | split: '|' %}
+  {% else %}
+    {% if collection == null or collection.handle == 'all' %}
+      {% assign found_a_collection = false %}
+      {% for c in product.collections %}
+        {% capture currentType %}{{ product.type | handleize }}{% endcapture %}
+        {% if c.handle == currentType %}
+          {% assign found_a_collection = true %}
+          {% assign collection = c %}
+        {% else %}
+          {% if found_a_collection == false and c.handle != 'all' and c.all_products_count > 1 %}
+            {% assign found_a_collection = true %}
+            {% assign collection = c %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% if related_product_handles.size or collection %}
+  <section class="section section--related-products">
+    <div class="section-content">
+      <h2 class="section--related-products-title">You may also like</h2>
+      <div class="row row--gutters products">
+        {% if related_product_handles == blank %}
+          {% capture related_product_handles %}
+            {% for prod in collection.products limit: 5 %}
+              {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}
+                {% continue %}
+              {% endif %}
+              {% unless prod.handle == product.handle %}
+                {{- prod.handle |strip -}}
+                {%- unless forloop.last -%},{%- endunless -%}
+              {% endunless %}
+            {% endfor %}
+          {% endcapture %}
+          {%- assign related_product_handles = related_product_handles | split: ',' -%}
+        {% endif %}
+        
+        {% for handle in related_product_handles limit: 4 %}        
+          {% assign prod = all_products[handle] %}        
+          {% include 'product-loop' %}
+        {% endfor %}
+      </div>
+      {% comment %} <script type="text/template" id="related-product__template">
+        <article itemtype="http://schema.org/Product" itemscope="itemscope" class="column product product--<%= product.id %>">
+          <div class="product__content">
+            <a itemprop="url" class="product__image-wrapper" href="/collections/{{ collection.handle }}/products/<%= product.handle %>" title="<%= product.title %>">
+              <noscript>
+                <img itemprop="image" class="product__image product__image--<%= product.id %>" src="<%= product.featured_image %>" data-default-image="<%= product.featured_image %>" alt="<%= product.title %>">
+              </noscript>
+              <img itemprop="image" class="product__image product__image--<%= product.id %>" src="<%= product.featured_image %>" data-default-image="<%= product.featured_image %>" alt="<%= product.title %>">
+              <img class="product__image product__image--<%= product.id %> product__image--secondary lazy" src="<%= product.images[1] %>" data-default-image="<%= product.images[1] %>" alt="<%= product.images[1].alt %>">
+            </a>
+            <header class="product__header">
+              <h2 class="product__title">
+                <a href="<%= product.url %>" title="<%- product.title %>" itemprop="name"><%= product.title.replace(/\(([^()]+)\)/g, '') %> <span><%= product.title.match(/\(([^()]+)\)/g) %></span></a>
+              </h2>
+              <span class="product__meta product__meta--pricing" itemprop="offers" itemtype="http://schema.org/Offer" itemscope="itemscope">
+                <meta itemprop="priceCurrency" content="<%= Shopify.currency.active %>">
+                <span class="product__price" itemprop="price"><%= Shopify.formatMoney(product.price, Shopify.money_format) %></span>
+              </span>
+            </header>
+          </div>
+        </article>
+      </script> {% endcomment %}
+
+
+
+      {% comment %} <script type="text/javascript" id="related_product__json">
+        {% if related_product_handles != blank %}
+          var rehash_related_products = [{% for related_product in related_product_handles limit: 4 %}
+  {% if related_product.object_type == 'product' and related_product.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+{{all_products[related_product]|json}}{% unless forloop.index == 0%},{% endunless %}{% endfor %}];
+        {% else %}
+          var rehash_related_products = [];
+        {% endif %}
+      </script> {% endcomment %}
+    </div>
+  </section>
+{% endif %}

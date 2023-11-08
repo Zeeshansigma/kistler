@@ -1,0 +1,59 @@
+<!-- engraving -->
+{% assign prod_handle = 'engraving' %}
+{% assign extra = all_products[prod_handle] %}
+{% if extra.available %}
+{% assign extra_index = 1 %}
+{% assign featured_image = extra.selected_or_first_available_variant.featured_image | default: extra.featured_image %}
+<div class="product-custom-engraving__wrapper">
+	<input type="checkbox" id="add-engraving">
+	<label for="add-engraving" class="label"><span></span>Add Custom Engraving</label>
+	<div class="product-custom-engraving">
+		<div class="ship-notice">Rods with engravings or fish decals will ship in approximately 2 weeks.</div>
+		<div class="extra-product extra-product--{{ extra_index }}" id="extra-product--{{ extra_index }}">
+			<select name="addOn-{{ extra_index }}" id="product-select-add-on-{{ extra_index }}" data-quantity="1" style="display: none;">
+				<option value="{{ extra.selected_or_first_available_variant.id }}">{{ extra.selected_or_first_available_variant.title }}</option>
+			</select>
+			
+		  <div class="extra-product-img"><img src="{{ featured_image | product_img_url:'600x' }}" alt="{{ extra.title }}"/></div>
+		  <h4>
+			<span>{{ extra.title }} - <span class="extra-product__price">{{ extra.price | money_without_trailing_zeros }}</span></span>
+			<a href="{{ extra.url }}" title="View {{ extra.title }}">Details</a>
+		  </h4>	
+			<p>{{ extra.description }}</p>
+			
+			<div class="product-custom-engraving__options">
+				<select name="properties[engraving-font]" id="addon-engraving__font" disabled>
+					  <option value="Script">Script</option>
+					  <option value="Bold">Bold</option>
+				</select>
+		
+				<input type="text" class="addon-engraving__text" id="addon-engraving__text" name="properties[engraving-text]" value="" placeholder="Your Text Here" maxlength="50" disabled/>
+				<span class="addon-engraving__text-counter" id="addon-engraving__text-counter"><span>0</span>/50</span>
+			</div>
+		</div>
+	</div>
+	<script>
+	var addEngravingInput = document.getElementById("add-engraving");
+	var addEngravingVariantInput = document.getElementById("extra-product--1");
+	var addEngravingFontInput = document.getElementById("addon-engraving__font");
+	var addEngravingTextInput = document.getElementById("addon-engraving__text");
+	var addEngravingTextCounter = document.getElementById("addon-engraving__text-counter");
+
+	addEngravingInput.addEventListener("change", function() {
+		addEngravingFontInput.disabled = !addEngravingInput.checked;
+		addEngravingTextInput.disabled = !addEngravingInput.checked;
+	  addEngravingInput.checked ? addEngravingVariantInput.classList.add("extra-product--selected") : addEngravingVariantInput.classList.remove("extra-product--selected");
+		loadEngravingFonts();
+		chooseEngravingFont(addEngravingTextInput, addEngravingFontInput.value);
+	})
+	addEngravingFontInput.addEventListener("change", function() {
+		console.log(addEngravingFontInput.value)
+		chooseEngravingFont(addEngravingTextInput, addEngravingFontInput.value)
+	})
+	addEngravingTextInput.addEventListener("input", function() {
+		addEngravingTextCounter.getElementsByTagName("span")[0].innerText = addEngravingTextInput.value.length;
+	})
+	</script>
+</div>
+{% endif %}
+<!-- // engraving -->

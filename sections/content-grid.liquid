@@ -1,0 +1,76 @@
+<section class="section section--content-grid content-grid content-grid--{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="section-content{% unless section.settings.padding %} section-content--padding-none{% endunless %}">
+    {% for block in section.blocks %}
+      <div class="content-grid__item content-grid__item--{{ section.blocks.size }} content-grid__item--{{ block.id }}{% unless section.settings.padding %} content-grid__item--padding-none{% endunless%}" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.link_url }}" title="{% if block.settings.link_text %}{{ block.settings.link_text }}{% else %}{{ block.settings.title }}{% endif %}">
+          <figure class="lazy content-grid__item-image" data-src="{{ block.settings.image | img_url: '1400x'}}">
+            <figcaption>
+              <h3>
+                <span>{{ block.settings.preheading }}</span>
+                {{ block.settings.title | replace: '|', '<br>' }}
+              </h3>
+              {% if block.settings.link_text != blank %}
+                <div class="btn btn--large">{{ block.settings.link_text }}</div>
+              {% endif %}
+            </figcaption>
+          </figure>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Content Grid",
+    "max_blocks": 2,
+    "settings": [
+      {
+        "type":"checkbox",
+        "id":"padding",
+        "label": "Add Padding?",
+        "default":true
+      }
+    ],
+    "blocks": [
+      {
+        "type":"content",
+        "name":"Grid Item",
+        "settings":[
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image",
+            "info":"Image should be a jpeg, at least 1400px wide"
+          },
+          {
+            "type":"text",
+            "id":"preheading",
+            "label":"Preheading"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Heading",
+            "info":"Use a | (pipe) character to manually insert a line break"
+          },
+          {
+            "type":"text",
+            "id":"link_text",
+            "label":"Button Text",
+            "info":"Leave blank to hide button"
+          },
+          {
+            "type":"url",
+            "id":"link_url",
+            "label":"Link URL"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Content Grid",
+      "category": "Content"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,44 @@
+<div class="product-detail">
+  <ul class="product-detail__tabs">
+    <li data-handle="details">
+      Description {% include 'icon-caret-down.svg' %}
+    </li>
+    <li data-handle="specs">
+      Specs {% include 'icon-caret-down.svg' %}
+    </li>
+    <li data-handle="reviews" id="product-reviews" class="selected">
+      Reviews{% include 'icon-caret-down.svg' %}
+    </li>
+  </ul>
+
+  <div class="product-detail__tab-container">
+    <h3 class="mobile-tab-heading" data-handle="details">Description{% include 'icon-caret-down.svg' %}</h3>
+    <div class="product-detail__tab" data-handle="details">
+      <div class="container">
+        {{ product.description }}
+      </div>
+    </div>
+    <h3 class="mobile-tab-heading" data-handle="specs">Specs{% include 'icon-caret-down.svg' %}</h3>
+    <div class="product-detail__tab" data-handle="specs">
+      <div class="container--slim">
+        <table>
+          <tbody>
+            {% for product_option in product.options_with_values %}
+              <tr class="product-option-spec">
+                <td><strong>{{ product_option.name }}</strong></td>
+                <td>{{ product_option.selected_value }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h3 class="mobile-tab-heading" data-handle="reviews">Reviews{% include 'icon-caret-down.svg' %}</h3>
+    <div class="product-detail__tab" data-handle="reviews" class="selected">
+      <div class="container">
+        <div style="display: block; width: 100%;" class="feraReviews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+

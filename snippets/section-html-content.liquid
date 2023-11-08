@@ -1,0 +1,18 @@
+<style>
+  .html-content--{{block.id}} { background-color: {{ block.settings.bkgd_color }}; }
+  .html-content--{{block.id}} .html-content__text-title,
+  .html-content--{{block.id}} .html-content__text-content { color: {{ block.settings.text_color }}; }
+</style>
+
+<section class="section section--html-content html-content {% if block.settings.full_width %}html-content--full-width{% endif %} html-content--{{block.id}}" {{ block.shopify_attributes }} >
+  <div class="container">
+    <div class="html-content__text">
+      <h2 class="html-content__text-title">{{ block.settings.title }}</h2>
+      <div class="html-content__text-content">{{ block.settings.content }}</div>
+    </div>
+
+    <div class="html-content__content">
+      {{ block.settings.html_content}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+<section class="section section--multicolumn-html section--multicolumn-html--{{ block.id }}
+  {% if block.settings.full_width %}section--multicolumn-html--full-width{% endif %}
+  {% unless block.settings.top_padding %}section--multicolumn-html--no-top-padding{% endunless %}
+  {% unless block.settings.bottom_padding %}section--multicolumn-html--no-bottom-padding{% endunless %}" 
+  {{ block.shopify_attributes }}>
+  <style>
+    {%- if block.settings.bkgd_color -%}
+      .section--multicolumn-html--{{ block.id }} { 
+        background-color: {{ block.settings.bkgd_color }}; 
+      }
+    {%- endif -%}
+
+    {%- if block.settings.text_color -%}
+      .section--multicolumn-html--{{ block.id }} .multicolumn-content { 
+        color: {{ block.settings.text_color }}; 
+      }
+    {%- endif -%}
+  </style>
+
+  <div class="container">
+    {%- if block.settings.title != blank -%}
+      <h2 class="section--multicolumn-html-title">{{ block.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="multicolumn-wrap">
+      {%- if block.settings.show_column_1 -%}
+        <div class="multicolumn multicolumn-1">
+          {%- if block.settings.html_content_1 -%}
+            <div class="multicolumn-content">{{ block.settings.html_content_1 }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_column_2 -%}
+        <div class="multicolumn multicolumn-2">
+          {%- if block.settings.html_content_2 -%}
+            <div class="multicolumn-content">{{ block.settings.html_content_2 }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_column_3 -%}
+        <div class="multicolumn multicolumn-3">
+          {%- if block.settings.html_content_3 -%}
+            <div class="multicolumn-content">{{ block.settings.html_content_3 }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_column_4 -%}
+        <div class="multicolumn multicolumn-4">
+          {%- if block.settings.html_content_4 -%}
+            <div class="multicolumn-content">{{ block.settings.html_content_4 }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if block.settings.show_column_5 -%}
+        <div class="multicolumn multicolumn-5">
+          {%- if block.settings.html_content_5 -%}
+            <div class="multicolumn-content">{{ block.settings.html_content_5 }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

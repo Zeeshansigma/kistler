@@ -1,0 +1,138 @@
+<header class="header">
+  <div class="header-utility">
+    {% if section.settings.promo_text != blank %}
+      <div class="header-utility-left header-promo">
+        {% if section.settings.promo_button_url != blank %}<a href="{{ section.settings.promo_button_url }}" title="Learn more about {{ section.settings.promo_text }}">{% endif %}
+          <span class="header-promo__tag">{{ section.settings.promo_tag }}</span>
+          <span class="header-promo__text">{{ section.settings.promo_text }}</span>
+        {% if section.settings.promo_button_url != blank %}</a>{% endif %}
+      </div>
+    {% endif %}
+
+    <div class="header-utility-right">
+      <div class="header-contact"><a href="/collections/quick-order" alt="Kistler Product Catalog">Kistler Catalog</a></div>
+      <!--<div class="header-contact">Sales & Support <a href="tel:{{ settings.phone_number }}">{{ settings.phone_number }}</a></div>-->
+      <div class="header-account">
+        {% if customer != blank  %}
+          <a href="{{ routes.account_url }}" title="Go to My Account">My Account</a> <span>or</span> <a href="{{ routes.account_logout_url }}" title="Logout of My Acccount">Logout</a>
+        {% else %}
+          <a href="{{ routes.account_login_url }}" title="Go to Login">Login</a> <span>or</span> <a href="{{ routes.account_register_url }}" title="Go to Register">Register</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main container--fluid">
+    <div class="header-menu">
+      <div class="header__mobile-toggle">
+        <button class="header__mobile-nav-toggle" type="button" id="mobile-navigation-toggle" aria-label="Toggle Navigation">
+          <span class="top"></span>
+          <span class="middle"></span>
+          <span class="bottom"></span>
+        </button>
+      </div>
+      {% include 'navigation' linklist: section.settings.main_linklist %}
+      {% include 'navigation-mobile' linklist: section.settings.main_linklist %}
+    </div>
+
+    <div class="header-logo">
+      <a href="/" title="{{ shop.name }}" aria-label="{{ shop.name }}">
+        {% include 'logo.svg' %}
+      </a>
+    </div>
+
+    <div class="header-actions">
+      <div class="header-search">
+        <form action="/search" method="GET">
+          <input type="hidden" name="type" value="product" />
+          <div class="form-field">
+            <label>
+              <span class="visually-hidden">Search</span>
+              <input type="text" name="q" placeholder="search..." />
+              {% include 'icon-search.svg' %}
+            </label>
+          </div>
+        </form>
+      </div>
+
+      <div class="header-cart">
+        <button class="minicart-toggle-btn" type="button" aria-label="Toggle Cart Drawer">
+          <span>Cart</span> {% include 'icon-cart.svg' %}
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings":[
+    {
+      "type":"link_list",
+      "id":"main_linklist",
+      "label":"Main Menu"
+    },
+    {
+      "type":"header",
+      "content":"Promo Settings"
+    },
+    {
+      "type":"text",
+      "id":"promo_tag",
+      "label":"Promo Tag"
+    },
+    {
+      "type":"text",
+      "id":"promo_text",
+      "label":"Promo Text",
+      "info":"Leave blank to hide promo"
+    },
+    {
+      "type":"url",
+      "id":"promo_button_url",
+      "label":"Promo Link"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"navigation_promo",
+      "name":"Navigation Promo",
+      "settings":[
+        {
+          "type":"text",
+          "id":"menu_item",
+          "label":"Menu Item",
+          "info":"Name of top level menu item you'd like this promo to live underneath"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Background Image"
+        },
+        {
+          "type":"text",
+          "id":"preheading",
+          "label":"Pre Heading"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading",
+          "info":"Use a | (pipe) character to manually insert a line break"
+        },
+        {
+          "type":"text",
+          "id":"btn_text",
+          "label":"Button Text"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"Link URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

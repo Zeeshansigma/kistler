@@ -1,0 +1,115 @@
+<style>
+  .html-content--{{ section.id }} { background-color: {{ section.settings.bkgd_color }}; }
+  .html-content--{{ section.id }} .html-content__text-title,
+  .html-content--{{ section.id }} .html-content__text-content { color: {{ section.settings.text_color }}; }
+</style>
+
+<section class="section section--html-content html-content html-content--{{ section.id }}{% if section.settings.full_width %} html-content--full-width{% endif %}{% unless section.settings.top_padding %} html-content--no-top-padding{% endunless %}{% unless section.settings.bottom_padding %} html-content--no-bottom-padding{% endunless %}" {{ section.shopify_attributes }} >
+  <div class="container">
+    <div class="html-content__text">
+      <h2 class="html-content__text-title">{{ section.settings.title }}</h2>
+      <div class="html-content__text-content">{{ section.settings.content }}</div>
+    </div>
+
+    <div class="html-content__content">
+      {{ section.settings.html_content }}
+    </div>
+
+    {% if section.settings.btn_url != blank and section.settings.btn_text != blank %}
+      <a href="{{ section.settings.btn_url }}" class="html-content__btn btn {{ section.settings.btn_style }}">{{ section.settings.btn_text }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HTML Content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type":"color",
+      "id":"bkgd_color",
+      "label":"Background Color",
+      "default":"#fff"
+    },
+    {
+      "type":"color",
+      "id":"text_color",
+      "label":"Text Color",
+      "default":"#1a1a1a"
+    },
+    {
+      "type":"checkbox",
+      "id":"full_width",
+      "label":"Full Width?"
+    },
+    {
+      "type":"checkbox",
+      "id":"top_padding",
+      "label":"Top Padding?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"bottom_padding",
+      "label":"Bottom Padding?",
+      "default":true
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    },
+    {
+      "type":"richtext",
+      "id":"content",
+      "label":"Content"
+    },
+    {
+      "type":"html",
+      "id":"html_content",
+      "label":"HTML Content"
+    },
+    {
+      "type":"text",
+      "id":"btn_text",
+      "label":"Button Text",
+      "info": "You can target this button with custom css \" #shopify-section-{section_id} .html-content__btn\""
+    },
+    {
+      "type":"url",
+      "id":"btn_url",
+      "label":"Button URL",
+      "info": "Button URL and Button Text are required for this button to show"
+    },
+    {
+      "type":"select",
+      "id":"btn_style",
+      "label":"Button Style",
+      "options":[
+        {"value":"","label":"Default"},
+        {"value":"btn--alt","label":"Alt"},
+        {"value":"btn--block","label":"Block"},
+        {"value":"btn--text","label":"Text"},
+        {"value":"btn--white","label":"White"},
+        {"value":"btn--outline","label":"Outline"},
+        {"value":"btn--plain","label":"Plain"},
+        {"value":"btn--small","label":"Small"},
+        {"value":"btn--large","label":"Large"},
+        {"value":"btn--no-style","label":"No style"}
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HTML Content",
+    "category": "Content"
+  }]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+{% case block.settings.video_url.type %}
+  {% when 'vimeo' %}
+    {% capture player_src %}https://player.vimeo.com/video/{{ block.settings.video_url.id }}?title=0&byline=0&portrait=0&autoplay=1{% endcapture %}
+  {% when 'youtube' %}
+    {% capture player_src %}https://www.youtube.com/embed/{{ block.settings.video_url.id }}?autoplay=1{% endcapture %}
+{% endcase %}
+
+<section class="section section--video video video--{{ block.id }}" data-src="{{player_src}}" {{ block.shopify_attributes }}>
+  {% if block.settings.bg_overlay_color != blank %}
+    <style>
+      .video--{{ block.id }} .video__image:after {
+        background-color: {{ block.settings.bg_overlay_color | color_modify: 'alpha', 0.75 }};
+      }
+    </style>
+  {% endif %}
+  <div class="section-content{% unless block.settings.padding %} section-content--padding-none{% endunless %}">
+    <figure class="lazy video__image" data-src="{{ block.settings.image | img_url: '3000x' }}">
+      <figcaption class="video__content">
+        <span class="video__subheading">Watch the Video</span>
+        <div class="video__play">{% include 'icon-play.svg' %}</div>
+        <h3 class="video__heading">{{ block.settings.title }}</h3>
+      </figcaption>
+    </figure>
+  </div>
+</section>

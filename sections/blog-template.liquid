@@ -1,0 +1,91 @@
+{%- paginate blog.articles by 6 -%}
+  <div class="blog">
+    <div class="container">
+      <h1 class="blog__title">{{ blog.title }}</h1>
+    </div>
+
+    <div class="container row">
+      <div class="column column--xs-12 column--md-8">
+        <div class="row row--gutters blog__articles">
+          {% for article in blog.articles %}
+            <article class="blog__article column column--xs-12 column--md-6">
+              <a href="{{ article.url }}">
+                <figure class="lazy blog__article-image" data-src="{% if article.image %}{{ article.image | img_url: '600x', format:'pjpg' }}{% endif %}">
+                  <figcaption class="visually-hidden">{% if article.image.alt != blank %}{{ article.image.alt }}{% else %}{{ article.title }}{% endif %}</figcaption>
+                </figure>
+                <h3 class="blog__article-title">{{ article.title }}</h3>
+                <div class="blog__article-excerpt">{{ article.excerpt }}</div>
+                <p class="blog__article-link">Read More</p>
+              </a>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="column column--xs-12 column--md-3 column--md-offset-1">
+        <div class="blog__sidebar">
+          {% if section.settings.sidebar_menu != blank  %}
+            {% assign sidebar_linklist = linklists[section.settings.sidebar_menu]%}
+            <h3>News Topics</h3>
+            <ul>
+              {% for link in sidebar_linklist.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}{% include 'icon-caret-down.svg' %}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% for block in section.blocks %}
+            {% if block.type == 'promo' and block.settings.image != blank %}
+              <a href="{{ block.settings.url }}" title="{{ block.settings.image.alt }}">
+                <img class="lazy" data-src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.image.alt }}" />
+              </a>
+            {% endif %}
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+    </div>
+
+    {% if paginate.pages > 1 %}
+      <div class="blog__pagination container">
+        {% if paginate.previous %}<a class="blog__pagination-prev" href="{{ paginate.previous.url }}" aria-label="Previous Page">{% else %}<div class="blog__pagination-prev" aria-label="Previous Page">{% endif %}
+          {% include 'icon-caret-down.svg' %}
+        {% if paginate.previous %}</a>{% else %}</div>{% endif %}
+        <div class="blog__page-labels"><strong>{{ paginate.current_page }}</strong> / {{ paginate.pages }}</div>
+        {% if paginate.next %}<a class="blog__pagination-next" href="{{ paginate.next.url }}" aria-label="Next Page">{% else %}<div class="blog__pagination-next" aria-label="Next Page">{% endif %}
+          {% include 'icon-caret-down.svg' %}
+        {% if paginate.next %}</a>{% else %}</div>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+  {
+    "name": "Blog",
+    "settings": [
+      {
+        "type":"link_list",
+        "id":"sidebar_menu",
+        "label":"Sidebar Navigation"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"promo",
+        "name":"Promo",
+        "settings":[
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Promo Image"
+          },
+          {
+            "type":"url",
+            "id":"url",
+            "label":"Promo URL"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

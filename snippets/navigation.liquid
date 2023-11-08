@@ -1,0 +1,50 @@
+<nav class="navigation header__navigation" role="navigation">
+  <ul class="navigation-ul">
+    {% for link in linklists.main-menu.links limit:4 %}
+      <li class="navigation-li navigation-li--{{ forloop.index }} navigation-li--{{ link.title | handle }}{% if link.links != blank %} has-children{%endif%}{% if link.url == page.url or link.url == collection.url %} navigation-li--active{%endif%} hover-intent">
+        <a class="navigation-main-link navigation-main-link--{{ link.title | handle }}" href="{{ link.url }}" title="{{ link.title |  escape }}">
+          {{ link.title |  escape }}
+          {% if link.links != blank %}
+            {% include 'icon-caret-down.svg' %}
+          {% endif %}
+        </a>
+        {% if link.links != blank %}
+          <div class="sub-navigation-wrapper">
+            <div class="container--fluid">
+              {% for sub_link in link.links %}
+                <div class="sub-navigation-column" style="padding: 5px !important;">
+                  <h4><a href="{{ sub_link.url }}" title="{{ sub_link.title | escape }}">{{ sub_link.title | escape }}</a></h4>
+                  {% if sub_link.links != blank %}
+                    <ul class="sub-navigation">
+                      {% for sub_sub_link in sub_link.links %}
+                        <li class="sub-navigation-link sub-navigation-link--{{ sub_sub_link.title | handleize }}"><a href="{{ sub_sub_link.url }}" title="{{ sub_sub_link.title | escape }}">{{ sub_sub_link.title | escape }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+              {% endfor %}
+
+              {% for block in section.blocks %}
+                {% if block.settings.menu_item == link.title %}
+                  <div class="sub-navigation-column sub-navigation-column--promo">
+                    <div class="sub-navigation-promo">
+                      <figure class="lazy sub-navigation-promo__image" data-src="{{ block.settings.image.src | img_url: '500x' }}">
+                        <figcaption>
+                          <a href="{{ block.settings.url }}" title="{{ block.settings.title }}">
+                            <div class="sub-navigation-promo__preheading">{{ block.settings.preheading }}</div>
+                            <h4 class="sub-navigation-promo__heading">{{ block.settings.title | replace: '|', '<br>' }}</h4>
+                            <div class="btn btn--small">{{ block.settings.btn_text }}</div>
+                          </a>
+                        </figcaption>
+                      </figure>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

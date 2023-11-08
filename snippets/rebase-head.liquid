@@ -1,0 +1,23 @@
+{% comment %}
+File: rebase-head.liquid 
+API Version: 1
+Last Updated: 09/27/17
+{% endcomment %}
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all">
+<link href="//rebase-api.global.ssl.fastly.net/production/1/rebase-apps.min.css" rel="stylesheet" type="text/css" media="all">
+{% assign path = canonical_url | split: '/' %}
+{% if path.last != 'challenge' %}
+<script>var onloadCallbackRebase = function () {/* no-op */};</script>
+<script src="//www.google.com/recaptcha/api.js?onload=onloadCallbackRebase&render=explicit" async defer></script>
+{% endif %}
+<script>var REBASE={};REBASE.SRAM={api_key:'ae0b9fb22042c35976331ac62490651c'};</script>
+<script src="//rebase-api.global.ssl.fastly.net/production/1/rebase-libs.min.js" defer></script>
+{% if shop.customer_accounts_enabled and customer %}
+<script>REBASE.SRAM.customer_id={{customer.id}};</script>
+{% endif %}
+<script src="//rebase-api.global.ssl.fastly.net/production/1/lists.min.js" defer></script>
+{% comment %} -- auto_lists -- {% endcomment %}
+<script>REBASE.SRAM.auto_lists={notify_display_logic:'auto-show'};</script>
+{% comment %} -- end_auto_lists -- {% endcomment %}
+
+<script src="//rebase-api.global.ssl.fastly.net/production/1/rebase-auto-lists-1.0.2.js" defer></script>

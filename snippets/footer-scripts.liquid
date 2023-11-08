@@ -1,0 +1,15 @@
+<script type="application/ld+json">
+  {
+   "@context": "http://schema.org",
+   "@type": "Organization",
+   "name": "{{ shop.name }}",
+   "url": "{{ shop.url }}",
+   "logo": "https:{{ 'logo.png' | asset_url }}",
+   "sameAs": [
+     "https://www.facebook.com/{{ settings.social_facebook }}",
+     "https://twitter.com/{{ settings.social_twitter }}",
+     "https://www.instagram.com/{{ settings.social_instagram }}",
+     "https://youtube.com/{{ settings.social_youtube }}"
+   ]
+  }
+</script>

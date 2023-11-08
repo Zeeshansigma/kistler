@@ -1,0 +1,167 @@
+{% assign current_handle = collection.handle %}
+
+{% assign series = settings.series | split: ',' %}
+{% assign crankbaits = settings.crankbaits | split: ',' %}
+{% assign top_waters = settings.top_waters | split: ',' %}
+{% assign soft_plastics = settings.soft_plastics | split: ',' %}
+{% assign finesses = settings.finesses | split: ',' %}
+{% assign blades = settings.blades | split: ',' %}
+{% assign jigs = settings.jigs | split: ',' %}
+{% assign oversizeds = settings.oversizeds | split: ',' %}
+{% assign swim_glides = settings.swim_glides | split: ',' %}
+{% assign nobasses = settings.nobasses | split: ',' %}
+
+{% assign wts = settings.wts | split: ','%}
+{% assign structures = settings.structures | split: ','%}
+{% assign cast_types = settings.cast_types | split: ','%}
+{% assign powers = settings.powers | split: ','%}
+{% assign lengths = settings.lengths | split: ',' %}
+{% assign prices = settings.prices | split: '|' %}
+
+<div class="clear-filtering-selections">
+  <button class="btn btn--small" disabled>Clear Selections</button>
+</div>
+
+<div class="widget widget--filtering">
+  <div class="filtering-group">
+    <h3>Series</h3>
+    <ul class="filtering-list filtering-list-items">
+      {% for seri in series %}
+        <li data-group="series" data-value="{{ seri | escape }}">{{ seri }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="filtering-group">
+    <h3>Lure/bait type</h3>
+    <ul class="filtering-list">
+      <li>
+        <div class="filtering-list-item-toggle">Crankbaits <span>&minus;</span></div>
+        <ul class="filtering-list-items">
+          {% for crankbait in crankbaits %}
+            <li data-group="bait" data-value="{{ crankbait | escape }}">{{ crankbait }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Top Waters <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          {% for top_water in top_waters %}
+            <li data-group="bait" data-value="{{ top_water | escape }}">{{ top_water }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Soft Plastics <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          {% for soft_plastic in soft_plastics %}
+            <li data-group="bait" data-value="{{ soft_plastic | escape }}">{{ soft_plastic }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Finesse <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          {% for finesse in finesses %}
+            <li data-group="bait" data-value="{{ finesse | escape }}">{{ finesse }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Blades <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          {% for blade in blades %}
+            <li data-group="bait" data-value="{{ blade | escape }}">{{ blade }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Jigs <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          {% for jig in jigs %}
+            <li data-group="bait" data-value="{{ jig | escape }}">{{ jig }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Oversized Lures <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          {% for oversized in oversizeds %}
+            <li data-group="bait" data-value="{{ oversized | escape }}">{{ oversized }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Swimbaits/Glide Baits <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          {% for swim_glide in swim_glides %}
+            <li data-group="bait" data-value="{{ swim_glide | escape }}">{{ swim_glide }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Multi-Purpose <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          <li data-group="bait" data-value="Multi-Purpose">Multi-Purpose</li>
+        </ul>
+      </li>
+      <li>
+        <div class="filtering-list-item-toggle">Species other than Bass <span>&plus;</span></div>
+        <ul class="filtering-list-items">
+          {% for nobass in nobasses %}
+            <li data-group="bait" data-value="{{ nobass | escape }}">{{ nobass }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="filtering-group">
+    <h3>Power Rating</h3>
+    <ul class="filtering-list filtering-list-items">
+      {% for wt in wts %}
+        <li data-group="lure-line-wt" data-value="{{ wt | escape }}">{{ wt }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="filtering-group">
+    <h3>Structure/Cover</h3>
+    <ul class="filtering-list filtering-list-items filtering-list-items--swatch">
+      {% for structure in structures %}
+        <li data-group="structure" data-value="{{ structure | escape }}">{{ structure }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="filtering-group">
+    <h3>Cast or Spin</h3>
+    <ul class="filtering-list filtering-list-items filtering-list-items--swatch">
+      {% for cast_type in cast_types %}
+        <li data-group="cast-or-spin" data-value="{{ cast_type | escape }}">{{ cast_type }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% comment %} <div class="filtering-group">
+    <h3>Power</h3>
+    <ul class="filtering-list filtering-list-items filtering-list-items--swatch">
+      {% for power in powers %}
+        <li data-group="power" data-value="{{ power | escape }}">{{ power }}</li>
+      {% endfor %}
+    </ul>
+  </div> {% endcomment %}
+  <div class="filtering-group">
+    <h3>Length</h3>
+    <ul class="filtering-list filtering-list-items filtering-list-items--swatch">
+      {% for length in lengths %}
+        <li data-group="length" data-value="{{ length | replace: ' ', '' | replace: '"', '' | escape }}">{{ length }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="filtering-group">
+    <h3>Price</h3>
+    <ul class="filtering-list filtering-list-items">
+      {% for price in prices %}
+        {% assign split_price = price | split: ':' %}
+        <li data-group="price" data-value="{{ split_price | first | escape }}">{{ split_price | last }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

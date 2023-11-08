@@ -1,0 +1,88 @@
+<div id="minicart-container"></div>
+
+<script src="/services/javascripts/countries.js" defer></script>
+<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+
+<script>
+  (function() {
+    var kistlerMiniCart,
+      miniCartExtraData = {},
+      miniCartOptionsData = {
+        addToCartFormId: 'minicart-add-to-cart-form',
+        scrollToAfterAdd: false,
+        showBackground: true,
+        showQtyAction: true,
+        showQtyInput: false,
+        cartCountClass: 'minicart-cart-count',
+        showCartCountZero: false,
+        showSubtotal: {{section.settings.show_subtotal}},
+        showCartAction: true,
+        showCheckoutAction: true,
+        checkoutActionText: '{{ section.settings.checkout_action_text}}',
+        upsellHeadingText: '{{ section.settings.upsell_heading_text }}',
+        header: '{{section.settings.header}}',
+        message: '{{section.settings.message}}'
+      };
+
+
+    // setup extra address information
+    miniCartExtraData.customer = {};
+    {% if shop.customer_accounts_enabled and customer %}
+      miniCartExtraData.customer.address = {{ customer.default_address | json }};
+    {% endif %}
+
+    miniCartExtraData.shop = {};
+    miniCartExtraData.shop.address = {{ shop.address | json }};
+    
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      if ( typeof MiniCart === 'function' ) {
+        kistlerMiniCart = new MiniCart(miniCartOptionsData, miniCartExtraData);
+      }
+    });
+    
+  })();
+</script>
+
+<style>
+  
+.minicart__actions .btn.btn--block.btn--checkout {
+
+white-space: nowrap;
+padding: 0px;
+
+}
+  
+</style>
+
+{% schema %}
+{
+  "name": "MiniCart",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Header",
+      "default": "You have ::item_count:: in your shopping cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subtotal",
+      "label": "Show Subtotal",
+      "default": true
+    },
+    {
+      "type":"text",
+      "id": "message",
+      "label": "Message"
+    },
+    {
+      "type":"text",
+      "id": "checkout_action_text",
+      "label": "Checkout Button Text",
+      "default":"Continue to checkout"
+    }
+  ]
+}
+{% endschema %}
+

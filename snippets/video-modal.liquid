@@ -1,0 +1,37 @@
+<div class="video-modal">
+  <div class="video-modal__content">
+    <div style="padding:56.25% 0 0 0;position:relative;">
+      <iframe src="" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+  </div>
+  <div class="video-modal__close">&times;</div>
+  <div class="video-modal__bg"></div>
+
+  <script>
+    window.REBASE = window.REBASE || {};
+    window.REBASE.videoModal = {
+      open: function(url) {
+        $('.video-modal iframe').attr('src', url);
+        $('.video-modal').addClass('video-modal--open');
+      },
+      close: function() {
+        $('.video-modal').removeClass('video-modal--open');
+        $('.video-modal iframe').attr('src', '');
+      }
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+      $(document).on('click', '.video', function() {
+        var _this = $(this), src = _this.data('src');
+
+        if ( _this.hasClass('video--regular-link') ) {
+          window.location = src
+        } else {
+          REBASE.videoModal.open( src );
+        }
+
+      });
+
+      $(document).on('click', '.video-modal__close, .video-modal__bg', REBASE.videoModal.close);
+    });
+  </script>
+</div>

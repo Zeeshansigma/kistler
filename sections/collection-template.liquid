@@ -1,0 +1,116 @@
+<div class="collection-header">
+  <div class="collection-header__image">
+    <figure class="lazy" data-src="{% if collection.image != blank %}{{ collection.image | img_url: '3000x', format: 'pjpg'}}{% endif %}">
+      <figcaption class="visually-hidden">{% if collection.image.alt != blank%}{{ collection.image.alt }}{% else %}{{ collection.title }}{% endif %}</figcaption>
+    </figure>
+    <div class="collection-header__title {% if collection.image != blank %}collection-header__title--has-image{% endif %}">
+      <h1>{{ collection.title }}</h1>
+    </div>
+  </div>
+  <div class="collection-header__actions">
+    <div class="collection-header__breadcrumbs">
+      {% include 'page-utility' %}
+    </div>
+    <div class="collection-header__sorting">
+      {% include 'collection-sort' %}
+    </div>
+  </div>
+</div>
+
+<main class="content content--no-sidebar" role="main">
+  <div class="collection-main">
+    <div class="row row--gutters products">
+      {% if collection.products.size < 1 %}
+        <p class="no-products column--xs-12">Sorry
+          nothing is available at the moment.</p>
+      {% else %}
+        {% for prod in collection.products %}
+  {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+          {% include 'product-loop', classes: "column--xs-6 column--lg-4" %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    (function($){
+      $(function(){
+        $('#sort-by-select').val('{{ collection.sort_by | default: collection.default_sort_by | escape }}').bind('change', function(){
+          REBASE.theme.collection.sortKey = $(this).val();
+          $(document).trigger('collection_sort_by_change');
+          location.reload();
+        });
+      });
+    })(jQuery)
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "Collection Promos",
+    "blocks": [
+      {
+        "type": "promo",
+        "name": "Collection Promo",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection",
+            "info": "Collection the promo will display in"
+          },
+          {
+            "type":"textarea",
+            "id": "tags",
+            "label":"Tags",
+            "info":"comma separated list of collection filtering tags to include this promo on. Leave blank for all."
+          },
+          {
+            "type":"text",
+            "id":"position_index",
+            "label":"Position of Promo in collection",
+            "default":"7"
+          },
+          {
+            "type":"radio",
+            "id":"width",
+            "label":"Column Width Span",
+            "options":[
+              {"value":"2-column","label":"2 columns"},
+              {"value":"3-column","label":"3 columns"}
+            ]
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+          },
+          {
+            "type":"text",
+            "id":"content",
+            "label":"Text"
+          },
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          },
+          {
+            "type":"text",
+            "id":"link_text",
+            "label":"Link Text"
+          },
+          {
+            "type":"url",
+            "id":"link_url",
+            "label":"Link URL"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

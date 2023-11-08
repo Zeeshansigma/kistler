@@ -1,0 +1,122 @@
+<style>
+ @media only screen and (max-width:640px) {
+   .klaviyo-form-ViGXxV {
+     width: 100% !important;
+     max-width: 100% !important;
+   }
+   
+ }
+ 
+</style>
+<footer class="footer">
+  <div class="footer-section footer-section--upper">
+    <div class="container">
+      <div class="footer-newsletter footer-newsletter--{{ section.id }}">
+        <div class="footer-newsletter__content">
+          <h2 class="footer-newsletter__heading">{{section.settings.newsletter_heading}}</h2>
+          <p class="footer-newsletter__text">{{section.settings.newsletter_content}}</p>
+        </div>
+        {% comment %} <form id="footer_newsletter_form" class="footer-newsletter__form" method="GET" action="">
+          <input aria-label="Email Address" type="email" name="email" size="40" value="" placeholder="Enter email address" required />
+          <button type="submit" class="btn btn--plain">Subscribe</button>
+        </form> {% endcomment %}
+        {% include 'footer-newsletter-form' %}
+                      <div class="klaviyo-form-ViGXxV" style="width:50%;"></div>
+        <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Pvxz2q"></script>
+
+      </div>
+    </div>
+  </div>
+  <div class="footer-section footer-section--lower">
+    <div class="container">
+      <ul class="footer-navigation">
+        {% assign footer_menu = section.settings.linklist %}
+        {% for link in linklists[footer_menu].links limit:4 %}
+          <li class="footer-navigation__item footer-navigation__item--{{ link.title | handle }}">
+            {% assign has_sub = link.links | size %}
+            {% if link.url == '#heading' %}
+              <h2 class="footer-navigation__heading">{{ link.title }}{% include 'icon-caret-down.svg' %}</h2>
+            {% else %}
+              <a href="{{ link.url }}" title="Go to {{ link.title }}">
+                {{ link.title }}
+              </a>
+            {% endif %}
+            {% if has_sub > 0 %}
+              <ul class="footer-navigation__sub">
+                {% for l in link.links %}
+                  <li class="footer-navigation__sub-item"><a href="{{ l.url }}" title="{{ l.title }}">{{ l.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <div class="footer-utility">
+        <div class="footer-social">
+          {% if settings.social_instagram != blank %}
+            <a href="https://instagram.com/{{ settings.social_instagram }}" title="View us on Instagram">
+              <span class="visually-hidden">View us on Instagram</span>
+              {% include 'icon-instagram' %}
+            </a>
+          {% endif %}
+          {% if settings.social_facebook != blank %}
+            <a href="https://facebook.com/{{ settings.social_facebook }}" title="View us on Facebook">
+              <span class="visually-hidden">View us on Facebook</span>
+              {% include 'icon-facebook' %}
+            </a>
+          {% endif %}
+          {% if settings.social_twitter != blank %}
+            <a href="https://twitter.com/{{ settings.social_twitter }}" title="View us on Twitter">
+              <span class="visually-hidden">View us on Twitter</span>
+              {% include 'icon-twitter' %}
+            </a>
+          {% endif %}
+          {% if settings.social_youtube != blank %}
+            <a href="https://YouTube.com/{{ settings.social_youtube }}" title="View us on YouTube">
+              <span class="visually-hidden">View us on YouTube</span>
+              {% include 'icon-youtube' %}
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="footer-copyright">
+          <p><sup>&copy;</sup>{{ 'now' | date: '%Y' }} {{ shop.name }}</p><span class="sep">|</span>
+          <p>All Rights Reserved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "label":"Heading",
+      "id":"newsletter_heading",
+      "type":"text",
+      "default":"Be in the know"
+    },
+    {
+      "label":"Content",
+      "id":"newsletter_content",
+      "type":"textarea"
+    },
+    {
+      "type": "header",
+      "content": "Menu"
+    },
+    {
+      "type":"link_list",
+      "id":"linklist",
+      "label":"Footer Menu"
+    }
+  ]
+}
+{% endschema %}

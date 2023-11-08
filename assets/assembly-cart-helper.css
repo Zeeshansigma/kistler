@@ -1,0 +1,44 @@
+/* 
+* Assembly Cart Helper - v0.1.8
+* Notes:
+* 	- only include on the cart page (with the cart-template)
+* Copyright (c) 2018-2019 Rehash
+*/
+
+.assembly-build-row.assembly-build-row-invalid {
+	border: 2px solid red;
+}
+
+.assembly-build-remove,
+.assembly-build-cart-quantity {
+	display: none; /* IMPORTANT: not showing on load, js will unhide them */
+}
+
+.assembly-is-removing,
+.assembly-is-updating {
+	opacity: 0.5;
+	pointer-events: none; /* IMPORTANT: stops user interaction */
+	background: #f3f3f3;
+}
+
+.assembly-build-error,
+.assembly-build-invalid {
+	display:block; 
+	font-size:14px; 
+	margin:0 0 10px 0; 
+	padding:10px; 
+	color:red; 
+	background:#fcc;
+}
+
+.assembly-build-error a, 
+.assembly-build-error a:active, 
+.assembly-build-error a:link, 
+.assembly-build-error a:visited,
+.assembly-build-invalid a, 
+.assembly-build-invalid a:active, 
+.assembly-build-invalid a:link, 
+.assembly-build-invalid a:visited {
+	color: red;
+	text-decoration: underline;
+}

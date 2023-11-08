@@ -1,0 +1,81 @@
+<section class="section section--product-listing product-listing product-listing--{{ section.id }}" {{ section.shopify_attributes }} >
+  <div class="section-content">
+    <div class="product-listing__header">
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+      {% if section.settings.button_text != blank %}
+        <a class="product-listing__action btn {{ section.settings.btn_style }}" href="{{ section.settings.button_url }}" title="{{ section.settings.button_text }} - {{ section.settings.title }}">{{ section.settings.button_text }}</a>
+      {% endif %}
+    </div>
+    <div class="product-listing__items">
+      <div class="row row--gutters">
+        {% for prod in collections[section.settings.collection].products limit: 3 %}
+  {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+          {% include 'product-loop' classes: 'product-listing__item'%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Product Listing",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    },
+    {
+      "type":"text",
+      "id":"subheading",
+      "label":"Subheading"
+    },
+    {
+      "type":"text",
+      "id":"button_text",
+      "label":"Button Text",
+      "info":"Leave blank to hide."
+    },
+    {
+      "type":"url",
+      "id":"button_url",
+      "label":"Button URL"
+    },
+    {
+      "type":"select",
+      "id":"btn_style",
+      "label":"Button Style",
+      "options":[
+          {"value":"","label":"Default"},
+          {"value":"btn--alt","label":"Alt"},
+          {"value":"btn--block","label":"Block"},
+          {"value":"btn--text","label":"Text"},
+          {"value":"btn--white","label":"White"},
+          {"value":"btn--outline","label":"Outline"},
+          {"value":"btn--plain","label":"Plain"},
+          {"value":"btn--small","label":"Small"},
+          {"value":"btn--large","label":"Large"},
+          {"value":"btn--no-style","label":"No style"}
+      ]
+    },
+    {
+      "type":"collection",
+      "id":"collection",
+      "label":"Collection"
+    }
+  ],
+  "presets": [{
+    "name": "Product Listing",
+    "category": "Content"
+  }]
+}
+{% endschema %}
+

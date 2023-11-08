@@ -1,0 +1,212 @@
+
+
+<section class="section section--img-vid-with-text section--img-vid-with-text--{{ section.id }}
+{% if section.settings.full_width %}section--img-vid-with-text--full-width{% endif %}
+{% unless section.settings.top_padding %}section--img-vid-with-text--no-top-padding{% endunless %}
+{% unless section.settings.bottom_padding %}section--img-vid-with-text--no-bottom-padding{% endunless %}" {{ section.shopify_attributes }}>
+ 
+    <style>
+        {% if section.settings.bkgd_color %}
+        .section--img-vid-with-text--{{ section.id }} { background-color: {{ section.settings.bkgd_color }}; }
+        {% endif %}
+
+        {% if section.settings.text_color %}
+        .section--img-vid-with-text--{{ section.id }},
+        .section--img-vid-with-text--{{ section.id }} .img-vid-txt__heading { color: {{ section.settings.text_color }}; }
+        {% endif %}
+
+        
+        .section--img-vid-with-text--{{ section.id }} .container .img-vid-txt__inner-wrap .img-vid-txt__text-wrap {
+            {% if section.settings.text_align %}text-align: {{section.settings.text_align}};{% endif %}  
+        }
+
+        @media screen and ( min-width: 60em ) {
+            .section--img-vid-with-text--{{ section.id }} .container .img-vid-txt__inner-wrap .img-vid-txt__text-wrap {
+                {% if section.settings.text_padding %} padding: 40px;{% endif %}
+            }
+        }
+    </style>
+  
+    <div class="container">
+        <div class="img-vid-txt__inner-wrap {{section.settings.media_width}}">
+            <div class="img-vid-txt__text-wrap">
+                {% if section.settings.title != blank %}<h2 class="img-vid-txt__heading">{{ section.settings.title }}</h2>{% endif %}
+                {% if section.settings.description != blank %}<div class="img-vid-txt__description">{{ section.settings.description }}</div>{% endif %}
+            
+                {% if section.settings.btn_url != blank and section.settings.btn_text != blank %}
+                    <a href="{{ section.settings.btn_url }}" class="img-vid-txt__btn btn {{ section.settings.btn_style }}">{{ section.settings.btn_text }}</a>
+                {% endif %}
+            </div>
+            
+            <div class="img-vid-txt__media-wrap">
+                {% if section.settings.image != blank %}
+                    {% assign img = section.settings.image %}
+                    <img class="lazy" data-srcset="{{ img | img_url: '1600x' }} 2x, {{ img | img_url: '800x' }} 1x" data-src="{{ img | img_url: '800x' }}" data-default-image="{{ img | img_url: '1600x' }}" alt="{{ img.alt | escape }}">
+                {% elsif section.settings.video_url != blank and section.settings.image == blank %}
+                    <div class="video-container">
+                        <div class="yt-player" data-id="{{section.settings.video_url.id}}"></div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    
+    {% if section.settings.video_url != blank and section.settings.image == blank %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                (function($) {
+                    $(function() {
+                        var players = [];
+
+                        // Include YT script if needed
+                        if (!$('#yt_iframe_api').length) {
+                            var tag = document.createElement('script');
+
+                            tag.id = 'yt_iframe_api';
+                            tag.src = 'https://www.youtube.com/iframe_api';
+
+                            var firstScriptTag = document.getElementsByTagName('script')[0];
+                            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                        }
+
+                        window.queueOnYoutubeIframeAPIReady(function () {
+                            var yt_player = $('.section--img-vid-with-text--{{ section.id }} .yt-player');
+                            var player = new YT.Player(yt_player.get(0), {
+                                height: '390',
+                                width: '640',
+                                videoId: yt_player.data('id'),
+                                playerVars: {
+                                    autoplay: 0,
+                                    modestbranding: 1,
+                                    playsinline: 1,
+                                    rel: 0
+                                }
+                            });
+                        });
+                    });
+                })(jQuery)
+            });
+        </script>
+    {% endif %}
+</section>
+
+{% schema %}
+  {
+    "name": "Image Video with Text",
+    "settings": [
+        {
+            "type":"color",
+            "id":"bkgd_color",
+            "label":"Background Color",
+            "default":"#fff"
+        },
+        {
+            "type":"color",
+            "id":"text_color",
+            "label":"Text Color",
+            "default":"#1a1a1a"
+        },
+        {
+            "type":"checkbox",
+            "id":"full_width",
+            "label":"Full Width?"
+        },
+        {
+            "type":"checkbox",
+            "id":"top_padding",
+            "label":"Top Padding?",
+            "default":true
+        },
+        {
+            "type":"checkbox",
+            "id":"bottom_padding",
+            "label":"Bottom Padding?",
+            "default":true
+        },
+        {
+            "type":"select",
+            "id":"text_align",
+            "label":"Text alignment",
+            "options":[
+              {"value":"left","label":"Left"},
+              {"value":"center","label":"Center"},
+              {"value":"right","label":"Right"}
+            ],
+            "default":"left"
+        },
+        {
+            "type":"checkbox",
+            "id":"text_padding",
+            "label":"Text Padding? (Desktop)",
+            "default":false
+        },
+        {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+        },
+        {
+            "type": "richtext",
+            "id":"description",
+            "label":"Description"
+        },
+        {
+            "type":"text",
+            "id":"btn_text",
+            "label":"Button Text"
+        },
+        {
+            "type":"url",
+            "id":"btn_url",
+            "label":"Button URL",
+            "info": "Button URL and Button Text are required for this button to show."
+        },
+        {
+            "type":"select",
+            "id":"btn_style",
+            "label":"Button Style",
+            "options":[
+                {"value":"","label":"Default"},
+                {"value":"btn--alt","label":"Alt"},
+                {"value":"btn--block","label":"Block"},
+                {"value":"btn--text","label":"Text"},
+                {"value":"btn--white","label":"White"},
+                {"value":"btn--outline","label":"Outline"},
+                {"value":"btn--plain","label":"Plain"},
+                {"value":"btn--small","label":"Small"},
+                {"value":"btn--large","label":"Large"},
+                {"value":"btn--no-style","label":"No style"}
+            ]
+        },
+        {
+            "type":"select",
+            "id":"media_width",
+            "label":"Width of Media (Image/Video)",
+            "options":[
+              {"value":"media-one-third","label":"1/3"},
+              {"value":"media-one-half","label":"1/2"},
+              {"value":"media-two-third","label":"2/3"}
+            ],
+            "default":"media-one-half"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "Note, you can use image or video (below), but only one at a time. Leave image blank to use video."
+        },
+        {
+            "type": "video_url",
+            "id": "video_url",
+            "label": "YouTube Video URL",
+            "accept": ["youtube"]
+        }
+    ],
+    
+    "presets": [{
+      "name": "Image Video with Text",
+      "category": "Content"
+    }]
+  }
+{% endschema %}

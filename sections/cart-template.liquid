@@ -1,0 +1,669 @@
+{% comment %}
+* Assembly Cart
+* Notes:
+*	- upload to "sections" folder in theme, include inside the main "cart.liquid" ```{% section 'cart-template' %}```
+* Copyright (c) 2018-2019 Rehash
+{% endcomment %}
+
+{% assign limit = section.settings.cart_collection_limit %}
+{% assign upsell_limit = section.settings.cart_upsell_limit | plus: 0 %}
+
+{% capture cart_handles %}{% for item in cart.items %}{{item.product.handle}}{%unless forloop.last%},{%endunless%}{% endfor %}{% endcapture %}
+{% comment %} Wholesale_Club_Item_Prices Start {% endcomment %}
+{% if item.product %}{% assign base_product = item.product %}{% else %}{% assign base_product = item %}{% endif %}
+{% if item.variant %}{% assign base_variant = item.variant %}{% else %}{% assign base_variant = item.selected_or_first_available_variant %}{% endif %}
+
+{% if shop.metafields.sawholesale['base_price'] == blank %}
+  {% assign base_price = 'compare_at_price' %}
+{% else %}
+  {% assign base_price = shop.metafields.sawholesale['base_price'] %}
+{% endif %}
+
+{% assign saw_discount = 0 %}{% assign saw_has_discount = false %}
+
+{% if customer.tags != blank %}
+  {% for mf in base_product.metafields.sawholesale %}
+    {% capture product_customer_tag %}{{ mf | first | replace: 'discount_', '' }}{% endcapture %}
+    {% if customer.tags contains product_customer_tag %}
+      {% assign saw_has_discount = true %}
+      {% assign discount_key = product_customer_tag | prepend: 'discount_' %}
+      {% assign price_key = product_customer_tag | prepend: 'price_' %}
+      {% assign saw_discount = base_product.metafields.sawholesale[discount_key] | divided_by: 100.0 %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign saw_discount = 1 | minus: saw_discount %}
+
+{% if base_price == 'price' or base_variant.compare_at_price == blank  or base_variant.compare_at_price == 0 or base_variant.compare_at_price < base_variant.price %}
+  {% assign saw_variant_compare_at_price = base_variant.price %}
+{% else %}
+  {% assign saw_variant_compare_at_price = base_variant.compare_at_price %}
+{% endif %}
+
+{% assign cpe = shop.metafields.sawholesale['cpe'] | default: "true" %}
+{% if base_variant.metafields.sawholesale[price_key] != blank and cpe == "true" %}
+  {% assign saw_variant_price = base_variant.metafields.sawholesale[price_key] %}
+{% else %}
+  {% assign saw_variant_price = saw_variant_compare_at_price | times: saw_discount %}
+{% endif %}
+
+{% if saw_has_discount == false or saw_variant_price >= saw_variant_compare_at_price %}
+  {% assign WCItem_OriginalPrice = item.original_price %}
+  {% assign WCItem_FinalPrice = item.final_price %}
+  {% assign WCItem_Price = item.price %}
+  {% assign WCItem_PriceMin = item.price_min %}
+  {% assign WCItem_PriceMax = item.price_max %}
+  {% assign WCItem_CompareAtPrice = item.compare_at_price %}
+  {% assign WCItem_CompareAtPriceMin = item.compare_at_price_min %}
+  {% assign WCItem_CompareAtPriceMax = item.compare_at_price_max %}
+  {% assign WCItem_OriginalLinePrice = item.original_line_price %}
+  {% assign WCItem_FinalLinePrice = item.final_line_price %}
+  {% assign WCItem_LinePrice = item.line_price %}
+{% else %}
+  {% assign WCItem_OriginalPrice = saw_variant_compare_at_price %}
+  {% assign WCItem_FinalPrice = saw_variant_price %}
+  {% assign WCItem_Price = saw_variant_price %}
+  {% assign WCItem_PriceMin = item.price_min | times: saw_discount %}
+  {% assign WCItem_PriceMax = item.price_max | times: saw_discount %}
+  {% assign WCItem_CompareAtPrice = saw_variant_compare_at_price %}
+  {% if base_product.compare_at_price_min != 0 %}{% assign WCItem_CompareAtPriceMin = base_product.compare_at_price_min %}{% else %}{% assign WCItem_CompareAtPriceMin = base_product.price_min %}{% endif %}
+  {% if base_product.compare_at_price_max != 0 %}{% assign WCItem_CompareAtPriceMax = base_product.compare_at_price_max %}{% else %}{% assign WCItem_CompareAtPriceMax = base_product.price_max %}{% endif %}
+  {% assign WCItem_OriginalLinePrice = WCItem_OriginalPrice | round | times: item.quantity %}
+  {% assign WCItem_FinalLinePrice = WCItem_FinalPrice | round | times: item.quantity %}
+  {% assign WCItem_LinePrice = WCItem_Price | round | times: item.quantity %}
+{% endif %}
+{% comment %} Wholesale_Club_Item_Prices End {% endcomment %}
+
+{% assign cart_handles = cart_handles | split: ',' | uniq | join: ',' %}
+{% assign upsell_handles = '' %}
+
+<main class="content content--no-sidebar" role="main">
+	<div class="container">
+		<section class="page-main">
+			{% if cart.item_count == 0 %}
+				<div class="page-content cart-no-products">
+					<p class="lead center container--slim">{{ section.settings.cart_collection_heading }}</p>
+					
+					<h2 class="center">Shop Featured Products:</h2>
+					<div class="products row">
+						{% for prod in collections[section.settings.cart_collection].products limit:limit %}
+							{% include 'product-loop', quickview:false %}
+						{% endfor %}
+					</div>
+				</div>
+			{% else %}
+				<div class="page-content">
+					
+{% render 'zoorix-cart-top' %}
+{% render 'banana-stand-cart-top-container' %}
+
+<form action="/cart" method="post" id="cartform" class="row row--gutters">
+						<div class="column column--xs-12 column--md-7" id="cart-products">
+							<h4 id="cart-products-title">Items currently in your cart</h4>
+							<ul id="cart-items">
+								{% for item in cart.items %}
+{% comment %} Wholesale_Club_Item_Prices Start {% endcomment %}
+{% if item.product %}{% assign base_product = item.product %}{% else %}{% assign base_product = item %}{% endif %}
+{% if item.variant %}{% assign base_variant = item.variant %}{% else %}{% assign base_variant = item.selected_or_first_available_variant %}{% endif %}
+
+{% if shop.metafields.sawholesale['base_price'] == blank %}
+  {% assign base_price = 'compare_at_price' %}
+{% else %}
+  {% assign base_price = shop.metafields.sawholesale['base_price'] %}
+{% endif %}
+
+{% assign saw_discount = 0 %}{% assign saw_has_discount = false %}
+
+{% if customer.tags != blank %}
+  {% for mf in base_product.metafields.sawholesale %}
+    {% capture product_customer_tag %}{{ mf | first | replace: 'discount_', '' }}{% endcapture %}
+    {% if customer.tags contains product_customer_tag %}
+      {% assign saw_has_discount = true %}
+      {% assign discount_key = product_customer_tag | prepend: 'discount_' %}
+      {% assign price_key = product_customer_tag | prepend: 'price_' %}
+      {% assign saw_discount = base_product.metafields.sawholesale[discount_key] | divided_by: 100.0 %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign saw_discount = 1 | minus: saw_discount %}
+
+{% if base_price == 'price' or base_variant.compare_at_price == blank  or base_variant.compare_at_price == 0 or base_variant.compare_at_price < base_variant.price %}
+  {% assign saw_variant_compare_at_price = base_variant.price %}
+{% else %}
+  {% assign saw_variant_compare_at_price = base_variant.compare_at_price %}
+{% endif %}
+
+{% assign cpe = shop.metafields.sawholesale['cpe'] | default: "true" %}
+{% if base_variant.metafields.sawholesale[price_key] != blank and cpe == "true" %}
+  {% assign saw_variant_price = base_variant.metafields.sawholesale[price_key] %}
+{% else %}
+  {% assign saw_variant_price = saw_variant_compare_at_price | times: saw_discount %}
+{% endif %}
+
+{% if saw_has_discount == false or saw_variant_price >= saw_variant_compare_at_price %}
+  {% assign WCItem_OriginalPrice = item.original_price %}
+  {% assign WCItem_FinalPrice = item.final_price %}
+  {% assign WCItem_Price = item.price %}
+  {% assign WCItem_PriceMin = item.price_min %}
+  {% assign WCItem_PriceMax = item.price_max %}
+  {% assign WCItem_CompareAtPrice = item.compare_at_price %}
+  {% assign WCItem_CompareAtPriceMin = item.compare_at_price_min %}
+  {% assign WCItem_CompareAtPriceMax = item.compare_at_price_max %}
+  {% assign WCItem_OriginalLinePrice = item.original_line_price %}
+  {% assign WCItem_FinalLinePrice = item.final_line_price %}
+  {% assign WCItem_LinePrice = item.line_price %}
+{% else %}
+  {% assign WCItem_OriginalPrice = saw_variant_compare_at_price %}
+  {% assign WCItem_FinalPrice = saw_variant_price %}
+  {% assign WCItem_Price = saw_variant_price %}
+  {% assign WCItem_PriceMin = item.price_min | times: saw_discount %}
+  {% assign WCItem_PriceMax = item.price_max | times: saw_discount %}
+  {% assign WCItem_CompareAtPrice = saw_variant_compare_at_price %}
+  {% if base_product.compare_at_price_min != 0 %}{% assign WCItem_CompareAtPriceMin = base_product.compare_at_price_min %}{% else %}{% assign WCItem_CompareAtPriceMin = base_product.price_min %}{% endif %}
+  {% if base_product.compare_at_price_max != 0 %}{% assign WCItem_CompareAtPriceMax = base_product.compare_at_price_max %}{% else %}{% assign WCItem_CompareAtPriceMax = base_product.price_max %}{% endif %}
+  {% assign WCItem_OriginalLinePrice = WCItem_OriginalPrice | round | times: item.quantity %}
+  {% assign WCItem_FinalLinePrice = WCItem_FinalPrice | round | times: item.quantity %}
+  {% assign WCItem_LinePrice = WCItem_Price | round | times: item.quantity %}
+{% endif %}
+{% comment %} Wholesale_Club_Item_Prices End {% endcomment %}
+
+									{% comment %}
+									Resetting Assembly product variables
+									{% endcomment %}
+									{% assign product_title = item.product.title %}
+									{% assign assembly_base_prod = false %}
+									{% assign assembly_add_on_prod = false %}
+									{% assign assembly_additional_cost_prod = false %}
+									{% assign has_build_img = false %}
+
+									{% assign property_size = item.properties | size %}
+									{% if property_size > 0 %}
+										{% for p in item.properties %}
+											{% case p.first %}
+												{% when '_assembly_base_prod' %}
+													{% assign assembly_base_prod = true %}
+												{% when '_assembly_base_prod_title' %}
+													{% assign product_title = p.last %}
+												{% when '_assembly_add_on_prod' %}
+													{% assign assembly_add_on_prod = true %}
+												{% when '_assembly_additional_cost_prod' %}
+													{% assign assembly_additional_cost_prod = true %}
+												{% when '_build_img' %} {% comment %} Legacy base64 images {% endcomment %}
+													{% assign has_build_img = true %}
+													{% assign build_img = p.last %}
+												{% when '_assembled_img' %} {% comment %} New images {% endcomment %}
+													{% assign has_build_img = true %}
+													{% assign build_img = p.last %}
+												{% when '_build_link' %}
+													{% assign build_link = p.last %}
+												{% when '_build_id' %}
+													{% assign build_id = p.last %}
+												{% when '_build_add_on_count' %}
+													{% assign build_add_on_count = p.last %}
+											{% endcase %}
+										{% endfor %}
+									{% endif %}
+
+
+									{% if item.product.metafields.kistler.upsell != blank %}
+										{% assign item_upsell_handles = item.product.metafields.kistler.upsell | split: '|' %}
+										{% for upsell in item_upsell_handles %}
+											{% unless cart_handles contains upsell %}
+												{% capture upsell_handles %}{% unless upsell_handles == blank %}{{upsell_handles}},{% endunless %}{{upsell}}{%endcapture%}
+											{% endunless %}
+										{% endfor %}
+									{% else %}
+										{% assign item_upsell_handles = ''%}
+									{% endif %}
+
+
+									{% if assembly_base_prod %}
+										{% assign custom_prod_total_price = WCItem_LinePrice %}
+										{% assign is_build_add_on_count_valid = false %}
+										{% assign add_on_counter = 0 %}
+
+										{% for sub_item in cart.items %}
+											{% unless sub_item.product.id == item.product.id %}
+												{% assign property_size = sub_item.properties | size %}
+
+												{% if property_size > 0 %}
+													{% assign sub_line_build_id = nil %}
+													{% assign sub_line_assembly_add_on_prod = false %}
+													{% assign sub_line_assembly_additional_cost_prod = false %}
+
+													{% for p in sub_item.properties %}
+														{% case p.first %}
+															{% when '_assembly_add_on_prod' %}
+																{% assign sub_line_assembly_add_on_prod = true %}
+															{% when '_assembly_additional_cost_prod' %}
+																{% assign sub_line_assembly_additional_cost_prod = true %}
+															{% when '_build_id' %}
+																{% assign sub_line_build_id = p.last %}
+														{% endcase %}
+													{% endfor %}
+
+													{% if sub_line_build_id == build_id %}
+														{% assign custom_prod_total_price = custom_prod_total_price | plus: sub_item.line_price %}
+
+														{% if sub_line_assembly_add_on_prod or sub_line_assembly_additional_cost_prod %}
+															{% assign add_on_counter = add_on_counter | plus: 1 %}
+														{% endif %}
+													{% endif %}
+												{% endif %}
+
+											{% endunless %}
+										{% endfor %}
+
+										{% if add_on_counter == build_add_on_count %}
+											{% assign is_build_add_on_count_valid = true %}
+										{% endif %}
+
+										{% comment %} Base custom products {% endcomment %}
+										<li id="cart-row-{{ item.id }}" class="cart-row assembly-build-row {% unless is_build_add_on_count_valid %}assembly-build-row-invalid{% endunless %}" data-assembler-build-id="{{ build_id }}">
+											{% unless is_build_add_on_count_valid %}<div class="assembly-build-invalid">This custom product is invalid, some pieces are missing. Please edit or remove to correct the problem before checkout.</div>{% endunless %}
+
+											<div class="cart-column item-image-wrapper">
+												{% if has_build_img %}
+													<img class="item-image" src="{{ build_img }}" alt="{{ item.title | escape }}" />
+												{% else %}
+													<img class="item-image" src="#" alt="{{ item.title | escape }}" />
+												{% endif %}
+											</div><!-- item-image-wrapper -->
+
+											<div class="cart-column item-header">
+												<h3 class="item-title">{{ product_title }}</h3>
+												<div class="item-link-options">
+													<a class="edit-custom-build" href="{{ build_link }}">Edit Build</a> <span class="sep">|</span> <a href="#" class="item-view-details assembly-view-details"></a>
+												</div>
+												<div class="cart__meta-text assembly-meta-details">
+													{% assign property_size = item.properties | size %}
+													{% if property_size > 0 %}
+														{% for p in item.properties %}
+															{% assign first_character_in_key = p.first | truncate: 1, '' %}
+
+															{% unless p.last == blank or first_character_in_key == '_' %}
+																<div class="item-meta"><span class="item-meta__option">{{ p.first | replace:'_',' ' }}: <span class="item-meta__option">{{ p.last }}</span></span></div>
+															{% endunless %}
+														{% endfor %}
+													{% endif %}
+												</div>
+												<div class="cart__meta-text">
+													{% if is_build_add_on_count_valid %}
+														<div class="item-line-price" >
+                                                          <span>
+                                                            {{ custom_prod_total_price | money_without_trailing_zeros }}
+                                                          </span>
+															
+															{% if item.total_discount > 0 %} 
+                                                          <span class="item-old-price"> {{ WCItem_OriginalLinePrice | money }}</span>{% endif %}
+														</div>
+													{% endif %}
+
+													{% if item.total_discount > 0 %}
+														<div class="item-meta item-meta--discount">{{ item.message }} / {{ item.total_discount | money_without_trailing_zeros }} OFF</div>
+													{% endif %}
+												</div>
+											</div><!-- item-header -->
+
+											<div class="cart-column item-qty-price">
+												<noscript>
+													<div style="display: block; font-size: 14px; padding: 10px; margin:0 0 10px 0; color: #333; background: #ffc;">Please enable JavaScript to update/remove custom builds</div>
+												</noscript>
+
+												<div style="display: none;" class="cart-qty assembly-build-cart-quantity">
+													<input type="button" value="–" class="qtyminus assembly-build-cart-quantity-action" data-assembly-build-cart-quantity-action="subtract" />
+													<input type="text" size="4" class="cart-qty-input assembly-build-cart-quantity-input" value="{{ item.quantity }}" {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %} max="{{ item.variant.inventory_quantity }}" {% endunless %} onfocus="this.select();" />
+													<input type="button" value="+" class="qtyplus assembly-build-cart-quantity-action" data-assembly-build-cart-quantity-action="add" />
+												</div>
+
+												<div class="price-and-remove">
+													<a style="display: none;" class="item-delete item-delete-{{ item.id }} assembly-build-remove" href="#">
+														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>
+													</a>
+												</div>
+											</div>
+										</li>
+
+									{% elsif assembly_add_on_prod == false and assembly_additional_cost_prod == false %}
+									
+										{% comment %} Normal products {% endcomment %}
+										<li id="cart-row-{{ item.id }}" class="cart-row">
+											<div class="cart-column item-image-wrapper">
+												<img class="item-image" src="{{ item.image.src | product_img_url: 'medium' }}" alt="{{ item.title | escape }}" />
+											</div><!-- item-image-wrapper -->
+											<div class="cart-column item-header">
+												
+												{% assign property_size = item.properties | size %}
+													
+												{% if property_size > 0 %}
+													{% for p in item.properties %}
+														{% if p.first == '_backorder' and p.last == 'true' %}
+														{% assign backorder_text = '' %}
+														{% for tag in item.product.tags %}
+														  {% if tag contains 'Oversell:' %}{% assign backorder_text = tag | split: ':' | last %}{% endif %}
+														{%endfor%}
+                                                        {% if backorder_text != '' %}
+                                                           <span class="backordered">Currently backordered and ships on {{ backorder_text }}</span>
+                                                        {% endif %}
+														{% endif %}
+													{% endfor %}
+												{% endif %}
+												<h3 class="item-title"><a href="{{ item.product.url }}">{{ product_title }}</a></h3>
+												<div class="cart__meta-text">
+													{% unless item.variant.title contains 'Default' and item.total_discount == 0 %}
+														{% for option in item.product.options %}
+															<div class="item-meta">
+																<span class="item-meta__label">{{ option }}</span>: <span class="item-meta__value">{{ item.variant.options[forloop.index0] }}</span>
+																{% unless forloop.last %} / {% endunless %}
+															</div>
+														{% endfor %}
+														{% comment %}
+														{% assign property_size = item.properties | size %}
+															
+														{% if property_size > 0 %}
+															{% for p in item.properties %}
+																{% if p.first == '_backorder' and p.last == 'true' %}
+																<span class="backordered">This item is backordered</span>
+																{% else %}
+																{% assign first_character_in_key = p.first | truncate: 1, '' %}
+																{% unless p.last == blank or first_character_in_key == '_' %}
+																	<div class="item-meta"><span class="item-meta__option">{{ p.first }}: <span class="item-meta__option">{{ p.last }}</span></span></div>
+																{% endunless %}
+																{% endif %}
+															{% endfor %}
+														{% endif %}{% endcomment %}
+														
+													{% endunless %}
+													
+													<div class="item-line-price">{{ WCItem_LinePrice | money_without_trailing_zeros }} {% if item.total_discount > 0 %} <span class="item-old-price"> {{ WCItem_OriginalLinePrice | money }}</span>{% endif %}</div>
+
+													{% if item.total_discount > 0 %}
+														<div class="item-meta item-meta--discount">{{ item.message }} / {{ item.total_discount | money_without_trailing_zeros }} OFF</div>
+													{% endif %}
+												</div>
+											</div><!-- item-header -->
+											<div class="cart-column item-qty-price">
+												<div class="cart-qty">
+													<input id="qtyminus-{{ item.id }}" type="button" value="–" class="qtyminus" field="quantity" />
+													<input type="text" size="4" class="cart-qty-input" id="updates_{{ item.id }}" value="{{ item.quantity }}" {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %} max="{{ item.variant.inventory_quantity }}" {% endunless %} onfocus="this.select();" />
+													<input id="qtyplus-{{ item.id }}" type="button" value="+" class="qtyplus" field="quantity" />
+												</div><!-- cart-qty -->
+												<div class="price-and-remove">
+													<a class="item-delete item-delete-{{ item.id }}" href="/cart/change?line={{ forloop.index }}&quantity=0">
+														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></svg>
+													</a>
+												</div>
+											</div>
+										</li>
+										<script>
+											document.addEventListener('DOMContentLoaded', function () {
+												(function ($) {
+													$(function () {
+														$('#updates_{{ item.id }}').on('change', function (e) {
+															var current_val = parseInt($(this).val());
+
+															if (current_val < 1) {
+																if (!confirm('Would you like to remove this product from your cart?')) {
+																	window.location.reload(); // easily restores original quantity value
+																	return;
+																}
+															}
+
+															window.location.href = '/cart/change?line={{ forloop.index }}&quantity=' + current_val;
+														});
+
+														$('#qtyplus-{{ item.id }}').click(function (e) {
+															e.preventDefault();
+															var $input = $('#updates_{{ item.id }}'),
+																current_val = parseInt($input.val());
+
+															$input.val(current_val + 1).trigger('change');
+														});
+
+														$('#qtyminus-{{ item.id }}').click(function (e) {
+															e.preventDefault();
+															var $input = $('#updates_{{ item.id }}'),
+																current_val = parseInt($input.val());
+
+															current_val -= 1;
+															if (current_val < 0) { current_val = 0; }
+															$input.val(current_val).trigger('change');
+												 		});
+													});
+												})(jQuery)
+											});
+										</script>
+									{% endif %}
+								{% endfor %}
+							</ul><!-- cart-items-list -->
+
+							{% if upsell_handles != blank %}
+								{% include 'cart-upsells' %}
+							{% endif %}
+						</div>
+
+
+						<div class="column column--xs-12 column--md-4 column--md-offset-1" id="cart-summary">
+							<header class="center">
+								<h1 class="h2">Cart Summary</h1>
+							</header>
+							<div id="cart-actions">
+								<div id="totals">
+									<div class="total-row clearfix total-row--sub-total">
+										<span class="total-row__title">Sub Total </span> <span style="display: block; text-align: right;" class="saw-extra-note"></span><span class="saw-cart-original-total"><span class="total-row__value">{{ cart.original_total_price | money_without_trailing_zeros }}</span></span><br><span class="saw-cart-total"></span>
+									</div>
+
+									{% if cart.total_discount > 0 %}
+										<div class="total-row clearfix total-row--savings">
+											<span id="cart-saving-amount" class="total-row__title" data-savings-total="{{ cart.total_discount | remove:'$' }}">Savings</span> <span class="total-row__value">-{{ cart.total_discount | money_without_trailing_zeros }}</span>
+										</div>
+									{% endif %}
+
+									{% unless customer %}
+										<a href="#" id="show-shipping-calculator-start" title="Estimate Shipping"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"/></svg> Enter address to estimate shipping</a>
+									{% endunless %}
+
+									<div class="total-row clearfix total-row--estimated-shipping{% unless customer %} total-row--estimated-shipping--hidden{% endunless %}">
+										<span class="total-row__title ">Estimated Shipping</span> <span id="estimated-shipping-cost" class="total-row__value"></span>
+									</div>
+
+									<div id="estimating-messaging"><span id="shipping_zipcode_result"></span><span>change</span> </a></div>
+									
+									<div id="shipping-calculator">
+										<div id="shipping-calculator-form" class="form">
+											<div class="form__fieldrow">
+												<label for="address-country">Country</label>
+												<div class="form__field--select">
+													<select id="address-country" name="address[country]" data-default="{% if shop.customer_accounts_enabled and customer %}{{ customer.default_address.country }}{% else %}United States{% endif %}">{{ country_option_tags }}</select>
+													{% include 'icon-caret-down.svg' %}
+												</div>
+											</div>
+											<div class="form__fieldrow" id="address-province-container">
+												<label for="address-province" id="address_province_label">State/Province</label>
+												<div class="form__field--select">
+													<select id="address-province" name="address[province]" data-default="{% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}{{ customer.default_address.province }}{% endif %}"></select>
+													{% include 'icon-caret-down.svg' %}
+												</div>
+											</div>
+											<div class="form__fieldrow">
+												<label for="address_zip">Zipcode</label>
+												<input class="form__field" type="text" id="address-zip" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} />
+											</div>
+											<div class="form__actions">
+												<a href="#" id="get-rates" class="btn btn--alt" title="Estimate">Estimate</a>
+											</div>
+										</div>
+									</div>
+
+									<div class="total-row clearfix total-row--total">
+										<span class="total-row__title">Total </span> <span id="cart-total-amount" class="total-row__value" data-cart-total="{{ cart.total_price | remove:'$' }}"><span style="display: block; text-align: right;" class="saw-extra-note"></span><span class="saw-cart-original-total"><span class="zrx-cart-total">{{ cart.total_price | money_without_trailing_zeros }}</span></span><br><span class="saw-cart-total"></span></span>
+									</div>
+								</div>
+								
+								<div id="checkout-buttons" class="center">
+									<input type="submit" id="checkout" class="btn btn--large btn--block" name="checkout" value="Check Out" />
+									{% comment %}<button type="submit" id="update-cart" class="btn--no-style" name="update"></button> {% endcomment %}
+									{% if additional_checkout_buttons %}
+										<div class="additional-checkout-buttons"> {{ content_for_additional_checkout_buttons }} </div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</form>
+{% render 'zoorix-cart-bottom' %}
+
+				</div>
+
+				<script src="/services/javascripts/countries.js" defer></script>
+				<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+				<script>
+					document.addEventListener('DOMContentLoaded', function () {
+						new Shopify.CountryProvinceSelector('address-country', 'address-province', {hideElement: 'address-province-container'});
+
+
+						// calculates the cart total
+						function calculate_total (shipping_rate) {
+							var cart_total = parseInt($('#cart-total-amount').data('cart-total')),
+								savings = parseInt($('#cart-saving-amount').data('savings-total'));
+
+							$('#cart-total-amount').text((Shopify.formatMoney(cart_total + shipping_rate)).replace('.00', ''));
+						}
+
+
+						function get_rates (province, country, zipcode) {
+							var form = $('#shipping-calculator'),
+								rates_url;
+
+							form.addClass('calculating');
+
+							if (province == null) {
+								province = $('#address-province').val().replace(' ', '+');
+							}
+
+							if (country == null) {
+								country = $('#address-country').val().replace(' ', '+');
+							}
+
+							if (zipcode == null) {
+								zipcode = $('#address-zip').val().replace(' ', '+');
+							}
+
+							rates_url = '{{ shop.url }}/cart/shipping_rates.json?shipping_address%5Bzip%5D=' + zipcode + '&shipping_address%5Bcountry%5D=' + country + '&shipping_address%5Bprovince%5D=' + province;
+							
+							$.getJSON(rates_url).done(function (data) {
+								var shipping_price = Shopify.formatMoney(data.shipping_rates[0].price, '{{shop.money_without_currency_format}}').replace('.00', ''),
+									address = [{'province': province, 'country': country, 'zipcode': zipcode}],
+									shipping_rate = parseInt(data.shipping_rates[0].price.replace('.', ''));
+
+								if (shipping_price == '$0') {
+									shipping_price = 'Free';
+								}
+
+								// UI changes
+								$('#show-shipping-calculator-start').hide();
+								form.removeClass('calculating');
+								$('.total-row--estimated-shipping').removeClass('total-row--estimated-shipping--hidden');
+								$('#estimated-shipping-cost').text(shipping_price);
+								$('#shipping_zipcode_result').text(zipcode.replace('+', ''));
+								$('#show-shipping-calculator, #shipping_zipcode_result, #estimating-messaging').show();
+								$('#shipping-calculator').removeClass('shown');
+
+								// get shipping address and store as JSON object in browser
+								localStorage.setItem('get_rates_address', JSON.stringify(address));
+								
+								// triggers recalculation on cart total
+								calculate_total(shipping_rate);
+							}).fail(function (data) {
+								form.removeClass('calculating');
+								alert('Sorry, something went wrong. Please try inputting your address again');
+							});
+						}
+
+						// On load
+						if (localStorage.getItem('get_rates_address')) {
+							var rate_info = $.parseJSON(localStorage.getItem('get_rates_address')),
+								province = rate_info[0].province,
+								country = rate_info[0].country,
+								zipcode = rate_info[0].zipcode;
+							
+							get_rates(province, country, zipcode);
+						}
+
+						$('#get-rates').on('click', function () {
+							get_rates();
+							return false;
+						});
+
+						$('#address-zip').keypress(function (event) {
+							if (event.which === 13) {
+								event.preventDefault();
+								get_rates();
+							}
+						});
+
+						$('#show-shipping-calculator-start').on('click', function () {
+							$(this).hide();
+							$('#shipping-calculator').addClass('shown');
+							return false;
+						});
+
+						$('#show-shipping-calculator, #estimating-messaging').on('click', function () {
+							$('#show-shipping-calculator, #shipping_zipcode_result, #estimating-messaging').hide();
+							$('#shipping-calculator').addClass('shown');
+							return false;
+						});
+
+						{% if customer %}
+							$('#get-rates').click();
+						{% endif %}
+					});
+				</script>
+			{% endif %}
+		</section>
+	</div>
+</main>
+
+{% schema %}
+{
+	"name": "Cart",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Empty Cart"
+		},
+		{
+			"type": "textarea",
+			"id": "cart_collection_heading",
+			"label": "Heading",
+			"default": "Oops. Looks like you haven't added anything to your cart. Check out some of these products"
+		},
+		{
+			"type": "collection",
+			"id": "cart_collection",
+			"label": "Collection",
+			"info": "Collection to pull products from."
+		},
+		{
+			"type": "text",
+			"id": "cart_collection_limit",
+			"label": "How many products to show?",
+			"default": "12"
+		},
+		{
+			"type":"text",
+			"id":"cart_upsell_limit",
+			"label": "Upsell Product Limit",
+			"default": "3"
+		}
+	]
+}
+{% endschema %}
+<style>
+  
+  .additional-checkout-buttons {
+    display: none !important;
+  }
+ 
+</style>

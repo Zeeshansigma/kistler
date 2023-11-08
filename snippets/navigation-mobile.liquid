@@ -1,0 +1,70 @@
+<nav id="mobile-navigation-wrapper">
+  <ul class="mobile-navigation">
+    <li class="mobile-navigation__search">
+      <form class="mobile-navigation__search-form" action="/search">
+        {% include 'icon-search.svg' %}
+        <label>
+          <span class="visually-hidden">Search {{ shop.name }}</span>
+          <input type="text" name="q" class="mobile-navigation__search-input" placeholder="search {{ shop.name | split: ' ' | first }}..."/>
+        </label>
+      </form>
+    </li>
+    {% assign children = false %}
+    {% for link in linklists[linklist].links %}
+      <li class="mobile-link{% if link.active %} active{% endif %}{% if link.links.size > 0 %} clearfix children{% endif %}">
+        <a href="{{ link.url }}" title="{{ link.title | split: '|' | first }}">{{ link.title | split: '|' | first }}</a>
+        {% if link.links.size > 0 %}
+          <span class="mobile-dropdown-toggle">{% include 'icon-caret-down.svg' %}</span>
+          <ul class="mobile-dropdown mobile-dropdown-level-1">
+            {% for sub_link in link.links %}
+              <li {% if l.active %} class="active"{% endif %}>
+                <a href="{{ sub_link.url }}" title="{{ sub_link.title }}">
+                  {{ sub_link.title }}
+                </a>
+                {% if sub_link.links.size > 0  %}
+                  <ul class="mobile-dropdown mobile-dropdown-level-2">
+                    {% for sub_sub_link in sub_link.links %}
+                      <li>
+                        <a href="{{ sub_sub_link.url }}" title="{{ sub_sub_link.title }}" style="font-family: 'GT AMERICA REGULAR' !important;">{{ sub_sub_link.title }} </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+
+            {% for block in section.blocks %}
+              {% if block.settings.menu_item == link.title %}
+                <li class="sub-navigation-column sub-navigation-column--promo">
+                  <div class="sub-navigation-promo">
+                    <figure class="lazy sub-navigation-promo__image" data-src="{{ block.settings.image.src | img_url: '500x' }}">
+                      <figcaption>
+                        <a href="{{ block.settings.url }}" title="{{ block.settings.title }}">
+                          <div class="sub-navigation-promo__preheading">{{ block.settings.preheading }}</div>
+                          <h4 class="sub-navigation-promo__heading">{{ block.settings.title | replace: '|', '<br>' }}</h4>
+                          <div class="btn btn--small">{{ block.settings.btn_text }}</div>
+                        </a>
+                      </figcaption>
+                    </figure>
+                  </div>
+                </li>
+              {% endif %}
+            {% endfor %}
+
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+
+    <li class="mobile-link{% if link.links.size > 0 %} clearfix children{% endif %}">
+      <a href="/account/login" title="Account">Account</a>
+      <span class="mobile-dropdown-toggle">{% include 'icon-caret-down.svg' %}</span>
+      <ul class="mobile-dropdown mobile-dropdown-level-1">
+        <li><a href="/account" title="My Account">My Account</a></li>
+        <li><a href="/account/orders" title="My Account">Orders</a></li>
+        <li><a href="/account/login" title="My Account">Login</a></li>
+        <li><a href="/account/register" title="My Account">Register</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>

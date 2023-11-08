@@ -1,0 +1,110 @@
+<section class="section section--photo-gallery section--photo-gallery--{{ section.id }}
+  {% if section.settings.full_width %}section--photo-gallery--full-width{% endif %}
+  {% unless section.settings.top_padding %}section--photo-gallery--no-top-padding{% endunless %}
+  {% unless section.settings.bottom_padding %}section--photo-gallery--no-bottom-padding{% endunless %}" 
+  {{ section.shopify_attributes }}>
+  <style>
+    {% if section.settings.bkgd_color %}
+    .section--photo-gallery--{{ section.id }} { background-color: {{ section.settings.bkgd_color }}; }
+    {% endif %}
+
+    {% if section.settings.text_color %}
+    .section--photo-gallery--{{ section.id }} .section--photo-gallery-title,
+    .section--photo-gallery--{{ section.id }} .gallery-imgs { color: {{ section.settings.text_color }}; }
+    {% endif %}
+  </style>
+
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <h2 class="section--photo-gallery-title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="row row--gutters gallery-imgs">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <div class="column gallery-img gallery-img--{{ forloop.index }}">
+            <img 
+              src="{{ block.settings.image | img_url: '400x' }}" 
+              alt="{{ block.settings.image.alt }}"
+              loading="lazy"
+              width="400"
+              height="{{ 400 | divided_by: block.settings.image.aspect_ratio }}" />
+          </div>
+        {%- else -%}
+          <div class="column gallery-img gallery-img--{{ forloop.index }} gallery-img--placeholder">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Photo gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type":"color",
+      "id":"bkgd_color",
+      "label":"Background Color",
+      "default":"#fff"
+    },
+    {
+      "type":"color",
+      "id":"text_color",
+      "label":"Text Color",
+      "default":"#1a1a1a"
+    },
+    {
+      "type":"checkbox",
+      "id":"full_width",
+      "label":"Full Width?",
+      "default": true
+    },
+    {
+      "type":"checkbox",
+      "id":"top_padding",
+      "label":"Top Padding?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"bottom_padding",
+      "label":"Bottom Padding?",
+      "default":true
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type":"gallery-img",
+      "name":"Gallery Image",
+      "settings":[ 
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image",
+          "info": "400px width or larger will have best results"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Photo gallery",
+    "category": "Content"
+  }]
+}
+{% endschema %}

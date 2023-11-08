@@ -1,0 +1,9 @@
+<div class="btn btn--large btn--text" data-rebase-lists-wishlist-add-remove="{{product.id}}" data-rebase-lists-add-text="Save To Wishlist" data-rebase-lists-adding-text="Saving..." data-rebase-lists-remove-text="Remove from Wishlist" data-rebase-lists-removing-text="Removing...">Save to Wishlist</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    REBASE.lists.updateActiveProductVariant({
+      product_id: '{{product.id}}',
+      variant_id: '{{current_variant.id}}'
+    });
+  });
+</script>

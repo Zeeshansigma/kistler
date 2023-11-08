@@ -1,0 +1,49 @@
+<section class="section section--faq cart-faq faq--{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="section-content">
+    <h2 class="cart-faq__section-heading">{{section.settings.section_heading}}</h2>
+    <div class="cart-faq-items container">
+      {% for block in section.blocks %}
+        <div class="cart-faq-item" {{ block.shopify_attributes }}>
+          <h3 class="cart-faq-item__title">
+            <span class="cart-faq-item__title-toggle-icon">&plus;</span>
+            {{ block.settings.title }}
+          </h3>
+          <div class="cart-faq-item__content">
+            {{ block.settings.content }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "FAQs",
+    "settings":[
+      {
+        "type":"text",
+        "id":"section_heading",
+        "label":"Section Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type":"faq",
+        "name":"FAQ",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Question"
+          },
+          {
+            "type":"richtext",
+            "id":"content",
+            "label":"Answer"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

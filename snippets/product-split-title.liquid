@@ -1,0 +1,31 @@
+{% if title contains 'Z Bone' %}
+<img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/Z_Bone_logo.svg?v=1611768809" style="display: block; width: 125px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--z-bone">{{ title | replace: 'Z Bone', 'Z Bone' }}</h1>
+{% elsif title contains 'Feel N Reel' %}
+  <img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/2021.1.30_Kistler_Rod_Labels-13.svg?v=1612979349" style="display: block; width: 145px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--feel-n-reel">{{ title | replace: 'Feel N Reel', 'Feel n Reel' }}</h1>
+{% elsif title contains 'KLX' %}
+  <img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/KLX_Red_Logo-10.svg?v=1635958096" style="display: block; width: 115px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--klx">{{ title | replace: 'KLX', 'KLX' }}</h1>
+{% elsif title contains 'Helium' %}
+  <img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/2021_helium_logo-09.svg?v=1612385236" style="display: block; width: 125px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--helium">{{ title | replace: 'Helium', 'Helium' }}</h1>
+{% elsif title contains 'Argon' %}
+  <img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/2021.1.30_Kistler_Rod_Labels-11.svg?v=1612979349" style="display: block; width: 125px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--argon">{{ title | replace: 'Argon', 'Argon' }}</h1>
+{% elsif title contains 'Magnesium' %}
+  <img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/2021.1.30_Kistler_Rod_Labels-10.svg?v=1612979349" style="display: block; width: 125px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--magnesium">{{ title | replace: 'Magnesium', 'Magnesium' }}</h1>
+{% elsif title contains 'Graphite' %}
+  <img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/2021.1.30_Kistler_Rod_Labels-12.svg?v=1612979349" style="display: block; width: 125px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--graphite">{{ title | replace: 'Graphite', 'Graphite' }}</h1>
+{% elsif title contains 'Series 1' %}
+  <img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/Series_1_SVG_logo-30_bb62360f-eae3-4e20-add2-16b8409c1e31.svg?v=1627047926" style="display: block; width: 125px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--graphite">{{ title | replace: 'Series 1', 'Series 1' }}</h1>
+{% elsif title contains 'Series 2' %}
+  <img src="https://cdn.shopify.com/s/files/1/0264/0370/0784/files/Series_2_SVG_Logo-30.svg?v=1627047926" style="display: block; width: 125px; height: auto; padding-bottom: 10px;"></img>
+  <h1 class="product-header__title product-header__title--graphite">{{ title | replace: 'Series 2', 'Series 2' }}</h1>
+{% else %}
+  <h1 class="product-header__title">{{ title }}</h1>
+{% endif %}
+

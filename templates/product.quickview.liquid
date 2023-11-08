@@ -1,0 +1,13 @@
+{% include 'product-content.zipifypages', contentprt: 'header' %}                   {% if product.type  == 'SHOPSTORM_HIDDEN_PRODUCT' %}
+                     Product is not available
+                     {% break %}
+                   {% endif %}
+
+{% layout none %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% section 'product-template' %}
+{% unless product == empty %}
+<script type="application/json" id="product__json">{%- render 'wc_product_json', product: product -%}</script>
+{% endunless %}
+
+{% include 'product-content.zipifypages', contentprt: 'footer' %}

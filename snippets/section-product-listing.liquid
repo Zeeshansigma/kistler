@@ -1,0 +1,20 @@
+<section class="section section--product-listing product-listing product-listing--{{ block.id }}" {{ block.shopify_attributes }} >
+  <div class="section-content">
+    <div class="product-listing__header">
+      <h2>{{ block.settings.title }}</h2>
+      <p>{{ block.settings.subheading }}</p>
+      {% if block.settings.button_text != blank %}
+        <a class="product-listing__action btn btn--text btn--large" href="{{ block.settings.button_url }}" title="{{ block.settings.button_text }} - {{ block.settings.title }}">{{ block.settings.button_text }}</a>
+      {% endif %}
+    </div>
+    <div class="product-listing__items">
+      <div class="row row--gutters">
+        {% for prod in collections[block.settings.collection].products limit: 3 %}
+  {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+          {% include 'product-loop' classes: 'product-listing__item'%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

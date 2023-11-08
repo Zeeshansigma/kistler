@@ -1,0 +1,72 @@
+<section class="section section--slideshow slideshow slideshow--{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="section-content{% unless section.settings.padding %} section-content--padding-none{% endunless %}">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide" data-index="{{ forloop.index0 }}" id="{{ block.id }}" {{ block.shopify_attributes }}>
+            <img src="{{ block.settings.image | img_url: '1500x' }}" alt="{{ block.settings.image.alt }}" />
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-button-prev swiper-button-black"></div>
+      <div class="swiper-button-next swiper-button-black"></div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var assemblySwiper,
+        assemblySwiperOptions = {
+          loop: true,
+          //slidesPerView: 2,
+          centeredSlides: true,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        };
+
+      // only do autoplay if not in the theme editor
+      if ( !$('body#theme-editor').length ) {
+        assemblySwiperOptions.autoplay = {delay: 8000};
+      }
+
+      // init our slider
+      assemblySwiper = new Swiper('.slideshow--{{ section.id }} .swiper-container', assemblySwiperOptions);
+
+      // trigger events for various theme editor changes
+      $(document).on('shopify:section:load', function(){
+        assemblySwiper.update();
+      });
+      $(document).on('shopify:block:select', function(e){
+        assemblySwiper.slideTo($('#'+e.detail.blockId).data('index'));
+      });
+    });
+  </script>
+</section>
+
+{% schema %}
+  {
+    "name": "Slideshow",
+    "settings": [
+      {
+        "type":"checkbox",
+        "id":"padding",
+        "label": "Add Padding?",
+        "default":true
+      }
+    ],
+    "blocks":[
+      {
+        "name":"Slide",
+        "type":"slide",
+        "settings":[
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

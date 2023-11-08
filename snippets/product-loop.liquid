@@ -1,0 +1,100 @@
+
+{% comment %} Wholesale_Club_Product_Prices Start {% endcomment %}
+{% assign base_product = product %}
+{% assign base_variant = product.selected_or_first_available_variant %}
+
+{% if shop.metafields.sawholesale['base_price'] == blank %}
+  {% assign base_price = 'compare_at_price' %}
+{% else %}
+  {% assign base_price = shop.metafields.sawholesale['base_price'] %}
+{% endif %}
+
+{% assign saw_discount = 0 %}{% assign saw_has_discount = false %}
+
+{% if customer.tags != blank %}
+  {% for mf in base_product.metafields.sawholesale %}
+    {% capture product_customer_tag %}{{ mf | first | replace: 'discount_', '' }}{% endcapture %}
+    {% if customer.tags contains product_customer_tag %}
+      {% assign saw_has_discount = true %}
+      {% assign discount_key = product_customer_tag | prepend: 'discount_' %}
+      {% assign price_key = product_customer_tag | prepend: 'price_' %}
+      {% assign saw_discount = base_product.metafields.sawholesale[discount_key] | divided_by: 100.0 %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% assign saw_discount = 1 | minus: saw_discount %}
+
+{% if base_price == 'price' or base_variant.compare_at_price == blank  or base_variant.compare_at_price == 0 or base_variant.compare_at_price < base_variant.price %}
+  {% assign saw_variant_compare_at_price = base_variant.price %}
+{% else %}
+  {% assign saw_variant_compare_at_price = base_variant.compare_at_price %}
+{% endif %}
+
+{% assign cpe = shop.metafields.sawholesale['cpe'] | default: "true" %}
+{% if base_variant.metafields.sawholesale[price_key] != blank and cpe == "true" %}
+  {% assign saw_variant_price = base_variant.metafields.sawholesale[price_key] %}
+{% else %}
+  {% assign saw_variant_price = saw_variant_compare_at_price | times: saw_discount %}
+{% endif %}
+
+{% if saw_has_discount == false or saw_variant_price >= saw_variant_compare_at_price %}
+  {% assign WCProduct_Price = base_product.price %}
+  {% assign WCProduct_ComparePrice = base_product.compare_at_price %}
+  {% assign WCProduct_PriceMin = base_product.price_min %}
+  {% assign WCProduct_ComparePriceMin = base_product.compare_at_price_min %}
+  {% assign WCProduct_PriceMax = base_product.price_max %}
+  {% assign WCProduct_ComparePriceMax = base_product.compare_at_price_max %}
+  {% assign WCProduct_VariantPrice = base_variant.price %}
+  {% assign WCProduct_VariantComparePrice = base_variant.compare_at_price %}
+{% else %}   
+  {% assign WCProduct_Price = saw_variant_price %}
+  {% assign WCProduct_PriceMin = base_product.price_min | times: saw_discount %}
+  {% assign WCProduct_PriceMax = base_product.price_max | times: saw_discount %}
+  {% assign WCProduct_ComparePrice = saw_variant_compare_at_price %}
+  {% if base_product.compare_at_price_min != 0 %}{% assign WCProduct_ComparePriceMin = base_product.compare_at_price_min %}{% else %}{% assign WCProduct_ComparePriceMin = base_product.price_min %}{% endif %}
+  {% if base_product.compare_at_price_max != 0 %}{% assign WCProduct_ComparePriceMax = base_product.compare_at_price_max %}{% else %}{% assign WCProduct_ComparePriceMax = base_product.price_max %}{% endif %}
+  {% assign WCProduct_VariantPrice = saw_variant_price %}
+  {% assign WCProduct_VariantComparePrice = saw_variant_compare_at_price %}
+{% endif %}
+{% comment %} Wholesale_Club_Product_Prices End {% endcomment %}
+{% assign variant = prod.variants.first %}
+
+<article itemtype="http://schema.org/Product" itemscope="itemscope" class="{% if prod.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod.compare_at_price_max > prod.price %} product--on-sale{% endif %}"{% if template contains 'collection' or template contains 'index' %} data-prod-id="{{ prod.id }}"{% endif %}>
+  <div class="product__content">
+    <div class="product__badges">
+      {% if prod.compare_at_price_max > prod.price %}
+        {% assign difference = WCProduct_VariantComparePrice | minus: WCProduct_VariantPrice %}
+        <div class="product__badge product__badge--sale">Save {{ difference | money_without_trailing_zeros }}</div>
+      {% endif %}
+    </div>
+    <a itemprop="url" class="product__image-wrapper" href="{{ prod.url | within: collection }}" title="{{ prod.title | strip_html | escape }}">
+      {% assign featured_image = prod.selected_or_first_available_variant.featured_image | default: prod.featured_image %}
+      <noscript>
+        <img itemprop="image" class="product__image product__image--{{ prod.id }}" srcset="{{ prod.featured_image | img_url: '800x' }} 2x, {{ prod.featured_image | img_url: '400x' }} 1x" src="{{ prod.featured_image | img_url: '400x' }}" data-default-image="{{ prod.featured_image | img_url: '800x' }}" alt="{% if prod.featured_image.alt != blank %}{{ prod.featured_image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
+      </noscript>
+      <img itemprop="image" class="product__image product__image--{{ prod.id }} lazy" data-srcset="{{ prod.featured_image | img_url: '800x' }} 2x, {{ prod.featured_image | img_url: '400x' }} 1x" data-src="{{ prod.featured_image | img_url: '400x' }}" data-default-image="{{ prod.featured_image | img_url: '800x' }}" alt="{% if prod.featured_image.alt != blank %}{{ prod.featured_image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
+    </a>
+    <header class="product__header">
+      <h2 class="product__title">
+        <a href="{{ prod.url | within: collection }}" title="{{ prod.title | strip_html | escape }}" itemprop="name">{{ prod.title }}</a>
+      </h2>
+      
+      <span class="product__meta product__meta--pricing" itemprop="offers" itemtype="http://schema.org/Offer" itemscope="itemscope">
+        {% if prod.available or prod.tags contains "neversoldout" %}
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+          {% if prod.compare_at_price_max > prod.price %}
+            <span class="product__old-price">
+              {% if WCProduct_VariantComparePrice > 0 %}
+                 {{ WCProduct_VariantComparePrice | money }}
+              {% endif %}
+            </span>
+          {% endif %}
+          <span class="product__price"  itemprop="price">{{ WCProduct_VariantPrice | money }}</span>
+        {% else %}
+          <span class="product__price">SOLD OUT</span>
+        {% endif %}
+      </span>
+    </header>
+  </div>
+</article>

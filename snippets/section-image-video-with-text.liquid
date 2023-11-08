@@ -1,0 +1,103 @@
+<section class="section section--img-vid-with-text section--img-vid-with-text--{{ block.id }}
+  {% if block.settings.full_width %}section--img-vid-with-text--full-width{% endif %}
+  {% unless block.settings.top_padding %}section--img-vid-with-text--no-top-padding{% endunless %}
+  {% unless block.settings.bottom_padding %}section--img-vid-with-text--no-bottom-padding{% endunless %}" {{ block.shopify_attributes }}>
+   
+  <style>
+    {% if block.settings.bkgd_color %}
+      .section--img-vid-with-text--{{ block.id }} { 
+        background-color: {{ block.settings.bkgd_color }}; 
+      }
+    {% endif %}
+
+    {% if block.settings.text_color %}
+      .section--img-vid-with-text--{{ block.id }},
+      .section--img-vid-with-text--{{ block.id }} .img-vid-txt__heading { 
+        color: {{ block.settings.text_color }}; 
+      }
+    {% endif %}
+
+    
+    .section--img-vid-with-text--{{ block.id }} .container .img-vid-txt__inner-wrap .img-vid-txt__text-wrap {
+      {% if block.settings.text_align %}text-align: {{block.settings.text_align}};{% endif %}  
+    }
+
+    @media screen and ( min-width: 60em ) {
+      .section--img-vid-with-text--{{ block.id }} .container .img-vid-txt__inner-wrap .img-vid-txt__text-wrap {
+        {% if block.settings.text_padding %} padding: 40px;{% endif %}
+      }
+    }
+  </style>
+  
+  <div class="container">
+    <div class="img-vid-txt__inner-wrap {{block.settings.media_width}}">
+      <div class="img-vid-txt__text-wrap">
+        {% if block.settings.title != blank %}
+          <h2 class="img-vid-txt__heading">{{ block.settings.title }}</h2>
+        {% endif %}
+        {% if block.settings.description != blank %}
+          <div class="img-vid-txt__description">{{ block.settings.description }}</div>
+        {% endif %}
+            
+        {% if block.settings.btn_url != blank and block.settings.btn_text != blank %}
+          <a href="{{ block.settings.btn_url }}" class="img-vid-txt__btn btn {{ block.settings.btn_style }}">
+            {{ block.settings.btn_text }}
+          </a>
+        {% endif %}
+      </div>
+            
+      <div class="img-vid-txt__media-wrap">
+        {% if block.settings.image != blank %}
+          {% assign img = block.settings.image %}
+            <img 
+              class="lazy" 
+              data-srcset="{{ img | img_url: '1600x' }} 2x, {{ img | img_url: '800x' }} 1x" 
+              data-src="{{ img | img_url: '800x' }}" 
+              data-default-image="{{ img | img_url: '1600x' }}" 
+              alt="{{ img.alt | escape }}">
+        {% elsif block.settings.video_url != blank and block.settings.image == blank %}
+          <div class="video-container">
+            <div class="yt-player" data-id="{{block.settings.video_url.id}}"></div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% if block.settings.video_url != blank and block.settings.image == blank %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        (function($) {
+          $(function() {
+            var players = [];
+            // Include YT script if needed
+            if (!$('#yt_iframe_api').length) {
+              var tag = document.createElement('script');
+              tag.id = 'yt_iframe_api';
+              tag.src = 'https://www.youtube.com/iframe_api';
+              
+              var firstScriptTag = document.getElementsByTagName('script')[0];
+              firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            }
+
+            window.queueOnYoutubeIframeAPIReady(function () {
+              var yt_player = $('.section--img-vid-with-text--{{ block.id }} .yt-player');
+              var player = new YT.Player(yt_player.get(0), {
+                height: '390',
+                width: '640',
+                videoId: yt_player.data('id'),
+                playerVars: {
+                  autoplay: 0,
+                  modestbranding: 1,
+                  playsinline: 1,
+                  rel: 0
+                }
+              });
+            });
+          });
+        })(jQuery)
+      });
+    </script>
+  {% endif %}
+</section>
+  

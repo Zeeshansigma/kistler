@@ -1,0 +1,95 @@
+{% assign search_terms = search.terms | handle | upcase %}
+<main class="content content--no-sidebar" role="main">
+  <div class="container">
+    {% include 'page-utility' %}
+    <div class="page-main">
+      <div class="page-header">
+        <h1>Search</h1>
+      </div>
+      <div class="page-content" id="search-results">
+        <form id="search-form--page" class="form form--compact clearfix" action="/search" method="get">
+          <div class="form__fieldrow form__fieldrow--inline">
+            <input class="form__field" type="text" name="q" value="{{search.terms | escape}}" size="25" />
+            <div class="form__field form__field--select">
+              <select name="type">
+                <option value="all">Filter By</option>
+                <option value="article" {% if earch.performed and search.types contains 'article' %}selected{% endif %}>Articles</option>
+                <option value="product" {% if search.performed and search.types contains 'product' %}selected{% endif %}>Products</option>
+                <option value="page" {% if search.performed and search.types contains 'page' %}selected{% endif %}>Pages</option>
+              </select>
+              {% include 'icon-caret-down.svg' %}
+            </div>
+            <input type="submit" class="form__field btn" value="Search{% if search.performed %} Again{% endif %}" />
+          </div>
+        </form>
+        {% if search.performed %}
+          <p>Search results for "{{search.terms}}":</p>
+          {%- paginate search.results by 12 -%}
+            {% if search.results == empty %}
+              <p>Sorry, your search for "{{search.terms | escape}}" did not return any results.</p>
+            {% else %}
+              <div class="item-list item-list--with-thumbnail item-list--search-results row row--gutters">
+                {% if search.terms contains 'custom' or search.terms contains 'Custom' %}
+                <section class="section product section--video video video--1576089152482 video--regular-link column column--xs-12 column--lg-8" data-position="1" data-src="/pages/build-your-own-custom-rod">
+                  <div class="section-content section-content--padding-none">
+                    <figure class="lazy video__image" data-src="//cdn.shopify.com/s/files/1/0264/0370/0784/files/Kistler_Fall2019_-431_3000x.jpg?v=1576089299" >
+                      <figcaption class="video__content">
+                        <span class="video__subheading">Custom Rod Shop</span>
+                        <h3 class="video__heading">Build Your Own</h3>
+                      </figcaption>
+                    </figure>
+                  </div>
+                  <style>
+                    .video--1576089152482 .video__image:after {
+                        background-color: rgba(0,0,0,0);
+                    }
+                  </style>
+                </section>
+                {% endif %}
+                {% for prod in search.results %}
+  {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+
+                  {% if search.types contains 'product' %}
+                    {% unless prod.tags contains 'assembly' %}
+                    
+
+                    {% assign variant_found = false %}
+                    {% for variant in prod.variants %}
+                      {% assign variant_sku = variant.sku | handle | upcase  %}
+                      {% if variant_sku == search_terms %}
+                        {% assign variant_found = true %}
+                        {% assign prod_variant = variant %}
+                      {% endif %}
+                    {% endfor %}
+                    
+                    {% if variant_found %}
+                      {% include 'variant-loop', prod_variant:prod_variant, classes: 'column--xs-6 column--md-4' %}
+                    {% else %}
+                      {% include 'product-loop' classes: 'column--xs-6 column--md-4' %}
+                    {% endif %}
+                    {% endunless %}
+                  {% else %}
+                      <article class="item {% cycle 'item--odd', 'item--even' %} clearfix column column--xs-12">
+                        {% if prod.featured_image %}
+                          <a class="pull-left item__image-wrapper" href="{{prod.url}}" title="{{ prod.title }}">
+                            {{ prod.featured_image.src | product_img_url: 'large' | img_tag: prod.featured_image.alt }}
+                          </a>
+                        {% endif %}
+                        <header class="item__header">
+                          <h3 class="item__title">{{ prod.title | link_to: prod.url }} {% if prod.price %} <span class="sep">/</span> <span class="search-item-price">{{ prod.price | money_without_trailing_zeros }}</span>{% endif %}</h4>
+                          <p class="secondary">{{ prod.content | strip_html | truncatewords: 80 | highlight: search.terms }}</p>
+                        </header>
+                      </article>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% if paginate.pages > 1 %}
+              {% include 'pagination' %}
+            {% endif %}
+          {%- endpaginate -%}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</main>

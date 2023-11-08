@@ -1,0 +1,149 @@
+<section class="section section--multicolumn multicolumn-content--{{ section.id }}
+    {% if section.settings.full_width %}section--multicolumn--full-width{% endif %}
+    {% unless section.settings.top_padding %}section--multicolumn--no-top-padding{% endunless %}
+    {% unless section.settings.bottom_padding %}section--multicolumn--no-bottom-padding{% endunless %}" 
+{{ section.shopify_attributes }}>
+    <style>
+        {% if section.settings.bkgd_color %}
+        .multicolumn-content--{{ section.id }} { background-color: {{ section.settings.bkgd_color }}; }
+        {% endif %}
+
+        {% if section.settings.text_color %}
+        .multicolumn-content--{{ section.id }} .multicolumn-title,
+        .multicolumn-content--{{ section.id }} .multicolumn-content { color: {{ section.settings.text_color }}; }
+        {% endif %}
+    </style>
+
+    <div class="container">
+        {% if section.settings.title != blank %}
+            <h2 class="section--multicolumn-title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        <div class="multicolumn-wrap">
+            {% for block in section.blocks %}
+                <div class="multicolumn multicolumn-{{ forloop.index }}">
+                    {% if block.settings.image %}
+                        <img class="multicolumn-image" src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.image.alt }}" />
+                    {% endif %}
+
+                    {% if block.settings.title %}
+                        <h3 class="multicolumn-title">{{ block.settings.title }}</h3>
+                    {% endif %}
+
+                    {% if block.settings.content %}
+                        <div class="multicolumn-content">{{ block.settings.content }}</div>
+                    {% endif %}
+
+                    {% if block.settings.btn_url != blank and block.settings.btn_text != blank %}
+                        <a href="{{ block.settings.btn_url }}" class="multicolumn-btn btn {{ block.settings.btn_style }}">{{ block.settings.btn_text }}</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Multi-column",
+    "max_blocks": 5,
+    "settings": [
+        {
+            "type": "header",
+            "content": "Design Settings"
+        },
+        {
+            "type":"color",
+            "id":"bkgd_color",
+            "label":"Background Color",
+            "default":"#fff"
+        },
+        {
+            "type":"color",
+            "id":"text_color",
+            "label":"Text Color",
+            "default":"#1a1a1a"
+        },
+        {
+            "type":"checkbox",
+            "id":"full_width",
+            "label":"Full Width?"
+        },
+        {
+            "type":"checkbox",
+            "id":"top_padding",
+            "label":"Top Padding?",
+            "default":true
+        },
+        {
+            "type":"checkbox",
+            "id":"bottom_padding",
+            "label":"Bottom Padding?",
+            "default":true
+        },
+        {
+            "type": "header",
+            "content": "Content Settings"
+        },
+        {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+        }
+    ],
+    "blocks": [{
+        "type":"multi-column-content",
+        "name":"Multi-column content",
+        "settings":[
+            {
+                "type":"text",
+                "id":"title",
+                "label":"Title"
+            },
+            {
+                "type":"richtext",
+                "id":"content",
+                "label":"Content"
+            },
+            {
+                "type":"image_picker",
+                "id":"image",
+                "label":"Image",
+                "info": "400px width or larger will have best results"
+            },
+            {
+                "type":"text",
+                "id":"btn_text",
+                "label":"Button Text"
+            },
+            {
+                "type":"url",
+                "id":"btn_url",
+                "label":"Button URL",
+                "info": "Button URL and Button Text are required for this button to show"
+            },
+            {
+                "type":"select",
+                "id":"btn_style",
+                "label":"Button Style",
+                "options":[
+                    {"value":"","label":"Default"},
+                    {"value":"btn--alt","label":"Alt"},
+                    {"value":"btn--block","label":"Block"},
+                    {"value":"btn--text","label":"Text"},
+                    {"value":"btn--white","label":"White"},
+                    {"value":"btn--outline","label":"Outline"},
+                    {"value":"btn--plain","label":"Plain"},
+                    {"value":"btn--small","label":"Small"},
+                    {"value":"btn--large","label":"Large"},
+                    {"value":"btn--no-style","label":"No style"}
+                ]
+            }
+        ]
+    }],
+    "presets": [{
+        "name": "Multi-column",
+        "category": "Content"
+    }]
+}
+{% endschema %}

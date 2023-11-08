@@ -1,0 +1,630 @@
+/*
+* Example
+* Style override for Assembly
+* ------------------------- */
+#ShopifyChat { /* NOTE: force chat app to left side of screen */
+  right: auto;
+  left: 0;
+}
+
+
+.asm-option-group-title {
+  font-size: 1.4em !important;
+}
+
+.asm-panel-top-bar {
+  box-shadow: 5px 5px 10px #e7e8e8;
+  z-index:999;
+}
+
+@media only screen and (min-width:640px) { 
+    .asm-assembler-preview {
+        width: 55%;
+    }
+}
+
+@media only screen and (min-width:640px) {
+    .asm-assembler-controls {
+        width: 45%;
+    }
+}
+
+.asm-assembler-preview canvas {  
+  width: auto !important;
+  height: 100% !important;
+}
+
+.assembly {
+  min-height: 300px;
+  border-bottom: 4px solid #252a2b;
+}
+
+.assembly noscript div {
+  display: block;
+  padding: 20px;
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #eec200;
+  border-radius: 3px;
+  background: #fdf7e3;
+}
+
+/* Splash View
+------------------------------------------------------------ */
+ul._custom_product_list_f0qlm_2 { /* IMPORTANT: this is the only reliable way to target this element right now (using the generated css component class), could break with assembly build updates */
+  margin: 5rem auto;
+}
+
+.assembly .asm-splash-tile {
+  min-width: 35%;
+  padding: 0;
+  border-radius: 6px;
+  background: rgb(45,45,45);
+  background: -moz-linear-gradient(45deg, rgba(45,45,45,1) 0%, #252a2b 99%)
+  background: -webkit-linear-gradient(45deg, rgba(45,45,45,1) 0%, #252a2b 99%);
+  background: linear-gradient(45deg, rgba(45,45,45,1) 0%, #252a2b 99%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#292929', endColorstr='#252a2b',GradientType=1 );
+}
+.assembly .asm-splash-tile a {
+  padding: 0 !important;
+  border-bottom: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.assembly .asm-splash-tile .asm-splash-tile-heading {
+  width: 100%;
+  font-size: 4rem;
+  text-align: center;
+  padding: 3rem 1rem 0;
+  line-height: 1.2;
+  color: #fff !important;
+  align-self: flex-start;
+}
+.assembly .asm-splash-tile a div {
+  width: 100% !important;
+  color: #fff !important;
+  padding: 2rem 3rem !important;
+  text-align: center !important;
+}
+.assembly .asm-splash-tile a img {
+  width:90%;
+  left: initial;
+  top: initial;
+  transform: initial;
+  /* transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%); */
+}
+
+
+/* Assembler View
+------------------------------------------------------------ */
+.asm-assembler-controls .asm-product-title {
+
+}
+
+.asm-assembler-controls .asm-panel {
+
+}
+
+@media only screen and (min-width: 640px) {
+ .asm-assembler-controls .asm-panel .asm-option-group {
+  border-top: 1px solid #e7e8e8;
+  padding: 50px;
+
+}
+}
+@media only screen and (max-width: 640px) {
+ .asm-assembler-controls .asm-panel .asm-option-group {
+  padding: 20px;
+
+}
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group .asm-option.asm-option-has-img.asm-option-selected .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-spinning .asm-option.asm-option-selected .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-casting .asm-option.asm-option-selected .asm-option-inner-wrap {
+  color: #111;
+  background: #f4f4f4;
+}
+
+/* Option group - Label colors */
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-magnesium-label-color .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-helium-label-color .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-klx-label-color .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-z-bone-label-color .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-feel-n-reel-label-color .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-argon-label-color .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-graphite-label-color .asm-option-group-list .asm-option-grid-style {
+  width: 20%;
+  margin: 0;
+  padding: 0 8px 0 0;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-magnesium-label-color .asm-option-group-list .asm-option-grid-style img,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-helium-label-color .asm-option-group-list .asm-option-grid-style img,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-klx-label-color .asm-option-group-list .asm-option-grid-style img,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-z-bone-label-color .asm-option-group-list .asm-option-grid-style img,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-feel-n-reel-label-color .asm-option-group-list .asm-option-grid-style img,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-argon-label-color .asm-option-group-list .asm-option-grid-style img,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--choose-graphite-label-color .asm-option-group-list .asm-option-grid-style img{
+  width: auto;
+  height: auto;
+  max-width: 85%;
+  max-height: 80px;
+  padding: 0 8px 0 0;
+}
+
+/* Option group - Handle */
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-spinning .asm-option-group-list,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-casting .asm-option-group-list {
+  -webkit-box-orient: horizontal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-spinning .asm-option-group-list .asm-option-list-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-casting .asm-option-group-list .asm-option-list-style {
+  width: 50%;
+  padding: 0 8px 0 0px;
+  margin: 0 0 8px 0;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-spinning .asm-option-group-list .asm-option-list-style .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-casting .asm-option-group-list .asm-option-list-style .asm-option-inner-wrap {
+  overflow: hidden;
+  min-height: 150px;
+}
+
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-spinning .asm-option-group-list .asm-option-list-style .asm-option-inner-wrap .asm-option-img-bg,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-casting .asm-option-group-list .asm-option-list-style .asm-option-inner-wrap .asm-option-img-bg {
+  position: relative;
+  margin: -30% 0px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-spinning .asm-option-group-list .asm-option-list-style .asm-option-inner-wrap .asm-option-img-bg img,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-casting .asm-option-group-list .asm-option-list-style .asm-option-inner-wrap .asm-option-img-bg img {
+  margin: 0 auto;
+  width: auto;
+  display: block;
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-spinning .asm-option-group-list .asm-option-list-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--handle-casting .asm-option-group-list .asm-option-list-style .asm-option-inner-wrap .asm-option-title {
+  font-size: 13px;
+  line-height: initial;
+}
+
+
+
+/* Option group - Series */
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--carbon-fiber-blank-series .asm-option-group-list .asm-option-grid-style {
+  width: 50%;
+  margin: 0;
+  padding: 0 8px 0 0;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--carbon-fiber-blank-series .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap {
+  padding-bottom: 35%;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--carbon-fiber-blank-series .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-img-bg img {
+  max-width: 90% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--carbon-fiber-blank-series .asm-option-group-list .asm-option-grid-style.asm-option--klx-feel-n-reel-hybrid .asm-option-inner-wrap .asm-option-img-bg img {
+  max-width: 70%;
+  max-height: 70%;
+}
+
+
+/* Option group - Power Rating */
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--power-rating-z-bone .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--power-rating-t-800-carbon-fiber .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--power-rating-fnr .asm-option-group-list .asm-option-grid-style,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--power-rating-magnesium-argon .asm-option-group-list .asm-option-grid-style {
+  width: 50%;
+  margin: 0;
+  padding: 0 8px 8px 0;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--power-rating-z-bone .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--power-rating-t-800-carbon-fiber .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--power-rating-fnr .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--power-rating-magnesium-argon .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap {
+  display: block;
+}
+
+
+/* Option group - Length */
+
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-10-length-fnr .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-0-length-z-bone .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-3-length-z-bone .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-6-length-z-bone .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-10-length-z-bone .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-0-length .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-3-length .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-6-length .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title,
+.asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--60-7-10-length .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-title {
+  font-size: 16px;
+  line-height: initial;
+  min-width: 35px;
+}
+
+
+
+
+.asm-assembler-controls .asm-panel .asm-option-group .asm-visual-section {
+
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group .asm-visual-section .asm-option {
+
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group .asm-option {
+
+}
+
+/*.asm-assembler-controls .asm-panel .asm-option-group .asm-option-selected .asm-option-inner-wrap {
+color: #fff;
+background: #ec297b;
+box-shadow: 0 0 0 2px #ec297b;
+}
+*/
+/*.asm-assembler-controls .asm-panel .asm-option-group .asm-option-selected .asm-option-inner-wrap:after {
+border-color: #ec297b transparent transparent transparent;
+}*/
+
+
+.asm-assembler-controls .asm-nav-price {
+  width: auto;
+  flex-grow: 1;
+}
+
+.asm-panel-nav-plain .asm-nav-next,
+.asm-panel-nav-plain .asm-nav-next:hover {
+  background: #EF3F1E;
+  color: #fff;
+  font-weight: bold;
+  padding-left: 20px;
+  width: auto;
+}
+
+.asm-assembler-controls .asm-nav-disabled {
+  opacity: 0.4;
+}
+
+
+.asm-assembler-controls .asm-panel .asm-option-group .asm-option .asm-variant-dropdown {
+
+}
+
+/*.asm-assembler-controls .asm-panel .asm-option-group .asm-option .asm-variant-dropdown select:focus,
+.asm-assembler-controls .asm-panel .asm-option-group .asm-option .asm-variant-multi .asm-variant-multi-dropdown select:focus {
+box-shadow:0 0 0 1px #ec297b;
+border-color: #ec297b;
+}
+*/
+
+
+.asm-assembler-controls .asm-panel .asm-option-group .asm-option .asm-variant-tile {
+
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group .asm-option .asm-variant-tile-disabled {
+  overflow: hidden;
+}
+
+.asm-assembler-controls .asm-panel .asm-option-group .asm-option .asm-variant-tile-selected .asm-variant-tile-inner-wrap {
+  /*box-shadow: 0 0 0 2px #ec297b;*/
+}
+
+
+
+ .asm-assembler-controls .asm-panel .asm-add-to-cart-button {
+  background: #ef3f1e;
+  color: #fff;
+  cursor: pointer;
+  font-style: normal;
+  font-family: "proxima-nova-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-decoration: none;
+  border-radius: unset;
+}
+
+.asm-assembler-controls .asm-panel .asm-share-button {
+  border-radius: unset;
+}
+
+/* bottom nav */
+.asm-assembler-controls .asm-summary-accordion,
+.asm-assembler-controls .asm-summary-accordion + .asm-panel-nav-plain,
+.asm-assembler-controls .asm-panel + .asm-panel-nav-plain {
+  border-top: 1px solid #eee;
+}
+
+
+.asm-summary-accordion .asm-summary-accordion-toggle-wrap .asm-summary-accordion-toggle {
+  text-decoration: none;
+}
+
+.asm-summary-accordion .asm-summary-accordion-toggle-wrap .asm-summary-accordion-toggle:hover {
+  text-decoration: underline;
+}
+
+.asm-summary-accordion-details-wrap {
+  background: #f7f7f7;
+}
+
+
+/* Breakpoints (set to match the same as base app css)
+------------------------------------------------------------ */
+/* Small breakpoint */
+@media (max-width: 599px) {
+  .assembly .asm-splash-tile {
+    min-width: 80%;
+    min-height: 420px;
+  }
+  .assembly .asm-splash-tile .asm-splash-tile-heading {
+    font-size: 3rem;
+  }
+
+  /* hooker group style fix */
+  .asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--hook-keeper .asm-option.asm-option-grid-style,
+  .asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--hook-keeper .asm-option.asm-option-grid-style .asm-option-inner-wrap {
+    width: 100%;
+  }
+
+  /* allow notes to show on series tiles */
+  .asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--carbon-fiber-blank-series .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap {
+    padding-bottom: 0;
+  }
+  .asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--carbon-fiber-blank-series .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-img-bg {
+    position: relative;
+    padding: 0 0 35% 0;
+  }
+  .asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--carbon-fiber-blank-series .asm-option-group-list .asm-option-grid-style .asm-option-inner-wrap .asm-option-notes {
+    margin-bottom: 1em;
+  }
+  .asm-assembler-controls .asm-panel .asm-option-group.asm-option-group--carbon-fiber-blank-series .asm-option .asm-option-inner-wrap:hover {
+    overflow: hidden;
+  }
+
+  .asm-assembler-controls .asm-panel .asm-option-group--custom-engraving-or-logo .asm-option {
+    width: 100%;
+  }
+  .asm-assembler-controls .asm-panel .asm-option-group--custom-engraving-or-logo .asm-option .asm-option-inner-wrap {
+    display: block;
+  }
+
+  /* show notes always */
+  .asm-assembler-controls .asm-panel .asm-option-group .asm-option .asm-option-inner-wrap .asm-option-notes {
+    pointer-events: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative;
+    top: auto;
+    bottom: 0;
+    background: rgba(238, 238, 238, 0.9);
+    color: #111;
+    margin: 1em 0 0;
+    max-width: 100%;
+  }
+
+  .asm-assembler-controls .asm-panel .asm-option-group .asm-option .asm-option-inner-wrap .asm-option-notes:before {
+    display: none !important;
+  }
+
+
+
+  /* hide footer for small screens (auto-scroll not possible currently) */
+  .page-assembly-template .footer-section--upper,
+  .page-assembly-template .footer-navigation {
+    display: none;
+  }
+  .page-assembly-template .footer-section--lower {
+    padding: 0;
+  }
+}
+
+/* Medium breakpoint */
+@media (min-width: 600px) and (max-width: 959px) {
+
+  .assembly .asm-splash-tile {
+    min-width: 43%;
+    min-height: 400px;
+  }
+  .assembly .asm-splash-tile .asm-splash-tile-heading {
+    font-size: 3rem;
+  }
+
+
+  /* hide footer for small screens (auto-scroll not possible currently) */
+  .page-assembly-template .footer-section--upper {
+    display: none;
+  }
+  .page-assembly-template .footer-section--lower {
+    padding: 0;
+  }
+}
+
+@media (min-width: 959px) and (max-width: 1100px) {
+  .assembly .asm-splash-tile {
+    min-width: 38%;
+    min-height: 400px;
+  }
+}
+
+/* Large breakpoint */
+@media (min-width: 960px) {
+  .assembly .asm-splash-tile .asm-splash-tile-heading {
+
+  }
+
+}
+
+/* X-Large breakpoint */
+@media (min-width: 1680px) {
+  .assembly > div > div > div { /* .inner_wrap */
+    height: 100%;
+  }
+}
+
+#customizer-reviews {
+    padding:3rem 5%;
+}
+
+/* 3.0 fixes */
+.asm-option-group--handle .asm-option-group-list .asm-option.asm-option-grid-style.asm-option-has-img {
+    width: 48%;
+  margin: 0 2% 2% 0;
+}
+
+.asm-option-group--handle .asm-option-group-list .asm-option.asm-option-grid-style.asm-option-has-img .asm-option-inner-wrap {
+    padding: 25% 0 0;
+}
+
+@media (max-width: 599px) {
+  .asm-option-group--handle .asm-option-group-list .asm-option.asm-option-grid-style.asm-option-has-img .asm-option-inner-wrap {
+    padding: 50% 0 0;
+  }
+}
+
+.asm-option-group--handle .asm-option-group-list .asm-option.asm-option-grid-style.asm-option-has-img .asm-option-inner-wrap .asm-option-img-bg img {
+  top: 30%;
+}
+
+.asm-option-group--handle .asm-option-group-list .asm-option .asm-option-inner-wrap .asm-option-notes {
+    
+}
+
+.asm-option-group--handle .asm-option-group-list .asm-option.asm-option-grid-style.asm-option-has-img .asm-option-title {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+}
+
+.asm-option-group--handle .asm-option-group-list .asm-option.asm-option-grid-style.asm-option-has-img img {
+  display: block;
+  width: auto;
+  max-width: 95%;
+  height: auto;
+  max-height: none;
+  position: absolute;
+  top: 40%;
+  right: 0;
+}
+
+.asm-assembler-controls .asm-panel .asm-option--custom-label-graphite .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-helium .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-argon .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-klx .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-fnr .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-magnesium .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-z-bone .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--metallic-thread-wrap .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--nylon-thread-wrap .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--nylon-accent-thread .asm-variant-tile,
+.asm-assembler-controls .asm-panel .asm-option--metallic-accent-thread .asm-variant-tile {
+    width:37px !important;
+  padding-bottom: 30px !important;
+  margin:2px !important;
+}
+
+.asm-assembler-controls .asm-panel .asm-option--custom-label-graphite .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-helium .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-argon .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-klx .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-fnr .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-magnesium .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-z-bone .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--metallic-thread-wrap .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--nylon-thread-wrap .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--nylon-accent-thread .asm-variant-tile-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--metallic-accent-thread .asm-variant-tile-inner-wrap {
+  width: 37px !important;
+  min-width:0 !important;
+  height: 30px !important;
+}
+
+.asm-assembler-controls .asm-panel .asm-option--custom-label-graphite .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-helium .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-argon .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-klx .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-fnr .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-magnesium .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-z-bone .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--metallic-thread-wrap .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--nylon-thread-wrap .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--nylon-accent-thread .asm-variant-tile-color-bg,
+.asm-assembler-controls .asm-panel .asm-option--metallic-accent-thread .asm-variant-tile-color-bg{
+    width:35px !important;
+}
+
+.asm-assembler-controls .asm-panel .asm-option--custom-label-graphite,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-helium,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-argon,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-klx,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-fnr,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-magnesium,
+.asm-assembler-controls .asm-panel .asm-option--custom-label-z-bone,
+.asm-assembler-controls .asm-panel .asm-option--no-accent-thread,
+.asm-assembler-controls .asm-panel .asm-option--metallic-thread-wrap,
+.asm-assembler-controls .asm-panel .asm-option--nylon-thread-wrap,
+.asm-assembler-controls .asm-panel .asm-option--nylon-accent-thread,
+.asm-assembler-controls .asm-panel .asm-option--metallic-accent-thread,
+.asm-assembler-controls .asm-panel .asm-option--no-accent-thread .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--metallic-thread-wrap .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--nylon-thread-wrap .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--nylon-accent-thread .asm-option-inner-wrap,
+.asm-assembler-controls .asm-panel .asm-option--metallic-accent-thread .asm-option-inner-wrap {
+  display: block !important;
+  width:100% !important;
+}
+
+/* Mobile */
+@media (max-width: 599px) {
+  .assembly .asm-assembly-wrapper .asm-assembler-view .asm-inner-wrap .asm-assembler-preview {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      margin: 0;
+      box-shadow: 5px 5px 10px #e7e8e8;
+      background: #fff;
+  }
+
+  .assembly .asm-assembly-wrapper .asm-assembler-view .asm-inner-wrap .asm-assembler-preview .asm-loader-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .assembly .asm-assembly-wrapper .asm-assembler-view .asm-inner-wrap .asm-assembler-preview canvas {
+    margin: 0 auto;
+  }
+
+  .asm-panel-top-bar {
+    box-shadow: none;
+    z-index: unset;
+  }
+}
+

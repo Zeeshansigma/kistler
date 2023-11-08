@@ -1,0 +1,40 @@
+<style>
+  .hero--{{ block.id }} .hero__content--text {color: {{ block.settings.text_color }};}
+  {% if block.settings.header_offset %}
+    body:not(.nav-opened) .header {background:none;}
+    body:not(.nav-opened) .header__logo svg path{fill: {{ block.settings.text_color }};}
+    body:not(.nav-opened) .header-cart button {color:{{ block.settings.text_color }};}
+    body:not(.nav-opened) .header-cart svg {fill:{{ block.settings.text_color }};}
+    body:not(.nav-opened) .header-search input[type="text"] { background: rgba(255,255,255,0.2); border-color: transparent; color: {{ block.settings.text_color }};}
+    body:not(.nav-opened) .header-search input[type="text"]::placeholder {color: rgba(255,255,255,0.5);}
+    body:not(.nav-opened) .header-search svg path { fill: {{ block.settings.text_color }}; }
+    body:not(.nav-opened) .header__navigation ul li a,
+    body:not(.nav-opened) .header__navigation ul li a:link,
+    body:not(.nav-opened) .header__navigation ul li a:visited {color: {{ block.settings.text_color }};}
+    body:not(.nav-opened) .header__navigation ul li svg path {fill: {{ block.settings.text_color }};}
+    body:not(.nav-opened) #mobile-navigation-toggle span { background-color: {{ block.settings.text_color }};}
+  {% endif %}
+
+  {% if block.settings.mobile_image != blank %}
+    @media screen and ( max-width: 60em) {
+      .hero--{{ block.id }} .hero__image { background-image: url({{ block.settings.mobile_image | img_url: '1200x' }}) !important;}
+    }
+  {% endif %}
+</style>
+
+<section class="section section--hero hero hero--{{ block.id }}{% if block.settings.header_offset %} hero--offset-top{% endif %}" {{ block.shopify_attributes }} >
+  <div class="section-content section-content--padding-none">
+    <figure class="lazy hero__image hero__image--{{ block.settings.image_position }}" data-src="{{ block.settings.image | img_url: '3000x', format: 'pjpg'}}">
+      <figcaption class="visually-hidden">{% if block.settings.image.alt != blank%}{{ block.settings.image.alt }}{% else %}{{ block.settings.text}}{% endif %}</figcaption>
+    </figure>
+    <div class="hero__content hero__content--{{block.settings.text_position }}">
+      <div class="container--fluid">
+        {% assign split_text = block.settings.title | split: '|' %}
+        <div class="hero__content--text">{{ split_text[0] | strip }}{% if split_text[1] %}<span>{{ split_text[1] | strip }}</span>{% endif %}</div>
+        {% if block.settings.link_text != blank %}
+          <a class="hero__content--action btn btn--large" href="{{ block.settings.link_url }}" title="Go to {{ block.settings.link_text }}">{{ block.settings.link_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

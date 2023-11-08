@@ -1,0 +1,152 @@
+{% if template contains 'article' and blog.metafields.blogfeeder.use_canonical == 'yes' %}
+  {% assign canonical_url = article.metafields.blogfeeder.canonical %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  
+  <!-----TikTok Pixel----->
+
+  <script>
+  (function() {
+    var ta = document.createElement('script'); ta.type = 'text/javascript'; ta.async = true;
+    ta.src = 'https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid=BSKN5TGQH7P7CAP6LH50';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ta, s);
+  })();
+</script>
+  
+  
+  
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KQKW9QP');</script>
+<!-- End Google Tag Manager -->
+  {% include 'head-meta' %}
+  {% include 'head-css' %}
+  {% include 'head-scripts' %}
+  {% render 'header-scripts.zipifypages', renderctx: 'thm' %}{{ content_for_header }}
+  {% unless template == 'cart' %}
+  {% include 'rebase-head' %}
+  {% endunless %}
+
+  <!-- Algolia head -->
+    
+
+
+
+
+
+<script type="text/template" id="template_algolia_money_format">{% include 'algolia_money_format' %}</script>
+<script type="text/template" id="template_algolia_current_collection_id">{% include 'algolia_current_collection_id' %}</script>
+<script type="text/template" id="template_algolia_autocomplete">{% include 'algolia_autocomplete.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete.css">{% include 'algolia_autocomplete.css.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_pages_empty">{% include 'algolia_autocomplete_pages_empty.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_page">{% include 'algolia_autocomplete_page.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_collection">{% include 'algolia_autocomplete_collection.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_collections_empty">{% include 'algolia_autocomplete_collections_empty.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_article">{% include 'algolia_autocomplete_article.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_articles_empty">{% include 'algolia_autocomplete_articles_empty.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_product">{% include 'algolia_autocomplete_product.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_products_empty">{% include 'algolia_autocomplete_products_empty.hogan' %}</script>
+<script type="text/template" id="template_algolia_autocomplete_footer">{% include 'algolia_autocomplete_footer.hogan' %}</script>
+<script type="text/template" id="template_algolia_instant_search">{% include 'algolia_instant_search.hogan' %}</script>
+<script type="text/template" id="template_algolia_instant_search.css">{% include 'algolia_instant_search.css.hogan' %}</script>
+<script type="text/template" id="template_algolia_instant_search_stats">{% include 'algolia_instant_search_stats.hogan' %}</script>
+<script type="text/template" id="template_algolia_instant_search_facet_item">{% include 'algolia_instant_search_facet_item.hogan' %}</script>
+<script type="text/template" id="template_algolia_instant_search_current_refined_values_item">{% include 'algolia_instant_search_current_refined_values_item.hogan' %}</script>
+<script type="text/template" id="template_algolia_instant_search_product">{% include 'algolia_instant_search_product.hogan' %}</script>
+<script type="text/template" id="template_algolia_instant_search_no_result">{% include 'algolia_instant_search_no_result.hogan' %}</script>
+{{ 'algolia_dependency_font-awesome-4-4-0.min.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'algolia_externals.js' | asset_url }}" defer></script>
+{{ 'algolia_config.js' | asset_url | script_tag }}
+{{ 'algolia_init.js' | asset_url | script_tag }}
+<script src="{{ 'algolia_analytics.js' | asset_url }}" defer></script>
+<script src="{{ 'algolia_translations.js' | asset_url }}" defer></script>
+<script src="{{ 'algolia_helpers.js' | asset_url }}" defer></script>
+<script src="{{ 'algolia_autocomplete.js' | asset_url }}" defer></script>
+<script src="{{ 'algolia_facets.js' | asset_url }}" defer></script>
+<script src="{{ 'algolia_sort_orders.js' | asset_url }}" defer></script>
+<script src="{{ 'algolia_instant_search.js' | asset_url }}" defer></script>
+  <!-- /Algolia head -->
+  {{ 'shopstorm-apps.scss.css' | asset_url | stylesheet_tag }}
+  {% include 'shopstorm-scripttags' %}
+  {% render 'zoorix-cart-items' %}
+
+  <!-- REAMAZE INTEGRATION START - DO NOT REMOVE -->
+{% render 'reamaze-config' %}
+{% render 'reamaze-sso' %}
+<!-- REAMAZE INTEGRATION END - DO NOT REMOVE -->
+
+{% include 'swift_core' %} 
+ </head>
+{% comment %}Finding and adding body classes below{% endcomment %}
+{% capture bodyClasses %}{{ template | split: '.' | first | remove: '/' | remove: '_' | replace:'404','error-404' }}-template {{ template | handle | replace:'.','-' | replace:'/','-' | replace:'_','-' | replace:'404','error-404' }}-template{% if collection %}{% if collection.image %} has-collection-image{% endif %}{% endif %}{% if customer %} customer-logged-in{% endif %}{% endcapture %}
+
+  
+  
+  
+  
+  
+  
+  
+  
+<body id="{% if template contains 'gift_card' %}gift-card-id{% else %}{{ page_title | truncatewords: 3 | handle }}-id{% endif %}" class="{{ bodyClasses | split: ' ' | uniq | join: ' ' }}">
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQKW9QP"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <div class="wrapper">
+    {% section 'header' %}
+    {{content_for_layout}}
+    {% section 'footer' %}
+  </div>
+  {% section 'minicart' %}
+  {% include 'video-modal' %}
+  {% include 'footer-scripts' %}
+  {% include 'smile-initializer' %}
+  
+{% render 'page-footer.zipifypages', renderctx: 'thm', ocuapp: ocuapp %}
+  <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+<script>
+    var klaviyo = klaviyo || [];
+    klaviyo.init({
+      account: "Pvxz2q",
+      platform: "shopify"
+    });
+    klaviyo.enable("backinstock",{ 
+    trigger: {
+      product_page_text: "Notify Me When Available",
+      product_page_class: "btn",
+      product_page_text_align: "center",
+      product_page_margin: "0px",
+      replace_anchor: false
+    },
+    modal: {
+     headline: "{product_name}",
+     body_content: "Register to receive a notification when this item comes back in stock.",
+     email_field_label: "Email",
+     button_label: "Notify me when available",
+     subscription_success_label: "You're in! We'll let you know when it's back.",
+     footer_content: '',
+     additional_styles: "@import url('https://fonts.googleapis.com/css?family=Helvetica+Neue');",
+     drop_background_color: "#000",
+     background_color: "#fff",
+     text_color: "#222",
+     button_text_color: "#fff",
+     button_background_color: "#439fdb",
+     close_button_color: "#ccc",
+     error_background_color: "#fcd6d7",
+     error_text_color: "#C72E2F",
+     success_background_color: "#d3efcd",
+     success_text_color: "#1B9500"
+    }
+  });
+</script>
+  </body>
+</html>

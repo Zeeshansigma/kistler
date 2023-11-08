@@ -1,0 +1,38 @@
+<section class="section section--content-grid content-grid content-grid--{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="section-content{% unless block.settings.padding %} section-content--padding-none{% endunless %}">
+    {% if block.settings.image_1 != blank %}
+      <div class="content-grid__item content-grid__item-- {% unless block.settings.padding %} content-grid__item--padding-none{% endunless%}">
+        <a href="{{ block.settings.link_url_1 }}" title="{% if block.settings.link_text_1 %}{{ block.settings.link_text_1 }}{% else %}{{ block.settings.title_1 }}{% endif %}">
+          <figure class="lazy content-grid__item-image" data-src="{{ block.settings.image_1 | img_url: '1400x'}}">
+            <figcaption>
+              <h3>
+                <span>{{ block.settings.preheading_1 }}</span>
+                {{ block.settings.title_1 | replace: '|', '<br>' }}
+              </h3>
+              {% if block.settings.link_text_1 != blank %}
+                <div class="btn btn--large">{{ block.settings.link_text_1 }}</div>
+              {% endif %}
+            </figcaption>
+          </figure>
+        </a>
+      </div>
+    {% endif %}
+    {% if block.settings.image_2 != blank %}
+      <div class="content-grid__item content-grid__item-- {% unless block.settings.padding %} content-grid__item--padding-none{% endunless%}">
+        <a href="{{ block.settings.link_url_2 }}" title="{% if block.settings.link_text_2 %}{{ block.settings.link_text_2 }}{% else %}{{ block.settings.title_2 }}{% endif %}">
+          <figure class="lazy content-grid__item-image" data-src="{{ block.settings.image_2 | img_url: '1400x'}}">
+            <figcaption>
+              <h3>
+                <span>{{ block.settings.preheading_2 }}</span>
+                {{ block.settings.title_2 | replace: '|', '<br>' }}
+              </h3>
+              {% if block.settings.link_text_2 != blank %}
+                <div class="btn btn--large">{{ block.settings.link_text_2 }}</div>
+              {% endif %}
+            </figcaption>
+          </figure>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% render 'header-scripts.zipifypages', renderctx: 'lsctn' %}{{ content_for_header }}
+  
+  <!-- REAMAZE INTEGRATION START - DO NOT REMOVE -->
+{% render 'reamaze-config' %}
+{% render 'reamaze-sso' %}
+<!-- REAMAZE INTEGRATION END - DO NOT REMOVE -->
+
+</head>
+  <body>
+    {{ content_for_layout }}
+    {% render 'page-footer.zipifypages', renderctx: 'lsctn' %}
+  </body>
+</html>

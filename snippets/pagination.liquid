@@ -1,0 +1,26 @@
+{% if paginate.previous or paginate.next %}
+  <nav class="pagination" role="navigation">
+    <a class="pagination__part pagination__part--prev btn btn--outline" href="{% if paginate.previous %}{{ paginate.previous.url }}{% endif %}" title="Previous">
+      &larr; Previous
+    </a>
+
+     <ol class="pagination__part pagination__part--links">
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <li class="pagination__part pagination__part--link">{{ part.title | link_to: part.url }}</li>
+        {% else %}
+          {% if part.title == '&hellip;' %}
+            <li class="pagination__part pagination__part--link">{{ part.title }}</li>
+          {% else %}
+            <li class="pagination__part pagination__part--current" aria-current="page">{{ part.title }}</li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </ol>
+
+
+    <a class="pagination__part pagination__part--next btn btn--outline" href="{% if paginate.next %}{{ paginate.next.url }}{% endif %}" title="Next">
+      Next &rarr;
+    </a>
+  </nav>
+{% endif %}

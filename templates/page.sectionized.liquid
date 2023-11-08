@@ -1,0 +1,91 @@
+<main class="content" role="main">
+  {% case page.handle %}
+    {% when 'about-kistler' %}
+      {% section 'page-about-kistler' %}
+    {% when 'alton-jones-jr' %}
+      {% section 'page-alton-jones-jr' %}
+    {% when 'alton-jones-sr' %}
+      {% section 'page-alton-jones-sr' %}
+    {% when 'bass-fishing' %}
+      {% section 'page-bass-fishing' %}
+    {% when 'caleb-sumrall' %}
+      {% section 'page-caleb-sumrall' %}
+    {% when 'contact-us' %}
+      {% section 'page-contact-us' %}
+    {% when 'fishing-rod-testimonials' %}
+      {% section 'page-fishing-rod-testimonials' %}
+    {% when 'frequently-asked-questions' %}
+      {% section 'page-frequently-asked-questions' %}
+    {% when 'help' %}
+      {% section 'page-help' %}
+    {% when 'kistler-reward-points' %}
+      {% section 'page-kistler-reward-points' %}
+    {% when 'kistler-vip-warranty-protection' %}
+      {% section 'page-kistler-vip-warranty-protection' %}
+    {% when 'kistlers-story' %}
+      {% section 'page-kistlers-story' %}
+    {% when 'kyle-cortiana' %}
+      {% section 'page-kyle-cortiana' %}
+    {% when 'landing-page' %}
+      {% section 'page-landing-page' %}
+    {% when 'matt-herren' %}
+      {% section 'page-matt-herren' %}
+    {% when 'privacy-and-return-policies' %}
+      {% section 'page-privacy-and-return-policies' %}
+    {% when 'pro-fishing-staff' %}
+      {% section 'page-pro-fishing-staff' %}
+    {% when 'rod-finder' %}
+      {% section 'page-rod-finder' %}
+    {% when 'rod-usage-tips' %}
+      {% section 'page-rod-usage-tips' %}
+    {% when 'shipping' %}
+      {% section 'page-shipping' %}
+    {% when 'store-policies' %}
+      {% section 'page-store-policies' %}
+    {% when 'tell-a-friend' %}
+      {% section 'page-tell-a-friend' %}
+    {% when 'warranty-claim-information-form' %}
+      {% section 'page-warranty-claim-information-form' %}
+    {% when 'warranty-registration' %}
+      {% section 'page-warranty-registration' %}
+  {% when 'promo-page' %}
+      {% section 'page-promo-page' %}
+    {% when 'promo-page-2' %}
+      {% section 'page-promo-page-2' %}
+   {% when 'reward-points' %}
+      {% section 'page-reward-points' %}
+   {% when 'deals' %}
+      {% section 'page-deals' %}
+   {% when 'kistlers-best-crankbait-rod' %}
+      {% section 'page-kistlers-best-crankbait-rod' %}
+   {% when 'big-swimbait-rod' %}
+      {% section 'page-big-swimbait-rod' %}
+   {% when 'popular-all-purpose-rods' %}
+      {% section 'page-popular-all-purpose-rods' %}
+  {% when 'fishing-for-faith' %}
+      {% section 'page-fishing-for-faith' %}
+    {% when 'holiday-gift-guide' %}
+      {% section 'page-holiday-gift-guide' %}
+     {% when 'kistler-guide' %}
+      {% section 'page-kistler-guide' %}
+     {% when 'vip-program' %}
+      {% section 'page-vip-program' %}
+     {% when 'team-application-1' %}
+      {% section 'page-team-application-1' %}
+    {% else %}
+      <div class="container">
+        {% include 'page-utility' %}
+      </div>
+      <div class="container page page--no-sidebar">
+        <div class="page__content">
+          <h1>{{ page.title }}</h1>
+          <hr>
+          {% if page.content.size > 0 %}
+            <div class="rte">
+              {{ page.content }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+  {% endcase %}
+</main>

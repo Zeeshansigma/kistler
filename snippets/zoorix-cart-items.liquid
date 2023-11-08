@@ -1,0 +1,21 @@
+<script>
+        window.zoorixCartData = {
+          currency: "{{ cart.currency.iso_code }}",
+          currency_symbol: "{{ cart.currency.symbol }}",
+          {% if cart.items %}
+          original_total_price: {{ cart.original_total_price }},
+          total_discount: {{ cart.total_discount }},
+          item_count: {{ cart.item_count  }},
+          items: [
+              {% for line_item in cart.items %}{
+                product_id: {{ line_item.product_id }},
+                variant_id: {{ line_item.variant_id }}
+                }{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+          ]
+       	  {% endif %}
+        };
+        window.Zoorix = window.Zoorix || {};
+        window.Zoorix.moneyFormat = {{ shop.money_format | json }};
+        window.Zoorix.moneyFormatWithCurrency = {{ shop.money_with_currency_format | json }};
+</script>

@@ -1,0 +1,43 @@
+{% if product.metafields.kistler.upsell != blank %}
+  {% assign item_upsell_handles = product.metafields.kistler.upsell | split: ',' %}
+
+  {% for upsell_handle in item_upsell_handles limit: 1 %}
+    {% assign upsell_product = all_products[upsell_handle] %}
+
+    {% if upsell_product.tags contains 'ppupsell' %}
+      {% assign upsell_variant = upsell_product.first_available_variant %}
+      {% if upsell_variant.available %}
+        <div class="upsells">
+          <h3 class="upsells-heading">Frequently bought together</h3>
+          <ul class="upsells-list">
+            <li class="upsells-list-item clearfix">
+              <div class="upsells-list-item__image">
+                <a href="{{ upsell_product.url }}" title="{{ upsell_product.title }}">
+                  <img src="{{ upsell_product.images | first | img_url: '150x' }}">
+                </a>
+              </div>
+              <div class="upsells-list-item__title">
+                <a href="{{ upsell_product.url }}" title="{{ upsell_product.title }}">{{ upsell_product.title }}</a>
+                <span class="upsells-list-item__price">{{ upsell_variant.price | money | replace: '.00', '' }}</span>
+              </div>
+              <div class="upsells-list-item__actions">
+                {% if upsell_product.variants[1] %}
+                  <div class="form__field--select">
+                    <select class="upsells-list-item__variant-select" value="{{ upsell_variant.id }}">
+                      {% for prod_variant in upsell_product.variants %}
+                        <option {% if prod_variant.id == upsell_variant.id %}selected{% endif %} {% unless prod_variant.available %}disabled{% endunless %} value="{{ prod_variant.id }}">{{ prod_variant.title }}{% unless prod_variant.available %} - Sold Out{% endunless %}</option>
+                      {% endfor %}
+                    </select>
+                    {% include 'icon-caret-down.svg' %}
+                  </div>
+                {% endif %}
+                <button class="btn btn--alt upsells-list-item__button minicart-quick-add-to-cart-btn" data-quantity="1" data-id="{{ upsell_variant.id }}" data-show="true">Add To Cart</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      {% endif %}
+    {% endif %}
+
+  {% endfor %}
+{% endif %}

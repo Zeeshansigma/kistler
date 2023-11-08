@@ -1,0 +1,177 @@
+<div class="collection-header">
+  <div class="collection-header__image">
+    <figure class="lazy" data-src="{% if collection.image != blank %}{{ collection.image | img_url: '3000x', format: 'pjpg'}}{% endif %}">
+      <figcaption class="visually-hidden">{% if collection.image.alt != blank%}{{ collection.image.alt }}{% else %}{{ collection.title }}{% endif %}</figcaption>
+    </figure>
+    <div class="collection-header__title {% if collection.image != blank %}collection-header__title--has-image{% endif %}">
+      <h1>{{ collection.title }}</h1>
+    </div>
+  </div>
+  <div class="collection-header__actions">
+    <div class="collection-header__breadcrumbs">
+      {% include 'page-utility' %}
+    </div>
+    <div class="collection-header__filtering-toggle">
+      <span>Filter</span> {% include 'icon-sliders.svg' %}
+    </div>
+    <div class="collection-header__sorting">
+      {% include 'collection-sort' %}
+    </div>
+  </div>
+</div>
+
+<main class="content content--has-sidebar" role="main">
+  <div class="collection-sidebar">
+    {% include 'collection-filtering' %}
+  </div>
+  <div class="collection-main">
+    <div class="row row--gutters products">
+      {% if collection.products.size < 1 %}
+        <p class="no-products column--xs-12">Sorry
+          nothing is available at the moment.</p>
+      {% else %}
+        {% for prod in collection.products %}
+  {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
+          {% for prod_variant in prod.variants %}
+            {% include 'variant-loop', classes: "column--xs-6 column--lg-4" %}
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</main>
+
+<script type="text/template" id="no-product-found-message">
+  <div class="no-products-found">{{ section.settings.none_found_message }}</div>
+</script>
+
+{% for block in section.blocks %}
+  <script type="text/template" class="video-promo-block video-promo-block--{{ block.id }}">
+    {% case block.settings.video_url.type %}
+      {% when 'vimeo' %}
+        {% capture player_src %}https://player.vimeo.com/video/{{ block.settings.video_url.id }}?title=0&byline=0&portrait=0&autoplay=1{% endcapture %}
+      {% when 'youtube' %}
+        {% capture player_src %}https://www.youtube.com/embed/{{ block.settings.video_url.id }}?autoplay=1{% endcapture %}
+    {% endcase %}
+    <section class="section product section--video video video--{{ block.id }} {% if block.settings.link_url != blank %}video--regular-link{% endif %} column column--xs-12 column--lg-8" data-position="{{ block.settings.position_index }}" data-src="{% if block.settings.video_url != blank %}{{ player_src }}{% else %}{{ block.settings.link_url }}{% endif %}">
+      <div class="section-content{% unless block.settings.padding %} section-content--padding-none{% endunless %}">
+        <figure class="lazy video__image" data-src="{{ block.settings.image | img_url: '3000x' }}">
+          <figcaption class="video__content">
+            <span class="video__subheading">{{ block.settings.preheading }}</span>
+            {% if block.settings.video_url != blank %}<div class="video__play">{% include 'icon-play.svg' %}</div>{% endif %}
+            <h3 class="video__heading">{{ block.settings.title }}</h3>
+          </figcaption>
+        </figure>
+      </div>
+      {% if block.settings.bg_overlay_color != blank %}
+        {% assign is_none = false %}
+        {% if block.settings.bg_overlay_color == 'rgba(0,0,0,0)' %}{% assign is_none = true %}{% endif %}
+          <style>
+            .video--{{ block.id }} .video__image:after {
+              {% if is_none %}
+                background-color: {{ block.settings.bg_overlay_color }};
+              {% else %}
+                background-color: {{ block.settings.bg_overlay_color | color_modify: 'alpha', 0.75 }};
+              {% endif %}
+            }
+          </style>
+      {% endif %}
+    </section>
+  </script>
+{% endfor %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    (function($){
+      $(function(){
+        $('#sort-by-select').val('{{ collection.sort_by | default: collection.default_sort_by | escape }}').bind('change', function(){
+          REBASE.theme.collection.sortKey = $(this).val();
+          $(document).trigger('collection_sort_by_change');
+          location.reload();
+        });
+
+        function insertPromoBlocks() {
+          var promo_templates = $('.video-promo-block');
+
+          promo_templates.each(function(indx, val) {
+            var html = $(val).html(),
+              $el = $(html),
+              position = $el.data('position');
+
+            $el.insertBefore( $( '.products .product:nth-child('+position+')' ) );
+          });
+
+          REBASE_LazyLoad && REBASE_LazyLoad.update();
+        }
+
+        {% if section.blocks %}
+          insertPromoBlocks();
+          document.addEventListener('shopify:section:load', insertPromoBlocks)
+        {% endif %}
+      });
+    })(jQuery)
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "Rods Collection",
+    "settings":[
+      {
+        "type":"textarea",
+        "id":"none_found_message",
+        "label":"No Products Found Message",
+        "info":"Message displayed when applied filters return no results",
+        "default":"No rods found &mdash; please adjust your filters"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "promo",
+        "name": "Collection Promo",
+        "settings": [
+          {
+            "type":"text",
+            "id":"position_index",
+            "label":"Position of Promo in collection",
+            "default":"4"
+          },
+          {
+            "type":"text",
+            "id":"preheading",
+            "label":"Pre Heading"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+          },
+          {
+            "type": "video_url",
+            "id": "video_url",
+            "label": "Video URL",
+            "accept": ["vimeo", "youtube"],
+            "info":"Leave blank to use Link URL"
+          },
+          {
+            "type": "url",
+            "id": "link_url",
+            "label": "Link URL",
+            "info":"Leave blank to use Video URL"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Placeholder Image"
+          },
+          {
+            "type":"color",
+            "id":"bg_overlay_color",
+            "label":"Background Overlay Color"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

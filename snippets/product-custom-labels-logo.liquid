@@ -1,0 +1,74 @@
+<!-- logo -->
+{% assign prod_handle = 'custom-label' %}
+{% assign extra = all_products[prod_handle] %}
+{% if extra.available %}
+{% assign extra_index = 2 %}
+{% assign featured_image = extra.selected_or_first_available_variant.featured_image | default: extra.featured_image %}
+
+{%- comment -%}
+{% assign decals = "100-Albacore,114-Blue-Marlin,116-Bluefin-Tuna,120-Bonefish,121-Brown-Trout,122-Brook-Trout,123-Calico-Bass,127-California-Yellowtail,130-Channel-Catfish,131-Chinook-Salmon,133-Cobia,135-Coho-Salmon,137-Crappie,139-Dolphin-Fish,146-Gag-Grouper,148-Great-White-Shark,149-Halibut,150-Hammerhead-Shark,152-Kingfish,155-Largemouth-Bass,159-Ling-Cod,160-Mako-Shark,163-Muskie,166-Northern-Pike,167-Peacock-Basss,169-Permit,174-Redfish-_Red-Drum,176-Sailfish,177-Sailfish-_Action,178-Sea-Trout,181-Smallmouth-Bass,183-Snook,184-Sockeye-Salmon,188-Striped-Bass,190-Striped-Bass-_Action,192-Striped-Marlin,193-Sturgeon,195-Tarpon,200-Wahoo,201-Walleye,207-Yellowfin-Tuna,212-Mermaid,213-Mermaid,221-Fish-Flag-Gold,223-Batson-Steelhead,C432-Rainbow-Trout" | split: ',' %}
+{%- endcomment -%}
+{% assign decals = "155-Largemouth-Bass,181-Smallmouth-Bass,201-Walleye,221-Fish-Flag,188-Striped-Bass,130-Channel-Catfish,137-Crappie,163-Muskie,167-Peacock-Basss,178-Sea-Trout,C432-Rainbow-Trout,174-Redfish-_Red-Drum,183-Snook" | split: ',' %}
+
+<div class="product-custom-logo__wrapper" style="margin-top: 1rem;">
+	<input type="checkbox" id="add-logo">
+	<label for="add-logo" class="label"><span></span>Add Fish Decal</label>
+	<div class="product-custom-logo">
+		<div class="ship-notice">Rods with engravings or fish decals will ship in approximately 2 weeks.</div>
+		<div class="extra-product extra-product--{{ extra_index }}" id="extra-product--{{ extra_index }}">
+			<select name="addOn-{{ extra_index }}" id="product-select-add-on-{{ extra_index }}" data-quantity="1" style="display: none;">
+				<option value="{{ extra.selected_or_first_available_variant.id }}">{{ extra.selected_or_first_available_variant.title }}</option>
+			</select>
+			
+			<div class="extra-product-img"><img src="{{ featured_image | product_img_url:'600x' }}" alt="{{ extra.title | replace: 'Custom Label', 'Fish Decal' }}"/></div>
+			<h4>
+			<span>{{ extra.title | replace: 'Custom Label', 'Fish Decal' }} - <span class="extra-product__price">{{ extra.price | money_without_trailing_zeros }}</span></span>
+			<a href="{{ extra.url }}" title="View {{ extra.title | replace: 'Custom Label', 'Fish Decal' }}">Details</a>
+			</h4>	
+			<p>{{ extra.description | replace: ' or provide your own logo.', '.' }}</p>
+			
+			<div class="product-custom-logo__options">
+				{% for decal in decals %}
+				<div class="product-custom-logo__option">
+					{% assign decal_img = decal | append: '.png' %}
+					<input type="radio" id="addon-logo__{{decal}}" name="properties[custom-label]" value="{{decal}}" class="product-custom-logo__input visually-hidden" {% if forloop.first == true %}checked{% endif %}>
+					<label for="addon-logo__{{decal}}">
+						<img src="{{ decal_img | file_img_url: '400x' }}" class="product-custom-logo__image" />
+						<span>{{ decal | handleize | replace: '-', ' ' }}</span>
+					</label>
+				</div>
+				{% endfor %}
+			</div>
+			{%- comment -%}
+			<div class="product-custom-logo__option" style="margin-right:0;">
+				<input type="radio" id="addon-logo__myown" name="properties[custom-label]" value="provide my own" class="product-custom-logo__input visually-hidden" style="padding:1rem;">
+				<label for="addon-logo__myown" style="text-align: center;">Provide My Own</label>
+			</div>
+			{%- endcomment -%}
+		</div>
+	</div>
+	<script>
+	var addLogoInput = document.getElementById("add-logo");
+	var addLogoVariantInput = document.getElementById("extra-product--2");
+	var addLogoLabelInput = document.getElementsByClassName("product-custom-logo__input");
+	if (addLogoInput.checked) {
+	 addLogoVariantInput.classList.add("extra-product--selected");
+	} else {
+	 addLogoVariantInput.classList.remove("extra-product--selected");
+	}
+	var addLogoEnabled = addLogoInput.checked;
+		
+	for (var i=0, iLen=addLogoLabelInput.length; i<iLen; i++) {
+	  addLogoLabelInput[i].disabled = !addLogoEnabled;
+	} 
+	addLogoInput.addEventListener("change", function() {
+		for (var i=0, iLen=addLogoLabelInput.length; i<iLen; i++) {
+			addLogoInput.checked ? addLogoLabelInput[i].removeAttribute('disabled') : addLogoLabelInput[i].setAttribute('disabled', true);
+		} 
+		addLogoLabelInput.disabled = !addLogoInput.checked;
+		addLogoInput.checked ? addLogoVariantInput.classList.add("extra-product--selected") : addLogoVariantInput.classList.remove("extra-product--selected");
+	})
+	</script>
+</div>
+{% endif %}
+<!-- // logo -->

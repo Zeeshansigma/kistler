@@ -1,0 +1,48 @@
+<main class="content content--no-sidebar" role="main">
+  {% if article.image %}
+    <style>.header { background: rgba(255,255,255,0.9); } </style>
+    <img class="blog-article__hero-image" src="{{ article.image | img_url: '3000x' }}" alt="{{ article.image.alt }}" />
+  {% endif %}
+  <div class="container container--slim">
+    <article class="blog-article page-main page-main--{{ template | split: '.' | first | remove: '/' | remove: '_' | replace:'404','error-404' }}" itemscope itemtype="http://schema.org/Article">
+      <header class="blog-article__header">
+        <h1 itemprop="name">{{article.title}}</h1>
+      </header>
+      <div class="blog-article__content" itemprop="content">
+        {{ article.content }}
+      </div>
+    </article>
+  </div>
+
+  <div class="blog-related">
+    <div class="container--slim">
+      <h2>More Kistler News</h2>
+      <div class="blog-related__articles">
+        {% for related_article in blog.articles limit: 4 %}
+          {% unless related_article.handle == article.handle %}
+            <a class="blog-related__article" href="{{ related_article.url }}" title="{{ related_article.title }}">
+              {{ related_article.title }}{% include 'icon-caret-down.svg' %}
+            </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% if article.comments_enabled? %}
+    <div class="blog-comments">
+      <div class="container container--slim">
+        <h2>Comments</h2>
+        <div id="disqus_thread"></div>
+        <noscript>Please enable JavaScript to view the comments section.</noscript>
+      </div>
+    </div>
+  {% endif %}
+</main>
+
+{% schema %}
+  {
+    "name": "Article"
+  }
+{% endschema %}
+

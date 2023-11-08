@@ -1,0 +1,62 @@
+<section class="section section--faq faq faq--{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="section-content container" data-allow-toggle>
+    <h2 class="faq__section-heading">{{ section.settings.section_heading }}</h2>
+    <div class="faq-items">
+      {% for block in section.blocks %}
+        <div class="faq-item{% if forloop.first %} faq-item--selected{% endif %}" {{ block.shopify_attributes }}>
+          <h3 class="faq-item__title">
+            <div role="button"
+              id="faq{{ forloop.index }}Title"
+              aria-controls="faq{{ forloop.index }}Content"
+              {% if forloop.first %} aria-expanded="true"{% else %} aria-expanded="false"{% endif %}>
+              <span class="faq-item__title-toggle-icon" role="presentation">{% if forloop.first %}&minus;{% else %}&plus;{% endif %}</span>
+              {{ block.settings.title }}
+            </div>
+          </h3>
+          <div role="region" 
+            id="faq{{ forloop.index }}Content" 
+            class="faq-item__content{% unless forloop.first %} faq-item__content--hidden{% endunless %}" 
+            aria-labelledby="faq{{ forloop.index }}Title">
+            {{ block.settings.content }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "FAQs",
+    "settings":[
+      {
+        "type":"text",
+        "id":"section_heading",
+        "label":"Section Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type":"faq",
+        "name":"FAQ",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Question"
+          },
+          {
+            "type":"richtext",
+            "id":"content",
+            "label":"Answer"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "FAQ"
+      }
+    ]
+  }
+{% endschema %}
