@@ -13,7 +13,7 @@
     <details class="store_filtering-{{ filter.label }}" style="display: block;">
       <summary>
         <div>
-          <span>{{ filter.label }}</span>
+          <span>{{ filter.label | replace: ' ', '-' }}</span>
 
           {%- if filter.active_values.size > 0 -%}
             <span>({{ filter.active_values.size }})</span>
@@ -60,8 +60,8 @@
           </div>
           {%- when 'list' -%}
           <ul class="store-filter-ul {{ filter.label }} {% for checkb in for_checkboxes %}{% if filter.label == checkb %}apply_checkbox{% endif %}{% endfor %}
-                                                    {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}
-                                                      ">
+                                                                  {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}
+                                                                    ">
             {%- for filter_value in filter.values -%}
               <li>
                 <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
@@ -92,14 +92,14 @@
                         {%- endfor -%}
                       {%- endcapture -%}
                       <span style="
-                                                                                                                                                                                                                                                                                                                                                                            width: 25px;
-                                                                                                                                                                                                                                                                                                                                                                            height: 25px;
-                                                                                                                                                                                                                                                                                                                                                                            border-radius: 50%;
-                                                                                                                                                                                                                                                                                                                                                                            display: flex;
-                                                                                                                                                                                                                                                                                                                                                                            justify-content: center;
-                                                                                                                                                                                                                                                                                                                                                                            align-items: center;
-                                                                                                                                                                                                                                                                                                                                                                            background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
-                                                                                                                                                                                                                                                                                                                                                                          "></span>
+                                                                                                                                                                                                                                                                                                                                                                                                    width: 25px;
+                                                                                                                                                                                                                                                                                                                                                                                                    height: 25px;
+                                                                                                                                                                                                                                                                                                                                                                                                    border-radius: 50%;
+                                                                                                                                                                                                                                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                                                                                                                                                                                                                                    justify-content: center;
+                                                                                                                                                                                                                                                                                                                                                                                                    align-items: center;
+                                                                                                                                                                                                                                                                                                                                                                                                    background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                                                                                                                                                                                                                                                                                                                                                                                                  "></span>
                       {%- when 'image' -%}
                       {{
                          filter_value.display.value
