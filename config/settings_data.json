@@ -25,7 +25,7 @@
     "lengths": "6'0\",6'3\",6'6\",6'8\",6'9\",6'10\",7'0\",7'1\",7'2\",7'3\",7'4\",7'6\",7'10\"",
     "prices": "0000-9999:$0 - $99|10000-19800:$100 - $198|19900-24800:$199 - $248|24900-29800:$249 - $298|29900-39800:$299 - $398|39900-59800:$399 - $598",
     "checkbox_filtering": "Series,Baits",
-    "swatches_filtering": "Length",
+    "swatches_filtering": "Length,Lure",
     "checkout_header_image": "",
     "checkout_logo_image": "shopify:\/\/shop_images\/Kistler_Logo_Black_LOGO_POSITIVE.png",
     "checkout_logo_position": "center",
