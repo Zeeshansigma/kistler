@@ -47,9 +47,9 @@
               <input type="submit" value="Apply">
             </div>
           {%- when 'list' -%}
-            <ul class="{{ filter.label }}">
+            <ul class="store-filter-ul {{ filter.label }}">
               {%- for filter_value in filter.values -%}
-                <li class="{{ filter_value.value }}">
+                <li>
                   <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
                   <input type="checkbox"
                     name="{{ filter_value.param_name }}"
