@@ -49,9 +49,9 @@
             <input type="submit" value="Apply">
           </div>
           {%- when 'list' -%}
-          <ul class="{{ filter.label }}">
+          <ul class="store-filter-ul {{ filter.label }}">
             {%- for filter_value in filter.values -%}
-              <li class="{{ filter_value.value }}">
+              <li>
                 <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
                   <input
                     type="checkbox"
@@ -80,19 +80,19 @@
                         {%- endfor -%}
                       {%- endcapture -%}
                       <span style="
-                                                    width: 25px;
-                                                    height: 25px;
-                                                    border-radius: 50%;
-                                                    display: flex;
-                                                    justify-content: center;
-                                                    align-items: center;
-                                                    background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
-                                                  "></span>
+                                                                            width: 25px;
+                                                                            height: 25px;
+                                                                            border-radius: 50%;
+                                                                            display: flex;
+                                                                            justify-content: center;
+                                                                            align-items: center;
+                                                                            background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                                                                          "></span>
                       {%- when 'image' -%}
                       {{
                          filter_value.display.value
-                         | image_url: width: 25
-                         | image_tag: alt: filter_value.display.value.alt }}
+                       | image_url: width: 25
+                       | image_tag: alt: filter_value.display.value.alt }}
                     {%- else -%}
                       <span class="visual-display__child"></span>
                     {%- endcase -%}
