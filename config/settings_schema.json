@@ -1,1 +1,210 @@
-[{"name":"theme_info","theme_name":"kistler","theme_version":"1.15.0","theme_author":"Knit Agency","theme_documentation_url":"https:\/\/knitagency.com","theme_support_url":"https:\/\/knitagency.com\/"},{"name":"Brand","settings":[{"type":"header","content":"Contact"},{"type":"textarea","id":"mailing_address","label":"Mailing Address"},{"type":"text","id":"email_address","label":"Email Address"},{"type":"text","id":"phone_number","label":"Phone Number"},{"type":"header","content":"Social Media Sharing Logo"},{"type":"paragraph","content":"Shown when sharing a link on social media. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/troubleshooting\/showing-social-media-thumbnail-images\/) about image thumbnails."},{"type":"image_picker","id":"share_image","label":"Image"},{"type":"header","content":"Social Media Accounts"},{"type":"paragraph","content":"Leave a social account blank to not use within your store."},{"type":"text","id":"social_facebook","label":"Facebook Username"},{"type":"text","id":"social_twitter","label":"Twitter Handle","info":"No @ needed"},{"type":"text","id":"social_instagram","label":"Instagram Username"},{"type":"text","id":"social_youtube","label":"Youtube Username"}]},{"name":"Rod Filters","settings":[{"type":"textarea","id":"series","label":"Series","info":"Comma separated list available filters","default":"Argon,Magnesium,KLX,Feel N Reel,Helium,Z Bone"},{"type":"textarea","id":"crankbaits","label":"Crankbaits Filters","info":"Comma separated list available filters","default":"Lipless,Diving,Square Bill,Wake Bait,Jerk Bait"},{"type":"textarea","id":"top_waters","label":"Top Waters Filters","info":"Comma separated list available filters","default":"Buzz Bait,Hollow Body Frog,Toads,Prop Bait,Plopper,Walking Bait,Popper"},{"type":"textarea","id":"soft_plastics","label":"Soft Plastics Filters","info":"Comma separated list available filters","default":"Carolina Rig,Texas Rig Worm,Big Shakey Head,Weightless Senko,Creature Bait,10\" + Magnum Worm,Fluke,Tokyo rig"},{"type":"textarea","id":"finesses","label":"Finesse Filters","info":"Comma separated list available filters","default":"Wacky Worm,Ned Rig,Neko Rig,Small Shakey Head,Drop Shot,Finesse Jig,Spy \/ Spin Baits,Tube"},{"type":"textarea","id":"blades","label":"Blades Filters","info":"Comma separated list available filters","default":"Chatter Bait,Spinner Bait,Under Spin,Jigging Spoon,Blade Bait,Tail Spinner"},{"type":"textarea","id":"jigs","label":"Jigs Filters","info":"Comma separated list available filters","default":"Hair Jig,Flipping Jig,Football Jig,Swim Jig,Finesse Jig,Vibrating Jig"},{"type":"textarea","id":"oversizeds","label":"Oversized Lures Filters","info":"Comma separated list available filters","default":"Flutter Spoon,Umbrella Rig"},{"type":"textarea","id":"swim_glides","label":"Swimbaits\/Glide baits Filters","info":"Comma separated list available filters","default":"Swimbaits,Glide baits,Underspin"},{"type":"textarea","id":"nobasses","label":"Species other than bass Filters","info":"Comma separated list available filters","default":"Walleye,Musky\/Pike,Speckled Trout,Redfish"},{"type":"textarea","id":"wts","label":"Lure Wt Line Wt Filters","info":"Comma separated list available filters","default":"1\/16 oz - 3\/8 oz 4 - 10 lb,1\/8 - 1\/2 oz 10 - 12 lb,3\/16 - 3\/4 oz 12 - 14 lb,1\/4 - 1 oz 15 - 17 lb,3\/8 - 2 oz 17 - 25 lb,1\/2 - 4 oz 25 - 85 lb,3 - 9 oz  30 - 100 lb,1\/8 - 1 oz 12 - 20 lb"},{"type":"textarea","id":"structures","label":"Structure\/Cover Filters","info":"Comma separated list available filters","default":"Open Water,Sparse,Thick"},{"type":"textarea","id":"cast_types","label":"Casting\/Spinning Filters","info":"Comma separated list available filters","default":"Casting,Spinning"},{"type":"textarea","id":"powers","label":"Power Filters","info":"Comma separated list available filters","default":"1,2,3,4,5,6,7,APP"},{"type":"textarea","id":"lengths","label":"Length Filters","info":"Comma separated list available filters","default":"6' 9\",7' 0\",7' 3\",7' 6\",7' 10\""},{"type":"textarea","id":"prices","label":"Price Ranges","info":"Pipe separated list of values and labels. Each value is a range in cents, each label is the visual representation of the filter. Example item: 10000-19800:$100 - $198","default":"10000-19800:$100 - $198|19900-24800:$199 - $248|24900-29800:$249 - $298|29900-39800:$299 - $398|39900-59800:$399 - $598"}]}]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "kistler",
+    "theme_version": "1.15.0",
+    "theme_author": "Knit Agency",
+    "theme_documentation_url": "https:\/\/knitagency.com",
+    "theme_support_url": "https:\/\/knitagency.com\/"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Contact"
+      },
+      {
+        "type": "textarea",
+        "id": "mailing_address",
+        "label": "Mailing Address"
+      },
+      {
+        "type": "text",
+        "id": "email_address",
+        "label": "Email Address"
+      },
+      {
+        "type": "text",
+        "id": "phone_number",
+        "label": "Phone Number"
+      },
+      {
+        "type": "header",
+        "content": "Social Media Sharing Logo"
+      },
+      {
+        "type": "paragraph",
+        "content": "Shown when sharing a link on social media. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/troubleshooting\/showing-social-media-thumbnail-images\/) about image thumbnails."
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Image"
+      },
+      {
+        "type": "header",
+        "content": "Social Media Accounts"
+      },
+      {
+        "type": "paragraph",
+        "content": "Leave a social account blank to not use within your store."
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook Username"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter Handle",
+        "info": "No @ needed"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram Username"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "Youtube Username"
+      }
+    ]
+  },
+  {
+    "name": "Rod Filters",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "series",
+        "label": "Series",
+        "info": "Comma separated list available filters",
+        "default": "Argon,Magnesium,KLX,Feel N Reel,Helium,Z Bone"
+      },
+      {
+        "type": "textarea",
+        "id": "crankbaits",
+        "label": "Crankbaits Filters",
+        "info": "Comma separated list available filters",
+        "default": "Lipless,Diving,Square Bill,Wake Bait,Jerk Bait"
+      },
+      {
+        "type": "textarea",
+        "id": "top_waters",
+        "label": "Top Waters Filters",
+        "info": "Comma separated list available filters",
+        "default": "Buzz Bait,Hollow Body Frog,Toads,Prop Bait,Plopper,Walking Bait,Popper"
+      },
+      {
+        "type": "textarea",
+        "id": "soft_plastics",
+        "label": "Soft Plastics Filters",
+        "info": "Comma separated list available filters",
+        "default": "Carolina Rig,Texas Rig Worm,Big Shakey Head,Weightless Senko,Creature Bait,10\" + Magnum Worm,Fluke,Tokyo rig"
+      },
+      {
+        "type": "textarea",
+        "id": "finesses",
+        "label": "Finesse Filters",
+        "info": "Comma separated list available filters",
+        "default": "Wacky Worm,Ned Rig,Neko Rig,Small Shakey Head,Drop Shot,Finesse Jig,Spy \/ Spin Baits,Tube"
+      },
+      {
+        "type": "textarea",
+        "id": "blades",
+        "label": "Blades Filters",
+        "info": "Comma separated list available filters",
+        "default": "Chatter Bait,Spinner Bait,Under Spin,Jigging Spoon,Blade Bait,Tail Spinner"
+      },
+      {
+        "type": "textarea",
+        "id": "jigs",
+        "label": "Jigs Filters",
+        "info": "Comma separated list available filters",
+        "default": "Hair Jig,Flipping Jig,Football Jig,Swim Jig,Finesse Jig,Vibrating Jig"
+      },
+      {
+        "type": "textarea",
+        "id": "oversizeds",
+        "label": "Oversized Lures Filters",
+        "info": "Comma separated list available filters",
+        "default": "Flutter Spoon,Umbrella Rig"
+      },
+      {
+        "type": "textarea",
+        "id": "swim_glides",
+        "label": "Swimbaits\/Glide baits Filters",
+        "info": "Comma separated list available filters",
+        "default": "Swimbaits,Glide baits,Underspin"
+      },
+      {
+        "type": "textarea",
+        "id": "nobasses",
+        "label": "Species other than bass Filters",
+        "info": "Comma separated list available filters",
+        "default": "Walleye,Musky\/Pike,Speckled Trout,Redfish"
+      },
+      {
+        "type": "textarea",
+        "id": "wts",
+        "label": "Lure Wt Line Wt Filters",
+        "info": "Comma separated list available filters",
+        "default": "1\/16 oz - 3\/8 oz 4 - 10 lb,1\/8 - 1\/2 oz 10 - 12 lb,3\/16 - 3\/4 oz 12 - 14 lb,1\/4 - 1 oz 15 - 17 lb,3\/8 - 2 oz 17 - 25 lb,1\/2 - 4 oz 25 - 85 lb,3 - 9 oz  30 - 100 lb,1\/8 - 1 oz 12 - 20 lb"
+      },
+      {
+        "type": "textarea",
+        "id": "structures",
+        "label": "Structure\/Cover Filters",
+        "info": "Comma separated list available filters",
+        "default": "Open Water,Sparse,Thick"
+      },
+      {
+        "type": "textarea",
+        "id": "cast_types",
+        "label": "Casting\/Spinning Filters",
+        "info": "Comma separated list available filters",
+        "default": "Casting,Spinning"
+      },
+      {
+        "type": "textarea",
+        "id": "powers",
+        "label": "Power Filters",
+        "info": "Comma separated list available filters",
+        "default": "1,2,3,4,5,6,7,APP"
+      },
+      {
+        "type": "textarea",
+        "id": "lengths",
+        "label": "Length Filters",
+        "info": "Comma separated list available filters",
+        "default": "6' 9\",7' 0\",7' 3\",7' 6\",7' 10\""
+      },
+      {
+        "type": "textarea",
+        "id": "prices",
+        "label": "Price Ranges",
+        "info": "Pipe separated list of values and labels. Each value is a range in cents, each label is the visual representation of the filter. Example item: 10000-19800:$100 - $198",
+        "default": "10000-19800:$100 - $198|19900-24800:$199 - $248|24900-29800:$249 - $298|29900-39800:$299 - $398|39900-59800:$399 - $598"
+      }
+    ]
+  },
+  {
+    "name": "Filter Styling Options",
+    "settings": [
+      {
+        "type": "text",
+        "id": "checkbox_filtering",
+        "label": "Add Metafield Key",
+        "info": "Add Comma Sperated values"
+      },
+      {
+        "type": "text",
+        "id": "swatches_filtering",
+        "label": "Add Metafield Key",
+        "info": "Add Comma Sperated values"
+      }
+    ]
+  }
+]
