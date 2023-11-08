@@ -1,7 +1,7 @@
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
-{% assign for_checkboxes = settings.swatches_filtering | split: ',' %}
-{{ settings.checkbox_filtering }}
-{{ settings.swatches_filtering }}
+{% assign for_swatches = settings.swatches_filtering | split: ',' %}
+{{ for_checkboxes }}
+{{ for_swatches }}
 <form>
   {%- for filter in collection.filters -%}
     <details class="store_filtering-{{ filter.label }}" style="display: block;">
@@ -84,14 +84,14 @@
                         {%- endfor -%}
                       {%- endcapture -%}
                       <span style="
-                                                                                                                            width: 25px;
-                                                                                                                            height: 25px;
-                                                                                                                            border-radius: 50%;
-                                                                                                                            display: flex;
-                                                                                                                            justify-content: center;
-                                                                                                                            align-items: center;
-                                                                                                                            background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
-                                                                                                                          "></span>
+                                                                                                                                                    width: 25px;
+                                                                                                                                                    height: 25px;
+                                                                                                                                                    border-radius: 50%;
+                                                                                                                                                    display: flex;
+                                                                                                                                                    justify-content: center;
+                                                                                                                                                    align-items: center;
+                                                                                                                                                    background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                                                                                                                                                  "></span>
                       {%- when 'image' -%}
                       {{
                          filter_value.display.value
