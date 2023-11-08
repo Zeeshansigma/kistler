@@ -1,11 +1,11 @@
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% for checkb in for_checkboxes %}
-  {{ checkb }}
+  {{ checkb }}<br>
 {% endfor %}
 
 {% for checks in for_swatches %}
-  {{ checks }}
+  {{ checks }}<br>
 {% endfor %}
 
 <form>
@@ -59,7 +59,10 @@
             <input type="submit" value="Apply">
           </div>
           {%- when 'list' -%}
-          <ul class="store-filter-ul {{ filter.label }}">
+          <ul class="store-filter-ul {{ filter.label }} {% for checkb in for_checkboxes %}
+                        {% if filter.label == checkb %} apply_checkbox {% endif %}
+              {% endfor %}
+              ">
             {%- for filter_value in filter.values -%}
               <li>
                 <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
@@ -90,14 +93,14 @@
                         {%- endfor -%}
                       {%- endcapture -%}
                       <span style="
-                                                                                                                                                                                                    width: 25px;
-                                                                                                                                                                                                    height: 25px;
-                                                                                                                                                                                                    border-radius: 50%;
-                                                                                                                                                                                                    display: flex;
-                                                                                                                                                                                                    justify-content: center;
-                                                                                                                                                                                                    align-items: center;
-                                                                                                                                                                                                    background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
-                                                                                                                                                                                                  "></span>
+                                                                                                                                                                                                                                                    width: 25px;
+                                                                                                                                                                                                                                                    height: 25px;
+                                                                                                                                                                                                                                                    border-radius: 50%;
+                                                                                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                                                                                    justify-content: center;
+                                                                                                                                                                                                                                                    align-items: center;
+                                                                                                                                                                                                                                                    background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                                                                                                                                                                                                                                                  "></span>
                       {%- when 'image' -%}
                       {{
                          filter_value.display.value
