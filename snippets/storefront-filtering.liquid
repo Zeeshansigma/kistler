@@ -82,13 +82,6 @@ background: #ef3f1e;
 
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
-{% for checkb in for_checkboxes %}
-  {{ checkb }}<br>
-{% endfor %}
-
-{% for checks in for_swatches %}
-  {{ checks }}<br>
-{% endfor %}
 
 <form>
   {%- for filter in collection.filters -%}
