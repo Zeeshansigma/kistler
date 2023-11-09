@@ -519,20 +519,21 @@ elements.forEach(function(element) {
   const myCheckbox = document.querySelector('.myCheckbox');
   const customLabel = document.querySelector('.custom-checkbox-label');
 
-  // Add an event listener to the checkbox
-  myCheckbox.addEventListener('change', function() {
-    // Check if the checkbox is checked
-    if (this.checked) {
-      // If checked, add a class to the label
+  // Function to check if the checkbox is checked and add class accordingly
+  const checkCheckboxAndAddClass = () => {
+    if (myCheckbox.hasAttribute('checked')) {
       customLabel.classList.add('checked-bg');
     } else {
-      // If unchecked, remove the class from the label
       customLabel.classList.remove('checked-bg');
     }
+  };
+
+  // Add an event listener to the checkbox
+  myCheckbox.addEventListener('change', function() {
+    // Check if the checkbox is checked and add class accordingly
+    checkCheckboxAndAddClass();
   });
 
   // Check if the checkbox is initially checked and add class accordingly
-  if (myCheckbox.checked) {
-    customLabel.classList.add('checked-bg');
-  }
+  checkCheckboxAndAddClass();
 </script>
