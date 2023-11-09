@@ -267,6 +267,10 @@ ul.store-filter-ul {
   <div>
               <input type="submit" value="Apply">
             </div>
+
+      <p>
+      <a class="clear-all-btn" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
+    </p>
   {%- for filter in collection.filters -%}
     <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
       <summary class="summary-global" {% for accordion in for_accordion %}{% if filter.label == accordion %} data-disabled="true" {% endif %}{% endfor %}>
@@ -433,9 +437,7 @@ ul.store-filter-ul {
   {%- endfor -%}
 
   <div class="clearn-btn-div">
-    <p>
-      <a class="clear-all-btn" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
-    </p>
+
 
     <!-- {%- for filter in collection.filters -%}
       {%- if filter.type == "price_range" -%}
