@@ -82,6 +82,12 @@ background: #ef3f1e;
 span.one-minus {
     display: none;
 }
+  .heading-clicked .one-minus{
+    display: block;
+  }
+    .heading-clicked .one-plus{
+    display: none;
+  }
 </style>
 
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
@@ -278,7 +284,7 @@ var elements = document.querySelectorAll('.heading-filters');
 
 elements.forEach(function(element) {
     element.addEventListener('click', function() {
-        this.classList.toggle('your-class-to-toggle');
+        this.classList.toggle('heading-clicked');
     });
 });
 
