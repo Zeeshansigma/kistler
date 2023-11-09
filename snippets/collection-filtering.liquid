@@ -264,6 +264,9 @@ ul.store-filter-ul {
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
 
 <form>
+  <div>
+              <input type="submit" value="Apply">
+            </div>
   {%- for filter in collection.filters -%}
     <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
       <summary class="summary-global" {% for accordion in for_accordion %}{% if filter.label == accordion %} data-disabled="true" {% endif %}{% endfor %}>
@@ -384,9 +387,7 @@ ul.store-filter-ul {
             {%- endfor -%}
           </ul>
 
-            <div>
-              <input type="submit" value="Apply">
-            </div>
+            
           {%- when 'price_range' -%}
             <div class="filter-group-display__price-range">
               <div class="filter-group-display__price-range-from">
