@@ -320,35 +320,27 @@ elements.forEach(function(element) {
       }
     }
 
+   document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            // Get label element
+            var label = this.parentElement;
 
-       document.addEventListener('DOMContentLoaded', function () {
-            var checkbox = document.querySelectorAll('myCheckbox');
-            var targetElement = document.querySelectorAll('.custom-checkbox-label');
-
-            checkbox.addEventListener('change', function () {
-                if (this.checked) {
-                    targetElement.classList.add('highlight');
-                } else {
-                    targetElement.classList.remove('highlight');
-                }
-            });
-        });
-   document.addEventListener('DOMContentLoaded', function () {
-            var checkboxes = document.querySelectorAll('.myCheckbox');
-
-            checkboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                    var label = document.querySelector('.custom-checkbox-label');
-                    applyStyles(checkbox, label);
-                });
-            });
-        });
-
-        function applyStyles(checkbox, label) {
-            if (checkbox.checked) {
-                label.classList.add('highlight');
+            // Add or remove 'checked' class based on checkbox status
+            if (this.checked) {
+                label.classList.add('checked');
             } else {
-                label.classList.remove('highlight');
+                label.classList.remove('checked');
             }
-        }
+        });
+    });
+    document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            // Get filter information from data attributes
+            var paramName = this.nextElementSibling.getAttribute('data-param-name');
+            var paramValue = this.nextElementSibling.getAttribute('data-value');
+
+            // Perform any desired actions with the filter information
+            console.log('Filter changed:', paramName, paramValue, this.checked);
+        });
+    });
 </script>
