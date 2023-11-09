@@ -273,12 +273,15 @@ span.one-minus {
   </div>
 </form>
 <script>
-// Assuming you have an element with the id 'toggleElement'
-var element = document.querySelectorAll('.heading-filters');
+// Assuming you have elements with the class 'heading-filters'
+var elements = document.querySelectorAll('.heading-filters');
 
-element.addEventListener('click', function() {
-    this.classList.toggle('your-class-to-toggle');
+elements.forEach(function(element) {
+    element.addEventListener('click', function() {
+        this.classList.toggle('your-class-to-toggle');
+    });
 });
+
 
 
 </script>
