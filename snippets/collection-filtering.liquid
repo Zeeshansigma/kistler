@@ -376,12 +376,14 @@ display: block;
 </form>
 </div>
 <script>
-    document.querySelectorAll('.details-global').addEventListener('click', function(event) {
-    // Check if the custom attribute "data-disabled" is present
-    if (this.hasAttribute('data-disabled')) {
+  var detailsElements = document.querySelectorAll('details[data-disabled]');
+
+  // Add an event listener to each element
+  detailsElements.forEach(function(detailsElement) {
+    detailsElement.addEventListener('click', function(event) {
       // Prevent the default behavior of the details element
       event.preventDefault();
-    }
+    });
   });
   
 // Assuming you have elements with the class 'heading-filters'
