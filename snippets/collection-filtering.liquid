@@ -109,12 +109,13 @@ ul.store-filter-ul {
       <summary>
         <div class="heading-filters">
           <span>{{ filter.label }}</span>
-    <div>
-             
-    
+ 
+          <div class="cust-icons">
+        
     {%- if filter.active_values.size > 0 -%}
             <span>({{ filter.active_values.size }})</span>
           {%- endif -%}
+    
    <span class="one-plus">+</span>
           <span class="one-minus">-</span>  
     </div>
