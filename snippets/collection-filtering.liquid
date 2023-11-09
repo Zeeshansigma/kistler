@@ -181,10 +181,11 @@ display: block;
 <div class="widget widget--filtering">
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
+{% assign for_accordion = settings.accordion_filtering | split: ',' %}
 
 <form>
   {%- for filter in collection.filters -%}
-    <details class="store_filtering-{{ filter.label }}" style="display: block;" open>
+    <details class="store_filtering-{{ filter.label }}" style="display: block;" {% for checks in for_swatches %}{% if filter.label == checks %}open{% endif %}{% endfor %}>
       <summary>
         <div class="heading-filters">
           <span>{{ filter.label }}</span>
