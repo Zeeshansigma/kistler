@@ -138,7 +138,7 @@ span.one-minus {
                 </li>
                 <li class="{{ filter.true_value.value }}">
                   <label for="Filter-{{ filter.param_name }}-{{ filter.false_value.value }}">
-                  <input type="checkbox"
+                  <input type="checkbox" 
                     name="{{ filter.param_name }}"
                     value="{{ filter.false_value.value }}"
                     id="Filter-{{ filter.param_name }}"
@@ -159,7 +159,7 @@ span.one-minus {
               <li>
                 <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
                   <input
-                    type="checkbox"
+                    type="checkbox" checked="checked"
                     name="{{ filter_value.param_name }}"
                     value="{{ filter_value.value }}"
                     id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
