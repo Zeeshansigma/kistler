@@ -89,7 +89,8 @@ background: #ef3f1e;
       <summary>
         <div class="heading-filters">
           <span>{{ filter.label }}</span>
-
+          <span>+</span>
+          <span>-</span>
           {%- if filter.active_values.size > 0 -%}
             <span>({{ filter.active_values.size }})</span>
           {%- endif -%}
