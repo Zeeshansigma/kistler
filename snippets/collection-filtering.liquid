@@ -523,14 +523,7 @@ elements.forEach(function(element) {
     checkboxes.forEach(function(checkbox) {
       checkbox.addEventListener('change', function() {
         // Get the associated label
-        const label = document.querySelector(`label[for="${this.id}"]`);
-
-        // Check if the checkbox is checked and add or remove the class accordingly
-        if (this.checked) {
-          label.classList.add('checked-bg');
-        } else {
-          label.classList.remove('checked-bg');
-        }
+      
       });
 
       // Trigger the change event initially to handle pre-checked checkboxes
