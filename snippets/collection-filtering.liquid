@@ -269,7 +269,8 @@ ul.store-filter-ul {
             </div>
 
       <p>
-      <a class="clear-all-btn" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
+         -
+      <a class="clear-all-btn clearn-btn-div" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
     </p>
   {%- for filter in collection.filters -%}
     <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
