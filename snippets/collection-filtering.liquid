@@ -136,12 +136,18 @@ display: block;
 
 /* Create a custom checkbox */
 .apply_checkbox li .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #eee;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 1px solid #d6d6d6;
+    background: #fff;
+    -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+    -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
 }
 
 /* On mouse-over, add a grey background color */
