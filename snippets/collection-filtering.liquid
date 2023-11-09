@@ -23,145 +23,193 @@
 </div>
 
 <div class="widget widget--filtering">
-  <div class="filtering-group">
-    <h3>Series</h3>
-    <ul class="filtering-list filtering-list-items">
-      {% for seri in series %}
-        <li data-group="series" data-value="{{ seri | escape }}">{{ seri }}</li>
-      {% endfor %}
-    </ul>
-  </div>
+{% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
+{% assign for_swatches = settings.swatches_filtering | split: ',' %}
 
-  <div class="filtering-group">
-    <h3>Lure/bait type</h3>
-    <ul class="filtering-list">
-      <li>
-        <div class="filtering-list-item-toggle">Crankbaits <span>&minus;</span></div>
-        <ul class="filtering-list-items">
-          {% for crankbait in crankbaits %}
-            <li data-group="bait" data-value="{{ crankbait | escape }}">{{ crankbait }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Top Waters <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          {% for top_water in top_waters %}
-            <li data-group="bait" data-value="{{ top_water | escape }}">{{ top_water }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Soft Plastics <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          {% for soft_plastic in soft_plastics %}
-            <li data-group="bait" data-value="{{ soft_plastic | escape }}">{{ soft_plastic }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Finesse <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          {% for finesse in finesses %}
-            <li data-group="bait" data-value="{{ finesse | escape }}">{{ finesse }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Blades <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          {% for blade in blades %}
-            <li data-group="bait" data-value="{{ blade | escape }}">{{ blade }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Jigs <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          {% for jig in jigs %}
-            <li data-group="bait" data-value="{{ jig | escape }}">{{ jig }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Oversized Lures <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          {% for oversized in oversizeds %}
-            <li data-group="bait" data-value="{{ oversized | escape }}">{{ oversized }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Swimbaits/Glide Baits <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          {% for swim_glide in swim_glides %}
-            <li data-group="bait" data-value="{{ swim_glide | escape }}">{{ swim_glide }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Multi-Purpose <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          <li data-group="bait" data-value="Multi-Purpose">Multi-Purpose</li>
-        </ul>
-      </li>
-      <li>
-        <div class="filtering-list-item-toggle">Species other than Bass <span>&plus;</span></div>
-        <ul class="filtering-list-items">
-          {% for nobass in nobasses %}
-            <li data-group="bait" data-value="{{ nobass | escape }}">{{ nobass }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-    </ul>
+<form>
+  {%- for filter in collection.filters -%}
+    <details class="store_filtering-{{ filter.label }}" style="display: block;">
+      <summary>
+        <div class="heading-filters">
+          <span>{{ filter.label }}</span>
+    <div>
+          <span class="one-plus">+</span>
+          <span class="one-minus">-</span>     
+    </div>
+    {%- if filter.active_values.size > 0 -%}
+            <span>({{ filter.active_values.size }})</span>
+          {%- endif -%}
+        
+        </div>
+      </summary>
+
+      <div>
+        <div>
+          <p>{{ filter.active_values.size }} selected</p>
+          {%- if filter.active_values.size > 0 -%}
+            <p><a href="{{ filter.url_to_remove }}">Reset</a></p>
+          {%- endif -%}
+        </div>
+        {%- case filter.type -%}
+          {%- when 'boolean' -%}
+            <ul class="{{ filter.label }}">
+                <li class="{{ filter.true_value.value }}">
+                  <label for="Filter-{{ filter.param_name }}-{{ filter.true_value.value }}">
+                  <input type="checkbox" 
+                    name="{{ filter.param_name }}"
+                    value="{{ filter.true_value.value }}"
+                    id="Filter-{{ filter.param_name }}"
+                    {% if filter.true_value.active -%}checked{%- endif %}
+                    {% if filter.true_value.count == 0 and filter.true_value.active == false -%}disabled{%- endif -%}
+                  >{{ filter.true_value.label }}</label>
+                </li>
+                <li class="{{ filter.true_value.value }}">
+                  <label for="Filter-{{ filter.param_name }}-{{ filter.false_value.value }}">
+                  <input type="checkbox" 
+                    name="{{ filter.param_name }}"
+                    value="{{ filter.false_value.value }}"
+                    id="Filter-{{ filter.param_name }}"
+                    {% if filter.false_value.active -%}checked{%- endif %}
+                    {% if filter.false_value.count == 0 and filter.false_value.active == false -%}disabled{%- endif %}
+                  >{{ filter.false_value.label }}</label>
+                </li>
+            </ul>
+
+            <div>
+              <input type="submit" value="Apply">
+            </div>
+          {%- when 'list' -%}
+          <ul class="store-filter-ul {{ filter.label }} {% for checkb in for_checkboxes %}{% if filter.label == checkb %}apply_checkbox{% endif %}{% endfor %}
+                                                                                                                                                      {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}
+                                                                                                                                                        ">
+            {%- for filter_value in filter.values -%}
+              <li>
+                <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                  <input
+                    class="checkboxes"
+                    type="checkbox"
+                    name="{{ filter_value.param_name }}"
+                    value="{{ filter_value.value }}"
+                    id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                    {% if filter_value.active -%}checked{%- endif %}
+                    {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                  >
+                    <span>
+                      {%- case filter_value.display.type -%}
+                        {%- when 'colors' -%}
+                          {% liquid
+                            assign size_limit = filter_value.display.value.size | at_most: 4
+                            assign rotation = '0deg'
+                            if size_limit == 2
+                              assign rotation = '45deg'
+                            endif
+
+                            assign angle_increment = 360 | divided_by: size_limit
+                            assign angle = 0
+                          %}
+                      {%- capture conic_gradient -%}
+                        {%- for color in filter_value.display.value limit: size_limit -%}
+                          {{ color }} {{ angle }}deg{%- assign angle = angle | plus: angle_increment %} {{ angle }}deg{%- unless forloop.last %},
+                          {%- endunless -%}
+                        {%- endfor -%}
+                      {%- endcapture -%}
+                      <span style="
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width: 25px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height: 25px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    border-radius: 50%;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    justify-content: center;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    align-items: center;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  "></span>
+                      {%- when 'image' -%}
+                      {{
+                         filter_value.display.value
+                       | image_url: width: 25
+                       | image_tag: alt: filter_value.display.value.alt }}
+                    {%- else -%}
+                      <span class="visual-display__child"></span>
+                    {%- endcase -%}
+                  </span>
+                  {{ filter_value.label }}
+                </label>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+            <div>
+              <input type="submit" value="Apply">
+            </div>
+          {%- when 'price_range' -%}
+            <div class="filter-group-display__price-range">
+              <div class="filter-group-display__price-range-from">
+                <span>{{ cart.currency.symbol }}</span>
+
+                <input name="{{ filter.min_value.param_name }}"
+                  id="Filter-{{ filter.min_value.param_name }}"
+                  {% if filter.min_value.value -%}
+                    value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                  {%- endif %}
+                  type="number"
+                  placeholder="0"
+                  min="0"
+                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                >
+
+                <label for="Filter-{{ filter.min_value.param_name }}">From</label>
+              </div>
+              <div class="filter-group-display__price-range-to">
+                <span>{{ cart.currency.symbol }}</span>
+
+                <input name="{{ filter.max_value.param_name }}"
+                  id="Filter-{{ filter.max_value.param_name }}"
+                  {% if filter.max_value.value -%}
+                    value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                  {%- endif %}
+                  type="number"
+                  placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  min="0"
+                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                >
+
+                <label for="Filter-{{ filter.max_value.param_name }}">To</label>
+              </div>
+            </div>
+
+            <div class="filter-group-display__submit">
+              <input type="submit" value="Apply">
+            </div>
+        {%- endcase -%}
+      </div>
+    </details>
+  {%- endfor -%}
+
+  <div>
+    <p>
+      <a class="clear-all-btn" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
+    </p>
+
+    {%- for filter in collection.filters -%}
+      {%- if filter.type == "price_range" -%}
+        {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+          <p>
+            <a href="{{ filter.url_to_remove }}">
+              {%- assign min_value = filter.min_value.value | default: 0 -%}
+              {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+              {{ min_value | money }} - {{ max_value | money }} X
+            </a>
+          </p>
+        {%- endif -%}
+      {%- else -%}
+        {%- for filter_value in filter.active_values -%}
+          <p>
+            <a href="{{ filter_value.url_to_remove }}">
+              {{ filter.label }}: {{ filter_value.label }} X
+            </a>
+          </p>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
   </div>
-  <div class="filtering-group">
-    <h3>Power Rating</h3>
-    <ul class="filtering-list filtering-list-items">
-      {% for wt in wts %}
-        <li data-group="lure-line-wt" data-value="{{ wt | escape }}">{{ wt }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="filtering-group">
-    <h3>Structure/Cover</h3>
-    <ul class="filtering-list filtering-list-items filtering-list-items--swatch">
-      {% for structure in structures %}
-        <li data-group="structure" data-value="{{ structure | escape }}">{{ structure }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="filtering-group">
-    <h3>Cast or Spin</h3>
-    <ul class="filtering-list filtering-list-items filtering-list-items--swatch">
-      {% for cast_type in cast_types %}
-        <li data-group="cast-or-spin" data-value="{{ cast_type | escape }}">{{ cast_type }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  {% comment %} <div class="filtering-group">
-    <h3>Power</h3>
-    <ul class="filtering-list filtering-list-items filtering-list-items--swatch">
-      {% for power in powers %}
-        <li data-group="power" data-value="{{ power | escape }}">{{ power }}</li>
-      {% endfor %}
-    </ul>
-  </div> {% endcomment %}
-  <div class="filtering-group">
-    <h3>Length</h3>
-    <ul class="filtering-list filtering-list-items filtering-list-items--swatch">
-      {% for length in lengths %}
-        <li data-group="length" data-value="{{ length | replace: ' ', '' | replace: '"', '' | escape }}">{{ length }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="filtering-group">
-    <h3>Price</h3>
-    <ul class="filtering-list filtering-list-items">
-      {% for price in prices %}
-        {% assign split_price = price | split: ':' %}
-        <li data-group="price" data-value="{{ split_price | first | escape }}">{{ split_price | last }}</li>
-      {% endfor %}
-    </ul>
-  </div>
+</form>
 </div>
