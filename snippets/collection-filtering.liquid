@@ -1,28 +1,28 @@
 <style>
-  .store-filter-ul li {
-    list-style-type: none;
-  }
-  .store-filter-ul li label{
-      font-family: unset !important;
-      font-weight: 400 !important;
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      color: #66646B;
-    }
+.store-filter-ul li {
+  list-style-type: none;
+}
+.store-filter-ul li label{
+  font-family: unset !important;
+  font-weight: 400 !important;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #66646B;
+}
 
 
 
 .store-filter-ul li .custom-checkbox-label {
-display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Hide the browser's default checkbox */
@@ -36,167 +36,158 @@ display: block;
 
 /* Create a custom checkbox */
 .store-filter-ul li .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1.6rem;
-    height: 1.6rem;
-    border: 1px solid #d6d6d6;
-    background: #fff;
-    -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
-    transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
-    -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
-    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
-    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid #d6d6d6;
+  background: #fff;
+  -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+  transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+  -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+  transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+  transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
 }
 
 /* On mouse-over, add a grey background color */
 
 
 /* When the checkbox is checked, add a blue background */
-.store-filter-ul li .myCheckbox:checked ~ .checkmark {
-   background-color: #000;
-    outline: 1px solid #000;
-    outline-offset: 2px;
+  .store-filter-ul li .myCheckbox:checked ~ .checkmark {
+  background-color: #000;
+  outline: 1px solid #000;
+  outline-offset: 2px;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.store-filter-ul li .checkmark:after {
+  .store-filter-ul li .checkmark:after {
   position: absolute;
   display: none;
 }
 
 /* Show the checkmark when checked */
-.store-filter-ul li .myCheckbox:checked ~ .checkmark:after {
+  .store-filter-ul li .myCheckbox:checked ~ .checkmark:after {
   display: block;
 }
 
-  
-
-  
-
-
-
-
-  
   .apply_swatches {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .apply_swatches li label input {
-    width: 0;
-    height: 0;
-    margin: 0;
-    visibility: hidden;
-  }
-  .apply_swatches li label {
-    width: auto;
-    margin-right: 0.6rem;
-    margin-top: 0.4rem;
-    border: 1px solid #EFEFEF;
-    background: #fff;
-    padding: 0.8rem;
-    min-width: 4rem;
-    text-align: center;
-    -webkit-transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
-    transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
-    -o-transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
-    transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
-    transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
-  }
-  .apply_checkbox li {
-    font-size: 1.4rem;
-    font-weight: 400;
-    font-family: "GT America Regular","proxima-nova","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-style: normal;
-    margin-bottom: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.apply_swatches li label input {
+  width: 0;
+  height: 0;
+  margin: 0;
+  visibility: hidden;
+}
+.apply_swatches li label {
+  width: auto;
+  margin-right: 0.6rem;
+  margin-top: 0.4rem;
+  border: 1px solid #EFEFEF;
+  background: #fff;
+  padding: 0.8rem;
+  min-width: 4rem;
+  text-align: center;
+  -webkit-transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+  transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+  -o-transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
+  transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
+  transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+}
+.apply_checkbox li {
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: "GT America Regular","proxima-nova","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-style: normal;
+  margin-bottom: 5px;
 }
 .heading-filters span {
-    display: block;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: .03em;
-    margin-bottom: 0;
-    font-weight: 700;
-    color: #000;
+  display: block;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  margin-bottom: 0;
+  font-weight: 700;
+  color: #000;
 }
 .clear-all-btn{
-background: #ef3f1e;
-    color: #fff !important;
-    cursor: pointer;
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    width: auto;
-    padding: 0 2em;
-    font-size: 1.5rem;
-    font-style: normal;
-    font-family: "proxima-nova-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
-    letter-spacing: .03em;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-align: center;
-    border: 0;
-    outline: 0;
-    -webkit-transition: color .3s ease,background .3s ease;
-    -o-transition: color .3s ease,background .3s ease;
-    transition: color .3s ease,background .3s ease;
-    text-decoration: none;
-    }
-    summary::marker{
-      font-size: 0px;
-    }
+  background: #ef3f1e;
+  color: #fff !important;
+  cursor: pointer;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  width: auto;
+  padding: 0 2em;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-family: "proxima-nova-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-align: center;
+  border: 0;
+  outline: 0;
+  -webkit-transition: color .3s ease,background .3s ease;
+  -o-transition: color .3s ease,background .3s ease;
+  transition: color .3s ease,background .3s ease;
+  text-decoration: none;
+}
+summary::marker{
+  font-size: 0px;
+}
 .heading-filters {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 }
 span.one-minus {
-    display: none;
+  display: none;
 }
-  .heading-clicked .one-minus{
-    display: block;
-  }
-    .heading-clicked .one-plus{
-    display: none;
-  }
-   .apply_checkbox li label input[type="checkbox"]:checked {
-      color: black; /* Change the text color to black */
-      background-color: black; /* Change the background color to black */
-      /* Add any other styles you want for the checked state */
-    }
+.heading-clicked .one-minus{
+  display: block;
+}
+.heading-clicked .one-plus{
+  display: none;
+}
+.apply_checkbox li label input[type="checkbox"]:checked {
+  color: black; 
+  background-color: black; 
+}
 ul.store-filter-ul {
-    margin-top: 14px;
+  margin-top: 14px;
 }
-  .cust-icons{
-    display: flex;
-  }
- .one-plus, .one-minus {
-    margin-left: 10px;
+.cust-icons{
+  display: flex;
+}
+.one-plus, .one-minus {
+  margin-left: 10px;
 }
 .apply_swatches li .custom-checkbox-label.checked{
   background: black;
   color: #fff;
-      outline: 1px solid #000;
-    outline-offset: 1px;
+  outline: 1px solid #000;
+  outline-offset: 1px;
 }
- .one-plus.hide, .one-minus.hide {
-    display: none;
+.one-plus.hide, .one-minus.hide {
+  display: none;
 }
 
 
 
 .apply_checkbox li .custom-checkbox-label {
-display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Hide the browser's default checkbox */
@@ -210,18 +201,18 @@ display: block;
 
 /* Create a custom checkbox */
 .apply_checkbox li .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1.6rem;
-    height: 1.6rem;
-    border: 1px solid #d6d6d6;
-    background: #fff;
-    -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
-    transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
-    -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
-    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
-    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid #d6d6d6;
+  background: #fff;
+  -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+  transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+  -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+  transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+  transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
 }
 
 /* On mouse-over, add a grey background color */
@@ -229,9 +220,9 @@ display: block;
 
 /* When the checkbox is checked, add a blue background */
 .apply_checkbox li .myCheckbox:checked ~ .checkmark {
-   background-color: #000;
-    outline: 1px solid #000;
-    outline-offset: 2px;
+  background-color: #000;
+  outline: 1px solid #000;
+  outline-offset: 2px;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -245,18 +236,18 @@ display: block;
   display: block;
 }
 .apply_swatches li label span.checkmark {
-    display: none;
+  display: none;
 }
-  .apply_swatches li .custom-checkbox-label {
+.apply_swatches li .custom-checkbox-label {
   padding-left: 0px !important
-  }
-  .apply_swatches li .custom-checkbox-label {
-    padding-left: 0.8rem !important;
-margin-bottom: 0px;
-  }
+}
+.apply_swatches li .custom-checkbox-label {
+  padding-left: 0.8rem !important;
+  margin-bottom: 0px;
+}
 
-  .clearn-btn-div {
-    margin-top: 20px;
+.clearn-btn-div {
+  margin-top: 20px;
 }
 </style>
 
