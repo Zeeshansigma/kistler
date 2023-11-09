@@ -164,7 +164,6 @@ span.one-minus {
                     name="{{ filter_value.param_name }}"
                     value="{{ filter_value.value }}"
                     id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-              {{ filter_value.active }}
                     {% if filter_value.active -%}checked{%- endif %}
                     {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
                   >
