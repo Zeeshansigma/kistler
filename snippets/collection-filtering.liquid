@@ -172,7 +172,7 @@ ul.store-filter-ul {
               <li>
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
                   <input
-                    class="checkboxes"
+                    class="myCheckbox"
                     type="checkbox"
                     name="{{ filter_value.param_name }}"
                     value="{{ filter_value.value }}"
@@ -321,17 +321,16 @@ elements.forEach(function(element) {
     }
 
 
-     document.addEventListener('DOMContentLoaded', function () {
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+       document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.getElementByClassName('myCheckbox');
+            var targetElement = document.getElementById('targetElement');
 
-            checkboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                    if (this.checked) {
-                        this.classList.add('highlight');
-                    } else {
-                        this.classList.remove('highlight');
-                    }
-                });
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    targetElement.classList.add('highlight');
+                } else {
+                    targetElement.classList.remove('highlight');
+                }
             });
         });
 </script>
