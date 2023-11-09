@@ -197,7 +197,7 @@ display: block;
           {%- endif -%}
     
    <span class="one-plus {% for accordion in for_accordion %}{% if filter.label == accordion %}hide{% endif %}{% endfor %}">+</span>
-          <span class="one-minus {% for accordion in for_accordion %}{% if filter.label == accordion %}hide{% endif %}{% endfor %}">-</span>  
+          <span class="one-minus{% for accordion in for_accordion %}{% if filter.label == accordion %} hide{% endif %}{% endfor %}">-</span>  
     </div>
         </div>
       </summary>
