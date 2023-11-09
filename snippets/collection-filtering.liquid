@@ -516,24 +516,23 @@ elements.forEach(function(element) {
     });
 
 
-    const myCheckbox = document.querySelector('.myCheckbox');
+  const myCheckbox = document.querySelector('.myCheckbox');
   const customLabel = document.querySelector('.custom-checkbox-label');
-
-  // Check if the checkbox is initially checked
-  if (myCheckbox.checked) {
-    // If checked, add a background color to the label
-    customLabel.style.backgroundColor = 'green'; // You can set your desired background color
-  }
 
   // Add an event listener to the checkbox
   myCheckbox.addEventListener('change', function() {
     // Check if the checkbox is checked
     if (this.checked) {
-      // If checked, add a background color to the label
-      customLabel.style.backgroundColor = 'green'; // You can set your desired background color
+      // If checked, add a class to the label
+      customLabel.classList.add('checked-bg');
     } else {
-      // If unchecked, remove the background color
-      customLabel.style.backgroundColor = 'transparent';
+      // If unchecked, remove the class from the label
+      customLabel.classList.remove('checked-bg');
     }
   });
+
+  // Check if the checkbox is initially checked and add class accordingly
+  if (myCheckbox.checked) {
+    customLabel.classList.add('checked-bg');
+  }
 </script>
