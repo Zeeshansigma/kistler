@@ -10,9 +10,76 @@
       margin-bottom: 10px;
       color: #66646B;
     }
-.store-filter-ul {
-  
+
+
+
+.store-filter-ul li .custom-checkbox-label {
+display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
+/* Hide the browser's default checkbox */
+.store-filter-ul li .myCheckbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.store-filter-ul li .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 1px solid #d6d6d6;
+    background: #fff;
+    -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+    -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
+}
+
+/* On mouse-over, add a grey background color */
+
+
+/* When the checkbox is checked, add a blue background */
+.store-filter-ul li .myCheckbox:checked ~ .checkmark {
+   background-color: #000;
+    outline: 1px solid #000;
+    outline-offset: 2px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.store-filter-ul li .checkmark:after {
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.store-filter-ul li .myCheckbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+  
+
+  
+
+
+
+
+  
   .apply_swatches {
     display: flex;
     flex-wrap: wrap;
@@ -262,6 +329,8 @@ display: block;
                     {% if filter_value.active -%}checked{%- endif %}
                     {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
                   >
+  
+                  
               <span class="checkmark"></span>
                     <span>
                       {%- case filter_value.display.type -%}
