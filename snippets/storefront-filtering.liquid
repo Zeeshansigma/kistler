@@ -88,6 +88,10 @@ span.one-minus {
     .heading-clicked .one-plus{
     display: none;
   }
+  .my-checkbox:checked + label::before {
+  background-color: black;
+}
+
 </style>
 
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
