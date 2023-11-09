@@ -294,6 +294,14 @@ elements.forEach(function(element) {
     });
 });
 
+  const all_checkboxes = document.querySelectorAll(".apply_checkbox input[type="checkbox"]");
 
+ function applyStyles(checkbox) {
+      if (checkbox.checked) {
+        checkbox.classList.add("checked");
+      } else {
+        checkbox.classList.remove("checked");
+      }
+    }
 
 </script>
