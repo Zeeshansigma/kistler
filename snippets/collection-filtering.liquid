@@ -112,7 +112,7 @@ ul.store-filter-ul {
 
 
 
-.custom-checkbox-label {
+.apply_checkbox li .custom-checkbox-label {
 display: block;
     position: relative;
     padding-left: 35px;
@@ -126,7 +126,7 @@ display: block;
 }
 
 /* Hide the browser's default checkbox */
-.myCheckbox {
+.apply_checkbox li .myCheckbox {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -135,7 +135,7 @@ display: block;
 }
 
 /* Create a custom checkbox */
-.checkmark {
+.apply_checkbox li .checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -148,24 +148,24 @@ display: block;
 
 
 /* When the checkbox is checked, add a blue background */
-.myCheckbox:checked ~ .checkmark {
+.apply_checkbox li .myCheckbox:checked ~ .checkmark {
     background-color: #000;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
+.apply_checkbox li .checkmark:after {
 
   position: absolute;
   display: none;
 }
 
 /* Show the checkmark when checked */
-.myCheckbox:checked ~ .checkmark:after {
+.apply_checkbox li .myCheckbox:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.checkmark:after {
+.apply_checkbox li .checkmark:after {
 left: 9px;
     top: 5px;
     width: 5px;
