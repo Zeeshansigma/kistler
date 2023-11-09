@@ -166,8 +166,6 @@ span.one-minus {
                     id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
                     {% if filter_value.active -%}checked{%- endif %}
                     {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
-               {% if filter.false_value.active -%}checked{%- endif %}
-                    {% if filter.false_value.count == 0 and filter.false_value.active == false -%}disabled{%- endif %}
                   >
                     <span>
                       {%- case filter_value.display.type -%}
