@@ -273,9 +273,12 @@ span.one-minus {
   </div>
 </form>
 <script>
-  // Assuming you have an element with the class 'toggle-element'
-$('.heading-filters').on('click', function() {
-    $(this).toggleClass('your-class-to-toggle');
+// Assuming you have an element with the id 'toggleElement'
+var element = document.getElementByClassName('heading-filters');
+
+element.addEventListener('click', function() {
+    this.classList.toggle('your-class-to-toggle');
 });
+
 
 </script>
