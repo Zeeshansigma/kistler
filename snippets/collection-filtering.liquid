@@ -239,6 +239,11 @@ display: block;
             <div>
               <input type="submit" value="Apply">
             </div>
+
+
+
+
+          
           {%- when 'list' -%}
           <ul class="store-filter-ul {{ filter.label }} {% for checkb in for_checkboxes %}{% if filter.label == checkb %}apply_checkbox{% endif %}{% endfor %}
 {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}">
@@ -293,7 +298,7 @@ display: block;
                       <span class="visual-display__child"></span>
                     {%- endcase -%}
                   </span>
-                  {{ filter_value.label }}
+                  <span>{{ filter_value.label }}</span>
                 </label>
               </li>
             {%- endfor -%}
