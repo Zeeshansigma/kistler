@@ -514,5 +514,19 @@ elements.forEach(function(element) {
             console.log('Filter changed:', paramName, paramValue, this.checked);
         });
     });
-  
+  // Get the checkbox and the label
+  const myCheckbox = document.querySelector('.myCheckbox');
+  const customLabel = document.querySelector('.custom-checkbox-label');
+
+  // Add an event listener to the checkbox
+  myCheckbox.addEventListener('change', function() {
+    // Check if the checkbox is checked
+    if (this.checked) {
+      // If checked, add a background color to the label
+      customLabel.style.backgroundColor = 'green'; // You can set your desired background color
+    } else {
+      // If unchecked, remove the background color
+      customLabel.style.backgroundColor = 'transparent';
+    }
+  });
 </script>
