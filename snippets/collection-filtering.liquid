@@ -323,7 +323,7 @@ elements.forEach(function(element) {
 
        document.addEventListener('DOMContentLoaded', function () {
             var checkbox = document.querySelectorAll('myCheckbox');
-            var targetElement = document.getElementByClassName('custom-checkbox-label');
+            var targetElement = document.querySelectorAll('.custom-checkbox-label');
 
             checkbox.addEventListener('change', function () {
                 if (this.checked) {
