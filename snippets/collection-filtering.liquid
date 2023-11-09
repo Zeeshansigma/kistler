@@ -196,8 +196,13 @@ display: block;
             <span>({{ filter.active_values.size }})</span>
           {%- endif -%}
     
-   <span class="one-plus">+</span>
-          <span class="one-minus">-</span>  
+    {% for accordion in for_accordion %}
+      {% if filter.label != accordion %}
+       <span class="one-plus">+</span>
+       <span class="one-minus">-</span>  
+      {% endif %}
+    {% endfor %}
+    
     </div>
         </div>
       </summary>
