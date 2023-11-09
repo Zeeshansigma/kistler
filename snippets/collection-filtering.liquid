@@ -515,25 +515,26 @@ elements.forEach(function(element) {
         });
     });
 
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get all checkboxes with the class 'myCheckbox'
+    const checkboxes = document.querySelectorAll('.myCheckbox');
 
-  const myCheckbox = document.querySelector('.myCheckbox');
-  const customLabel = document.querySelector('.custom-checkbox-label');
+    // Add event listeners to each checkbox
+    checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+        // Get the associated label
+        const label = document.querySelector(`label[for="${this.id}"]`);
 
-  // Function to check if the checkbox is checked and add class accordingly
-  const checkCheckboxAndAddClass = () => {
-    if (myCheckbox.hasAttribute('checked')) {
-      customLabel.classList.add('checked-bg');
-    } else {
-      customLabel.classList.remove('checked-bg');
-    }
-  };
+        // Check if the checkbox is checked and add or remove the class accordingly
+        if (this.checked) {
+          label.classList.add('checked-bg');
+        } else {
+          label.classList.remove('checked-bg');
+        }
+      });
 
-  // Add an event listener to the checkbox
-  myCheckbox.addEventListener('change', function() {
-    // Check if the checkbox is checked and add class accordingly
-    checkCheckboxAndAddClass();
+      // Trigger the change event initially to handle pre-checked checkboxes
+      checkbox.dispatchEvent(new Event('change'));
+    });
   });
-
-  // Check if the checkbox is initially checked and add class accordingly
-  checkCheckboxAndAddClass();
 </script>
