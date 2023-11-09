@@ -1,3 +1,100 @@
+<style>
+  .store-filter-ul li {
+    list-style-type: none;
+    margin-bottom: 20px;
+  }
+  .store-filter-ul li label{
+      font-family: unset !important;
+      font-weight: 400 !important;
+    }
+  .apply_swatches {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .apply_swatches li label input {
+    width: 0;
+    height: 0;
+    margin: 0;
+    visibility: hidden;
+  }
+  .apply_swatches li label {
+    width: auto;
+    margin-right: 0.6rem;
+    margin-top: 0.4rem;
+    border: 1px solid #EFEFEF;
+    background: #fff;
+    padding: 0.8rem;
+    min-width: 4rem;
+    text-align: center;
+    -webkit-transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+    transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+    -o-transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
+    transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
+    transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+  }
+  .apply_checkbox li {
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-family: "GT America Regular","proxima-nova","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-style: normal;
+    margin-bottom: 5px;
+}
+.heading-filters span {
+    display: block;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    margin-bottom: 0;
+    font-weight: 700;
+    color: #000;
+}
+.clear-all-btn{
+background: #ef3f1e;
+    color: #fff !important;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: auto;
+    padding: 0 2em;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-family: "proxima-nova-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    border: 0;
+    outline: 0;
+    -webkit-transition: color .3s ease,background .3s ease;
+    -o-transition: color .3s ease,background .3s ease;
+    transition: color .3s ease,background .3s ease;
+    text-decoration: none;
+    }
+    summary::marker{
+      font-size: 0px;
+    }
+.heading-filters {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+span.one-minus {
+    display: none;
+}
+  .heading-clicked .one-minus{
+    display: block;
+  }
+    .heading-clicked .one-plus{
+    display: none;
+  }
+   .apply_checkbox li label input[type="checkbox"]:checked {
+      color: black; /* Change the text color to black */
+      background-color: black; /* Change the background color to black */
+      /* Add any other styles you want for the checked state */
+    }
+
+</style>
 {% assign current_handle = collection.handle %}
 
 {% assign series = settings.series | split: ',' %}
