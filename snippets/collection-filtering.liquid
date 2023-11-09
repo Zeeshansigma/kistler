@@ -139,8 +139,8 @@ display: block;
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   background-color: #eee;
 }
 
@@ -149,7 +149,9 @@ display: block;
 
 /* When the checkbox is checked, add a blue background */
 .apply_checkbox li .myCheckbox:checked ~ .checkmark {
-    background-color: #000;
+   background-color: #000;
+    outline: 1px solid #000;
+    outline-offset: 2px;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
