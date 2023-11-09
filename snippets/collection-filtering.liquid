@@ -187,7 +187,7 @@ display: block;
 
 <form>
   {%- for filter in collection.filters -%}
-    <details class="store_filtering-{{ filter.label }} details-global" style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}{{ filter.label }} open data-disabled="true"{% endif %}{% endfor %}>
+    <details class="store_filtering-{{ filter.label }} details-global" style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
       <summary>
         <div class="heading-filters">
           <span>{{ filter.label }}</span>
