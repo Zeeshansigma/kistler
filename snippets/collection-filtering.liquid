@@ -329,7 +329,10 @@ display: block;
                     {% if filter_value.active -%}checked{%- endif %}
                     {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
                   >
+              {% for checkb in for_checkboxes %}
+                {% if filter.label == checkb %} 
               <span class="checkmark"></span>
+                   {% endif %}{% endfor %}
                     <span>
                       {%- case filter_value.display.type -%}
                         {%- when 'colors' -%}
