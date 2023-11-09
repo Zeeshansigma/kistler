@@ -103,6 +103,28 @@ ul.store-filter-ul {
     margin-left: 10px;
 }
 
+  /* Hide the default checkbox */
+.custom-checkbox-label input[type="checkbox"] {
+  display: none;
+}
+/* Style the custom checkbox */
+.custom-checkbox-label:before {
+  content: '';
+  display: inline-block;
+  width: 20px; /* Adjust the size of the checkbox */
+  height: 20px; /* Adjust the size of the checkbox */
+  background-color: #3498db; /* Set the background color */
+  border: 1px solid #3498db; /* Add a border for better visibility */
+  margin-right: 10px; /* Add some space between the checkbox and the text */
+}
+/* Style the checked state */
+.custom-checkbox-label input[type="checkbox"]:checked + span:before {
+  content: ' '; /* Unicode checkmark character */
+  font-size: 16px; /* Adjust the size of the checkmark */
+  color: #fff; /* Set the color of the checkmark */
+  text-align: center;
+  line-height: 20px; /* Match the height of the checkbox */
+}
 </style>
 
 
@@ -170,7 +192,7 @@ ul.store-filter-ul {
                                                                                                                                                         ">
             {%- for filter_value in filter.values -%}
               <li>
-                <label class="custom-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
                   <input
                     class="checkboxes"
                     type="checkbox"
@@ -333,5 +355,4 @@ elements.forEach(function(element) {
                 });
             });
         });
-  
 </script>
