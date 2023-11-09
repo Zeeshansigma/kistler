@@ -321,12 +321,24 @@ elements.forEach(function(element) {
     }
 
 
- document.addEventListener('DOMContentLoaded', function () {
-            var checkboxes = document.querySelectorAll('.checkbox');
+       document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.querySelectorAll('myCheckbox');
+            var targetElement = document.querySelectorAll('.custom-checkbox-label');
+
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    targetElement.classList.add('highlight');
+                } else {
+                    targetElement.classList.remove('highlight');
+                }
+            });
+        });
+   document.addEventListener('DOMContentLoaded', function () {
+            var checkboxes = document.querySelectorAll('.myCheckbox');
 
             checkboxes.forEach(function (checkbox) {
                 checkbox.addEventListener('change', function () {
-                    var label = document.querySelector('.targetElement');
+                    var label = document.querySelector('.custom-checkbox-label');
                     applyStyles(checkbox, label);
                 });
             });
