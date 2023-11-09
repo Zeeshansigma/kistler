@@ -283,12 +283,12 @@ ul.store-filter-ul {
       </summary>
 
       <div>
-        <!-- <div>
-          <p>{{ filter.active_values.size }} selected</p>
+        <div>
+          <!-- <p>{{ filter.active_values.size }} selected</p> -->
           {%- if filter.active_values.size > 0 -%}
             <p><a href="{{ filter.url_to_remove }}">Reset</a></p>
           {%- endif -%}
-        </div> -->
+        </div>
         {%- case filter.type -%}
           {%- when 'boolean' -%}
             <ul class="{{ filter.label }}">
