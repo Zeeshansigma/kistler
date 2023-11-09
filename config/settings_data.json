@@ -26,6 +26,7 @@
     "prices": "0000-9999:$0 - $99|10000-19800:$100 - $198|19900-24800:$199 - $248|24900-29800:$249 - $298|29900-39800:$299 - $398|39900-59800:$399 - $598",
     "checkbox_filtering": "Series,Baits",
     "swatches_filtering": "Length,Lure,Cast or Spin",
+    "accordion_filtering": "Series,Baits",
     "checkout_header_image": "",
     "checkout_logo_image": "shopify:\/\/shop_images\/Kistler_Logo_Black_LOGO_POSITIVE.png",
     "checkout_logo_position": "center",
