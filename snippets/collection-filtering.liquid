@@ -192,7 +192,7 @@ ul.store-filter-ul {
                                                                                                                                                         ">
             {%- for filter_value in filter.values -%}
               <li>
-                <label for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
                   <input
                     class="checkboxes"
                     type="checkbox"
