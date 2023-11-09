@@ -204,6 +204,12 @@
         "id": "swatches_filtering",
         "label": "Add Metafield Key for Swatches",
         "info": "Add Comma Sperated values"
+      },
+      {
+        "type": "text",
+        "id": "accordion_filtering",
+        "label": "Add Metafield Key for Accordions",
+        "info": "Add Comma Sperated values"
       }
     ]
   }
