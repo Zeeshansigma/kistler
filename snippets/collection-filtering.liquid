@@ -317,7 +317,7 @@ window.addEventListener('filter-updated', async () => {
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
-{% render 'loader' %}
+
 <form x-ref="filters-form">
 
   {%- for filter in collection.filters -%}
