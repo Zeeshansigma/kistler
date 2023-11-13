@@ -271,7 +271,7 @@ ul.store-filter-ul {
   console.log('filter-updatessss');
     let form = document.querySelector('#filter_form');
     console.log('form', form);
-  const queryString = new URLSearchParams(new FormData(document.querySelector('form[name="filter_form"]')).toString());
+  const queryString = new URLSearchParams(new FormData(form)).toString();
   console.log('queryString', queryString);
   loading = true;
 
