@@ -282,6 +282,11 @@ ul.store-filter-ul {
     .catch(error => console.error('Error:', error))
     .finally(() => loading = false);
 });
+// Assuming you want to trigger this on a specific element change, replace 'yourElement' with your actual element.
+yourElement.addEventListener('change', () => {
+  const filterUpdatedEvent = new Event('filter-updated');
+  window.dispatchEvent(filterUpdatedEvent);
+});
 
 </script>
 <div class="widget widget--filtering">
@@ -356,7 +361,7 @@ ul.store-filter-ul {
             {%- for filter_value in filter.values -%}
               <li>
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
-                  <input @change="$dispatch('filter-updated')"
+                  <input
                     class="myCheckbox"
                     type="checkbox"
                     name="{{ filter_value.param_name }}"
