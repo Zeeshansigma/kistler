@@ -277,8 +277,9 @@ ul.store-filter-ul {
 
   try {
     const response = await fetch('/collections/' + collection.handle + '?' + queryString);
+    console.log("response", response);
     const data = await response.text();
-
+console.log("data", data);
     let html_div = document.createElement('div');
     html_div.innerHTML = data;
     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
