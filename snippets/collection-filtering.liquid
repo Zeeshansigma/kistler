@@ -268,7 +268,7 @@ ul.store-filter-ul {
 <script>
 window.addEventListener('filter-updated', async () => {
   console.log('filter-updatessss');
-  const queryString = new URLSearchParams(new FormData(document.querySelector('#filters-form')).toString())
+  const queryString = new URLSearchParams(new FormData(document.querySelector('#filters-form')).toString());
   console.log('queryString', queryString);
   loading = true;
 
