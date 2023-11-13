@@ -270,7 +270,7 @@ ul.store-filter-ul {
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
 
-<form>
+<form x-ref="filter_form">
 
   {%- for filter in collection.filters -%}
     <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
