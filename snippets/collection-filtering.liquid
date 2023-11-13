@@ -293,12 +293,7 @@ ul.store-filter-ul {
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
-  <div x-data="{ isOpen: false }">
-    <button @click="isOpen = !isOpen">Toggle</button>
-    <div x-show="isOpen">
-      Content to be toggled
-    </div>
-  </div>
+
 <form x-ref="filter_form">
 
   {%- for filter in collection.filters -%}
