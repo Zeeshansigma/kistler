@@ -268,14 +268,8 @@ ul.store-filter-ul {
 
 
 <div class="widget widget--filtering" 
-  x-data="{ loading: false }"
-  x-init="() => {
-    window.addEventListener('filter-updated', () => {
-      const queryString = new URLSearchParams(new FormData(document.querySelector('form[name=filter_form]')).toString());
-      console.log('filter-updated', queryString);
-      // Your remaining logic here
-      // ... 
-    });
+  x-data="{
+  loading: false
   }"
 >
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
