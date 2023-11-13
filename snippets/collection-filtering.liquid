@@ -266,14 +266,8 @@ ul.store-filter-ul {
 
 
 <script>
-
-</script>
-
-<div class="widget widget--filtering" 
-  x-data="{
-  loading: false
-  }"
-@filter-updated.window="$nextTick(() => {
+     @filter-updated.window="$nextTick(() => {
+  console.log('filter-updatessss');
     const queryString = new URLSearchParams(new FormData($refs.filter_form)).toString()
     console.log('queryString', queryString);
     loading = true;
@@ -291,6 +285,13 @@ ul.store-filter-ul {
       .finally(() => loading = false);
     
   })"
+</script>
+
+<div class="widget widget--filtering" 
+  x-data="{
+  loading: false
+  }"
+
 >
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
