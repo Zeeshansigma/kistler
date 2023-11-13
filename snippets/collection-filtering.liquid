@@ -268,7 +268,7 @@ ul.store-filter-ul {
 <script>
      @filter-updated.window="$nextTick(() => {
   console.log('filter-updatessss');
-    const queryString = new URLSearchParams(new FormData($refs.filter_form)).toString()
+    const queryString = new URLSearchParams(new FormData($refs.filter_form))).toString()
     console.log('queryString', queryString);
     loading = true;
     fetch('/collections/{{ collection.handle }}?' + queryString)
