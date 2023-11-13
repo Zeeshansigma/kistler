@@ -346,7 +346,7 @@ ul.store-filter-ul {
                   <input
                     class="myCheckbox"
                     type="checkbox"
-              @change="$dispatch('filter-updated')"
+                    @change="loading = true"
                     name="{{ filter_value.param_name }}"
                     value="{{ filter_value.value }}"
                     id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
