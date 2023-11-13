@@ -268,7 +268,26 @@ ul.store-filter-ul {
 <script>
 window.addEventListener('filter-updated', async () => {
   console.log('filter-updatessss');
-  
+  const queryString = new URLSearchParams(new FormData(document.querySelector('#filters-form')).toString())
+  console.log('queryString', queryString);
+  loading = true;
+
+  try {
+    const response = await fetch('/collections/' + collection.handle + '?' + queryString);
+    const data = await response.text();
+
+    let html_div = document.createElement('div');
+    html_div.innerHTML = data;
+    let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
+    document.querySelector('#ProductGridContainer').innerHTML = html_dom;
+
+    // Update URL without refreshing the page 
+    history.replaceState(null, null, '?' + queryString);
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    loading = false;
+  }
 });
 
 </script>
