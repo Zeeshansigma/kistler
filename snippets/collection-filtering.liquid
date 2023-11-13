@@ -266,31 +266,24 @@ ul.store-filter-ul {
 
 
 <script>
-window.addEventListener('filter-updated', async () => {
-  console.log('filter-updatessss');
-  const queryString = new URLSearchParams(new FormData(document.querySelector('#filters-form'))).toString()
-  console.log('queryString', queryString);
-  loading = true;
-
-  try {
-    const response = await fetch('/collections/' + collection.handle + '?' + queryString);
-    console.log('response', response);
-    const data = await response.text();
-console.log('data', data);
-    let html_div = document.createElement('div');
-    html_div.innerHTML = data;
-    let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-    document.querySelector('#ProductGridContainer').innerHTML = html_dom;
-
-    // Update URL without refreshing the page 
-    history.replaceState(null, null, '?' + queryString);
-  } catch (error) {
-    console.error('Error:', error);
-  } finally {
-    loading = false;
-  }
-});
-
+@filter-updated.window="$nextTick(() => {
+    const queryString = new URLSearchParams(new FormData($refs.filter_form)).toString()
+    
+    loading = true;
+    fetch('/collections/{{ collection.handle }}?' + queryString)
+      .then(response => response.text())
+      .then(data => {
+        let html_div = document.createElement('div');
+        html_div.innerHTML = data;
+        let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
+        document.querySelector('#ProductGridContainer').innerHTML = html_dom;
+        // update url without refreshing the page 
+        history.replaceState(null, null, '?' + queryString);
+      })
+      .catch(error => console.error('Error:', error))
+      .finally(() => loading = false);
+    
+  })"
 </script>
 
 <div class="widget widget--filtering" 
@@ -303,7 +296,7 @@ console.log('data', data);
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
 {% render 'loader' %}
-<form id="filters-form">
+<form x-ref="filter_form">
 
   {%- for filter in collection.filters -%}
     <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
