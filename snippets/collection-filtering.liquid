@@ -283,7 +283,8 @@ ul.store-filter-ul {
     .finally(() => loading = false);
 });
 // Assuming you want to trigger this on a specific element change, replace 'yourElement' with your actual element.
-yourElement.addEventListener('change', () => {
+let yourElement = document.querySelectorAll(".myCheckbox");
+  yourElement.addEventListener('change', () => {
   const filterUpdatedEvent = new Event('filter-updated');
   window.dispatchEvent(filterUpdatedEvent);
 });
