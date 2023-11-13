@@ -265,32 +265,20 @@ ul.store-filter-ul {
 </style>
 
 
-
-
 <div class="widget widget--filtering" 
-    x-data="{
-    loading: false,
+  x-data="{ loading: false }"
+  x-init="() => {
+    window.addEventListener('filter-updated', () => {
+      const queryString = new URLSearchParams(new FormData(document.querySelector('form[name=filter_form]')).toString());
+      console.log('filter-updated', queryString);
+      // Your remaining logic here
+      // ... 
+    });
   }"
-    @filter-updated.window="$nextTick(() => {
-    const queryString = new URLSearchParams(new FormData($refs.filter_form)).toString();
-    console.log('filter-updated', queryString);
-    loading = true;
-    fetch('/collections/{{ collection.handle }}?' + queryString)
-      .then(response => response.text())
-      .then(data => {
-        let html_div = document.createElement('div');
-        html_div.innerHTML = data;
-        let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-  console.log('html_dom', html_dom);
-        document.querySelector('#ProductGridContainer').innerHTML = html_dom;
-        // update url without refreshing the page 
-        history.replaceState(null, null, '?' + queryString);
-      })
-      .catch(error => console.error('Error:', error))
-      .finally(() => loading = false);
-    
-  })"
-  >
+>
+  <!-- Your HTML content here -->
+</div>
+
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
