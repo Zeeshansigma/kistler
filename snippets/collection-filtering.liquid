@@ -283,6 +283,7 @@ ul.store-filter-ul {
     let html_div = document.createElement('div');
     html_div.innerHTML = data;
     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
+    console.log("html_dom", html_dom);
     document.querySelector('#ProductGridContainer').innerHTML = html_dom;
 
     // Update URL without refreshing the page 
