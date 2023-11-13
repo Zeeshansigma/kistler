@@ -362,9 +362,9 @@ ul.store-filter-ul {
               <li>
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
                   <input
-                    @change="$dispatch('filter-updated')"
                     class="myCheckbox"
                     type="checkbox"
+              @change="$dispatch('filter-updated')"
                     name="{{ filter_value.param_name }}"
                     value="{{ filter_value.value }}"
                     id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
