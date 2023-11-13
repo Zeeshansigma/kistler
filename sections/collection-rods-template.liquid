@@ -31,7 +31,7 @@
     {% include 'collection-filtering' %}
   </div>
   <div class="collection-main">
-    <div class="row row--gutters products">
+    <div class="row row--gutters products" id="ProductGridContainer">
       {% if collection.products.size < 1 %}
         <p class="no-products column--xs-12">Sorry
           nothing is available at the moment.</p>
