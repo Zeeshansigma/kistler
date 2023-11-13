@@ -268,9 +268,12 @@ ul.store-filter-ul {
 
 
 <div class="widget widget--filtering" 
+    x-data="{
+    loading: false,
+  }"
 @filter-updated.window="$nextTick(() => {
     const queryString = new URLSearchParams(new FormData($refs.filter_form)).toString()
-    
+    console.log(queryString);
     loading = true;
     fetch('/collections/{{ collection.handle }}?' + queryString)
       .then(response => response.text())
