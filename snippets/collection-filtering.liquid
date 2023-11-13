@@ -39,8 +39,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   border: 1px solid #d6d6d6;
   background: #fff;
   -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
@@ -254,6 +254,13 @@ ul.store-filter-ul {
 }
   label.custom-checkbox-label {
     text-transform: capitalize;
+}
+  input.myCheckbox[disabled] {
+  /* Add your styles here */
+  /* For example */
+  opacity: 0.5; /* Change opacity */
+  pointer-events: none; /* Disable pointer events */
+  /* Any other styles you want to apply */
 }
 </style>
 
