@@ -342,7 +342,7 @@ ul.store-filter-ul {
           
             {%- for filter_value in filter.values -%}
               <li>
-                <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}">
+                <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
                   <input
                     class="myCheckbox"
                     type="checkbox"
