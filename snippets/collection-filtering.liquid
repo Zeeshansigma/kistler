@@ -295,8 +295,9 @@ window.addEventListener('filter-updated', async () => {
 <div class="widget widget--filtering" 
 
 @filter-updated.window="$nextTick(() => {
+  
     const queryString = new URLSearchParams(new FormData($refs.filter_form)).toString()
-    
+  console.log(queryString);  
     loading = true;
     fetch('/collections/{{ collection.handle }}?' + queryString)
       .then(response => response.text())
