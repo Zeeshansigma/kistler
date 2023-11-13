@@ -268,7 +268,7 @@ ul.store-filter-ul {
 <script>
 window.addEventListener('filter-updated', async () => {
   console.log('filter-updatessss');
-  const queryString = new URLSearchParams(new FormData(document.querySelector('#filters-form')).toString());
+  const queryString = new URLSearchParams(new FormData(document.querySelector('#filters-form')).toString())
   console.log('queryString', queryString);
   loading = true;
 
@@ -293,33 +293,16 @@ window.addEventListener('filter-updated', async () => {
 </script>
 
 <div class="widget widget--filtering" 
+  x-data="{
+  loading: false
+  }"
 
-@filter-updated.window="$nextTick(() => {
-  
-    const queryString = new URLSearchParams(new FormData($refs.filter_form)).toString();
-  console.log(queryString);  
-    loading = true;
-    fetch('/collections/{{ collection.handle }}?' + queryString)
-      .then(response => response.text())
-      .then(data => {
-        let html_div = document.createElement('div');
-        html_div.innerHTML = data;
-        let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-        document.querySelector('#ProductGridContainer').innerHTML = html_dom;
-        // update url without refreshing the page 
-        history.replaceState(null, null, '?' + queryString);
-      })
-      .catch(error => console.error('Error:', error))
-      .finally(() => loading = false);
-    
-  })"
-  
 >
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
-
-<form x-ref="filters-form">
+{% render 'loader' %}
+<form id="filters-form">
 
   {%- for filter in collection.filters -%}
     <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
