@@ -364,6 +364,7 @@ let yourElement = document.querySelectorAll(".myCheckbox");
               <li>
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
                   <input
+                    @change="$dispatch('filter-updated')"
                     class="myCheckbox"
                     type="checkbox"
                     name="{{ filter_value.param_name }}"
