@@ -278,7 +278,7 @@ var collectionHandle = "{{ collection.handle }}";
 
   try {
 
-    const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
+    const response = await fetch('/collections/' + collection.handle + '?' + queryString);
     console.log("response", response);
     const data = await response.text();
     console.log("data", data);
