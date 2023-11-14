@@ -265,7 +265,7 @@ ul.store-filter-ul {
 </style>
 
 
-{{ collection.title }}
+{{ collection.title | downcase | handleize }}
 
 <div class="widget widget--filtering" 
   x-data="{
