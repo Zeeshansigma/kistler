@@ -266,17 +266,22 @@ ul.store-filter-ul {
 
 
 <script>
-window.addEventListener('filter-updated', async () => {
+
+  window.addEventListener('filter-updated', async () => {
+    let form = document.querySelector('#filter_form');
+  const queryString = new URLSearchParams(new FormData(form)).toString();
+  console.log(queryString);
+  loading = true;
+
   try {
-    const queryString = new URLSearchParams(new FormData(document.getElementById('filter_form'))).toString();
-    loading = true;
-
     const response = await fetch('/collections/' + collection.handle + '?' + queryString);
+    console.log("response", response);
     const data = await response.text();
-
+    console.log("data", data);
     let html_div = document.createElement('div');
     html_div.innerHTML = data;
     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
+    console.log("html_dom", html_dom);
     document.querySelector('#ProductGridContainer').innerHTML = html_dom;
 
     // Update URL without refreshing the page 
@@ -287,32 +292,6 @@ window.addEventListener('filter-updated', async () => {
     loading = false;
   }
 });
-
-//   window.addEventListener('filter-updated', async () => {
-//     let form = document.querySelector('#filter_form');
-//   const queryString = new URLSearchParams(new FormData(form)).toString();
-//   console.log(queryString);
-//   loading = true;
-
-//   try {
-//     const response = await fetch('/collections/' + collection.handle + '?' + queryString);
-//     console.log("response", response);
-//     const data = await response.text();
-//     console.log("data", data);
-//     let html_div = document.createElement('div');
-//     html_div.innerHTML = data;
-//     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-//     console.log("html_dom", html_dom);
-//     document.querySelector('#ProductGridContainer').innerHTML = html_dom;
-
-//     // Update URL without refreshing the page 
-//     history.replaceState(null, null, '?' + queryString);
-//   } catch (error) {
-//     console.error('Error:', error);
-//   } finally {
-//     loading = false;
-//   }
-// });
 
 </script>
 
