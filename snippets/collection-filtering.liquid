@@ -277,6 +277,7 @@ ul.store-filter-ul {
   loading = true;
 
   try {
+
     const response = await fetch('/collections/' + collection.handle + '?' + queryString);
     console.log("response", response);
     const data = await response.text();
