@@ -269,7 +269,7 @@ ul.store-filter-ul {
 // const collection = {
 //   handle: 'shop-all-rods' // Assuming 'shop-all-rods' is the handle for the collection
 // };
-
+var collectionHandle = "{{ collection.handle }}";
   window.addEventListener('filter-updated', async () => {
     let form = document.querySelector('#filter_form');
   const queryString = new URLSearchParams(new FormData(form)).toString();
@@ -278,7 +278,7 @@ ul.store-filter-ul {
 
   try {
 
-    const response = await fetch('/collections/' + collection.handle + '?' + queryString);
+    const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
     console.log("response", response);
     const data = await response.text();
     console.log("data", data);
