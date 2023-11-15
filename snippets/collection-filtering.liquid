@@ -273,7 +273,7 @@ var collectionHandle = "{{ collection.handle }}";
     let form = document.querySelector('#filter_form');
   const queryString = new URLSearchParams(new FormData(form)).toString();
   console.log(queryString);
-  loading = true;
+  // loading = true
 
   try {
     const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
