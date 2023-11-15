@@ -311,11 +311,12 @@ ul.store-filter-ul {
 //     loading = false;
 //   }
 // });
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var collectionHandle = "{{ collection.handle }}";
     console.log("collectionHandle", collectionHandle);
 
-    function handleFilterChange() {
+    // Function to handle checkbox change
+    function handleCheckboxChange() {
         // Get filter information from the checkbox
         var paramName = this.getAttribute('name');
         var paramValue = this.value;
@@ -328,7 +329,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.dispatchEvent(event);
     }
 
-    function handleFilterUpdate() {
+    // Function to handle filter update
+    async function handleFilterUpdate() {
         console.log("filter-updated");
         let form = document.querySelector('#filter_form');
         const queryString = new URLSearchParams(new FormData(form)).toString();
@@ -362,13 +364,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Attach change event listeners to checkboxes
-    document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-        checkbox.addEventListener('change', handleFilterChange);
+    document.querySelectorAll('.myCheckbox').forEach(function (checkbox) {
+        checkbox.addEventListener('change', handleCheckboxChange);
     });
 
     // Attach filter-updated event listener
     document.addEventListener('filter-updated', handleFilterUpdate);
 });
+
 
 </script>
 
