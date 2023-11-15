@@ -266,19 +266,23 @@ ul.store-filter-ul {
 
 
 <script>
-
-  function handleFilterUpdated() {
-  let form = document.querySelector('#filter_form');
+// const collection = {
+//   handle: 'shop-all-rods' // Assuming 'shop-all-rods' is the handle for the collection
+// };
+var collectionHandle = "{{ collection.handle }}";
+  console.log("collectionHandle", collectionHandle);
+  window.addEventListener('filter-updated', async () => {
+    let form = document.querySelector('#filter_form');
   const queryString = new URLSearchParams(new FormData(form)).toString();
   console.log(queryString);
   loading = true;
 
   try {
+
     const response = await fetch('/collections/' + collection.handle + '?' + queryString);
     console.log("response", response);
     const data = await response.text();
     console.log("data", data);
-
     let html_div = document.createElement('div');
     html_div.innerHTML = data;
     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
@@ -292,11 +296,7 @@ ul.store-filter-ul {
   } finally {
     loading = false;
   }
-}
-
-// Attach the function to the event listener
-
-
+});
 
 </script>
 
@@ -380,6 +380,7 @@ ul.store-filter-ul {
                   <input
                     class="myCheckbox"
                     type="checkbox"
+                    @change="$dispatch('filter-updated')"
                     name="{{ filter_value.param_name }}"
                     value="{{ filter_value.value }}"
                     id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
@@ -563,7 +564,6 @@ elements.forEach(function(element) {
 
             // Perform any desired actions with the filter information
             console.log('Filter changed:', paramName, paramValue, this.checked);
-          window.addEventListener('filter-updated', handleFilterUpdated);
         });
     });
 
