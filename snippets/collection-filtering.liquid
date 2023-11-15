@@ -270,6 +270,7 @@ ul.store-filter-ul {
 // var collectionHandle = "{{ collection.handle }}";
   console.log("collectionHandle", collectionHandle);
   window.addEventListener('filter-updated', async () => {
+    console.log("filter-updated");
     let form = document.querySelector('#filter_form');
   const queryString = new URLSearchParams(new FormData(form)).toString();
   console.log(queryString);
