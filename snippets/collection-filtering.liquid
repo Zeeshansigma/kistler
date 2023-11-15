@@ -262,6 +262,11 @@ ul.store-filter-ul {
   .apply-btn {
     margin-top: 20px;
 }
+    .both-btns{
+    display: flex;
+    align-items: self-start;
+    justify-content: space-evenly;
+}
 </style>
 
 
@@ -297,8 +302,7 @@ var collectionHandle = "{{ collection.handle }}";
 
 </script>
 
-<div class="widget widget--filtering" 
- "> 
+<div class="widget widget--filtering"> 
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
