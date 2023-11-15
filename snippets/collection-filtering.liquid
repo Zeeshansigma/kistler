@@ -284,7 +284,9 @@ document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
 
 var collectionHandle = "{{ collection.handle }}";
    console.log("collectionHandle", collectionHandle);
-  window.addEventListener('filter-updated', async () => {
+window.addEventListener('filter-updated', function() {
+    // Inside the event listener function, you can use async/await
+    (async function() {
     console.log("filter-updated");
     let form = document.querySelector('#filter_form');
   const queryString = new URLSearchParams(new FormData(form)).toString();
@@ -311,7 +313,7 @@ var collectionHandle = "{{ collection.handle }}";
     loading = false;
   }
 });
-
+});
 </script>
 
 <div class="widget widget--filtering" 
