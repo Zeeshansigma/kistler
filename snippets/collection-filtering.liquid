@@ -272,12 +272,16 @@ document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
         var paramName = checkbox.getAttribute('name');
         var paramValue = checkbox.value;
 
-        // Perform any desired actions with the filter information
-        console.log('Filter changed:', paramName, paramValue, checkbox.checked);
-
-        // Dispatch a custom event
-        var event = new Event('filter-updated');
-        document.dispatchEvent(event);
+      if (this.checked) {
+                console.log('Checkbox checked!');
+                
+                // You can dispatch a custom event if needed
+                var event = new Event('customCheckboxChange');
+                document.dispatchEvent(event);
+            } else {
+                console.log('Checkbox unchecked!');
+            }
+      
     });
 });
 
