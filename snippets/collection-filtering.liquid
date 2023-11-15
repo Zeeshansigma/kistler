@@ -120,7 +120,7 @@
   height: 42px;
   line-height: 40px;
   width: auto;
-  padding: 0 1em;
+  padding: 0 2em;
   font-size: 1.5rem;
   font-style: normal;
   font-family: "proxima-nova-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -261,11 +261,6 @@ ul.store-filter-ul {
   }
   .apply-btn {
     margin-top: 20px;
-}
-  .both-btns{
-    display: flex;
-    align-items: self-start;
-    justify-content: space-evenly;
 }
 </style>
 
@@ -477,13 +472,14 @@ var collectionHandle = "{{ collection.handle }}";
 
       
   <div class="both-btns">
-        <div class="apply-btn">
-          <input type="submit" value="Apply">
-        </div>
-              <p>
-                <a class="clear-all-btn clearn-btn-div" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
-              </p>
- </div>
+  <div class="apply-btn">
+              <input type="submit" value="Apply">
+            </div>
+
+      <p>
+      <a class="clear-all-btn clearn-btn-div" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
+    </p>
+
     <!-- {%- for filter in collection.filters -%}
       {%- if filter.type == "price_range" -%}
         {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
