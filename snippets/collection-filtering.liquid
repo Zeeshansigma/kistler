@@ -266,112 +266,51 @@ ul.store-filter-ul {
 
 
 <script>
-// document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-//     checkbox.addEventListener('change', function() {
-//         // Get filter information from the checkbox
-//         var paramName = checkbox.getAttribute('name');
-//         var paramValue = checkbox.value;
-
-//         // Perform any desired actions with the filter information
-//         console.log('Filter changed:', paramName, paramValue, checkbox.checked);
-
-//         // Dispatch a custom event
-//         var event = new Event('filter-updated');
-//         document.dispatchEvent(event);
-//     });
-// });
-
-
-// var collectionHandle = "{{ collection.handle }}";
-//    console.log("collectionHandle", collectionHandle);
-//   window.addEventListener('filter-updated', async () => {
-//     console.log("filter-updated");
-//     let form = document.querySelector('#filter_form');
-//   const queryString = new URLSearchParams(new FormData(form)).toString();
-//   console.log(queryString);
-//   loading = true;
-
-//   try {
-
-//     const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
-//     console.log("response", response);
-//     const data = await response.text();
-//     // console.log("data", data);
-//     let html_div = document.createElement('div');
-//     html_div.innerHTML = data;
-//     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-//     // console.log("html_dom", html_dom);
-//     document.querySelector('#ProductGridContainer').innerHTML = html_dom;
-
-//     // Update URL without refreshing the page 
-//     history.replaceState(null, null, '?' + queryString);
-//   } catch (error) {
-//     console.error('Error:', error);
-//   } finally {
-//     loading = false;
-//   }
-// });
-document.addEventListener('DOMContentLoaded', function () {
-    var collectionHandle = "{{ collection.handle }}";
-    console.log("collectionHandle", collectionHandle);
-
-    // Function to handle checkbox change
-    function handleCheckboxChange() {
+document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
         // Get filter information from the checkbox
-        var paramName = this.getAttribute('name');
-        var paramValue = this.value;
+        var paramName = checkbox.getAttribute('name');
+        var paramValue = checkbox.value;
 
         // Perform any desired actions with the filter information
-        console.log('Filter changed:', paramName, paramValue, this.checked);
+        console.log('Filter changed:', paramName, paramValue, checkbox.checked);
 
         // Dispatch a custom event
         var event = new Event('filter-updated');
         document.dispatchEvent(event);
-    }
-
-    // Function to handle filter update
-    async function handleFilterUpdate() {
-        console.log("filter-updated");
-        let form = document.querySelector('#filter_form');
-        const queryString = new URLSearchParams(new FormData(form)).toString();
-        console.log(queryString);
-
-        // Assuming 'loading' is declared globally
-        loading = true;
-
-        try {
-            const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
-            console.log("response", response);
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.text();
-            let html_div = document.createElement('div');
-            html_div.innerHTML = data;
-            let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-
-            document.querySelector('#ProductGridContainer').innerHTML = html_dom;
-
-            // Update URL without refreshing the page 
-            history.replaceState(null, null, '?' + queryString);
-        } catch (error) {
-            console.error('Error:', error);
-        } finally {
-            loading = false;
-        }
-    }
-
-    // Attach change event listeners to checkboxes
-    document.querySelectorAll('.myCheckbox').forEach(function (checkbox) {
-        checkbox.addEventListener('change', handleCheckboxChange);
     });
-
-    // Attach filter-updated event listener
-    document.addEventListener('filter-updated', handleFilterUpdate);
 });
 
+
+var collectionHandle = "{{ collection.handle }}";
+   console.log("collectionHandle", collectionHandle);
+  window.addEventListener('filter-updated', async () => {
+    console.log("filter-updated");
+    let form = document.querySelector('#filter_form');
+  const queryString = new URLSearchParams(new FormData(form)).toString();
+  console.log(queryString);
+  loading = true;
+
+  try {
+
+    const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
+    console.log("response", response);
+    const data = await response.text();
+    // console.log("data", data);
+    let html_div = document.createElement('div');
+    html_div.innerHTML = data;
+    let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
+    // console.log("html_dom", html_dom);
+    document.querySelector('#ProductGridContainer').innerHTML = html_dom;
+
+    // Update URL without refreshing the page 
+    history.replaceState(null, null, '?' + queryString);
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    loading = false;
+  }
+});
 
 </script>
 
