@@ -266,26 +266,69 @@ ul.store-filter-ul {
 
 
 <script>
+// document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+//     checkbox.addEventListener('change', function() {
+//         // Get filter information from the checkbox
+//         var paramName = checkbox.getAttribute('name');
+//         var paramValue = checkbox.value;
+
+//         // Perform any desired actions with the filter information
+//         console.log('Filter changed:', paramName, paramValue, checkbox.checked);
+
+//         // Dispatch a custom event
+//         var event = new Event('filter-updated');
+//         document.dispatchEvent(event);
+//     });
+// });
+
+
+// var collectionHandle = "{{ collection.handle }}";
+//    console.log("collectionHandle", collectionHandle);
+//   window.addEventListener('filter-updated', async () => {
+//     console.log("filter-updated");
+//     let form = document.querySelector('#filter_form');
+//   const queryString = new URLSearchParams(new FormData(form)).toString();
+//   console.log(queryString);
+//   loading = true;
+
+//   try {
+
+//     const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
+//     console.log("response", response);
+//     const data = await response.text();
+//     // console.log("data", data);
+//     let html_div = document.createElement('div');
+//     html_div.innerHTML = data;
+//     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
+//     // console.log("html_dom", html_dom);
+//     document.querySelector('#ProductGridContainer').innerHTML = html_dom;
+
+//     // Update URL without refreshing the page 
+//     history.replaceState(null, null, '?' + queryString);
+//   } catch (error) {
+//     console.error('Error:', error);
+//   } finally {
+//     loading = false;
+//   }
+// });
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            // Get filter information from the checkbox
-            var paramName = checkbox.getAttribute('name');
-            var paramValue = checkbox.value;
-
-            // Perform any desired actions with the filter information
-            console.log('Filter changed:', paramName, paramValue, checkbox.checked);
-
-            // Dispatch a custom event
-            var event = new Event('filter-updated');
-            document.dispatchEvent(event);
-        });
-    });
-
     var collectionHandle = "{{ collection.handle }}";
     console.log("collectionHandle", collectionHandle);
 
-    window.addEventListener('filter-updated', async () => {
+    function handleFilterChange() {
+        // Get filter information from the checkbox
+        var paramName = this.getAttribute('name');
+        var paramValue = this.value;
+
+        // Perform any desired actions with the filter information
+        console.log('Filter changed:', paramName, paramValue, this.checked);
+
+        // Dispatch a custom event
+        var event = new Event('filter-updated');
+        document.dispatchEvent(event);
+    }
+
+    function handleFilterUpdate() {
         console.log("filter-updated");
         let form = document.querySelector('#filter_form');
         const queryString = new URLSearchParams(new FormData(form)).toString();
@@ -316,9 +359,16 @@ document.addEventListener('DOMContentLoaded', function() {
         } finally {
             loading = false;
         }
-    });
-});
+    }
 
+    // Attach change event listeners to checkboxes
+    document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', handleFilterChange);
+    });
+
+    // Attach filter-updated event listener
+    document.addEventListener('filter-updated', handleFilterUpdate);
+});
 
 </script>
 
