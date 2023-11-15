@@ -563,19 +563,19 @@ elements.forEach(function(element) {
         });
     });
 
-  // document.addEventListener("DOMContentLoaded", function() {
-  //   // Get all checkboxes with the class 'myCheckbox'
-  //   const checkboxes = document.querySelectorAll('.myCheckbox');
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get all checkboxes with the class 'myCheckbox'
+    const checkboxes = document.querySelectorAll('.myCheckbox');
 
-  //   // Add event listeners to each checkbox
-  //   checkboxes.forEach(function(checkbox) {
-  //     checkbox.addEventListener('change', function() {
-  //       // Get the associated label
+    // Add event listeners to each checkbox
+    checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+        // Get the associated label
       
-  //     });
+      });
 
-  //     // Trigger the change event initially to handle pre-checked checkboxes
-  //     checkbox.dispatchEvent(new Event('change'));
-  //   });
-  // });
+      // Trigger the change event initially to handle pre-checked checkboxes
+      checkbox.dispatchEvent(new Event('change'));
+    });
+  });
 </script>
