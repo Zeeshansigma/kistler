@@ -565,8 +565,8 @@ document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
         console.log('Filter changed:', paramName, paramValue, checkbox.checked);
         
         // You can also dispatch a custom event if needed
-        // var event = new Event('filter-updated');
-        // checkbox.dispatchEvent(event);
+        var event = new Event('filter-updated');
+        checkbox.dispatchEvent(event);
     });
 });
 
