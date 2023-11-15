@@ -266,26 +266,12 @@ ul.store-filter-ul {
 
 
 <script>
-document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-    checkbox.addEventListener('change', function() {
-        // Get filter information from the checkbox
-        var paramName = checkbox.getAttribute('name');
-        var paramValue = checkbox.value;
-
-                var event = new Event('filter-updated');
-                document.dispatchEvent(event);
-         
-      
-    });
-});
-
-
+// const collection = {
+//   handle: 'shop-all-rods' // Assuming 'shop-all-rods' is the handle for the collection
+// };
 var collectionHandle = "{{ collection.handle }}";
-   console.log("collectionHandle", collectionHandle);
-window.addEventListener('filter-updated', function() {
-    // Inside the event listener function, you can use async/await
-    (async function() {
-    console.log("filter-updated");
+  console.log("collectionHandle", collectionHandle);
+  window.addEventListener('filter-updated', async () => {
     let form = document.querySelector('#filter_form');
   const queryString = new URLSearchParams(new FormData(form)).toString();
   console.log(queryString);
@@ -293,14 +279,14 @@ window.addEventListener('filter-updated', function() {
 
   try {
 
-    const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
+    const response = await fetch('/collections/' + collection.handle + '?' + queryString);
     console.log("response", response);
     const data = await response.text();
-    // console.log("data", data);
+    console.log("data", data);
     let html_div = document.createElement('div');
     html_div.innerHTML = data;
     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-    // console.log("html_dom", html_dom);
+    console.log("html_dom", html_dom);
     document.querySelector('#ProductGridContainer').innerHTML = html_dom;
 
     // Update URL without refreshing the page 
@@ -310,8 +296,8 @@ window.addEventListener('filter-updated', function() {
   } finally {
     loading = false;
   }
-})();
 });
+
 </script>
 
 <div class="widget widget--filtering" 
@@ -394,7 +380,7 @@ window.addEventListener('filter-updated', function() {
                   <input
                     class="myCheckbox"
                     type="checkbox"
-                 
+                    @change="$dispatch('filter-updated')"
                     name="{{ filter_value.param_name }}"
                     value="{{ filter_value.value }}"
                     id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
@@ -570,7 +556,17 @@ elements.forEach(function(element) {
             }
         });
     });
+    document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            // Get filter information from data attributes
+            var paramName = this.nextElementSibling.getAttribute('data-param-name');
+            var paramValue = this.nextElementSibling.getAttribute('data-value');
 
+            // Perform any desired actions with the filter information
+            console.log('Filter changed:', paramName, paramValue, this.checked);
+          function(filter-updated);
+        });
+    });
 
   document.addEventListener("DOMContentLoaded", function() {
     // Get all checkboxes with the class 'myCheckbox'
@@ -587,18 +583,4 @@ elements.forEach(function(element) {
       checkbox.dispatchEvent(new Event('change'));
     });
   });
-  document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-    checkbox.addEventListener('change', function() {
-        // Get filter information from the checkbox
-        var paramName = checkbox.getAttribute('name');
-        var paramValue = checkbox.value;
-
-        // Perform any desired actions with the filter information
-        console.log('Filter changed:', paramName, paramValue, checkbox.checked);
-
-        // Dispatch a custom event
-        var event = new Event('filter-updated');
-        checkbox.dispatchEvent(event);
-    });
-});
 </script>
