@@ -79,7 +79,7 @@
       <h2 class="product__title">
         <a href="{{ prod.url | within: collection }}" title="{{ prod.title | strip_html | escape }}" itemprop="name">{{ prod.title }}</a>
       </h2>
-      <span class="on-sale">{{ prod.price | money }}</span>
+      <!-- <span class="on-sale">{{ prod.price | money }}</span> -->
       <span class="product__meta product__meta--pricing" itemprop="offers" itemtype="http://schema.org/Offer" itemscope="itemscope">
         {% if prod.available or prod.tags contains "neversoldout" %}
           <meta itemprop="priceCurrency" content="{{ shop.currency }}">
@@ -91,7 +91,7 @@
               {% endif %}
             </span>
           {% endif %}
-          <span class="product__price"  itemprop="price">{{ WCProduct_VariantPrice | money }}</span>
+          <span class="product__price"  itemprop="price">{{ {{ prod.price | money }} | money }}</span>
         {% else %}
           <span class="product__price">SOLD OUT</span>
         {% endif %}
