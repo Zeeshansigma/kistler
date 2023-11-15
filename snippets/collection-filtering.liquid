@@ -266,37 +266,35 @@ ul.store-filter-ul {
 
 
 <script>
-// const collection = {
-//   handle: 'shop-all-rods' // Assuming 'shop-all-rods' is the handle for the collection
-// };
-// var collectionHandle = "{{ collection.handle }}";
-//   console.log("collectionHandle", collectionHandle);
-//   window.addEventListener('filter-updated', async () => {
-//     let form = document.querySelector('#filter_form');
-//   const queryString = new URLSearchParams(new FormData(form)).toString();
-//   console.log(queryString);
-//   loading = true;
 
-//   try {
+var collectionHandle = "{{ collection.handle }}";
+  console.log("collectionHandle", collectionHandle);
+  window.addEventListener('filter-updated', async () => {
+    let form = document.querySelector('#filter_form');
+  const queryString = new URLSearchParams(new FormData(form)).toString();
+  console.log(queryString);
+  loading = true;
 
-//     const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
-//     console.log("response", response);
-//     const data = await response.text();
-//     console.log("data", data);
-//     let html_div = document.createElement('div');
-//     html_div.innerHTML = data;
-//     let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-//     console.log("html_dom", html_dom);
-//     document.querySelector('#ProductGridContainer').innerHTML = html_dom;
+  try {
 
-//     // Update URL without refreshing the page 
-//     history.replaceState(null, null, '?' + queryString);
-//   } catch (error) {
-//     console.error('Error:', error);
-//   } finally {
-//     loading = false;
-//   }
-// });
+    const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
+    console.log("response", response);
+    const data = await response.text();
+    console.log("data", data);
+    let html_div = document.createElement('div');
+    html_div.innerHTML = data;
+    let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
+    console.log("html_dom", html_dom);
+    document.querySelector('#ProductGridContainer').innerHTML = html_dom;
+
+    // Update URL without refreshing the page 
+    history.replaceState(null, null, '?' + queryString);
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    loading = false;
+  }
+});
 
 </script>
 
