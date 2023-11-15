@@ -90,7 +90,7 @@
               {% endif %}
             </span>
           {% endif %}
-          <span class="product__price"  itemprop="price">{{ WCProduct_VariantPrice | money }}</span>
+          <span class="product__price"  itemprop="price">{{ product.price | money }}</span>
         {% else %}
           <span class="product__price">SOLD OUT</span>
         {% endif %}
