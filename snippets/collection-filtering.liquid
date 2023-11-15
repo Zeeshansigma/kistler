@@ -561,7 +561,7 @@ elements.forEach(function(element) {
             // Get filter information from data attributes
             var paramName = this.nextElementSibling.getAttribute('data-param-name');
             var paramValue = this.nextElementSibling.getAttribute('data-value');
-
+  window.dispatchEvent(new Event('filter-updated'));
             // Perform any desired actions with the filter information
             console.log('Filter changed:', paramName, paramValue, this.checked);
         });
