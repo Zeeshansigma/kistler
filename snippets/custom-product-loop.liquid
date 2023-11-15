@@ -91,7 +91,7 @@
               {% endif %}
             </span>
           {% endif %}
-          <span class="product__price"  itemprop="price">{{ {{ prod.price | money }} | money }}</span>
+          <span class="product__price"  itemprop="price">{{ prod.price | money }}</span>
         {% else %}
           <span class="product__price">SOLD OUT</span>
         {% endif %}
