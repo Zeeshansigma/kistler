@@ -40,7 +40,7 @@
      {% for prod in collection.products %}
       {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}{% continue %}{% endif %}
 
-          {% include 'product-loop', classes: "column--xs-6 column--lg-4" %}
+          {% include 'custom-product-loop', classes: "column--xs-6 column--lg-4" %}
         {% endfor %}
       {% endif %}
     </div>
