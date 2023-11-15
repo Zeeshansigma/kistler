@@ -120,7 +120,8 @@
       <noscript>
         <img itemprop="image" class="product__image product__image--{{ prod.id }}" srcset="{{ prod.featured_image | img_url: '800x' }} 2x, {{ prod.featured_image | img_url: '400x' }} 1x" src="{{ prod.featured_image | img_url: '400x' }}" data-default-image="{{ prod.featured_image | img_url: '800x' }}" alt="{% if prod.featured_image.alt != blank %}{{ prod.featured_image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
       </noscript>
-      <img itemprop="image" class="product__image product__image--{{ prod.id }} lazy" data-srcset="{{ prod.featured_image | img_url: '800x' }} 2x, {{ prod.featured_image | img_url: '400x' }} 1x" data-src="{{ prod.featured_image | img_url: '400x' }}" data-default-image="{{ prod.featured_image | img_url: '800x' }}" alt="{% if prod.featured_image.alt != blank %}{{ prod.featured_image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
+        <img itemprop="image" class="product__image product__image--{{ prod.id }}" srcset="{{ prod.featured_image | img_url: '800x' }} 2x, {{ prod.featured_image | img_url: '400x' }} 1x" src="{{ prod.featured_image | img_url: '400x' }}" data-default-image="{{ prod.featured_image | img_url: '800x' }}" alt="{% if prod.featured_image.alt != blank %}{{ prod.featured_image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
+      <!-- <img itemprop="image" class="product__image product__image--{{ prod.id }} lazy" data-srcset="{{ prod.featured_image | img_url: '800x' }} 2x, {{ prod.featured_image | img_url: '400x' }} 1x" data-src="{{ prod.featured_image | img_url: '400x' }}" data-default-image="{{ prod.featured_image | img_url: '800x' }}" alt="{% if prod.featured_image.alt != blank %}{{ prod.featured_image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}"> -->
     </a>
     <header class="product__header">
       <h2 class="product__title">
