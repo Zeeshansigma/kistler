@@ -84,7 +84,7 @@
         {% if prod.available or prod.tags contains "neversoldout" %}
           <meta itemprop="priceCurrency" content="{{ shop.currency }}">
           {% if prod.compare_at_price_max > prod.price %}
-            <span class="product__old-price">
+            <span class="product__old-price on-sale">
             {{ prod.compare_at_price_max | money }}
               {% if WCProduct_VariantComparePrice > 0 %}
                  {{ WCProduct_VariantComparePrice | money }}
