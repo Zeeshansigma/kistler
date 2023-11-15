@@ -379,7 +379,7 @@ var collectionHandle = "{{ collection.handle }}";
                   <input
                     class="myCheckbox"
                     type="checkbox"
-                    @change="$dispatch('filter-updated')"
+                    <!-- @change="$dispatch('filter-updated')" -->
                     name="{{ filter_value.param_name }}"
                     value="{{ filter_value.value }}"
                     id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
@@ -555,16 +555,21 @@ elements.forEach(function(element) {
             }
         });
     });
-    // document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-    //     checkbox.addEventListener('change', function() {
-    //         // Get filter information from data attributes
-    //         var paramName = this.nextElementSibling.getAttribute('data-param-name');
-    //         var paramValue = this.nextElementSibling.getAttribute('data-value');
+document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        // Get filter information from data attributes or other relevant methods
+        var paramName = checkbox.getAttribute('name');
+        var paramValue = checkbox.value;
 
-    //         // Perform any desired actions with the filter information
-    //         console.log('Filter changed:', paramName, paramValue, this.checked);
-    //     });
-    // });
+        // Perform any desired actions with the filter information
+        console.log('Filter changed:', paramName, paramValue, checkbox.checked);
+        
+        // You can also dispatch a custom event if needed
+        // var event = new Event('filter-updated');
+        // checkbox.dispatchEvent(event);
+    });
+});
+
 
   document.addEventListener("DOMContentLoaded", function() {
     // Get all checkboxes with the class 'myCheckbox'
