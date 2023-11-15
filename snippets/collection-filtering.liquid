@@ -297,12 +297,7 @@ var collectionHandle = "{{ collection.handle }}";
 
 </script>
 
-<div class="widget widget--filtering" 
-  x-data="{
-  loading: false
-  }"
-
->
+<div class="widget widget--filtering">
 {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
 {% assign for_swatches = settings.swatches_filtering | split: ',' %}
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
