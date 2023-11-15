@@ -266,6 +266,20 @@ ul.store-filter-ul {
 
 
 <script>
+document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        // Get filter information from the checkbox
+        var paramName = checkbox.getAttribute('name');
+        var paramValue = checkbox.value;
+
+        // Perform any desired actions with the filter information
+        console.log('Filter changed:', paramName, paramValue, checkbox.checked);
+
+        // Dispatch a custom event
+        var event = new Event('filter-updated');
+        document.dispatchEvent(event);
+    });
+});
 
 
 var collectionHandle = "{{ collection.handle }}";
