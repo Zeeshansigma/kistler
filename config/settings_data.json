@@ -258,49 +258,6 @@
       },
       "collection-rods-template": {
         "type": "collection-rods-template",
-        "blocks": {
-          "1569270430028": {
-            "type": "promo",
-            "settings": {
-              "position_index": "11",
-              "preheading": "Get Exclusive Email Deals",
-              "title": "Sign Up Now",
-              "video_url": "",
-              "link_url": "https:\/\/kistlerrods.com\/#shopify-section-footer",
-              "image": "shopify:\/\/shop_images\/Websize_KRmay290.jpeg",
-              "bg_overlay_color": "#ef3f1e"
-            }
-          },
-          "1576089152482": {
-            "type": "promo",
-            "settings": {
-              "position_index": "7",
-              "preheading": "Custom Rod Shop",
-              "title": "Design Your Own",
-              "video_url": "",
-              "link_url": "\/pages\/build-your-own-custom-rod",
-              "image": "shopify:\/\/shop_images\/Kistler_Fall2019_-431.jpg",
-              "bg_overlay_color": "rgba(0,0,0,0)"
-            }
-          },
-          "c8f74ebb-2fcb-4aa9-bba1-cda1ce9d7c1e": {
-            "type": "promo",
-            "settings": {
-              "position_index": "5",
-              "preheading": "5-star rated | Shop Now",
-              "title": "fishing reels",
-              "video_url": "",
-              "link_url": "https:\/\/kistlerrods.com\/collections\/fishing-reels",
-              "image": "shopify:\/\/shop_images\/Chromium_Casting_Fishing_Reel_Baitcasting_Reel_Baitcaster_Kistler-1647_copy.png",
-              "bg_overlay_color": "#252a2b"
-            }
-          }
-        },
-        "block_order": [
-          "1569270430028",
-          "1576089152482",
-          "c8f74ebb-2fcb-4aa9-bba1-cda1ce9d7c1e"
-        ],
         "settings": {
           "none_found_message": "No rods found &mdash; please adjust your filters"
         }
