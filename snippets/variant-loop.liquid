@@ -16,18 +16,14 @@
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
   
-  {% assign kistler_metafield = prod_variant.metafields.kistler | json %}
+  {% assign kistler_metafield = prod_variant.metafields.kistler %}
   
 {% for metafield in kistler_metafield %}
 {{ metafield | json }}<br>
 
 
   
-  <!-- <script>
-    console.log("kistler_metafield", kistler_metafield);
-    var let_jrs = {{ metafield | json }};
-  console.log(let_jrs);
-  </script> -->
+
 
   
 {% endfor %}
