@@ -15,9 +15,11 @@
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-{% for key in prod_variant.metafields.kistler %}
+  {% assign Object = {{ prod_variant.metafields.kistler | json }} %}
+  {{ Object }}
+<!-- {% for key in prod_variant.metafields.kistler %}
   {{ key }}<br><br>
-{% endfor %}
+{% endfor %} -->
 
   <script>
     console.log({{ prod_variant.metafields.kistler | json }});
