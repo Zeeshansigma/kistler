@@ -43,7 +43,7 @@
      
           {% for prod_variant in prod.variants %}
             {% for filter in collection.filters %}
-  
+  {{ filter.source }}
 {% for active_value in filter.active_values %}
   {{ filter.label }}: {{ active_value.label }}<br>
   {% endfor %}
