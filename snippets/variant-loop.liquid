@@ -24,8 +24,7 @@
   <script>
 <script>
   // Assuming prod_variant.metafields.kistler is your Liquid object
-  const liquidObjectString = '{{ prod_variant.metafields.kistler | json }}';
-  const liquidObject = JSON.parse(liquidObjectString);
+  const liquidObjectString = {{ prod_variant.metafields.kistler | json }};
 
   // Get keys and values
   const keys = Object.keys(liquidObject);
