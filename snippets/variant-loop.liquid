@@ -21,10 +21,8 @@
 {% for filter in collection.filters %}
   {{ filter.label }}
 {% for active_value in filter.active_values %}
-  {{ active_value }}
+  {{ active_value.label }}
   {% endfor %}
-  
-{{ metafield.active_values | json}}
 {% endfor %}
   
   
