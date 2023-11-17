@@ -17,10 +17,10 @@
 >
   
   {% assign kistler_metafield = prod_variant.metafields.kistler %}
-  {{collection.filters}}
-{% for metafield in kistler_metafield %}
+  {{}}
+{% for metafield in collection.filters %}
   
-
+{{ metafield.label }}
   
 
 {% endfor %}
