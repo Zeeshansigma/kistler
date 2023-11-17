@@ -42,13 +42,13 @@
             {% continue %}{% endif %}
      
           {% for prod_variant in prod.variants %}
-            
+            {% include 'variant-loop', classes: "column--xs-6 column--lg-4" %}
       
             <script>
               var var_met = {{ request.path }};
             console.log("var_met: ",var_met);
-            // if(true){
-            {% include 'variant-loop', classes: "column--xs-6 column--lg-4" %}
+         
+            
    
             </script>{% endfor %}
         {% endfor %}
