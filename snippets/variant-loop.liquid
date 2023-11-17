@@ -19,12 +19,17 @@
   {% assign kistler_metafield = prod_variant.metafields.kistler | json %}
   
 {% for metafield in kistler_metafield %}
+{{ metafield | json }}<br>
 
-  <script>
+
+  
+  <!-- <script>
     console.log("kistler_metafield", kistler_metafield);
     var let_jrs = {{ metafield | json }};
   console.log(let_jrs);
-  </script>
+  </script> -->
+
+  
 {% endfor %}
 
 
