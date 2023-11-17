@@ -22,7 +22,7 @@
 {% endfor %}
 
   <script>
-<script>
+
   // Assuming prod_variant.metafields.kistler is your Liquid object
   const liquidObjectString = {{ prod_variant.metafields.kistler | json }};
 
@@ -36,7 +36,6 @@
   }
 </script>
 
-  </script>
   <div class="product__content">
     <div class="product__badges">
       {% if prod_variant.compare_at_price > prod_variant.price %}
