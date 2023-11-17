@@ -40,9 +40,10 @@
      {% for prod in collection.products %}
           {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}
             {% continue %}{% endif %}
-       {% assign request_url = request.params %}
-       {{ request_url }}
+     
           {% for prod_variant in prod.variants %}
+              {% assign request_url = request.params %}
+       {{ request_url }}
             <script>
               let var_met = {{ prod_variant.metafields.custom | json }};
             console.log("var_met: ",var_met);
