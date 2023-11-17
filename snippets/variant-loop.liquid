@@ -22,8 +22,21 @@
 {% endfor %}
 
   <script>
-    const metafields = {{ prod_variant.metafields.kistler | json }};
-    console.log({{ prod_variant.metafields.kistler | json }});
+<script>
+  // Assuming prod_variant.metafields.kistler is your Liquid object
+  const liquidObjectString = '{{ prod_variant.metafields.kistler | json }}';
+  const liquidObject = JSON.parse(liquidObjectString);
+
+  // Get keys and values
+  const keys = Object.keys(liquidObject);
+  const values = Object.values(liquidObject);
+
+  // Print keys and values
+  for (let i = 0; i < keys.length; i++) {
+    console.log(`Key: ${keys[i]}, Value: ${values[i]}`);
+  }
+</script>
+
   </script>
   <div class="product__content">
     <div class="product__badges">
