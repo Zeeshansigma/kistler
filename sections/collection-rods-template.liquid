@@ -36,7 +36,7 @@
         <p class="no-products column--xs-12">Sorry
           nothing is available at the moment.</p>
       {% else %}
-         {{ request.device_type }}
+       
      {% for prod in collection.products %}
           {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}
             {% continue %}{% endif %}
