@@ -25,8 +25,8 @@
 {% for metafield in kistler_metafield %}
   metafield  
   <script>
-    const let_jr = {{ metafield | json }};
-  console.log(let_jr);
+    const let_jrs = {{ metafield | json }};
+  console.log(let_jrs);
   </script>
   Namespace: {{ metafield.namespace }}, Key: {{ metafield.key }}
 {% endfor %}
