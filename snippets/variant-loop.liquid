@@ -16,15 +16,7 @@
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
   
-  {% assign kistler_metafield = prod_variant.metafields.kistler %}
-
-{% for filter in collection.filters %}
-  
-{% for active_value in filter.active_values %}
-  {{ filter.label }}: {{ active_value.label }}<br>
-  {% endfor %}
-{% endfor %}
-  
+  {% assign kistler_metafield = prod_variant.metafields.kistler %}  
   
 <!-- {% for metafield in kistler_metafield %}
   
