@@ -17,15 +17,27 @@
 >
   
   {% assign kistler_metafield = prod_variant.metafields.kistler %}
-  {{}}
-{% for metafield in collection.filters %}
+
+{% for filter in collection.filters %}
+  {{ filter.label }}
+{% for active_value in filter.active_values %}
+  {{ active_value }}
+  {% endfor %}
   
-{{ metafield.label }}
 {{ metafield.active_values | json}}
+{% endfor %}
+  
+  
+{% for metafield in kistler_metafield %}
+  
+{{ metafield | json }}<br> 
+  <h1>{{ metafield[0] }}</h1>
+  {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}
   
 
 {% endfor %}
 
+  
 
   <div class="product__content">
     <div class="product__badges">
