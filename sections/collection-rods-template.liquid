@@ -47,9 +47,9 @@
             <script>
               var var_met = {{ request.path }};
             console.log("var_met: ",var_met);
-            if(true){
+            // if(true){
             {% include 'variant-loop', classes: "column--xs-6 column--lg-4" %}
-   }
+   
             </script>{% endfor %}
         {% endfor %}
       {% endif %}
