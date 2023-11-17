@@ -24,7 +24,8 @@
       <noscript>
         <img itemprop="image" class="product__image product__image--{{ prod_variant.id }}" srcset="{{ prod_variant.image | img_url: '800x' }} 2x, {{ prod_variant.image | img_url: '400x' }} 1x" src="{{ prod_variant.image | img_url: '400x' }}" data-default-image="{{ prod_variant.image | img_url: '800x' }}" alt="{% if prod_variant.image.alt != blank %}{{ prod_variant.image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
       </noscript>
-      <img itemprop="image" class="product__image product__image--{{ prod_variant.id }} lazy" data-srcset="{{ prod_variant.image | img_url: '800x' }} 2x, {{ prod_variant.image | img_url: '400x' }} 1x" data-src="{{ prod_variant.image | img_url: '400x' }}" data-default-image="{{ prod_variant.image | img_url: '800x' }}" alt="{% if prod_variant.image.alt != blank %}{{ prod_variant.image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
+        <img itemprop="image" class="product__image product__image--{{ prod_variant.id }}" srcset="{{ prod_variant.image | img_url: '800x' }} 2x, {{ prod_variant.image | img_url: '400x' }} 1x" src="{{ prod_variant.image | img_url: '400x' }}" data-default-image="{{ prod_variant.image | img_url: '800x' }}" alt="{% if prod_variant.image.alt != blank %}{{ prod_variant.image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
+      <!-- <img itemprop="image" class="product__image product__image--{{ prod_variant.id }} lazy" data-srcset="{{ prod_variant.image | img_url: '800x' }} 2x, {{ prod_variant.image | img_url: '400x' }} 1x" data-src="{{ prod_variant.image | img_url: '400x' }}" data-default-image="{{ prod_variant.image | img_url: '800x' }}" alt="{% if prod_variant.image.alt != blank %}{{ prod_variant.image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}"> -->
     </a>
     <header class="product__header">
       <h2 class="product__title">
