@@ -23,15 +23,18 @@
   
 {% assign Object = '{"key1": "value1", "key2": "value2", "key3": "value3"}' | json %}
 
-{% assign jsonKeys = myJsonObject | keys %}
-{% assign jsonValues = myJsonObject | values %}
+{% assign jsonKeys = Object | keys %}
+{% assign jsonValues = Object | values %}
 
 {% for key in jsonKeys %}
   Key: {{ key }}, Value: {{ jsonValues[key] }}<br>
 {% endfor %}
 
   <script>
+    let Obj = {{ prod_variant.metafields.kistler | json }};
+    
     console.log({{ prod_variant.metafields.kistler | json }});
+    const keys
   </script>
   <div class="product__content">
     <div class="product__badges">
