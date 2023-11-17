@@ -10,9 +10,14 @@
     {% assign value = prod_variant.options[forloop.index0] | replace: ' ', '' | replace: '"', '' | escape %}
     data-{{ option.name | handleize }}="{{ value  }}"
   {% endfor %}
+
+  
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
+  <script>
+    console.log({{ prod_variant.metafields.kistler | json}});
+  </script>
   <div class="product__content">
     <div class="product__badges">
       {% if prod_variant.compare_at_price > prod_variant.price %}
