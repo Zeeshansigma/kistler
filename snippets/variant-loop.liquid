@@ -22,6 +22,7 @@
 {% endfor %}
 
   <script>
+    const metafields = {{ prod_variant.metafields.kistler | json }};
     console.log({{ prod_variant.metafields.kistler | json }});
   </script>
   <div class="product__content">
