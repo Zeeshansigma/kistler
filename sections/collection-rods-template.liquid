@@ -45,7 +45,7 @@
               {% assign request_url = request.params %}
        {{ request_url }}
             <script>
-              let var_met = '{{ request.params }}';
+              let var_met = {{ request | json }};
             console.log("var_met: ",var_met);
             </script>
             {% include 'variant-loop', classes: "column--xs-6 column--lg-4" %}
