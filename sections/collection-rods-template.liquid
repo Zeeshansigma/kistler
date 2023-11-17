@@ -42,7 +42,7 @@
             {% continue %}{% endif %}
           {% for prod_variant in prod.variants %}
             <script>
-              let var_met = '{{ prod_variant.metafields }}';
+              let var_met = {{ prod_variant.metafields.custom | json}};
             console.log("var_met: ",var_met);
             </script>
             {% include 'variant-loop', classes: "column--xs-6 column--lg-4" %}
