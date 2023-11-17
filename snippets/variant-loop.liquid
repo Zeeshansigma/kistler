@@ -17,6 +17,7 @@
 >
   
   {% assign kistler_metafield = prod_variant.metafields.kistler %}
+  {{ kistler_metafield }}
 {% for metafield in kistler_metafield %}
   Namespace: {{ metafield.namespace }}, Key: {{ metafield.key }}
 {% endfor %}
