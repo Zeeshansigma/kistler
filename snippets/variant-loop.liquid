@@ -19,9 +19,9 @@
   {% assign kistler_metafield = prod_variant.metafields.kistler %}
 
 {% for filter in collection.filters %}
-  {{ filter.label }}
+  
 {% for active_value in filter.active_values %}
-  {{ active_value.label }}
+  {{ filter.label }}: {{ active_value.label }}<br>
   {% endfor %}
 {% endfor %}
   
