@@ -17,9 +17,9 @@
 >
   {% assign Object = prod_variant.metafields.kistler | json %}
   {{ Object }}
-<!-- {% for key in Object %}
-  {{ key }}<br><br>
-{% endfor %} -->
+ {% for key in Object %}
+  {{ key.key }}<br><br>
+{% endfor %} 
 
   <script>
     console.log({{ prod_variant.metafields.kistler | json }});
