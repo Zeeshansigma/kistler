@@ -20,10 +20,8 @@
   
 {% for metafield in kistler_metafield %}
   
-{{ metafield | json }}<br> 
-  <h1>{{ metafield[0] }}</h1>
-  {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}
-  {{collection.filters}}
+
+  {{collection.filters | json}}
 
 {% endfor %}
 
