@@ -42,6 +42,12 @@
             {% continue %}{% endif %}
      
           {% for prod_variant in prod.variants %}
+            {% for filter in collection.filters %}
+  
+{% for active_value in filter.active_values %}
+  {{ filter.label }}: {{ active_value.label }}<br>
+  {% endfor %}
+{% endfor %}
             {% include 'variant-loop', classes: "column--xs-6 column--lg-4" %}
       
             <!-- <script>
