@@ -41,6 +41,10 @@
           {% if prod.object_type == 'product' and prod.type == 'SHOPSTORM_HIDDEN_PRODUCT' %}
             {% continue %}{% endif %}
           {% for prod_variant in prod.variants %}
+            <script>
+              let var_met = {{ prod_variant.metafields | json }}
+            console.log("var_met: ",var_met);
+            </script>
             {% include 'variant-loop', classes: "column--xs-6 column--lg-4" %}
           {% endfor %}
         {% endfor %}
