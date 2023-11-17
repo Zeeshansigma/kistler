@@ -25,6 +25,7 @@
 {% for metafield in kistler_metafield %}
 
   <script>
+    console.log("kistler_metafield", kistler_metafield);
     var let_jrs = {{ metafield | json }};
   console.log(let_jrs);
   </script>
