@@ -19,7 +19,8 @@
   {% assign kistler_metafield = prod_variant.metafields.kistler %}
   
 {% for metafield in kistler_metafield %}
-{{ metafield | json | split: ', ' }}<br>
+  {{ metafield.namespace }}<br><br>
+<!-- {{ metafield | json | split: ', ' }}<br> -->
 
 
   
