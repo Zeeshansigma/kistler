@@ -16,7 +16,7 @@
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
   <script>
-    console.log({{ prod_variant.metafields.kistler.baits | json | split", " }});
+    console.log({{ prod_variant.metafields.kistler.baits | json }});
   </script>
   <div class="product__content">
     <div class="product__badges">
