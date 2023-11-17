@@ -16,7 +16,7 @@
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
   
-  {% assign kistler_metafield = prod_variant.metafields.kistler %}
+  {% assign kistler_metafield = prod_variant.metafields.kistler | json %}
   
 {% for metafield in kistler_metafield %}
 
