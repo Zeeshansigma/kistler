@@ -4,6 +4,7 @@
 {% for filter in collection.filters %}
       {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}
+    {{ active_filter.label }}
       <!-- {% if kistler_metafield[downcaseFilter] contains active_filter.label%} -->
         <script>
         console.log(`{{p_v.title}}`)
