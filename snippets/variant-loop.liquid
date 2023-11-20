@@ -62,7 +62,7 @@ hide
         {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
    
-    {{ active_filter_values }} = filter-label - {{ downcaseFilter }} - {{ kistler_metafield | json }} <br>
+    {{ active_filter_values }} = filter-label - {{ downcaseFilter | replace: " ", "_" }} - {{ kistler_metafield | json }} <br>
 
    
     {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
