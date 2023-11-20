@@ -1,6 +1,51 @@
 
  <article  
-       
+
+
+
+
+
+
+
+   {% assign kistler_metafield = prod_variant.metafields.kistler %}
+
+{% for metafield in kistler_metafield %}
+  {% assign metaValues = metafield[1] | join: ', ' %}
+  <!-- {{ metafield[0] | handleize }}={{ metaValues }}<br><br> -->
+
+  {% assign collectionFilters = collection.filters %}
+ 
+
+  {% for filter in collectionFilters %}
+    {% assign filter_active_values = filter.active_values %} 
+      {% for active_value in filter_active_values %}
+        {% assign filterLabels = filter.label | handleize | downcase %}
+        {% assign activeFilters = active_value.label %}
+          <!-- {{ filterLabels }} = {{ activeFilters }}<br> -->
+
+     {% if metaValues contains activeFilters %}
+      <span> it has that filter </span><br>      
+          {% elsif activeFilters == nil or activeFilters == '' %}
+         there are no active filters<br>
+   {% else %}
+       this is else <br>
+   {% endif %}
+        {% endfor %}
+   {% endfor %}
+  
+{% endfor %}
+
+
+
+
+
+
+   
+
+
+
+
+   
    itemtype="http://schema.org/Product"
   itemscope="itemscope"
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}"
@@ -61,7 +106,7 @@
   {% endfor %} 
 {% endcomment %}
 
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
+<!-- {% assign kistler_metafield = prod_variant.metafields.kistler %}
 
 {% for metafield in kistler_metafield %}
   {% assign metaValues = metafield[1] | join: ', ' %}
@@ -87,7 +132,7 @@
         {% endfor %}
    {% endfor %}
   
-{% endfor %}
+{% endfor %} -->
 
 
   
