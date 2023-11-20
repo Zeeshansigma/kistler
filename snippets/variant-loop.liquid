@@ -2,7 +2,7 @@
 
 {% assign metaValue = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
-{{ metaValue }} - {{ activeFilter }}<br> <br>
+
 
 {% if metaValue ==  activeFilter %}
   
@@ -22,7 +22,7 @@
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-  
+  {{ metaValue }} - {{ activeFilter }}<br> <br>
   {% assign kistler_metafield = prod_variant.metafields.kistler %}  
   
 <!-- {% for metafield in kistler_metafield %}
