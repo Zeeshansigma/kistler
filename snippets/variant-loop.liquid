@@ -38,16 +38,13 @@
 {% endcomment %}
 {% for filter in collection.filters %}
   {% for active_value in filter.active_values %}
-    
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
-  
- {% for metafield in kistler_metafield %}
-  
-<!-- {{ metafield | json }}<br>  -->
-
-  {{ metafield[0] | handleize }} = {{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
+{% for metafield in kistler_metafield %}
+    {% assign kistler_metafield = prod_variant.metafields.kistler %}
   
 
+  {{ metafield[0] | handleize }} = {{ metafield | slice: 1, metafield.size | join: ', ' }}
+ {{ filter.label }} = {{ active_value }}
+<br><br>
 {% endfor %}
     {% endfor %}
   {% endfor %}
