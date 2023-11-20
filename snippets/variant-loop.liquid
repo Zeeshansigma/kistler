@@ -78,7 +78,19 @@ hide
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-{{ kistler_metafield[downcaseFilter] }}
+
+   {% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% for filter in collection.filters %}
+      {% assign downcaseFilter = filter.label | downcase %}
+  {% for active_filter in filter.active_values %}
+
+{% if kistler_metafield[downcaseFilter] contains active_filter.label%} 
+show
+{% else %}
+hide
+{% endif %}
+    {% endfor %}
+  {% endfor %}
 
 {% comment %}   
 //filters show hide
