@@ -33,7 +33,7 @@ style = "display: block;"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
 
-  {% assign kistler_metafield = prod_variant.metafields.kistler %}
+  <!-- {% assign kistler_metafield = prod_variant.metafields.kistler %}
   
  {% for metafield in kistler_metafield %}
   
@@ -42,7 +42,7 @@ style = "display: block;"
   {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}
   
 
-{% endfor %} 
+{% endfor %}  -->
     
    
 
