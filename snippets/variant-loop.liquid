@@ -68,7 +68,7 @@ active_filters_size={{ active_filters_size }}
     {% assign filter_matched = false %}
 
    {% for active_filter in filter.active_values %}
-     active_filter:{{ active_filter | json}}<br>
+     active_filter:{{ active_filter | join: ','}}<br>
    kistler_metafield[downcaseFilter]: {{ kistler_metafield[downcaseFilter] }}<br>
    filter_matched: {{ filter_matched }}<br>
      filter: {{ filter | json}}
