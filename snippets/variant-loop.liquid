@@ -21,8 +21,7 @@
 {% comment %}   
 //filters show hide
 
-{% for filter in collection.filters %}
-  {% for active_value in filter.active_values %}
+
 
 {% assign metaSeries = prod_variant.metafields.kistler.series %}
 {% assign metaLength = prod_variant.metafields.kistler.length %}
@@ -37,7 +36,9 @@
   {% endfor %}
 {% endfor %}
 {% endcomment %}
-
+{% for filter in collection.filters %}
+  {% for active_value in filter.active_values %}
+    
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
   
  {% for metafield in kistler_metafield %}
@@ -47,7 +48,9 @@
   {{ metafield[0] | handleize }} = {{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
   
 
-{% endfor %} =
+{% endfor %}
+    {% endfor %}
+  {% endfor %}
     
    
 
