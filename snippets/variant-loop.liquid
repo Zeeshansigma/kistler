@@ -6,7 +6,8 @@
       console.log("filters loop");
   console.log("active_filter.param_name", '{{active_filter.param_name| json}}');
   console.log("active_filter.display", '{{active_filter.display| json}}');
-  console.log("meta obj", '{{kistler_metafield[filter.label]| json}}');
+  console.log("filter.label", '{{filter.label| json}}');
+  console.log("meta obj", '{{kistler_metafield["series"]| json}}');
   
 </script>
     {% endfor %}
