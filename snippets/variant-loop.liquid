@@ -1,7 +1,5 @@
 
 
-{% assign metaValue = prod_variant.metafields.kistler.length %}
-{% assign activeFilter = active_value.label %}
 
 
 
@@ -37,6 +35,9 @@
     
          {% for filter in collection.filters %}
 {% for active_value in filter.active_values %}
+  
+{% assign metaValue = prod_variant.metafields.kistler.length %}
+{% assign activeFilter = active_value.label %}
 {% if metaValue ==  activeFilter %} 
 this has the varaint 
   {% else %}
