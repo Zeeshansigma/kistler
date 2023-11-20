@@ -8,12 +8,10 @@
   {% assign metaLength = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
   
-{% if metaLength == activeFilter %} 
+{% if metaLength == activeFilter  metaSeries == activeFilter %} 
 style = "display: block;"
 
-{% elsif metaSeries == activeFilter %}
-  style = "display: block;"
- {% else %}
+{% else %}
   style = "display: none;"
   {% endif %} 
   
