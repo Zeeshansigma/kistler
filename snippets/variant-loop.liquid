@@ -1,4 +1,23 @@
-<article
+<article    
+  
+  
+  
+  {% for filter in collection.filters %}
+{% for active_value in filter.active_values %}
+  {% assign metaSeries = prod_variant.metafieldskistler.series %}
+{% assign metaLength = prod_variant.metafields.kistler.length %}
+{% assign activeFilter = active_value.label %}
+
+{% if metaLength ==  activeFilter or metaSeries ==  activeFilter %} 
+style = "display: block;"
+  {% else %}
+ style = "display: none;"
+  {% endif %} 
+  {% endfor %}
+           {% endfor %}
+
+
+  
   itemtype="http://schema.org/Product"
   itemscope="itemscope"
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}"
@@ -26,18 +45,8 @@
 
 {% endfor %} -->
     
-         {% for filter in collection.filters %}
-{% for active_value in filter.active_values %}
-  {% assign metaSeries = prod_variant.metafieldskistler.series %}
-{% assign metaLength = prod_variant.metafields.kistler.length %}
-{% assign activeFilter = active_value.label %}
-{% if metaLength ==  activeFilter or metaSeries ==  activeFilter %} 
-<span style="background: green; color: #fff; padding:20px;">this has the varaint </span>
-  {% else %}
-  hide it 
-  {% endif %} 
-  {% endfor %}
-           {% endfor %}
+   
+
 
   <div class="product__content">
     <div class="product__badges">
