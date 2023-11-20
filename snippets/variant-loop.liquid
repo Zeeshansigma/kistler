@@ -51,7 +51,10 @@
    
    {% for filter in collection.filters %}
   {% for active_value in filter.active_values %}
-   {% assign filterLabels = filter.label | handleize | downcase %} filterLabels = {{ active_value.label }}
+   {% assign filterLabels = filter.label | handleize | downcase %}
+   {% assign activeFilters = active_value.label %}
+    {% assign complete_active_filters = filterLabels = activeFilters %}
+    {{ complete_active_filters }}
      {% endfor %}
 {% endfor %}
 
