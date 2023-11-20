@@ -41,9 +41,10 @@
 
 
   {% assign kistler_metafield = prod_variant.metafields.kistler %}
+  {% assign metaValues = metafield | slice: 1, metafield.size | join: ', ' %}
   
   {% for metafield in kistler_metafield %}
-    {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
+    {{ metafield[0] | handleize }}={{ metaValues }}<br><br>
   {% endfor %} 
 
 
