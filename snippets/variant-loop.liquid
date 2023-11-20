@@ -28,13 +28,15 @@ hide
   {% assign active_filter_array =  active_filter_values | split: "," %}
   {% for item in  active_filter_array %}
     {% if kistler_metafield[downcaseFilter] contains item  %}
+      
       {%- assign class = 'show' -%}
     {% else %}
+      {{ kistler_metafield[downcaseFilter] }} {{ item }}
       {%- assign class = 'hide' -%}
     {% endif %}
   {% endfor %}
 {% endfor %}
-{{ class }} {{ kistler_metafield[downcaseFilter] }} {{ item }}
+{{ class }} 
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
