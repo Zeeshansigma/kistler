@@ -1,6 +1,6 @@
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% for metafield in kistler_metafield %}
-  {% assign metaValues = metafield[1] | join: ', ' %}
+  {% assign metaValues = metafield | join: ', ' %}
 <script>
   console.log('{{metaValues| json}}');
 </script>
