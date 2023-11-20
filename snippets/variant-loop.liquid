@@ -1,7 +1,11 @@
 
 
+{% assign metaValue = prod_variant.metafields.kistler.length %}
+{% assign activeFilter = active_value.label %}
+{{ metaValue }} - {{ activeFilter }}<br> <br>
 
-
+{% if metaValue ==  activeFilter %}
+  
 <article
   itemtype="http://schema.org/Product"
   itemscope="itemscope"
@@ -69,7 +73,7 @@
     </header>
   </div>
 </article>
-
+{% endif %}
 {% for filter in collection.filters %}
 
 {% for active_value in filter.active_values %}
