@@ -43,8 +43,8 @@
  {% for metafield in kistler_metafield %}
   
 <!-- {{ metafield | json }}<br>  -->
- {{ metafield[0] | downcase }}
-  {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}
+
+  {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
   
 
 {% endfor %} =
