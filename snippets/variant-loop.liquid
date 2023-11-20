@@ -97,6 +97,8 @@ hide
     {% endif %}
     Metavalue: {{ kistler_metafield[downcaseFilter] }}<br>
 Active Filter Values Array: {{ active_filter_values }}<br>
+    Downcase: {{ downcaseFilter }}
+    Metaobject: {{ kistler_metafield | json }}
   {% endfor %}
 {% endfor %}
 {% comment %}
