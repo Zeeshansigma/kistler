@@ -13,63 +13,35 @@ hide
   {% endfor %}
   {% endcomment %}
  <article  
-
-
-   
-   itemtype="http://schema.org/Product"
+ itemtype="http://schema.org/Product"
   itemscope="itemscope" 
-  class="
-   
-   
-   
-   
-   {% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
+  class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
 
+  {% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% assign active_filter_values = "" %}
 
-
-{% comment %}
-   {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% for filter in collection.filters %}
-      {% assign downcaseFilter = filter.label | downcase %}
+  {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}
-
-{% if kistler_metafield[downcaseFilter] contains active_filter.label%} 
-show
-{% else %}
-hide
-{% endif %}
-    {% endfor %}
-  {% endfor %}
-  
-
- 
-
-{% for metafield in kistler_metafield %}
-  {% assign metaValues = metafield[1] | join: ', ' %}
-
-
-  {% assign collectionFilters = collection.filters %}
- 
-
-  {% for filter in collectionFilters %}
-    {% assign filter_active_values = filter.active_values %} 
-      {% for active_value in filter_active_values %}
-        {% assign filterLabels = filter.label | handleize | downcase %}
-        {% assign activeFilters = active_value.label %}
+    Active filters: {{ active_filter.label }}<br>
+        {% assign my_array = active_filter.label | split: "," %}
+    {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
    
+    {{ active_filter_values }} = {{ kistler_metafield[downcaseFilter] }}<br>
 
-     {% if metaValues contains activeFilters %}
-      show
-          {% elsif activeFilters == nil or activeFilters == '' %}
-         there are no active filters<br>
-   {% else %}
-       hide
-   {% endif %}
-        {% endfor %}
-   {% endfor %}
-  
-{% endfor %} 
-{% endcomment %}
+   
+    {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
+      {%- assign class = 'show' -%}
+    {% else %}
+      {%- assign class = 'hide' -%}
+    {% endif %}{{ class }}<br>
+
+
+
+  {% endfor %}
+{% endfor %}
+
+
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
@@ -83,30 +55,10 @@ hide
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
+
+
+
 {% comment %}
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
-{% for filter in collection.filters %}
-{% assign downcaseFilter = filter.label | downcase %}
-  {% for active_filter in filter.active_values %}
-    Active filters: {{ active_filter.label }}<br>
-    {{ active_filter.label }} = {{ kistler_metafield[downcaseFilter] }}<br>
-
-   {% if active_filter.label contains kistler_metafield[downcaseFilter]  %}
-     
-{%- assign class = 'show' -%}
-  {% else %}
-    {%- assign class = 'hide' -%}
-  {% endif %}{{ class }}<br>
-
-   {% assign my_array = active_filter.label | split: "," %}
-
-
-    {% endfor %}
-  {% endfor %}
-{% endcomment %}
-
-
-
 
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
@@ -133,7 +85,7 @@ hide
 {% endfor %}
 
 Active Filter Values Array: {{ active_filter_values }}
-
+{% endcomment %}
 
 
 
@@ -161,35 +113,7 @@ Active Filter Values Array: {{ active_filter_values }}
 
 
 
- {% comment %}
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
-
-{% for metafield in kistler_metafield %}
-  {% assign metaValues = metafield[1] | join: ', ' %}
-  <!-- {{ metafield[0] | handleize }}={{ metaValues }}<br><br> -->
-
-  {% assign collectionFilters = collection.filters %}
  
-
-  {% for filter in collectionFilters %}
-    {% assign filter_active_values = filter.active_values %} 
-      {% for active_value in filter_active_values %}
-        {% assign filterLabels = filter.label | handleize | downcase %}
-        {% assign activeFilters = active_value.label %}
-          <!-- {{ filterLabels }} = {{ activeFilters }}<br> -->
-
-     {% if metaValues contains activeFilters %}
-      <span> it has that filter </span><br>      
-          {% elsif activeFilters == nil or activeFilters == '' %}
-         there are no active filters<br>
-   {% else %}
-       this is else <br>
-   {% endif %}
-        {% endfor %}
-   {% endfor %}
-  
-{% endfor %} 
-{% endcomment %}
 
   
 
