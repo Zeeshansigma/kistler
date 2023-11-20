@@ -95,10 +95,10 @@ hide
     {% else %}
       {%- assign class = 'hide' -%}
     {% endif %}
-  {% endfor %}
-Metavalue: {{ kistler_metafield[downcaseFilter] }}<br>{% endfor %}
-
+    Metavalue: {{ kistler_metafield[downcaseFilter] }}<br>
 Active Filter Values Array: {{ active_filter_values }}<br>
+  {% endfor %}
+{% endfor %}
 {% comment %}
 
 
