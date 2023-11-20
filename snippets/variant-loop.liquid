@@ -82,7 +82,7 @@ hide
 {% for filter in collection.filters %}
 {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
-{% if kistler_metafield[downcaseFilter] contains active_filter.label%}
+{% if kistler_metafield[downcaseFilter] contains active_filter.label %}
   {{ kistler_metafield[downcaseFilter] }} - {{ active_filter.label }} - show{% elsif kistler_metafield[downcaseFilter]  active_filter.label %}hide{% endif %}{% endif %}
     {% endfor %}
   {% endfor %}
