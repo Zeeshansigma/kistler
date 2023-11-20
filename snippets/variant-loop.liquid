@@ -23,14 +23,15 @@ hide
 {% for active_filter in filter.active_values %}
 {% assign my_array = active_filter.label | split: "," %}
 {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
-{% if kistler_metafield[downcaseFilter] contains active_filter_values %}
+
+
+  {% endfor %}
+  {% if kistler_metafield[downcaseFilter] contains active_filter_values %}
 {%- assign class = 'show' -%}
 {% else %}
 {%- assign class = 'hide' -%}
 {% endif %}
 
-
-  {% endfor %}
 {% endfor %} {{ class }}
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
