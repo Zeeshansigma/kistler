@@ -23,13 +23,8 @@ hide
 {% for filter in collection.filters %}
   {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}
-    Active filters: {{ active_filter.label }}<br>
         {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
-   
-    {{ active_filter_values }} = {{ kistler_metafield[downcaseFilter] }}<br>
-
-   
     {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
       {%- assign class = 'show' -%}
     {% else %}
