@@ -90,7 +90,7 @@ hide
   {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
     {{ kistler_metafield[downcaseFilter] }} = {{ active_filter.label }}<br>
 
-   {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
+   {% if active_filter.label contains kistler_metafield[downcaseFilter]   %}
 
     {%- assign class = 'show' -%}
   {% else %}
