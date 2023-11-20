@@ -69,11 +69,12 @@ hide
     {% else %}
       {%- assign class = 'hide' -%}
     {% endif %}
-  {% endfor %}
     
-  Variant title: {{ prod_variant.title }}<br>
 Active Filter Values Array: {{ active_filter_values }}<br>
 meta fields: {{ kistler_metafield[downcaseFilter] }}<br>
+  {% endfor %}
+    
+
 {% endfor %}
 
 
