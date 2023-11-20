@@ -19,7 +19,7 @@ hide
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
 {% for filter in collection.filters %}
-{% assign downcaseFilter = filter.label | downcase | replace " ", "_"%}
+{% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
 {% for active_filter in filter.active_values %}
 {% assign my_array = active_filter.label | split: "," %}
 {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
@@ -51,6 +51,7 @@ hide
 
 
 
+
 {% comment %}
 {% assign active_filter_values = "" %}
 
@@ -70,7 +71,6 @@ hide
 Active Filter Values Array: {{ active_filter_values }}<br>
 meta fields: {{ kistler_metafield[downcaseFilter] }}<br>
 {% endfor %}
-
 
 
 
