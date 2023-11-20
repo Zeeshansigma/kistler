@@ -1,6 +1,6 @@
- {% for filter in collection.filters %}
+ <!-- {% for filter in collection.filters %}
 
-{% for active_value in filter.active_values %}
+{% for active_value in filter.active_values %} -->
 
 {% assign metaValue = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
@@ -24,8 +24,8 @@
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-  {{ metaValue }} - {{ activeFilter }}<br> <br>
-  {% assign kistler_metafield = prod_variant.metafields.kistler %}  
+  <!-- {{ metaValue }} - {{ activeFilter }}<br> <br>
+  {% assign kistler_metafield = prod_variant.metafields.kistler %}   -->
   
 <!-- {% for metafield in kistler_metafield %}
   
@@ -77,6 +77,6 @@
 </article>
 <!-- {% endif %} -->
 
-   <!-- {{ prod_variant.metafields.kistler.length }} - {{ active_value.label }}<br> -->
+   <!-- <!-- {{ prod_variant.metafields.kistler.length }} - {{ active_value.label }}<br> -->
     {% endfor %}
-{% endfor %} 
+{% endfor %}  -->
