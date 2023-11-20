@@ -1,15 +1,4 @@
 
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
-{% for filter in collection.filters %}
-      {% assign downcaseFilter = filter.label | downcase %}
-  {% for active_filter in filter.active_values %}
-      {% if kistler_metafield[downcaseFilter] contains active_filter.label%}
-        <script>
-        console.log(`{{prod_variant.title}}`)
-          </script>
-      {% endif %}}
-    {% endfor %}
-  {% endfor %}
  <article  
 
    

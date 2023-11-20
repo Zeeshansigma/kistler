@@ -1,3 +1,15 @@
+
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% for filter in collection.filters %}
+      {% assign downcaseFilter = filter.label | downcase %}
+  {% for active_filter in filter.active_values %}
+      {% if kistler_metafield[downcaseFilter] contains active_filter.label%}
+        <script>
+        console.log(`{{prod_variant.title}}`)
+          </script>
+      {% endif %}}
+    {% endfor %}
+  {% endfor %}
 <div class="collection-header">
   <div class="collection-header__image">
     <figure class="lazy" data-src="{% if collection.image != blank %}{{ collection.image | img_url: '3000x', format: 'pjpg'}}{% endif %}">
