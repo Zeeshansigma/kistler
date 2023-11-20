@@ -28,8 +28,8 @@ hide
     {% assign filter_matched = false %}
   
     {% for active_filter in filter.active_values %}
-      kistler_metafield_downcaseFilter-{{ kistler_metafield[downcaseFilter] }}
       active_filter-{{ active_filter }}
+      kistler_metafield_downcaseFilter-{{ kistler_metafield[downcaseFilter] }}
       filter_matched-{{ filter_matched }}
       {% if kistler_metafield[downcaseFilter] contains active_filter and filter_matched == false %}
         {% assign matched_filters = matched_filters | plus: 1 %}
