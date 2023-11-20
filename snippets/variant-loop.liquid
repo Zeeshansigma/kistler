@@ -28,10 +28,10 @@
     
          {% for filter in collection.filters %}
 {% for active_value in filter.active_values %}
-  
-{% assign metaValue = prod_variant.metafields.kistler.length %}
+  {% assign metaSeries = prod_variant.metafieldskistler.series %}
+{% assign metaLength = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
-{% if metaValue ==  activeFilter %} 
+{% if metaLength ==  activeFilter or metaSeries ==  activeFilter %} 
 <span style="background: green; color: #fff; padding:20px;">this has the varaint </span>
   {% else %}
   hide it 
