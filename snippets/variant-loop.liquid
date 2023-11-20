@@ -4,7 +4,7 @@
   
   {% for filter in collection.filters %}
 {% for active_value in filter.active_values %}
-  active-filter: {{ filter.active_values.size }}
+  data-active-filter = "{{ filter.active_values.size }}"
   {% assign metaSeries = prod_variant.metafields.kistler.series %}
   {% assign metaLength = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
