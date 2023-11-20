@@ -26,7 +26,7 @@ hide
 {% assign metavalue = kistler_metafield[downcaseFilter] %}
   {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
     <script>
-   console.log("metavalue", metavalue);
+   console.log('{{ metavalue }}');
    </script>
     {%- assign class = 'show' -%}
   {% else %}
