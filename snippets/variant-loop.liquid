@@ -28,8 +28,7 @@ hide
   {% assign active_filter_array =  active_filter_values | downcase | replace: " ", "" | split: "," %}
   {% for item in  active_filter_array %}
     {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase %}
-    {% assign itm = item | downcase | replace: ' ', '' %}
-    {% if dc_meta_f contains  itm %}
+    {% if dc_meta_f contains  item %}
       {%- assign class = 'show' -%}
     {% else %}
       kistler_metafielddowncaseFilter:{{ kistler_metafield[downcaseFilter] }} -  item: {{ item }} ---
