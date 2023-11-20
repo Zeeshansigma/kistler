@@ -17,12 +17,15 @@ hide
   itemscope="itemscope" 
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% assign show = false %}
 {% for filter in collection.filters %}
+  {% assign no_show = 0 %}
   {% assign active_filter_values = "" %}
   {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
   {% for active_filter in filter.active_values %}
-    {% assign my_array = active_filter.label | split: "," %}
-    {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
+  {% if kistler_metafield[downcaseFilter] contains active_filter %}
+    
+  {% endif %}  
   {% endfor %}
   {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
      active_filters: {{ active_filter_values }}
