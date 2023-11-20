@@ -73,7 +73,7 @@ active_filters_size={{ active_filters_size }}
    filter_matched: {{ filter_matched }}<br>
      active_filter:{{ active_filter.value }}<br>
      filter: {{ filter | json}}
-      {% if kistler_metafield[downcaseFilter] contains active_filter and filter_matched == false %}
+      {% if kistler_metafield[downcaseFilter] contains active_filter.value and filter_matched == false %}
         {% assign matched_filters = matched_filters | plus: 1 %}
         {% assign filter_matched = true %}
       {% endif %}
