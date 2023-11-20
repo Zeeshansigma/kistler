@@ -16,24 +16,29 @@
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-      {% for filter in collection.filters %}
-{% for active_value in filter.active_values %}
 
 
-  {% assign metaSeries = prod_variant.metafields.kistler.series %}
-  {% assign metaLength = prod_variant.metafields.kistler.length %}
+{% comment %}   
+//filters show hide
+
+{% for filter in collection.filters %}
+  {% for active_value in filter.active_values %}
+
+{% assign metaSeries = prod_variant.metafields.kistler.series %}
+{% assign metaLength = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
   
-{% if metaLength == activeFilter or metaSeries == activeFilter %} 
-<span style = "background:green; color: #fff; padding: 10px 20px;">show</span>
-
-{% else %}
- <span style = "background:red; color: #fff; padding: 10px 20px;">hide</span> 
+  {% if metaLength == activeFilter or metaSeries == activeFilter %} 
+    <span style = "background:green; color: #fff; padding: 10px 20px;">show</span>
+  {% else %}
+    <span style = "background:red; color: #fff; padding: 10px 20px;">hide</span> 
   {% endif %} 
   
   {% endfor %}
-           {% endfor %}
-  <!-- {% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% endfor %}
+{% endcomment %}
+
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
   
  {% for metafield in kistler_metafield %}
   
@@ -42,7 +47,7 @@
   {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}
   
 
-{% endfor %}  -->
+{% endfor %} =
     
    
 
