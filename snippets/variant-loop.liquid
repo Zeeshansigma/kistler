@@ -36,13 +36,17 @@
   {% endfor %}
 {% endfor %}
 {% endcomment %}
-
+{% for filter in collection.filters %}
+  {% for active_value in filter.active_values %}
 {% for metafield in kistler_metafield %}
-    {% assign kistler_metafield = prod_variant.metafields.kistler %}
+  
+<!-- {{ metafield | json }}<br>  -->
+
+  {{ metafield[0] | handleize }} = {{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
   
 
-  {{ metafield[0] | handleize }} = {{ metafield | slice: 1, metafield.size | join: ', ' }}
-
+{% endfor %}
+    {% endfor %}
   {% endfor %}
     
    
