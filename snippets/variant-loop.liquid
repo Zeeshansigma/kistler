@@ -8,7 +8,7 @@
   {% assign metaSeries = prod_variant.metafields.kistler.series %}
   {% assign metaLength = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
-active fikter{{ activeFilter.size }}
+active filter: {{ activeFilter.size }}
   
 {% if metaLength == activeFilter and metaSeries == activeFilter %} 
 style = "display: block;"
