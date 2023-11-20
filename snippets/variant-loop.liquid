@@ -100,7 +100,7 @@ hide
     {% endfor %}
   {% endfor %}
 
-{% assign my_array = active_filter | split: "," %}
+{% assign my_array = active_filter.label | split: "," %}
 
 {% for item in my_array %}
   {{ item }}
