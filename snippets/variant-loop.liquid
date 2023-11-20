@@ -39,7 +39,7 @@
 {% endcomment %}
 
 
-
+{% comment %}
   {% assign kistler_metafield = prod_variant.metafields.kistler %}
 
   
@@ -59,8 +59,25 @@
      {% endfor %}
 {% endfor %}
   {% endfor %} 
+{% endcomment %}
 
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
 
+{% for metafield_entry in kistler_metafield %}
+  {% assign metaValues = metafield_entry[1] | join: ', ' %}
+  {{ metafield_entry[0] | handleize }}={{ metaValues }}<br><br>
+
+  {% assign collectionFilters = collection.filters %}
+  {% assign filter_active_values = filter.active_values %}
+
+  {% for filter in collectionFilters %}
+    {% for active_value in filter_active_values %}
+      {% assign filterLabels = filter.label | handleize | downcase %}
+      {% assign activeFilters = active_value.label %}
+      {{ filterLabels }} = {{ activeFilters }}<br>
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
 
   
 
