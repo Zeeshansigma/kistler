@@ -19,20 +19,21 @@ hide
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign show = false %}
 {% for filter in collection.filters %}
-  {% assign no_show = 0 %}
-  {% assign active_filter_values = "" %}
+  
+  {% assign matched_filters = 0 %}
+  {% assign active_filters_size = 0 %}
   {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
+   
   {% for active_filter in filter.active_values %}
-  {% if kistler_metafield[downcaseFilter] contains active_filter %}
+  
+    {% assign active_filters_size = active_filters_size | plus: 1 %}
     
-  {% endif %}  
+    {% if kistler_metafield[downcaseFilter] contains active_filter %}
+      {% assign matched_filters = matched_filters | plus: 1 %}
+    {% endif %}  
+  
   {% endfor %}
-  {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
-     active_filters: {{ active_filter_values }}
-    {%- assign class = 'show' -%}
-  {% else %}
-    {%- assign class = 'hide' -%}
-  {% endif %}
+  
 {% endfor %}
 {{ class }}
 "
