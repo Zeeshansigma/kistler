@@ -65,7 +65,7 @@
 
 {% for metafield in kistler_metafield %}
   {% assign metaValues = metafield[1] | join: ', ' %}
-  {{ metafield[0] | handleize }}={{ metaValues }}<br><br>
+  <!-- {{ metafield[0] | handleize }}={{ metaValues }}<br><br> -->
 
   {% assign collectionFilters = collection.filters %}
  
@@ -76,7 +76,15 @@
         {% assign filterLabels = filter.label | handleize | downcase %}
         {% assign activeFilters = active_value.label %}
           {{ filterLabels }} = {{ activeFilters }}<br>
-      {% endfor %}
+
+     {% if metaValues contains activeFilters %}
+       it has that filter       
+          {% elsif activeFilters == nil or activeFilters == '' %}
+         there are no active filters
+   {% else %}
+       this is elses
+   {% endif %}
+        {% endfor %}
    {% endfor %}
   
 {% endfor %}
