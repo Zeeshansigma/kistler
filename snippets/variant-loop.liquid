@@ -16,27 +16,24 @@ hide
  itemtype="http://schema.org/Product"
   itemscope="itemscope" 
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
+
+
 {% assign active_filter_values = "" %}
+
 {% for filter in collection.filters %}
-  {% assign downcase = filter.label | downcase %}
-  {% assign downcaseFilter = downcase | replace: ' ', '_' %}
+   {% assign kistler_metafield = prod_variant.metafields.kistler %}
+  {% assign downcaseFilter = filter.label | downcase | replace: " ", "_"%}
   {% for active_filter in filter.active_values %}
-    {% assign my_array = active_filter.label | split: "," %}
+        {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
-  {% endfor %}
-  {% assign active_filter_array =  active_filter_values | downcase | replace: " ", "" | split: "," %}
-  {% for item in  active_filter_array %}
-    {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase %}
-    {% assign itm = item | replace: ' ', '' %}
-    {% if kistler_metafield[downcaseFilter] contains   %}
-      
+   {% if kistler_metafield[downcaseFilter] contains active_filter_values  %}
       {%- assign class = 'show' -%}
     {% else %}
-      kistler_metafielddowncaseFilter:{{ kistler_metafield[downcaseFilter] }} -  item: {{ item }} ---
       {%- assign class = 'hide' -%}
     {% endif %}
   {% endfor %}
+    
+
 {% endfor %}
 {{ class }} 
 "
@@ -67,18 +64,19 @@ hide
   {% for active_filter in filter.active_values %}
         {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
-  {% endfor %}
-    {% if kistler_metafield[downcaseFilter] contains active_filter_values  %}
+   {% if kistler_metafield[downcaseFilter] contains active_filter_values  %}
       {%- assign class = 'show' -%}
     {% else %}
       {%- assign class = 'hide' -%}
     {% endif %}
+  {% endfor %}
+    
+
+{% endfor %}
+
   Variant title: {{ prod_variant.title }}<br>
 Active Filter Values Array: {{ active_filter_values }}<br>
 meta fields: {{ kistler_metafield[downcaseFilter] }}<br>
-{% endfor %}
-
-
 
 {% comment %}
 
