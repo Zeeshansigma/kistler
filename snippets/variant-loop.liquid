@@ -23,10 +23,10 @@ hide
 {% for filter in collection.filters %}
 {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
-
+{% assign metavalue = kistler_metafield[downcaseFilter] %}
   {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
     <script>
-   console.log("kistler_metafield[downcaseFilter]", kistler_metafield[downcaseFilter]);
+   console.log("metavalue", metavalue);
    </script>
     {%- assign class = 'show' -%}
   {% else %}
