@@ -1,7 +1,3 @@
-<article    
-  
-  
-  
   {% for filter in collection.filters %}
 {% for active_value in filter.active_values %}
   
@@ -10,6 +6,11 @@
 {% assign activeFilter = active_value.label %}
 {{ metaLength }} - {{ activeFilter }} <br>
 {{ metaSeries }} - {{ activeFilter }}
+  <article    
+  
+  
+  
+
   
 <!-- {% if metaLength == activeFilter or metaSeries == activeFilter %} 
 style = "display: block;"
@@ -18,8 +19,7 @@ style = "display: block;"
   {% else %}
     style = "display: none;"
   {% endif %}  -->
-  {% endfor %}
-           {% endfor %}
+
 
 
   
@@ -91,4 +91,5 @@ style = "display: block;"
   </div>
 </article>
 
-
+  {% endfor %}
+           {% endfor %}
