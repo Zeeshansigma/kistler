@@ -38,18 +38,22 @@
 {% endfor %}
 {% endcomment %}
 
-<!-- {% assign kistler_metafield = prod_variant.metafields.kistler %}
+   {% comment %}
+
+// for metafields
+
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
   
  {% for metafield in kistler_metafield %}
   
-<!-- {{ metafield | json }}<br>  
+ {{ metafield | json }}<br>  
 
   {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
   
 
 {% endfor %} 
-   -->
-   
+
+   {% endcomment %}
    {% for filter in collection.filters %}
   {% for active_value in filter.active_values %}
    {% assign filterLabels = filter.label | handleize | downcase %}
