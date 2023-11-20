@@ -84,7 +84,8 @@ hide
   {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
 
 {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
-  {{ kistler_metafield[downcaseFilter] }} - {{ active_filter.label }} - show {% else %}hide{% endif %}{% endif %}
+  {{ kistler_metafield[downcaseFilter] }} - {{ active_filter.label }} - show 
+  {% else %}hide{% endif %}{% endif %}
     {% endfor %}
   {% endfor %}
 
