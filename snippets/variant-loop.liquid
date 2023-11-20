@@ -1,4 +1,9 @@
+{% for filter in collection.filters %}
 
+{% for active_value in filter.active_values %}
+ {{ active_value.label }}<br>
+  {% endfor %}
+{% endfor %}
 
 {% if active_value.label == 'Argon' %}
 <article {{ active_value.label }}
