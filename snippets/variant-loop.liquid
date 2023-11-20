@@ -2,7 +2,7 @@
 {% for metafield in kistler_metafield %}
   {% assign metaValues = metafield | join: ', ' %}
 <script>
-  console.log('{{metaValues| json}}');
+  console.log('{{metafield| json}}');
 </script>
   {% endfor %}
  <article  
