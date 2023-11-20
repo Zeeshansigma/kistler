@@ -63,7 +63,7 @@ active_filters_size={{ active_filters_size }}
 {% for filter in collection.filters %}
   {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
 
-     active_filter:{{ filter.active_values }}<br>
+     active_filter:{{ filter.active_values | json }}<br>
   
    {% if filter.active_values.size > 0 %}
     {% assign active_filters_size = active_filters_size | plus: 1 %}
