@@ -94,7 +94,10 @@
   {% endfor %} 
 {% endcomment %}
 
-<!-- {% assign kistler_metafield = prod_variant.metafields.kistler %}
+
+
+   {% comment %}
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
 
 {% for metafield in kistler_metafield %}
   {% assign metaValues = metafield[1] | join: ', ' %}
@@ -120,8 +123,8 @@
         {% endfor %}
    {% endfor %}
   
-{% endfor %} -->
-
+{% endfor %} 
+{% endcomment %}
 
   
 
