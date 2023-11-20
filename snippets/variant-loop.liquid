@@ -17,8 +17,25 @@ hide
 
    
    itemtype="http://schema.org/Product"
-  itemscope="itemscope" {{ class }}
-  class="{{ class }} {% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
+  itemscope="itemscope" 
+  class="
+   {% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% for filter in collection.filters %}
+{% assign downcaseFilter = filter.label | downcase %}
+  {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
+
+  {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
+    {%- assign class = 'show' -%}
+  {% else %}
+    {%- assign class = 'hide' -%}
+  {% endif %}{% endif %}
+    {{ class }}
+    {% endfor %}
+  {% endfor %}
+   
+   
+   
+   {% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
 
 
 
@@ -78,18 +95,7 @@ hide
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
-{% for filter in collection.filters %}
-{% assign downcaseFilter = filter.label | downcase %}
-  {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
 
-  {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
-    {%- assign class = 'show' -%}
-  {% else %}
-    {%- assign class = 'hide' -%}
-  {% endif %}{% endif %}
-    {% endfor %}
-  {% endfor %}
 
 
 
