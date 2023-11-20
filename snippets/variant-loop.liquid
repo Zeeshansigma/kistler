@@ -1,9 +1,14 @@
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
-{% for metafield in kistler_metafield %}
-  {% assign metaValues = metafield | join: ', ' %}
-<script>
-  // console.log('{{kistler_metafield.baits| json}}');
+{% for filter in collection.filters %}
+
+  {% for active_filter in filter.active_values %}
+    <script>
+  console.log("active filter", '{{active_filter.label| json}}');
+  console.log("meta obj", '{{kistler_metafield[active_filter.label]| json}}');
+  
 </script>
+    {% endfor %}
+
   {% endfor %}
  <article  
 
