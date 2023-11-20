@@ -7,6 +7,7 @@
       {% if kistler_metafield[downcaseFilter] contains active_filter.label%}
         <script>
         console.log(`{{p_v.title}}`)
+        console.log(`{{active_filter.label}}`)
           </script>
       {% endif %}}
     {% endfor %}
