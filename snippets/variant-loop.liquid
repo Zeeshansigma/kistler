@@ -17,7 +17,7 @@ hide
   itemscope="itemscope" 
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
 
-{% comment %}
+
 {% assign active_filter_values = "" %}
 
 {% for filter in collection.filters %}
@@ -39,6 +39,32 @@ hide
 {% endfor %}
 
 {{ class }} 
+
+
+
+   {% comment %}
+// hassan bhai - code
+        {% assign kistler_metafield = prod_variant.metafields.kistler %}
+        {% assign active_filter_values = "" %}
+        {% for filter in collection.filters %}
+          {% assign downcase = filter.label | downcase %}
+          {% assign downcaseFilter = downcase | replace: ' ', '_' %}
+          {% for active_filter in filter.active_values %}
+            {% assign afv =  active_filter.label | downcase | replace: ' ', '' | remove: "\"%}
+            {% assign active_filter_values = active_filter_values | append: afv | append: "," %}
+          {% endfor %}
+          {% assign active_filter_array =  active_filter_values | split: ','%}
+          {% for item in  active_filter_array %}
+            {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase | replace: ' ', '' %}
+            {% if dc_meta_f contains  item %}
+              {%- assign class = 'show' -%}
+            {% else %}
+             downcaseFilter: {{ downcaseFilter }} -- kistler_metafielddowncaseFilter:{{ dc_meta_f }} -  item: {{ item }} --- active_filter_values:{{ active_filter_array }}
+              {%- assign class = 'hide' -%}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+        {{ class }} 
 {% endcomment %}
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
