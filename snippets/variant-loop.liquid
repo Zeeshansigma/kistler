@@ -4,7 +4,8 @@
   {% for active_filter in filter.active_values %}
     <script>
       console.log("filters loop");
-  console.log("active filter", '{{active_filter.label| json}}');
+  console.log("active_filter.param_name", '{{active_filter.param_name| json}}');
+  console.log("active_filter.display", '{{active_filter.display| json}}');
   console.log("meta obj", '{{kistler_metafield["series"]| json}}');
   
 </script>
