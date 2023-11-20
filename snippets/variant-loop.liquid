@@ -27,6 +27,9 @@ hide
   {% endfor %}
   {% assign active_filter_array =  active_filter_values | split: "," %}
   {% for item in  active_filter_array %}
+    <script>
+      console.log({{item}});
+    </script>
     {% if kistler_metafield[downcaseFilter] contains item  %}
       {%- assign class = 'show' -%}
     {% else %}
