@@ -4,13 +4,13 @@
   
   {% for filter in collection.filters %}
 {% for active_value in filter.active_values %}
-  
+  active filter: {{ filter.active_values.size }}
   {% assign metaSeries = prod_variant.metafields.kistler.series %}
   {% assign metaLength = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
-active fikter{{ activeFilter.size }}
+
   
-{% if metaLength == activeFilter and metaSeries == activeFilter %} 
+{% if metaLength == activeFilter or metaSeries == activeFilter %} 
 style = "display: block;"
 {% else %}
   style = "display: none;"
