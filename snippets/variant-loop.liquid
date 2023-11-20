@@ -88,10 +88,8 @@ hide
 {% for filter in collection.filters %}
 {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
-{% assign metavalue = kistler_metafield[downcaseFilter] %}
-     <script>
-   console.log('{{ metavalue }}');
-   </script>
+    {{ kistler_metafield[downcaseFilter] }} = {{ active_filter.label }}<br>
+
    {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
 
     {%- assign class = 'show' -%}
