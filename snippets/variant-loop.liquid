@@ -18,10 +18,9 @@ hide
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign show = false %}
+{% assign matched_filters = 0 %}
+{% assign active_filters_size = 0 %}
 {% for filter in collection.filters %}
-  
-  {% assign matched_filters = 0 %}
-  {% assign active_filters_size = 0 %}
   {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
 
    {% if filter.active_values.size > 0 %}
@@ -29,16 +28,17 @@ hide
    {% endif %}
 
   {% assign filter_matched = false %}
-  {% for active_filter in filter. %}
-    
+  
+  {% for active_filter in filter.active_values %}
     {% if kistler_metafield[downcaseFilter] contains active_filter and filter_matched == false%}
       {% assign matched_filters = matched_filters | plus: 1 %}
       {% assign filter_matched = true %}
     {% endif %}
-  
   {% endfor %}
   
 {% endfor %}
+matched_filters={{ matched_filters }}
+active_filters_size={{ active_filters_size }}
 {{ class }}
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
