@@ -8,14 +8,16 @@
   {% assign metaSeries = prod_variant.metafieldskistler.series %}
 {% assign metaLength = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
-
-{% if metaLength == activeFilter or metaSeries == activeFilter %} 
+{{ metaLength }} - {{ activeFilter }} <br>
+{{ metaSeries }} - {{ activeFilter }}
+  
+<!-- {% if metaLength == activeFilter or metaSeries == activeFilter %} 
 style = "display: block;"
 {% elsif filter.active_values == 'blank' %}
   style = "display: block;"
   {% else %}
     style = "display: none;"
-  {% endif %} 
+  {% endif %}  -->
   {% endfor %}
            {% endfor %}
 
