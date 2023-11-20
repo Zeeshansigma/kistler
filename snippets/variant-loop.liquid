@@ -19,23 +19,7 @@ hide
    itemtype="http://schema.org/Product"
   itemscope="itemscope" 
   class="
-   {% assign kistler_metafield = prod_variant.metafields.kistler %}
-{% for filter in collection.filters %}
-{% assign downcaseFilter = filter.label | downcase %}
-  {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
-{% assign metavalue = kistler_metafield[downcaseFilter] %}
-     <script>
-   console.log('{{ metavalue }}');
-   </script>
-   {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
-
-    {%- assign class = 'show' -%}
-  {% else %}
-    {%- assign class = 'hide' -%}
-  {% endif %}{% endif %}
-    {{ class }}
-    {% endfor %}
-  {% endfor %}
+   
    
    
    
@@ -100,7 +84,23 @@ hide
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
 
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% for filter in collection.filters %}
+{% assign downcaseFilter = filter.label | downcase %}
+  {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
+{% assign metavalue = kistler_metafield[downcaseFilter] %}
+     <script>
+   console.log('{{ metavalue }}');
+   </script>
+   {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
 
+    {%- assign class = 'show' -%}
+  {% else %}
+    {%- assign class = 'hide' -%}
+  {% endif %}{% endif %}
+    {{ class }}
+    {% endfor %}
+  {% endfor %}
 
 
 
