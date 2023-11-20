@@ -47,9 +47,13 @@
   {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
   
 
-{% endfor %} =
-    
+{% endfor %} 
    
+   {% for filter in collection.filters %}
+  {% for active_value in filter.active_values %}
+    {{ filter.label }} = {{ active_value.label }}
+     {% endfor %}
+{% endfor %}
 
 
   <div class="product__content">
