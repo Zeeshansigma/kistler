@@ -24,7 +24,7 @@ hide
     {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
   {% endfor %}
-  {% assign active_filter_array =  active_filter_values | split "," %}
+  {% assign active_filter_array =  active_filter_values | split: "," %}
   {% for item in  active_filter_array %}
     {% if kistler_metafield[downcaseFilter] contains item  %}
       {%- assign class = 'show' -%}
