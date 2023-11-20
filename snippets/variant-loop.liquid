@@ -28,6 +28,7 @@ hide
   {% assign active_filter_array =  active_filter_values | downcase | replace: " ", "" | split: "," %}
   {% for item in  active_filter_array %}
     {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase %}
+    {% assign itm = item | downcase | replace: ' ', '' %}
     {% if kistler_metafield[downcaseFilter] contains   %}
       
       {%- assign class = 'show' -%}
