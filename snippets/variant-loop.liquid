@@ -63,9 +63,9 @@
 
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 
-{% for metafield_entry in kistler_metafield %}
-  {% assign metaValues = metafield_entry[1] | join: ', ' %}
-  {{ metafield_entry[0] | handleize }}={{ metaValues }}<br><br>
+{% for metafield in kistler_metafield %}
+  {% assign metaValues = metafield[1] | join: ', ' %}
+  {{ metafield[0] | handleize }}={{ metaValues }}<br><br>
 
   {% assign collectionFilters = collection.filters %}
   {% assign filter_active_values = filter.active_values %}
@@ -78,6 +78,7 @@
     {% endfor %}
   {% endfor %}
 {% endfor %}
+
 
   
 
