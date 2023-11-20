@@ -12,7 +12,8 @@
   
 {% if metaLength == activeFilter and metaSeries == activeFilter %} 
 style = "display: block;"
-
+{% else %}
+  style = "display: none;"
   {% endif %} 
   {% endfor %}
            {% endfor %}
