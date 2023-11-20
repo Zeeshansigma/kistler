@@ -1,38 +1,6 @@
 
  <article  
 
-
-
-   {% assign kistler_metafield = prod_variant.metafields.kistler %}
-
-{% for metafield in kistler_metafield %}
-  {% assign metaValues = metafield[1] | join: ', ' %}
-  {% assign collectionFilters = collection.filters %}
- 
-
-  {% for filter in collectionFilters %}
-    {% assign filter_active_values = filter.active_values %} 
-      {% for active_value in filter_active_values %}
-        {% assign filterLabels = filter.label | handleize | downcase %}
-        {% assign activeFilters = active_value.label %}
-      
-
-     {% if metaValues contains activeFilters %}
-      style="display: block;"       
-        {% elsif activeFilters == nil or activeFilters == '' %}
-       style="display: block;"        
-   {% else %}
-
-   {% endif %}
-        
-        {% endfor %}
-   {% endfor %}
-  
-{% endfor %}
-
-
-
-
    
    itemtype="http://schema.org/Product"
   itemscope="itemscope"
@@ -96,7 +64,7 @@
 
 
 
-   {% comment %}
+ 
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 
 {% for metafield in kistler_metafield %}
@@ -124,7 +92,7 @@
    {% endfor %}
   
 {% endfor %} 
-{% endcomment %}
+
 
   
 
