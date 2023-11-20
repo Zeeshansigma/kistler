@@ -23,10 +23,12 @@ hide
   {% assign matched_filters = 0 %}
   {% assign active_filters_size = 0 %}
   {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
-   
-  {% for active_filter in filter.active_values %}
-  
+
+   {% if filter.active_values %}
     {% assign active_filters_size = active_filters_size | plus: 1 %}
+   {% endif %}
+  {% for active_filter in filter. %}
+  
     
     {% if kistler_metafield[downcaseFilter] contains active_filter %}
       {% assign matched_filters = matched_filters | plus: 1 %}
