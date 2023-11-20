@@ -1,4 +1,10 @@
-
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% for metafield in kistler_metafield %}
+  {% assign metaValues = metafield[1] | join: ', ' %}
+<script>
+  console.log({{metaValues}});
+</script>
+  {% endfor %}
  <article  
 
    
@@ -8,7 +14,6 @@
   
 
  
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
 
 {% for metafield in kistler_metafield %}
   {% assign metaValues = metafield[1] | join: ', ' %}
@@ -35,20 +40,7 @@
    {% endfor %}
   
 {% endfor %} 
-
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   "
+"
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
   data-lure-line-wt="{{ prod_variant.metafields.kistler.lure_weight_line_weight | escape }}"
