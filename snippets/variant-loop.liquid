@@ -85,7 +85,7 @@ hide
 
   {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
     {{ kistler_metafield[downcaseFilter] }} - {{ active_filter.label }} - show
-    {%- assign class = 'active' -%}
+    {%- assign class = 'show' -%}
   {% else %}
     {%- assign class = 'hide' -%}
   {% endif %}{% endif %}
