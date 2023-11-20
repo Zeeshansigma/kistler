@@ -30,11 +30,11 @@ hide
     {% if kistler_metafield[downcaseFilter] contains item  %}
       {%- assign class = 'show' -%}
     {% else %}
-      {%- assign class = 'hide' {{ kistler_metafield[downcaseFilter] }} {{ item }} -%}
+      {%- assign class = 'hide' -%}
     {% endif %}
   {% endfor %}
 {% endfor %}
-{{ class }}
+{{ class }} {{ kistler_metafield[downcaseFilter] }} {{ item }}
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
