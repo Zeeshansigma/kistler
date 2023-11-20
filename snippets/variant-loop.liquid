@@ -19,21 +19,19 @@ hide
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
 {% for filter in collection.filters %}
-{% assign downcaseFilter = filter.label | downcase %}
-{% for active_filter in filter.active_values %}
-{% assign my_array = active_filter.label | split: "," %}
-{% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
-
-
+  {% assign downcaseFilter = filter.label | downcase %}
+  {% for active_filter in filter.active_values %}
+    {% assign my_array = active_filter.label | split: "," %}
+    {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
   {% endfor %}
   {% assign active_filter_array =  active_filter_values | split "," %}
-   {% for item in  active_filter_array %}
-  {% if kistler_metafield[downcaseFilter] contains item  %}
-{%- assign class = 'show' -%}
-{% else %}
-{%- assign class = 'hide' -%}
-{% endif %}
-{% endfor %}
+  {% for item in  active_filter_array %}
+    {% if kistler_metafield[downcaseFilter] contains item  %}
+      {%- assign class = 'show' -%}
+    {% else %}
+      {%- assign class = 'hide' -%}
+    {% endif %}
+  {% endfor %}
 {% endfor %}
 {{ class }}
 "
