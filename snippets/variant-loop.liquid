@@ -28,7 +28,7 @@ test
   
 
  
-
+{% comment %}
 {% for metafield in kistler_metafield %}
   {% assign metaValues = metafield[1] | join: ', ' %}
 
@@ -54,6 +54,7 @@ test
    {% endfor %}
   
 {% endfor %} 
+{% endcomment %}
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
