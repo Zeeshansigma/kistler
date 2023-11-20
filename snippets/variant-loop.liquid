@@ -3,12 +3,9 @@
 {% for filter in collection.filters %}
       {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}
-    <script>
       {% if kistler_metafield[downcaseFilter] contains active_filter.label%}
-  console.log("meta obj", '{{prod_variant.title}}');
+        {{prod_variant.title}}
       {% endif %}}
-  
-</script>
     {% endfor %}
 
   {% endfor %}
