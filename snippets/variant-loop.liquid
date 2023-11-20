@@ -31,10 +31,13 @@ hide
     {% else %}
       {%- assign class = 'hide' -%}
     {% endif %}
+    
+
   {% endfor %}
     
 
 {% endfor %}
+
 {{ class }} 
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
