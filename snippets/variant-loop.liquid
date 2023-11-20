@@ -86,6 +86,14 @@ hide
 {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
   {{ kistler_metafield[downcaseFilter] }} - {{ active_filter.label }} - show 
   {% else %}hide{% endif %}{% endif %}
+
+    {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
+    {{ kistler_metafield[downcaseFilter] }} - {{ active_filter.label }} - show
+    {%- assign class = 'active' -%}
+  {% else %}
+    {%- assign class = 'hide' -%}
+  {% endif %}
+    
     {% endfor %}
   {% endfor %}
 
