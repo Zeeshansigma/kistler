@@ -61,13 +61,9 @@ hide
     Active filters: {{ active_filter.label }}<br>
         {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
-   
-    
-
-
 
   {% endfor %}
-  {{ active_filter_values }} = filter-label - {{ downcaseFilter | replace: " ", "_" }} - {{ kistler_metafield | json }} <br>
+  {{ active_filter_values }} = filter-label - {{ downcaseFilter | replace: " ", "_" }} <br>
 
    
     {% if kistler_metafield[downcaseFilter] contains active_filter_values  %}
@@ -75,11 +71,12 @@ hide
     {% else %}
       {%- assign class = 'hide' -%}
     {% endif %}{{ class }}<br>
+  Variant title: {{ prod_variant.title }}
+Active Filter Values Array: {{ active_filter_values }}<br>
+Variant title: {{ kistler_metafield[downcaseFilter] }}
 {% endfor %}
 
-Variant title: {{ prod_variant.title }}
-Active Filter Values Array: {{ active_filter_values }}<br>
-Variant title: {{ prod_variant.title }}
+
 
 
 
