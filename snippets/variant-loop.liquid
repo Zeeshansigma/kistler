@@ -71,7 +71,7 @@ active_filters_size={{ active_filters_size }}
    {% for active_filter in filter.active_values %}
    kistler_metafield[downcaseFilter]: -{{ kistler_metafield[downcaseFilter] }}-<br>
      active_filter:-{{ active_filter.value }}-<br>
-      {% if kistler_metafield[downcaseFilter] contains active_filter.value%}
+      {% if kistler_metafield[downcaseFilter] contains active_filter.value and filter_matched == false %}
         {% assign matched_filters = matched_filters | plus: 1 %}
         {% assign filter_matched = true %}
       {% endif %}
@@ -81,7 +81,7 @@ active_filters_size={{ active_filters_size }}
      
   
 {% endfor %}
-matched_filters={{ matched_filters }}
+matched_filters={{ matched_filters }}<br>
 active_filters_size={{ active_filters_size }}
 {% comment %}
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
