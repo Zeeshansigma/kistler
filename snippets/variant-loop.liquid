@@ -7,22 +7,6 @@
 {{ metaLength }} - {{ activeFilter }} <br>
 {{ metaSeries }} - {{ activeFilter }}
   <article    
-  
-  
-  
-
-  
-<!-- {% if metaLength == activeFilter or metaSeries == activeFilter %} 
-style = "display: block;"
-{% elsif filter.active_values == 'blank' %}
-  style = "display: block;"
-  {% else %}
-    style = "display: none;"
-  {% endif %}  -->
-
-
-
-  
   itemtype="http://schema.org/Product"
   itemscope="itemscope"
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}"
@@ -50,7 +34,21 @@ style = "display: block;"
 
 {% endfor %} -->
     
-   
+
+
+
+
+  
+<!-- {% if metaLength == activeFilter or metaSeries == activeFilter %} 
+style = "display: block;"
+{% elsif filter.active_values == 'blank' %}
+  style = "display: block;"
+  {% else %}
+    style = "display: none;"
+  {% endif %}  -->
+
+
+    
 
 
   <div class="product__content">
