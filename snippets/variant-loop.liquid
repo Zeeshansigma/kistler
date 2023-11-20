@@ -66,9 +66,9 @@ hide
     {% else %}
       {%- assign class = 'hide' -%}
     {% endif %}
-  Variant title: {{ prod_variant.title }}
+  Variant title: {{ prod_variant.title }}<br>
 Active Filter Values Array: {{ active_filter_values }}<br>
-meta fields: {{ kistler_metafield[downcaseFilter] }}
+meta fields: {{ kistler_metafield[downcaseFilter] }}<br>
 {% endfor %}
 
 
