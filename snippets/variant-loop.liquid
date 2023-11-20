@@ -22,10 +22,11 @@ hide
   {% assign downcase = filter.label | downcase %}
   {% assign downcaseFilter = downcase | replace: ' ', '_' %}
   {% for active_filter in filter.active_values %}
-    {% assign my_array = active_filter.label %}
-    {% assign active_filter_values = active_filter_values | append: my_array | downcase | replace: ' ', '' | join: "," | remove: "\"%}
+    {% assign afv =  active_filter.label | downcase | replace: ' ', '' | remove: "\"%}
+    {% assign active_filter_values = active_filter_values | append: afv | append: "," %}
   {% endfor %}
-  {% for item in  active_filter_values %}
+  {% assign active_filter_array =  active_filter_values | split: ','%}
+  {% for item in  active_filter_array %}
     {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase | replace: ' ', '' %}
     {% if dc_meta_f contains  item %}
       {%- assign class = 'show' -%}
