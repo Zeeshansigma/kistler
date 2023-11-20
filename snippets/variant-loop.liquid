@@ -74,14 +74,13 @@ hide
       {%- assign class = 'hide' -%}
     {% endif %}
     
-
+meta fields: {{ kistler_metafield[downcaseFilter] }}<br>
   {% endfor %}
     
 
 {% endfor %}
-Active Filter Values Array: {{ active_filter_values }}<br>
-meta fields: {{ kistler_metafield[downcaseFilter] }}<br>
 
+Active Filter Values Array: {{ active_filter_values }}<br>
 {% comment %}
 
 
