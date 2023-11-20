@@ -26,7 +26,7 @@ hide
 
 
   {% endfor %}
-  {% if kistler_metafield[downcaseFilter] contains active_filter_values %}
+  {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
 {%- assign class = 'show' -%}
 {% else %}
 {%- assign class = 'hide' -%}
