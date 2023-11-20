@@ -19,7 +19,7 @@ hide
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
 {% for filter in collection.filters %}
-  {% assign downcase = filter.label | downcase%}
+  {% assign downcase = filter.label | downcase %}
   {% assign downcaseFilter = downcase | replace: ' ', '_' %}
   {% for active_filter in filter.active_values %}
     {% assign my_array = active_filter.label | split: "," %}
@@ -31,7 +31,7 @@ hide
       
       {%- assign class = 'show' -%}
     {% else %}
-      kistler_metafielddowncaseFilter:{{ kistler_metafield[downcaseFilter] }} -  item: {{ item }}
+      kistler_metafielddowncaseFilter:{{ kistler_metafield[downcaseFilter] }} -  item: {{ item }} ---
       {%- assign class = 'hide' -%}
     {% endif %}
   {% endfor %}
