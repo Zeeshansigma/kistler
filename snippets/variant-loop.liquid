@@ -25,6 +25,9 @@ hide
   {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
 
   {% if kistler_metafield[downcaseFilter] contains active_filter.label %}
+    <script>
+   console.log("kistler_metafield[downcaseFilter]", kistler_metafield[downcaseFilter]);
+   </script>
     {%- assign class = 'show' -%}
   {% else %}
     {%- assign class = 'hide' -%}
