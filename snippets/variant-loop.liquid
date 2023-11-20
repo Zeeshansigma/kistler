@@ -25,10 +25,10 @@
 {% assign activeFilter = active_value.label %}
   
 {% if metaLength == activeFilter or metaSeries == activeFilter %} 
-style = "display: block;"
+<span style = "background:red; color: #fff; padding: 10px 20px;">this has the specified varaint</span>
 
 {% else %}
-  style = "display: none;"
+ <span style = "background:grey; color: #fff; padding: 10px 20px;">hide it </span> 
   {% endif %} 
   
   {% endfor %}
