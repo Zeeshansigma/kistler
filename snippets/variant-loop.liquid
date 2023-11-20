@@ -16,7 +16,7 @@ hide
  itemtype="http://schema.org/Product"
   itemscope="itemscope" 
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
-
+{% comment %}
 {% assign active_filter_values = "" %}
 
 {% for filter in collection.filters %}
@@ -33,6 +33,7 @@ hide
 
   {% endfor %}
 {% endfor %}
+{% endcomment %}
 {% comment %}
 {% assign active_filter_values = "" %}
 
@@ -114,6 +115,9 @@ hide
 
   {% endfor %}
 {% endfor %}
+Active: {{ active_filter_values }}<br>
+   Metavalue: {{ kistler_metafield[downcaseFilter] }}<br>
+   
 {% comment %}
 
 
