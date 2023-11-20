@@ -10,9 +10,9 @@
 {% assign activeFilter = active_value.label %}
 
 {% if metaLength == activeFilter or metaSeries == activeFilter %} 
-style = "display: none;"
+style = "display: block;"
 {% else %}
-  style = "display: block;"
+  style = "display: none;"
   {% endif %} 
   {% endfor %}
            {% endfor %}
