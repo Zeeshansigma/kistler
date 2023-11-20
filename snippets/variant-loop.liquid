@@ -31,7 +31,7 @@ hide
     {% if dc_meta_f contains  item %}
       {%- assign class = 'show' -%}
     {% else %}
-      kistler_metafielddowncaseFilter:{{ dc_meta_f }} -  item: {{ item }} ---
+      kistler_metafielddowncaseFilter:{{ dc_meta_f }} -  item: {{ item }} --- active_filter_values:{{ active_filter_values }}
       {%- assign class = 'hide' -%}
     {% endif %}
   {% endfor %}
