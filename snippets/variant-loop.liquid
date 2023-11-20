@@ -38,7 +38,6 @@
 {% endfor %}
 {% endcomment %}
 
- {% comment %}
 
     // for metafields
 
@@ -49,7 +48,7 @@
     {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
   {% endfor %} 
 
- {% endcomment %}
+
    
    {% for filter in collection.filters %}
   {% for active_value in filter.active_values %}
