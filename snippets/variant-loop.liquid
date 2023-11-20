@@ -58,7 +58,6 @@ hide
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
   {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}
-    Active filters: {{ active_filter.label }}<br>
         {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
   {% endfor %}
