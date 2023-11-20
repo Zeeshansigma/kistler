@@ -28,10 +28,10 @@ hide
 {% else %}
 {%- assign class = 'hide' -%}
 {% endif %}
-{{ class }}
+
 
   {% endfor %}
-{% endfor %}"
+{% endfor %} {{ class }}"
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
   data-lure-line-wt="{{ prod_variant.metafields.kistler.lure_weight_line_weight | escape }}"
