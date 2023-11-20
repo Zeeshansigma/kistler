@@ -52,10 +52,10 @@ hide
 
 
 
-   {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
 
 {% for filter in collection.filters %}
+   {% assign kistler_metafield = prod_variant.metafields.kistler %}
   {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}
     Active filters: {{ active_filter.label }}<br>
