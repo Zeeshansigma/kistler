@@ -24,15 +24,17 @@ hide
   {% assign active_filters_size = 0 %}
   {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
 
-   {% if filter.active_values %}
+   {% if filter.active_values.size > 0 %}
     {% assign active_filters_size = active_filters_size | plus: 1 %}
    {% endif %}
+
+  {% assign filter_matched = false %}
   {% for active_filter in filter. %}
-  
     
-    {% if kistler_metafield[downcaseFilter] contains active_filter %}
+    {% if kistler_metafield[downcaseFilter] contains active_filter and filter_matched == false%}
       {% assign matched_filters = matched_filters | plus: 1 %}
-    {% endif %}  
+      {% assign filter_matched = true %}
+    {% endif %}
   
   {% endfor %}
   
