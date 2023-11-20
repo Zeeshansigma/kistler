@@ -42,12 +42,12 @@
   
 
   {{ metafield[0] | handleize }} = {{ metafield | slice: 1, metafield.size | join: ', ' }}
- {% for filter in collection.filters %}
+ <!-- {% for filter in collection.filters %}
   {% for active_value in filter.active_values %}
     {{ filter.label }} = {{ active_value }}
 <br><br>
 {% endfor %}
-    {% endfor %}
+    {% endfor %} -->
   {% endfor %}
     
    
