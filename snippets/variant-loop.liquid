@@ -6,7 +6,6 @@
 
 
 
-
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
 
 {% for metafield in kistler_metafield %}
@@ -24,23 +23,16 @@
           <!-- {{ filterLabels }} = {{ activeFilters }}<br> -->
 
      {% if metaValues contains activeFilters %}
-      <span> it has that filter </span><br>      
+     style="display: block;"       
           {% elsif activeFilters == nil or activeFilters == '' %}
-         there are no active filters<br>
+       style="display: block;"        
    {% else %}
-       this is else <br>
+      style="display: none;"    
    {% endif %}
         {% endfor %}
    {% endfor %}
   
 {% endfor %}
-
-
-
-
-
-
-   
 
 
 
