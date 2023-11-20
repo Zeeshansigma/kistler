@@ -22,16 +22,18 @@ hide
   {% assign downcase = filter.label | downcase %}
   {% assign downcaseFilter = downcase | replace: ' ', '_' %}
   {% for active_filter in filter.active_values %}
-    {% assign afv =  active_filter.label | downcase | replace: ' ', '' | remove: "\"%}
-    {% assign active_filter_values = active_filter_values | append: afv | append: "," %}
+    {% assign my_array = active_filter.label | split: "," %}
+    {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
   {% endfor %}
-  {% assign active_filter_array =  active_filter_values | split: ','%}
+  {% assign active_filter_array =  active_filter_values | downcase | replace: " ", "" | split: "," %}
   {% for item in  active_filter_array %}
-    {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase | replace: ' ', '' %}
-    {% if dc_meta_f contains  item %}
+    {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase %}
+    {% assign itm = item | replace: ' ', '' %}
+    {% if kistler_metafield[downcaseFilter] contains   %}
+      
       {%- assign class = 'show' -%}
     {% else %}
-     downcaseFilter: {{ downcaseFilter }} -- kistler_metafielddowncaseFilter:{{ dc_meta_f }} -  item: {{ item }} --- active_filter_values:{{ active_filter_array }}
+      kistler_metafielddowncaseFilter:{{ kistler_metafield[downcaseFilter] }} -  item: {{ item }} ---
       {%- assign class = 'hide' -%}
     {% endif %}
   {% endfor %}
@@ -57,12 +59,11 @@ hide
 
 
 
-{% comment %}
 {% assign active_filter_values = "" %}
 
 {% for filter in collection.filters %}
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
-  {% assign downcaseFilter = filter.label | downcase %}
+  {% assign downcaseFilter = filter.label | downcase | replace: " ", "_"%}
   {% for active_filter in filter.active_values %}
         {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
@@ -79,6 +80,7 @@ meta fields: {{ kistler_metafield[downcaseFilter] }}<br>
 
 
 
+{% comment %}
 
 
 
