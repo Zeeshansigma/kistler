@@ -44,7 +44,7 @@
   
 <!-- {{ metafield | json }}<br>  -->
 
-  {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
+  {{ metafield[0] | handleize }} = {{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
   
 
 {% endfor %} =
