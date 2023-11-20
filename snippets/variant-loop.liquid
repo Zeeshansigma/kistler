@@ -25,19 +25,19 @@ hide
 
    {% if filter.active_values.size > 0 %}
     {% assign active_filters_size = active_filters_size | plus: 1 %}
-   {% endif %}
-
-  {% assign filter_matched = false %}
+    {% assign filter_matched = false %}
   
-  {% for active_filter in filter.active_values %}
-    kistler_metafield_downcaseFilter-{{ kistler_metafield[downcaseFilter] }}
-    active_filter-{{ active_filter | json }}
-    filter_matched-{{ filter.active_values | json }}
-    {% if kistler_metafield[downcaseFilter] contains active_filter and filter_matched == false %}
-      {% assign matched_filters = matched_filters | plus: 1 %}
-      {% assign filter_matched = true %}
-    {% endif %}
-  {% endfor %}
+    {% for active_filter in filter.active_values %}
+      kistler_metafield_downcaseFilter-{{ kistler_metafield[downcaseFilter] }}
+      active_filter-{{ active_filter | json }}
+      filter_matched-{{ filter.active_values | json }}
+      {% if kistler_metafield[downcaseFilter] contains active_filter and filter_matched == false %}
+        {% assign matched_filters = matched_filters | plus: 1 %}
+        {% assign filter_matched = true %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+     
   
 {% endfor %}
 matched_filters={{ matched_filters }}
