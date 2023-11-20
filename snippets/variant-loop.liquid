@@ -73,6 +73,6 @@
 {% for filter in collection.filters %}
 
 {% for active_value in filter.active_values %}
- {{ prod_variant.kistler.length }} - {{ active_value.label }}<br>
+ {{ prod_variant.kistler.length.values }} - {{ active_value.label }}<br>
     {% endfor %}
 {% endfor %}
