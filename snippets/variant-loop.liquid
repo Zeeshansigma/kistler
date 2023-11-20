@@ -87,15 +87,15 @@ hide
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% for filter in collection.filters %}
 {% assign downcaseFilter = filter.label | downcase %}
-  {% for active_filter in filter.active_values %}{% if active_filter.count > 0 %}
+  {% for active_filter in filter.active_values %}
     {{ active_filter.label }} = {{ kistler_metafield[downcaseFilter] }}<br>
 
-   {% if active_filter.label contains kistler_metafield[downcaseFilter]   %}
+   {% if active_filter.label contains kistler_metafield[downcaseFilter]  %}
 
     {%- assign class = 'show' -%}
   {% else %}
     {%- assign class = 'hide' -%}
-  {% endif %}{% endif %}
+  {% endif %}
     {{ class }}
     {% endfor %}
   {% endfor %}
