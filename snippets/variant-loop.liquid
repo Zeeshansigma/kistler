@@ -1,20 +1,4 @@
-      {% for filter in collection.filters %}
-{% for active_value in filter.active_values %}
 
-
-  {% assign metaSeries = prod_variant.metafields.kistler.series %}
-  {% assign metaLength = prod_variant.metafields.kistler.length %}
-{% assign activeFilter = active_value.label %}
-  
-{% if metaLength == activeFilter or metaSeries == activeFilter %} 
-style = "display: block;"
-
-{% else %}
-  style = "display: none;"
-  {% endif %} 
-  
-  {% endfor %}
-           {% endfor %}
  <article  
        
    itemtype="http://schema.org/Product"
@@ -32,7 +16,23 @@ style = "display: block;"
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
+      {% for filter in collection.filters %}
+{% for active_value in filter.active_values %}
 
+
+  {% assign metaSeries = prod_variant.metafields.kistler.series %}
+  {% assign metaLength = prod_variant.metafields.kistler.length %}
+{% assign activeFilter = active_value.label %}
+  
+{% if metaLength == activeFilter or metaSeries == activeFilter %} 
+style = "display: block;"
+
+{% else %}
+  style = "display: none;"
+  {% endif %} 
+  
+  {% endfor %}
+           {% endfor %}
   <!-- {% assign kistler_metafield = prod_variant.metafields.kistler %}
   
  {% for metafield in kistler_metafield %}
