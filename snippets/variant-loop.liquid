@@ -10,7 +10,7 @@
 {% assign activeFilter = active_value.label %}
 active filter: {{ activeFilter.size }}
   
-{% if metaLength == activeFilter and metaSeries == activeFilter %} 
+{% if metaLength == activeFilter or metaSeries == activeFilter %} 
 style = "display: block;"
 {% else %}
   style = "display: none;"
