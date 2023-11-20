@@ -44,14 +44,14 @@
   
 <!-- {{ metafield | json }}<br>  -->
 
-  {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
+  {{ metafield[0] }}={{ metafield | slice: 1, metafield.size | join: ', ' }}<br><br>
   
 
 {% endfor %} 
    
    {% for filter in collection.filters %}
   {% for active_value in filter.active_values %}
-    {{ filter.label | downcase}} = {{ active_value.label }}
+    {{ filter.label | downcase }} = {{ active_value.label }}
      {% endfor %}
 {% endfor %}
 
