@@ -34,7 +34,11 @@
   
 
 {% endfor %} -->
-
+{% if metaValue ==  activeFilter %} 
+this has the varaint 
+  {% else %}
+  hide it 
+  {% endif %} 
   
 
   <div class="product__content">
@@ -74,6 +78,5 @@
     </header>
   </div>
 </article>
-{% if metaValue ==  activeFilter %} 
-{% endif %} 
+
 
