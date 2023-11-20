@@ -65,7 +65,7 @@ hide
     {{ active_filter_values }} = filter-label - {{ downcaseFilter | replace: " ", "_" }} - {{ kistler_metafield | json }} <br>
 
    
-    {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
+    {% if kistler_metafield[downcaseFilter] contains active_filter_values  %}
       {%- assign class = 'show' -%}
     {% else %}
       {%- assign class = 'hide' -%}
