@@ -34,12 +34,16 @@
   
 
 {% endfor %} -->
+    
+         {% for filter in collection.filters %}
+{% for active_value in filter.active_values %}
 {% if metaValue ==  activeFilter %} 
 this has the varaint 
   {% else %}
   hide it 
   {% endif %} 
-  
+  {% endfor %}
+           {% endfor %}
 
   <div class="product__content">
     <div class="product__badges">
