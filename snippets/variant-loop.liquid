@@ -78,11 +78,11 @@
           <!-- {{ filterLabels }} = {{ activeFilters }}<br> -->
 
      {% if metaValues contains activeFilters %}
-       it has that filter       
+      <span> it has that filter </span><br>      
           {% elsif activeFilters == nil or activeFilters == '' %}
-         there are no active filters
+         there are no active filters<br>
    {% else %}
-       this is elses
+       this is else <br>
    {% endif %}
         {% endfor %}
    {% endfor %}
