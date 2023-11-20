@@ -32,17 +32,17 @@ style = "display: block;"
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-  <!-- {{ metaValue }} - {{ activeFilter }}<br> <br>
-  {% assign kistler_metafield = prod_variant.metafields.kistler %}   -->
+
+  {% assign kistler_metafield = prod_variant.metafields.kistler %}
   
-<!-- {% for metafield in kistler_metafield %}
+ {% for metafield in kistler_metafield %}
   
 {{ metafield | json }}<br> 
   <h1>{{ metafield[0] }}</h1>
   {{ metafield[0] | handleize }}={{ metafield | slice: 1, metafield.size | join: ', ' }}
   
 
-{% endfor %} -->
+{% endfor %} 
     
    
 
