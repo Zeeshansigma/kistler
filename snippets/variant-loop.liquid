@@ -16,31 +16,22 @@ hide
  itemtype="http://schema.org/Product"
   itemscope="itemscope" 
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
-
-  {% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
-
 {% for filter in collection.filters %}
-  {% assign downcaseFilter = filter.label | downcase %}
-  {% for active_filter in filter.active_values %}
-  
-        {% assign my_array = active_filter.label | split: "," %}
-    {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
-
-
-   
-    {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
-      {%- assign class = 'show' -%}
-    {% else %}
-      {%- assign class = 'hide' -%}
-    {% endif %}{{ class }}<br>
-
+{% assign downcaseFilter = filter.label | downcase %}
+{% for active_filter in filter.active_values %}
+{% assign my_array = active_filter.label | split: "," %}
+{% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
+{% if active_filter_values contains kistler_metafield[downcaseFilter] %}
+{%- assign class = 'show' -%}
+{% else %}
+{%- assign class = 'hide' -%}
+{% endif %}
 
 
   {% endfor %}
-{% endfor %}
-
-
+{% endfor %} {{ class }}
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
@@ -57,7 +48,9 @@ hide
 
 
 
-{% comment %}
+
+
+
 
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
@@ -69,7 +62,7 @@ hide
         {% assign my_array = active_filter.label | split: "," %}
     {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
    
-    {{ active_filter_values }} = {{ kistler_metafield[downcaseFilter] }}<br>
+    {{ active_filter_values }} = filter-label - {{ downcaseFilter }} - {{ kistler_metafield | json }} <br>
 
    
     {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
@@ -84,7 +77,7 @@ hide
 {% endfor %}
 
 Active Filter Values Array: {{ active_filter_values }}
-{% endcomment %}
+
 
 
 
@@ -155,12 +148,13 @@ Active Filter Values Array: {{ active_filter_values }}
   </div>
 </article>
 <style>
-    article.show {
-    display: block;
-}
+
   article.hide{
        display: none;
   }
+      article.show {
+    display: block;
+}
 
 </style>
 
