@@ -1,12 +1,28 @@
+<article    
+  
+  
+  
   {% for filter in collection.filters %}
 {% for active_value in filter.active_values %}
   
-  {% assign metaSeries = prod_variant.metafieldskistler.series %}
+  {% assign metaSeries = prod_variant.metafields.kistler.series %}
 {% assign metaLength = prod_variant.metafields.kistler.length %}
 {% assign activeFilter = active_value.label %}
 {{ metaLength }} - {{ activeFilter }} <br>
 {{ metaSeries }} - {{ activeFilter }}
-  <article    
+  
+{% if metaLength == activeFilter or metaSeries == activeFilter %} 
+style = "display: block;"
+{% elsif filter.active_values == 'blank' %}
+  style = "display: block;"
+  {% else %}
+    style = "display: none;"
+  {% endif %} 
+  {% endfor %}
+           {% endfor %}
+
+
+  
   itemtype="http://schema.org/Product"
   itemscope="itemscope"
   class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}"
@@ -34,21 +50,7 @@
 
 {% endfor %} -->
     
-
-
-
-
-  
-<!-- {% if metaLength == activeFilter or metaSeries == activeFilter %} 
-style = "display: block;"
-{% elsif filter.active_values == 'blank' %}
-  style = "display: block;"
-  {% else %}
-    style = "display: none;"
-  {% endif %}  -->
-
-
-    
+   
 
 
   <div class="product__content">
@@ -89,5 +91,4 @@ style = "display: block;"
   </div>
 </article>
 
-  {% endfor %}
-           {% endfor %}
+
