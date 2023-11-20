@@ -1,13 +1,12 @@
+
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% for filter in collection.filters %}
       {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}
     <script>
-      console.log("filters loop");
-  console.log("active_filter.param_name", '{{active_filter.param_name| json}}');
-  console.log("active_filter.display", '{{active_filter.display| json}}');
-  console.log("filter.label", '{{filter.label| json}}');
+      {% if kistler_metafield[downcaseFilter] contains active_filter.label%}
   console.log("meta obj", '{{kistler_metafield[downcaseFilter]| json}}');
+      {% endif %}}
   
 </script>
     {% endfor %}
