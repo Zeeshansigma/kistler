@@ -31,7 +31,7 @@ hide
       
       {%- assign class = 'show' -%}
     {% else %}
-      {{ kistler_metafield[downcaseFilter] }} {{ item }}
+      kistler_metafielddowncaseFilter:{{ kistler_metafield[downcaseFilter] }} -  item: {{ item }}
       {%- assign class = 'hide' -%}
     {% endif %}
   {% endfor %}
