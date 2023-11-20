@@ -45,7 +45,7 @@ hide
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-{% comment %}
+
 
 
 
@@ -77,7 +77,7 @@ hide
 {% endfor %}
 
 Active Filter Values Array: {{ active_filter_values }}
-{% endcomment %}
+
 
 
 
