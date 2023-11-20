@@ -88,9 +88,11 @@ hide
 {% for filter in collection.filters %}
 {% assign downcaseFilter = filter.label | downcase %}
   {% for active_filter in filter.active_values %}
+    Active filters: {{ active_filter.label }}
     {{ active_filter.label }} = {{ kistler_metafield[downcaseFilter] }}<br>
 
    {% if active_filter.label contains kistler_metafield[downcaseFilter]  %}
+     
 {%- assign class = 'show' -%}
   {% else %}
     {%- assign class = 'hide' -%}
