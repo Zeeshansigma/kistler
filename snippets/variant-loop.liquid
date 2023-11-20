@@ -63,12 +63,13 @@ active_filters_size={{ active_filters_size }}
 {% for filter in collection.filters %}
   {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
 
+     active_filter:{{ active_filter | join: ','}}<br>
+  
    {% if filter.active_values.size > 0 %}
     {% assign active_filters_size = active_filters_size | plus: 1 %}
     {% assign filter_matched = false %}
 
    {% for active_filter in filter.active_values %}
-     active_filter:{{ active_filter | join: ','}}<br>
    kistler_metafield[downcaseFilter]: {{ kistler_metafield[downcaseFilter] }}<br>
    filter_matched: {{ filter_matched }}<br>
      filter: {{ filter | json}}
