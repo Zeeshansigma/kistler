@@ -56,10 +56,12 @@
     
    {% assign activeFilters = active_value.label %}
     activeFilters = {{ activeFilters }}
-    {% assign complete_active_filters = filterLabels | concat: activeFilters %}
+    {% capture complete_active_filters = filterLabels | concat: activeFilters %}
     {{ complete_active_filters }}
+         {% endcapture %}
      {% endfor %}
 {% endfor %}
+  
 
 
   <div class="product__content">
