@@ -4,8 +4,10 @@
   {% for active_filter in filter.active_values %}
     {{ active_filter.label }}
 {% if kistler_metafield[downcaseFilter] contains active_filter.label%} 
-test
-   {% endif %}
+show
+{% else %}
+hide
+{% endif %}
     {% endfor %}
   {% endfor %}
  <article  
