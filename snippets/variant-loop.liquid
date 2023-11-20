@@ -22,8 +22,8 @@ hide
   {% assign downcase = filter.label | downcase %}
   {% assign downcaseFilter = downcase | replace: ' ', '_' %}
   {% for active_filter in filter.active_values %}
-    {% assign my_array = active_filter.label | split: "," %}
-    {% assign active_filter_values = active_filter_values | append: my_array | downcase | replace: ' ', '' | join: "," | remove: "\" %}
+    {% assign my_array = active_filter.label %}
+    {% assign active_filter_values = active_filter_values | append: my_array | downcase | replace: ' ', '' | join: "," | remove: "\"%}
   {% endfor %}
   {% for item in  active_filter_values %}
     {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase | replace: ' ', '' %}
