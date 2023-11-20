@@ -3,14 +3,10 @@
 
 
 
-
-
-
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
 
 {% for metafield in kistler_metafield %}
   {% assign metaValues = metafield[1] | join: ', ' %}
-
   {% assign collectionFilters = collection.filters %}
  
 
@@ -22,12 +18,13 @@
       
 
      {% if metaValues contains activeFilters %}
-     style="display: block;"       
-          {% elsif activeFilters == nil or activeFilters == '' %}
+      style="display: block;"       
+        {% elsif activeFilters == nil or activeFilters == '' %}
        style="display: block;"        
    {% else %}
       style="display: none;"    
    {% endif %}
+        
         {% endfor %}
    {% endfor %}
   
