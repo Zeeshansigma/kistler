@@ -23,10 +23,9 @@ hide
   {% assign downcaseFilter = downcase | replace: ' ', '_' %}
   {% for active_filter in filter.active_values %}
     {% assign my_array = active_filter.label | split: "," %}
-    {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
+    {% assign active_filter_values = active_filter_values | append: my_array | downcase | replace: ' ', '' | join: "," | remove: "\" %}
   {% endfor %}
-  {% assign active_filter_array =  active_filter_values | downcase | replace: " ", "" | split: "," %}
-  {% for item in  active_filter_array %}
+  {% for item in  active_filter_values %}
     {% assign dc_meta_f =  kistler_metafield[downcaseFilter] | downcase | replace: ' ', '' %}
     {% if dc_meta_f contains  item %}
       {%- assign class = 'show' -%}
