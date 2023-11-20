@@ -5,7 +5,7 @@
   {% for active_filter in filter.active_values %}
       {% if kistler_metafield[downcaseFilter] contains active_filter.label%}
         <script>
-        console.log('{{prod_variant.title}}')
+        console.log('{{prod_variant.title | json}}')
           </script>
       {% endif %}}
     {% endfor %}
