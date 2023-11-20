@@ -30,7 +30,8 @@ hide
     {%- assign class = 'hide' -%}
   {% endif %}
   {% endfor %}
-{% endfor %} {{ class }}
+{% endfor %}
+{{ class }}
 "
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
