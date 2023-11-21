@@ -307,7 +307,7 @@ var collectionHandle = "{{ collection.handle }}";
   } finally {
     loading = false;
   }
-});
+ });
 
 </script>
 
@@ -383,29 +383,7 @@ var collectionHandle = "{{ collection.handle }}";
             {%- for filter_value in filter.values -%}
               <li>
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
-             <script>
-              
-                var filterValueCounts = '{{ filter_value.count }}';
-                  var filterValueActive = '{{ filter_value.active }}';
-                  console.log("filterValueCounts", filterValueCounts);
-                  console.log("filterValueActive", filterValueActive);
-                  
-                  var element = document.querySelector('.custom-checkbox-label');
-                  console.log("element", element);
-                  
-                  if (filterValueCounts == 0 && filterValueActive == 'false') {
-                      console.log("Entering the if block");
-                      console.log("filterValueActive", filterValueActive);
-                      element.classList.add('disabled');
-                      element.setAttribute('disabled', true);
-                  } else {
-                      console.log("Entering the else block");
-                      element.classList.remove('disabled');
-                      element.removeAttribute('disabled');
-                  }
-                    
-
-              </script>
+       
                   <input
                     class="myCheckbox"
                     type="checkbox"
@@ -610,7 +588,24 @@ elements.forEach(function(element) {
   //     checkbox.dispatchEvent(new Event('change'));
   //   });
   // });
-
+                // var filterValueCounts = '{{ filter_value.count }}';
+                //   var filterValueActive = '{{ filter_value.active }}';
+                //   console.log("filterValueCounts", filterValueCounts);
+                //   console.log("filterValueActive", filterValueActive);
+                  
+                //   var element = document.querySelector('.custom-checkbox-label');
+                //   console.log("element", element);
+                  
+                //   if (filterValueCounts == 0 && filterValueActive == 'false') {
+                //       console.log("Entering the if block");
+                //       console.log("filterValueActive", filterValueActive);
+                //       element.classList.add('disabled');
+                //       element.setAttribute('disabled', true);
+                //   } else {
+                //       console.log("Entering the else block");
+                //       element.classList.remove('disabled');
+                //       element.removeAttribute('disabled');
+                //   }
               
      
 </script>
