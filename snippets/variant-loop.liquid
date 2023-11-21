@@ -1,17 +1,40 @@
-{% comment %}
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% assign show = false %}
+{% assign matched_filters = 0 %}
+{% assign active_filters_size = 0 %}
 {% for filter in collection.filters %}
-      {% assign downcaseFilter = filter.label | downcase %}
-  {% for active_filter in filter.active_values %}
-    {{ active_filter.label }}
-{% if kistler_metafield[downcaseFilter] contains active_filter.label%} 
-show
-{% else %}
-hide
-{% endif %}
-    {% endfor %}
-  {% endfor %}
-  {% endcomment %}
+  {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
+
+  
+   {% if filter.active_values.size > 0 %}
+    {% assign active_filters_size = active_filters_size | plus: 1 %}
+    {% assign filter_matched = false %}
+
+   {% for active_filter in filter.active_values %}
+     {% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' %}
+     {% assign filter_v =  active_filter.label | remove: "'" | remove: '"' %}
+       kistler_metafield[downcaseFilter]: -{{ meta_v }}-<br>
+       active_filter:-{{ filter_v  | remove: "'" | remove: '"' }}-<br>
+   
+      {% if meta_v contains filter_v and filter_matched == false %}
+        {% assign matched_filters = matched_filters | plus: 1 %}
+        {% assign filter_matched = true %}
+      {% endif %}
+     
+     filter_matched: {{ filter_matched }}<br>
+    {% endfor %}s
+  {% endif %}
+  
+{% endfor %}
+{% if active_filters_size == matched_filters %}
+  {% assign class = "show" %}
+  {% else %}
+  {% assign class = "hide" %}
+  {% endif %}
+
+matched_filters={{ matched_filters }}<br>
+active_filters_size={{ active_filters_size }}<br>
+  At this time class = <span style="background: green; color: #fff;">{{ class }}</span>
  <article  
  itemtype="http://schema.org/Product"
   itemscope="itemscope" 
@@ -56,43 +79,6 @@ active_filters_size={{ active_filters_size }}
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
 
-{% assign kistler_metafield = prod_variant.metafields.kistler %}
-{% assign show = false %}
-{% assign matched_filters = 0 %}
-{% assign active_filters_size = 0 %}
-{% for filter in collection.filters %}
-  {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
-
-  
-   {% if filter.active_values.size > 0 %}
-    {% assign active_filters_size = active_filters_size | plus: 1 %}
-    {% assign filter_matched = false %}
-
-   {% for active_filter in filter.active_values %}
-     {% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' %}
-     {% assign filter_v =  active_filter.label | remove: "'" | remove: '"' %}
-       kistler_metafield[downcaseFilter]: -{{ meta_v }}-<br>
-       active_filter:-{{ filter_v  | remove: "'" | remove: '"' }}-<br>
-   
-      {% if meta_v contains filter_v and filter_matched == false %}
-        {% assign matched_filters = matched_filters | plus: 1 %}
-        {% assign filter_matched = true %}
-      {% endif %}
-     
-     filter_matched: {{ filter_matched }}<br>
-    {% endfor %}s
-  {% endif %}
-  
-{% endfor %}
-{% if active_filters_size == matched_filters %}
-  {% assign class = "show" %}
-  {% else %}
-  {% assign class = "hide" %}
-  {% endif %}
-
-matched_filters={{ matched_filters }}<br>
-active_filters_size={{ active_filters_size }}<br>
-  At this time class = <span style="background: green; color: #fff;">{{ class }}</span>
 {% comment %}
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
