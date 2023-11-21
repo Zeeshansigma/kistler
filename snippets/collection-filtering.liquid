@@ -592,6 +592,8 @@ elements.forEach(function(element) {
               let filterValueCounts = '{{ filter_value.count }}';
   
               let filterValueActive = '{{ filter_value.active }}';
+  console.log("filterValueCounts", filterValueCounts);
+              console.log("filterValueActive", filterValueActive);
               if(filterValueCounts == 0 && filterValueActive == false) {
               var element = document.querySelectorAll('.custom-checkbox-label');
           
@@ -600,7 +602,6 @@ elements.forEach(function(element) {
               else {
               element.removeAttribute('disabled');
               }
-              console.log("filterValueCounts", filterValueCounts);
-              console.log("filterValueActive", filterValueActive);
+              
      
 </script>
