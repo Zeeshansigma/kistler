@@ -386,7 +386,7 @@ var collectionHandle = "{{ collection.handle }}";
               <script>
               let filterValueCounts = '{{ filter_value.count }}';
               let filterValueActive = '{{ filter_value.active }}';
-              if(filterValueCount == 0 && filterValueActive == false) {
+              if(filterValueCounts == 0 && filterValueActive == false) {
               var element = document.querySelector('.custom-checkbox-label');
               element.addAttribute('disabled');
                  }
