@@ -385,22 +385,23 @@ var collectionHandle = "{{ collection.handle }}";
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
              <script>
               
-              var filterValueCounts = '{{ filter_value.count }}';
-  
-              var filterValueActive = '{{ filter_value.active }}';
-              console.log("filterValueCounts", filterValueCounts);
-              console.log("filterValueActive", filterValueActive);
-              if(filterValueCounts == 0 && filterValueActive == false) {
-              var element = document.querySelector('.custom-checkbox-label');
-              console.log("filterValueActive", filterValueActive);
-              console.log("element", element);
-              element.classList.add('disabled');
-              element.setAttribute('disabled');
-                 }
-              else {
-              element.classList.remove('disabled');
-              element.removeAttribute('disabled');
-              }
+          var filterValueCounts = '{{ filter_value.count }}';
+var filterValueActive = '{{ filter_value.active }}';
+console.log("filterValueCounts", filterValueCounts);
+console.log("filterValueActive", filterValueActive);
+
+var element = document.querySelector('.custom-checkbox-label');
+console.log("element", element);
+
+if (filterValueCounts == 0 && filterValueActive == "false") {
+    console.log("filterValueActive", filterValueActive);
+    element.classList.add('disabled');
+    element.setAttribute('disabled', true);
+} else {
+    element.classList.remove('disabled');
+    element.removeAttribute('disabled');
+}
+
               </script>
                   <input
                     class="myCheckbox"
