@@ -383,6 +383,12 @@ var collectionHandle = "{{ collection.handle }}";
             {%- for filter_value in filter.values -%}
               <li>
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
+              <script>
+              console.log('{{ filter_value.count }}');
+              console.log('{{ filter_value.active }}');
+              console.log('{{ filter_value.active }}');
+              
+              </script>
                   <input
                     class="myCheckbox"
                     type="checkbox"
