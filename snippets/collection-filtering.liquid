@@ -385,7 +385,7 @@ var collectionHandle = "{{ collection.handle }}";
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
              <script>
               
-                                    var filterValueCounts = '{{ filter_value.count }}';
+                var filterValueCounts = '{{ filter_value.count }}';
                   var filterValueActive = '{{ filter_value.active }}';
                   console.log("filterValueCounts", filterValueCounts);
                   console.log("filterValueActive", filterValueActive);
