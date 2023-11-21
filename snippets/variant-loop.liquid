@@ -84,9 +84,15 @@ active_filters_size={{ active_filters_size }}
   {% endif %}
   
 {% endfor %}
-matched_filters={{ matched_filters }}<br>
-active_filters_size={{ active_filters_size }}
+{% if active_filters_size == matched_filters %}
+  {% assign class = "show" %}
+  {% else %}
+  {% assign class = "hide" %}
+  {% endif %}
 
+matched_filters={{ matched_filters }}<br>
+active_filters_size={{ active_filters_size }}<br>
+  At this time class ={{ class}}
 {% comment %}
    {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign active_filter_values = "" %}
