@@ -13,15 +13,13 @@
    {% for active_filter in filter.active_values %}
      {% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' %}
      {% assign filter_v =  active_filter.label | remove: "'" | remove: '"' %}
-       kistler_metafield[downcaseFilter]: -{{ meta_v }}-<br>
-       active_filter:-{{ filter_v  | remove: "'" | remove: '"' }}-<br>
    
       {% if meta_v contains filter_v and filter_matched == false %}
         {% assign matched_filters = matched_filters | plus: 1 %}
         {% assign filter_matched = true %}
       {% endif %}
      
-     filter_matched: {{ filter_matched }}<br>
+
     {% endfor %}
   {% endif %}
   
