@@ -73,7 +73,7 @@ active_filters_size={{ active_filters_size }}
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-{% comment %}
+
 {% assign kistler_metafield = prod_variant.metafields.kistler %}
 {% assign show = false %}
 {% assign matched_filters = 0 %}
@@ -98,7 +98,7 @@ active_filters_size={{ active_filters_size }}
       {% endif %}
      
      filter_matched: {{ filter_matched }}<br>
-    {% endfor %}s
+    {% endfor %}
   {% endif %}
   
 {% endfor %}
@@ -110,8 +110,8 @@ active_filters_size={{ active_filters_size }}
 
 matched_filters={{ matched_filters }}<br>
 active_filters_size={{ active_filters_size }}<br>
-  At this time class = <span style="background: green; color: #fff;">{{ class }}</span>
-{% endcomment %}
+  At this time class = {{ class }}<br>
+
   
 
  
