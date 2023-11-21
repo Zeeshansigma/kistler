@@ -70,7 +70,7 @@ active_filters_size={{ active_filters_size }}
 
    {% for active_filter in filter.active_values %}
      {% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' %}
-     {% assign filter_v =  active_filter.value | remove: "'" | remove: '"' %}
+     {% assign filter_v =  active_filter.label | remove: "'" | remove: '"' %}
        kistler_metafield[downcaseFilter]: -{{ meta_v }}-<br>
        active_filter:-{{ filter_v  | remove: "'" | remove: '"' }}-<br>
    
