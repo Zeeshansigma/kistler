@@ -22,7 +22,7 @@
       {% endif %}
      
      filter_matched: {{ filter_matched }}<br>
-    {% endfor %}s
+    {% endfor %}
   {% endif %}
   
 {% endfor %}
@@ -32,9 +32,6 @@
   {% assign class = "hide" %}
   {% endif %}
 
-matched_filters={{ matched_filters }}<br>
-active_filters_size={{ active_filters_size }}<br>
-  At this time class = <span style="background: green; color: #fff;">{{ class }}</span>
  <article  
  itemtype="http://schema.org/Product"
   itemscope="itemscope" 
@@ -64,8 +61,8 @@ active_filters_size={{ active_filters_size }}<br>
 matched_filters={{ matched_filters }}
 active_filters_size={{ active_filters_size }}
 {% endcomment %}
-{{ class }}
-"
+
+{{ class }}"
   data-bait="{{ prod_variant.metafields.kistler.baits | escape }}"
   data-structure="{{ prod_variant.metafields.kistler.cover | escape }}"
   data-lure-line-wt="{{ prod_variant.metafields.kistler.lure_weight_line_weight | escape }}"
@@ -78,60 +75,46 @@ active_filters_size={{ active_filters_size }}
   data-price="{{ prod_variant.price }}"
   data-series="{% for tag in prod.tags %}{% if tag contains 'Series:' %}{{ tag | split: ':' | last }}{% endif %}{% endfor %}"
 >
-
 {% comment %}
-   {% assign kistler_metafield = prod_variant.metafields.kistler %}
-{% assign active_filter_values = "" %}
-
+{% assign kistler_metafield = prod_variant.metafields.kistler %}
+{% assign show = false %}
+{% assign matched_filters = 0 %}
+{% assign active_filters_size = 0 %}
 {% for filter in collection.filters %}
-  {% assign downcaseFilter = filter.label | downcase %}
-  {% for active_filter in filter.active_values %}
-    Active filters: {{ active_filter.label }}<br>
-        {% assign my_array = active_filter.label | split: "," %}
-    {% assign active_filter_values = active_filter_values | append: my_array | join: "," | remove: "\" %}
-   
-    {{ active_filter_values }} = filter-label - {{ downcaseFilter }} - {{ kistler_metafield | json }} <br>
-
-   
-    {% if active_filter_values contains kistler_metafield[downcaseFilter] %}
-      {%- assign class = 'show' -%}
-    {% else %}
-      {%- assign class = 'hide' -%}
-    {% endif %}{{ class }}<br>
-
-
-
-  {% endfor %}
-{% endfor %}
-
-Active Filter Values Array: {{ active_filter_values }}
-
-
-
-
-
-  {% assign kistler_metafield = prod_variant.metafields.kistler %}
+  {% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
 
   
-  {% for metafield in kistler_metafield %}
-      {% assign metaValues = metafield | slice: 1, metafield.size | join: ', ' %}
-    {{ metafield[0] | handleize }}={{ metaValues }}<br><br>
-    {% assign collectionFilters = collection.filters %}
-    {% assign filter_active_values = filter.active_values %}
+   {% if filter.active_values.size > 0 %}
+    {% assign active_filters_size = active_filters_size | plus: 1 %}
+    {% assign filter_matched = false %}
 
-      
-   {% for filter in collectionFilters %}
-  {% for active_value in filter_active_values %}
-   {% assign filterLabels = filter.label | handleize | downcase %}
-   {% assign activeFilters = active_value.label %}
-    {{ filterLabels }} = {{ activeFilters }}
- 
-     {% endfor %}
+   {% for active_filter in filter.active_values %}
+     {% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' %}
+     {% assign filter_v =  active_filter.label | remove: "'" | remove: '"' %}
+       kistler_metafield[downcaseFilter]: -{{ meta_v }}-<br>
+       active_filter:-{{ filter_v  | remove: "'" | remove: '"' }}-<br>
+   
+      {% if meta_v contains filter_v and filter_matched == false %}
+        {% assign matched_filters = matched_filters | plus: 1 %}
+        {% assign filter_matched = true %}
+      {% endif %}
+     
+     filter_matched: {{ filter_matched }}<br>
+    {% endfor %}s
+  {% endif %}
+  
 {% endfor %}
-  {% endfor %} 
+{% if active_filters_size == matched_filters %}
+  {% assign class = "show" %}
+  {% else %}
+  {% assign class = "hide" %}
+  {% endif %}
+
+matched_filters={{ matched_filters }}<br>
+active_filters_size={{ active_filters_size }}<br>
+  At this time class = <span style="background: green; color: #fff;">{{ class }}</span>
 {% endcomment %}
-
-
+  
 
  
 
