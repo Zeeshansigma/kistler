@@ -383,7 +383,22 @@ var collectionHandle = "{{ collection.handle }}";
             {%- for filter_value in filter.values -%}
               <li>
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
-             
+             <script>
+              
+              var filterValueCounts = '{{ filter_value.count }}';
+  
+              var filterValueActive = '{{ filter_value.active }}';
+              console.log("filterValueCounts", filterValueCounts);
+              console.log("filterValueActive", filterValueActive);
+              if(filterValueCounts == 0 && filterValueActive == false) {
+              var element = document.querySelectorAll('.custom-checkbox-label');
+          
+              element.setAttribute('disabled');
+                 }
+              else {
+              element.removeAttribute('disabled');
+              }
+              </script>
                   <input
                     class="myCheckbox"
                     type="checkbox"
@@ -589,19 +604,6 @@ elements.forEach(function(element) {
   //   });
   // });
 
-              let filterValueCounts = '{{ filter_value.count }}';
-  
-              let filterValueActive = '{{ filter_value.active }}';
-  console.log("filterValueCounts", filterValueCounts);
-              console.log("filterValueActive", filterValueActive);
-              if(filterValueCounts == 0 && filterValueActive == false) {
-              var element = document.querySelectorAll('.custom-checkbox-label');
-          
-              element.setAttribute('disabled');
-                 }
-              else {
-              element.removeAttribute('disabled');
-              }
               
      
 </script>
