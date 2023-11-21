@@ -71,8 +71,8 @@ active_filters_size={{ active_filters_size }}
    {% for active_filter in filter.active_values %}
    kistler_metafield[downcaseFilter]: -{{ kistler_metafield[downcaseFilter] }}-<br>
      active_filter:-{{ active_filter.value }}-<br>
-     {% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "/" %}
-      {% if {{ kistler_metafield[downcaseFilter] | remove: "/" }} contains active_filter.value and filter_matched == false %}
+     {% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' %}
+      {% if meta_v contains active_filter.value and filter_matched == false %}
         {% assign matched_filters = matched_filters | plus: 1 %}
         {% assign filter_matched = true %}
       {% endif %}
