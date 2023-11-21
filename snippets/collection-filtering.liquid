@@ -562,16 +562,16 @@ elements.forEach(function(element) {
             }
         });
     });
-    document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            // Get filter information from data attributes
-            var paramName = this.nextElementSibling.getAttribute('data-param-name');
-            var paramValue = this.nextElementSibling.getAttribute('data-value');
-  window.dispatchEvent(new Event('filter-updated'));
-            // Perform any desired actions with the filter information
-            console.log('Filter changed:', paramName, paramValue, this.checked);
-        });
-    });
+  //   document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+  //       checkbox.addEventListener('change', function() {
+  //           // Get filter information from data attributes
+  //           var paramName = this.nextElementSibling.getAttribute('data-param-name');
+  //           var paramValue = this.nextElementSibling.getAttribute('data-value');
+  // window.dispatchEvent(new Event('filter-updated'));
+  //           // Perform any desired actions with the filter information
+  //           console.log('Filter changed:', paramName, paramValue, this.checked);
+  //       });
+  //   });
 
   // document.addEventListener("DOMContentLoaded", function() {
   //   // Get all checkboxes with the class 'myCheckbox'
