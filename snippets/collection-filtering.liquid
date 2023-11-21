@@ -394,10 +394,11 @@ var collectionHandle = "{{ collection.handle }}";
               var element = document.querySelector('.custom-checkbox-label');
               console.log("filterValueActive", filterValueActive);
               console.log("element", element);
-          
+              element.classLists.add('disabled');
               element.setAttribute('disabled');
                  }
               else {
+              element.classLists.remove('disabled');
               element.removeAttribute('disabled');
               }
               </script>
