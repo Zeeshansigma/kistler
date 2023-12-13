@@ -9,7 +9,7 @@
 {% assign active_filters_size = active_filters_size | plus: 1 %}
 {% assign filter_matched = false %} 
 {% for active_filter in filter.active_values %}
-{% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' | remove: '/' %}
+{% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' | remove: '\' %}
 {% assign filter_v =  active_filter.label | remove: "'" | remove: '"' %}
 {% if meta_v contains filter_v and filter_matched == false %}
 {% assign matched_filters = matched_filters | plus: 1 %}
