@@ -381,7 +381,7 @@ var collectionHandle = "{{ collection.handle }}";
 {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}">
          <script>
           var filtervalues = {{ filter.values }};
-          console.log("filtervalues", filtervalues);
+          // console.log("filtervalues", filtervalues);
           </script>
             {%- for filter_value in filter.values -%}
               
