@@ -379,7 +379,8 @@ var collectionHandle = "{{ collection.handle }}";
           {%- when 'list' -%}
           <ul class="store-filter-ul {% for checkb in for_checkboxes %}{% if filter.label == checkb %}apply_checkbox  {% endif %}{% endfor %}
 {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}">
-  {% assign fil_val = filter.values | split: ',' %} 
+  {% assign fil_val = filter.values | split: ',' | sort | reverse %}
+  {% assign fil_val = fil_val | join:'' %}
   {%- for filter_value in fil_val -%}
   {{ filter_value.label  }}<br>
   {% endfor %}
