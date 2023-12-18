@@ -382,6 +382,7 @@ var collectionHandle = "{{ collection.handle }}";
 
           {% for filter in collection.filters %}
   {{ filter.label }}
+  {% assign sorted values = filter.values | split: ',' %}
   {% for values in filter.values %}
   {{ values.label }}<br>
   {% endfor %}
