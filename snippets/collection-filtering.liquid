@@ -385,11 +385,8 @@ var collectionHandle = "{{ collection.handle }}";
       {% for filter in collection.filters %}
         {
           label: {{ filter.label | jsonify }},
-          values: [
-            {% for value in filter.values %}
-              {{ value | jsonify }},
-            {% endfor %}
-          ]
+          values: {{ filter.values | jsonify}}
+    
         },
       {% endfor %}
     ]
