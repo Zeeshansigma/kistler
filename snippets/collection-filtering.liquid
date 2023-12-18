@@ -318,7 +318,7 @@ var collectionHandle = "{{ collection.handle }}";
 
 <form id="filter_form">
 
-  {%- for filter in collection.filters -%}
+  {%- for filter in collection.filters | sort | reverse  -%}
     <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
       <summary class="summary-global" {% for accordion in for_accordion %}{% if filter.label == accordion %} data-disabled="true" {% endif %}{% endfor %}>
         <div class="heading-filters">
