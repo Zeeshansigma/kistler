@@ -611,12 +611,13 @@ elements.forEach(function(element) {
                 //   }
               
     // Get the <ul> element
-    var ul = document.querySelectorAll('.store-filter-ul');
+
+  
+  var ul = document.querySelectorAll('.store-filter-ul');
   ul.forEach((item) =>{
 var lis =  Array.from(item.getElementsByTagName('li'));
 console.log("lis", lis);
         lis.sort(function(a, b) {
-    
         return b.textContent.localeCompare(a.textContent);
     });
 
