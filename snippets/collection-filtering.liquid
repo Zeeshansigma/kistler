@@ -382,7 +382,7 @@ var collectionHandle = "{{ collection.handle }}";
 
           {% for filter in collection.filters %}
   {{ filter.label }}
-  {{filter.values | json }}
+  {{filter.values[0] }}
           {% assign filter_values = filter.values %}
   {%- for value in filter_values -%}
   {{value.label}}<br>
