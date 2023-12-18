@@ -612,25 +612,25 @@ elements.forEach(function(element) {
               
     // Get the <ul> element
     var ul = document.querySelectorAll('.store-filter-ul');
-console.log("ul", ul);
   ul.forEach((item) =>{
-console.log("item", item);
+var lis =  Array.from(item.getElementsByTagName('li'));
+console.log("lis", lis);
     
     // var lis = Array.from(item.getElementsByTagName('li'));
     
   })
   
-    lis.sort(function(a, b) {
+    // lis.sort(function(a, b) {
     
-        return b.textContent.localeCompare(a.textContent);
-    });
+    //     return b.textContent.localeCompare(a.textContent);
+    // });
 
  
-    lis.forEach(function(li) {
-        ul.removeChild(li);
-    });
+    // lis.forEach(function(li) {
+    //     ul.removeChild(li);
+    // });
 
-    lis.forEach(function(li) {
-        ul.appendChild(li);
-    });
+    // lis.forEach(function(li) {
+    //     ul.appendChild(li);
+    // });
 </script>
