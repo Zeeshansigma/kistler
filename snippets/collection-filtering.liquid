@@ -383,7 +383,7 @@ var collectionHandle = "{{ collection.handle }}";
           {% for filter in collection.filters %}
   {{ filter.label }}
   {% for value in filter.values %}
-{{ value }}
+{{ value.label }}
   {% endfor %}
   {% endfor %}
     
