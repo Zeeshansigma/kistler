@@ -382,9 +382,11 @@ var collectionHandle = "{{ collection.handle }}";
 
 <script>
     // Get the <ul> element
-    var ul = document.querySelectorAll('.store-filter-ul');
+    var uls = document.querySelectorAll('.store-filter-ul');
 
-    // Get the <li> elements inside the <ul>
+    uls,forEach((ul) =>{
+          ul
+    })
     var lis = Array.from(ul.getElementsByTagName('li'));
 
     // Sort the <li> elements in reverse order
