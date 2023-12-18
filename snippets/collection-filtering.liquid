@@ -617,7 +617,7 @@ elements.forEach(function(element) {
   ul.forEach((item) =>{
 var lis =  Array.from(item.getElementsByTagName('li'));
 console.log("lis", lis);
-        lis.sort(function(a, b) {
+    lis.sort(function(a, b) {
         return b.textContent.localeCompare(a.textContent);
     });
 
