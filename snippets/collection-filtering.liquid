@@ -379,7 +379,7 @@ var collectionHandle = "{{ collection.handle }}";
           {%- when 'list' -%}
           <ul class="store-filter-ul {% for checkb in for_checkboxes %}{% if filter.label == checkb %}apply_checkbox  {% endif %}{% endfor %}
 {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}">
-          
+          {{ filter.values }}
             {%- for filter_value in filter.values -%}
               <li>
                 <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
