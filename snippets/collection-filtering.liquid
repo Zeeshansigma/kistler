@@ -380,32 +380,7 @@ var collectionHandle = "{{ collection.handle }}";
           <ul class="store-filter-ul {% for checkb in for_checkboxes %}{% if filter.label == checkb %}apply_checkbox  {% endif %}{% endfor %}
 {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}">
 
-<script>
-    // Get the <ul> element
-    var uls = document.querySelectorAll('.store-filter-ul');
 
-    uls,forEach((ul) =>{
-       var lis = Array.from(ul.getElementsByTagName('li'));
-             // Sort the <li> elements in reverse order
-    lis.sort(function(a, b) {
-        // Compare the text content of the <li> elements
-        return b.textContent.localeCompare(a.textContent);
-    });
-
-    // Remove existing <li> elements from the <ul>
-    lis.forEach(function(li) {
-        ul.removeChild(li);
-    });
-
-    // Append the sorted <li> elements back to the <ul>
-    lis.forEach(function(li) {
-        ul.appendChild(li);
-    });
-    })
-    
-
- 
-</script>
 
 
 
@@ -635,5 +610,25 @@ elements.forEach(function(element) {
                 //       element.removeAttribute('disabled');
                 //   }
               
+    // Get the <ul> element
+    var ul = document.querySelectorAll('.store-filter-ul');
 
+    // Get the <li> elements inside the <ul>
+    var lis = Array.from(ul.getElementsByTagName('li'));
+
+    // Sort the <li> elements in reverse order
+    lis.sort(function(a, b) {
+        // Compare the text content of the <li> elements
+        return b.textContent.localeCompare(a.textContent);
+    });
+
+    // Remove existing <li> elements from the <ul>
+    lis.forEach(function(li) {
+        ul.removeChild(li);
+    });
+
+    // Append the sorted <li> elements back to the <ul>
+    lis.forEach(function(li) {
+        ul.appendChild(li);
+    });
 </script>
