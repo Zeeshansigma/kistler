@@ -614,23 +614,22 @@ elements.forEach(function(element) {
     var ul = document.querySelectorAll('.store-filter-ul');
 console.log("ul", ul);
   ul.forEach((item) =>{
-    var lis = Array.from(item.getElementsByTagName('li'));
+console.log("item", item);
+    
+    // var lis = Array.from(item.getElementsByTagName('li'));
     
   })
-    // Get the <li> elements inside the <ul>
-
-    // Sort the <li> elements in reverse order
+  
     lis.sort(function(a, b) {
-        // Compare the text content of the <li> elements
+    
         return b.textContent.localeCompare(a.textContent);
     });
 
-    // Remove existing <li> elements from the <ul>
+ 
     lis.forEach(function(li) {
         ul.removeChild(li);
     });
 
-    // Append the sorted <li> elements back to the <ul>
     lis.forEach(function(li) {
         ul.appendChild(li);
     });
