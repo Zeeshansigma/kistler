@@ -385,11 +385,8 @@ var collectionHandle = "{{ collection.handle }}";
     var uls = document.querySelectorAll('.store-filter-ul');
 
     uls,forEach((ul) =>{
-          ul
-    })
-    var lis = Array.from(ul.getElementsByTagName('li'));
-
-    // Sort the <li> elements in reverse order
+       var lis = Array.from(ul.getElementsByTagName('li'));
+             // Sort the <li> elements in reverse order
     lis.sort(function(a, b) {
         // Compare the text content of the <li> elements
         return b.textContent.localeCompare(a.textContent);
@@ -404,6 +401,10 @@ var collectionHandle = "{{ collection.handle }}";
     lis.forEach(function(li) {
         ul.appendChild(li);
     });
+    })
+    
+
+ 
 </script>
 
 
