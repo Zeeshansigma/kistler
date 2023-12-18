@@ -603,6 +603,6 @@ elements.forEach(function(element) {
                 //       element.removeAttribute('disabled');
                 //   }
               
-
-  console.log({{ collection.filters | json }})
+let colFilters = {{ collection.filters | json }};
+  console.log(colFilters);
 </script>
