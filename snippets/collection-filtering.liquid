@@ -382,10 +382,10 @@ var collectionHandle = "{{ collection.handle }}";
 
           {% for filter in collection.filters %}
   {{ filter.label }}
-<script>
-      var va = {{ filter.values }};
-           console.log(va);
-            </script>
+  {% for values in filter.values %}
+  {{ values.label }}<br>
+  {% endfor %}
+
 
   {% endfor %}
     
