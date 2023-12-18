@@ -317,7 +317,7 @@ var collectionHandle = "{{ collection.handle }}";
 {% assign for_accordion = settings.accordion_filtering | split: ',' %}
 
 <form id="filter_form">
-{% assign colFilters = collection.filters | sort | reverse %}
+{% assign colFilters = collection.filters | sort %}
   {%- for filter in colFilters -%}
     <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
       <summary class="summary-global" {% for accordion in for_accordion %}{% if filter.label == accordion %} data-disabled="true" {% endif %}{% endfor %}>
