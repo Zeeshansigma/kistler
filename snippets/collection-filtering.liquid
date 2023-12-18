@@ -568,7 +568,8 @@ elements.forEach(function(element) {
           window.dispatchEvent(new Event('filter-updated'));
         });
     });
-
+let colFilters = {{ collection.filters | json }};
+  console.log("test", colFilters);
   // document.addEventListener("DOMContentLoaded", function() {
   //   // Get all checkboxes with the class 'myCheckbox'
   //   const checkboxes = document.querySelectorAll('.myCheckbox');
@@ -603,6 +604,5 @@ elements.forEach(function(element) {
                 //       element.removeAttribute('disabled');
                 //   }
               
-let colFilters = {{ collection.filters | json }};
-  console.log("test", colFilters);
+
 </script>
