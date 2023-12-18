@@ -615,22 +615,22 @@ elements.forEach(function(element) {
   ul.forEach((item) =>{
 var lis =  Array.from(item.getElementsByTagName('li'));
 console.log("lis", lis);
+        lis.sort(function(a, b) {
     
-    // var lis = Array.from(item.getElementsByTagName('li'));
+        return b.textContent.localeCompare(a.textContent);
+    });
+
+ 
+    lis.forEach(function(li) {
+        ul.removeChild(li);
+    });
+
+    lis.forEach(function(li) {
+        ul.appendChild(li);
+    });
+    
     
   })
   
-    // lis.sort(function(a, b) {
-    
-    //     return b.textContent.localeCompare(a.textContent);
-    // });
 
- 
-    // lis.forEach(function(li) {
-    //     ul.removeChild(li);
-    // });
-
-    // lis.forEach(function(li) {
-    //     ul.appendChild(li);
-    // });
 </script>
