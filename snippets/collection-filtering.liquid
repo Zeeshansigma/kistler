@@ -381,6 +381,7 @@ var collectionHandle = "{{ collection.handle }}";
 {% for checks in for_swatches %}{% if filter.label == checks %}apply_swatches{% endif %}{% endfor %}">
 
           {% for filter in collection.filters %}
+  {{ filter.label }}
           {% assign fil_val = filter.values | split: ',' %}
  {{ fil_val }}
   {%- for filter_value in fil_val -%}
