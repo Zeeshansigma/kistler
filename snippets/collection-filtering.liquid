@@ -382,9 +382,8 @@ var collectionHandle = "{{ collection.handle }}";
 
           {% for filter in collection.filters %}
           {% assign fil_val = filter.values | split: ',' %}
- test {{ fil_val }}
+ {{ fil_val }}
   {%- for filter_value in fil_val -%}
-  {{ filter_value.label  }}<br>
   {% endfor %}
   {% endfor %}
     
