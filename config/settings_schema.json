@@ -208,7 +208,7 @@
       {
         "type": "text",
         "id": "accordion_filtering",
-        "label": "Add Metafield Key for Accordions",
+        "label": "Add Metafield Key for no Accordions",
         "info": "Add Comma Sperated values"
       }
     ]
