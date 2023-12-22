@@ -17,8 +17,8 @@
 {% endif %} 
 {% endfor %}  
 {% endif %} 
-  {%- for filter_value in filter.active_values -%}
-  {{ filter_value.label }}
+  {%- for filter in filter.active_filters -%}
+  {{ filter.label }}
 {% endfor %}
 {% endfor %}
 
