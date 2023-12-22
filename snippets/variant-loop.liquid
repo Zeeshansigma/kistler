@@ -17,13 +17,7 @@
 {% endif %} 
 {% endfor %}  
 {% endif %} 
-{%- for filter_value in filter.active_values -%}
-          <p>
-            <a>
-              {{ filter.label }}
-            </a>
-          </p>
-        {%- endfor -%}
+
 {% endfor %}
 
 {% if active_filters_size == matched_filters %}
