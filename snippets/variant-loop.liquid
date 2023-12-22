@@ -22,6 +22,7 @@
 {% for filter in collection.filters %}
   {%- for filter_value in filter.active_values -%}
     {{ filter.label }}
+    {{ filter_value.label }}
     {% if filter.label == 'Structure or Cover' %}test{% endif %}
   {%- endfor -%}
 {%- endfor -%}
