@@ -35,7 +35,7 @@
     {% for filter in collection.filters %}
   {%- for filter_value in filter.active_values -%}
     {{ filter.label }}
-    {% if filter.label != 'Availablity' %}{{ class }}{% endif %}
+    {% if filter.label != 'Availability' %}{{ class }}{% endif %}
   {%- endfor -%}
 {%- endfor -%}
   "
