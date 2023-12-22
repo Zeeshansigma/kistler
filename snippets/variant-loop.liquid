@@ -17,6 +17,9 @@
 {% endif %} 
 {% endfor %}  
 {% endif %} 
+  {%- for filter_value in filter.active_values -%}
+  {{ filter_value.label }}
+{% endfor %}
 {% endfor %}
 
 {% if active_filters_size == matched_filters %}
@@ -28,7 +31,7 @@
  <article  
  itemtype="http://schema.org/Product"
   itemscope="itemscope" 
-  class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %} ">
+  class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %} {{ class }}">
 
  <div class="product__content">
     <div class="product__badges">
