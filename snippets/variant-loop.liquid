@@ -17,9 +17,13 @@
 {% endif %} 
 {% endfor %}  
 {% endif %} 
-  {%- for filter in filter.active_filters -%}
-  {{ filter.label }}
-{% endfor %}
+{%- for filter_value in filter.active_values -%}
+          <p>
+            <a href="{{ filter_value.url_to_remove }}">
+              {{ filter.label }}: {{ filter_value.label }} X
+            </a>
+          </p>
+        {%- endfor -%}
 {% endfor %}
 
 {% if active_filters_size == matched_filters %}
