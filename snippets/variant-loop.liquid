@@ -19,8 +19,8 @@
 {% endif %} 
 {%- for filter_value in filter.active_values -%}
           <p>
-            <a href="{{ filter_value.url_to_remove }}">
-              {{ filter.label }}: {{ filter_value.label }} X
+            <a>
+              {{ filter.label }}
             </a>
           </p>
         {%- endfor -%}
