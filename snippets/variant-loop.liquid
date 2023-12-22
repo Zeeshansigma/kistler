@@ -4,65 +4,99 @@
 {% assign active_filters_size = 0 %}
 
 {% for filter in collection.filters %}
-{% assign downcaseFilter = filter.label | downcase | replace: " ", "_" %}
-{% if filter.active_values.size > 0 %}
-{% assign active_filters_size = active_filters_size | plus: 1 %}
-{% assign filter_matched = false %} 
-{% for active_filter in filter.active_values %}
-{% assign meta_v =  kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' | remove: '\' %}
-{% assign filter_v =  active_filter.label | remove: "'" | remove: '"' %}
-{% if meta_v contains filter_v and filter_matched == false %}
-{% assign matched_filters = matched_filters | plus: 1 %}
-{% assign filter_matched = true %} 
-{% endif %} 
-{% endfor %}  
-{% endif %} 
-
+  {% assign downcaseFilter = filter.label | downcase | replace: ' ', '_' %}
+  {% if filter.active_values.size > 0 %}
+    {% assign active_filters_size = active_filters_size | plus: 1 %}
+    {% assign filter_matched = false %}
+    {% for active_filter in filter.active_values %}
+      {% assign meta_v = kistler_metafield[downcaseFilter] | remove: "'" | remove: '"' | remove: '\' %}
+      {% assign filter_v = active_filter.label | remove: "'" | remove: '"' %}
+      {% if meta_v contains filter_v and filter_matched == false %}
+        {% assign matched_filters = matched_filters | plus: 1 %}
+        {% assign filter_matched = true %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 {% endfor %}
+
 {% for filter in collection.filters %}
-{%- for filter_value in filter.active_values -%}
-      {{ filter.label }}
-     {%- endfor -%}
-     {%- endfor -%}
-  
+  {%- for filter_value in filter.active_values -%}
+    {{ filter.label }}
+    {% if filter.label == 'Availability' %}test{% endif %}
+  {%- endfor -%}
+{%- endfor -%}
+
 {% if active_filters_size == matched_filters %}
-{% assign class = "show" %}
+  {% assign class = 'show' %}
 {% else %}
-{% assign class = "hide" %}
+  {% assign class = 'hide' %}
 {% endif %}
 
- <article  
- itemtype="http://schema.org/Product"
-  itemscope="itemscope" 
-  class="{% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %} 
-  {{ class }}">
-      {{ filter.label }}
+<article
+  itemtype="http://schema.org/Product"
+  itemscope="itemscope"
+  class="
+    {% if prod_variant.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if prod_variant.compare_at_price > prod_variant.price %} product--on-sale{% endif %}
+    {{ class }}
+  "
+>
+  {{ filter.label }}
 
- <div class="product__content">
+  <div class="product__content">
     <div class="product__badges">
       {% if prod_variant.compare_at_price > prod_variant.price %}
-         {% assign difference = prod_variant.compare_at_price | minus: prod_variant.price %}
+        {% assign difference = prod_variant.compare_at_price | minus: prod_variant.price %}
         <div class="product__badge product__badge--sale">Save {{ difference | money_without_trailing_zeros }}</div>
       {% endif %}
     </div>
-    <a itemprop="url" class="product__image-wrapper" href="{{ prod_variant.url | within: collection }}" title="{{ prod.title | strip_html | escape }}">
+    <a
+      itemprop="url"
+      class="product__image-wrapper"
+      href="{{ prod_variant.url | within: collection }}"
+      title="{{ prod.title | strip_html | escape }}"
+    >
       <noscript>
-        <img itemprop="image" class="product__image product__image--{{ prod_variant.id }}" srcset="{{ prod_variant.image | img_url: '800x' }} 2x, {{ prod_variant.image | img_url: '400x' }} 1x" src="{{ prod_variant.image | img_url: '400x' }}" data-default-image="{{ prod_variant.image | img_url: '800x' }}" alt="{% if prod_variant.image.alt != blank %}{{ prod_variant.image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
+        <img
+          itemprop="image"
+          class="product__image product__image--{{ prod_variant.id }}"
+          srcset="{{ prod_variant.image | img_url: '800x' }} 2x, {{ prod_variant.image | img_url: '400x' }} 1x"
+          src="{{ prod_variant.image | img_url: '400x' }}"
+          data-default-image="{{ prod_variant.image | img_url: '800x' }}"
+          alt="{% if prod_variant.image.alt != blank %}{{ prod_variant.image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}"
+        >
       </noscript>
-        <img itemprop="image" class="product__image product__image--{{ prod_variant.id }}" srcset="{{ prod_variant.image | img_url: '800x' }} 2x, {{ prod_variant.image | img_url: '400x' }} 1x" src="{{ prod_variant.image | img_url: '400x' }}" data-default-image="{{ prod_variant.image | img_url: '800x' }}" alt="{% if prod_variant.image.alt != blank %}{{ prod_variant.image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}">
-       </a>
+      <img
+        itemprop="image"
+        class="product__image product__image--{{ prod_variant.id }}"
+        srcset="{{ prod_variant.image | img_url: '800x' }} 2x, {{ prod_variant.image | img_url: '400x' }} 1x"
+        src="{{ prod_variant.image | img_url: '400x' }}"
+        data-default-image="{{ prod_variant.image | img_url: '800x' }}"
+        alt="{% if prod_variant.image.alt != blank %}{{ prod_variant.image.alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}"
+      >
+    </a>
     <header class="product__header">
       <h2 class="product__title">
-        <a href="{{ prod_variant.url | within: collection }}" title="{{ prod.title | strip_html | escape }}" itemprop="name">{{ prod.title }}</a>
+        <a
+          href="{{ prod_variant.url | within: collection }}"
+          title="{{ prod.title | strip_html | escape }}"
+          itemprop="name"
+        >
+          {{- prod.title -}}
+        </a>
       </h2>
       <span class="product__meta product__meta--options">{{ prod_variant.title }}</span>
-      <span class="product__meta product__meta--pricing" itemprop="offers" itemtype="http://schema.org/Offer" itemscope="itemscope">
+      <span
+        class="product__meta product__meta--pricing"
+        itemprop="offers"
+        itemtype="http://schema.org/Offer"
+        itemscope="itemscope"
+      >
         {% if prod_variant.available %}
           <meta itemprop="priceCurrency" content="{{ shop.currency }}">
           {% if prod_variant.compare_at_price > prod_variant.price %}
             <span class="product__old-price">
               {% if prod_variant.compare_at_price > 0 %}
-                 {{ prod_variant.compare_at_price | money }}
+                {{ prod_variant.compare_at_price | money }}
               {% endif %}
             </span>
           {% endif %}
