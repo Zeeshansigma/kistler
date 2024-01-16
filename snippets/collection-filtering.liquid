@@ -521,10 +521,10 @@ var collectionHandle = "{{ collection.handle }}";
   </div>
 </form>
 
-  <details class="store_filtering">
+  <!-- <details class="store_filtering">
       <summary class="summary-global">
         <div class="heading-filters">
-          <span class="headss">Availability my</span>
+          <span class="headss">Availability</span>
            <div class="cust-icons"><span class="one-plus ">+</span>
               <span class="one-minus">-</span>  
            </div>
@@ -535,22 +535,28 @@ var collectionHandle = "{{ collection.handle }}";
         <div></div>
         <ul class="store-filter-ul"><li>
           <label class="custom-checkbox-label" for="">
-            <input class="myCheckbox" type="checkbox">
+            <input class="myCheckbox" type="checkbox" name="filter.v.availability" value="true">
               <span class="checkmark"></span>
                 <span><span class="visual-display__child"></span></span>
                   <span>In stock</span>
                 </label>
               </li><li>
                 <label class="custom-checkbox-label" for="">
-                  <input class="myCheckbox" type="checkbox" >
+                  <input class="myCheckbox" type="checkbox" name="filter.v.availability" value="false">
               <span class="checkmark"></span>
                     <span><span class="visual-display__child"></span></span>
                   <span>Out of stock</span>
                 </label>
               </li></ul></div>
-    </details>
+    </details> -->
 
-  
+  <label for="availability-filter">Filter by Availability:</label>
+<select id="availability-filter">
+    <option value="all">All</option>
+    <option value="in_stock">In Stock</option>
+    <option value="out_of_stock">Out of Stock</option>
+</select>
+
 </div>
 <script>
   var detailsElements = document.querySelectorAll('.summary-global[data-disabled]');
