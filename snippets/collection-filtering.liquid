@@ -486,41 +486,7 @@ var collectionHandle = "{{ collection.handle }}";
       </div>
     </details>
   {%- endfor -%}
-
-      
-  <div class="both-btns">
-  <div class="apply-btn">
-              <input type="submit" value="Apply">
-            </div>
-
-      <p>
-      <a class="clear-all-btn clearn-btn-div" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
-    </p>
-
-    <!-- {%- for filter in collection.filters -%}
-      {%- if filter.type == "price_range" -%}
-        {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
-          <p>
-            <a href="{{ filter.url_to_remove }}">
-              {%- assign min_value = filter.min_value.value | default: 0 -%}
-              {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
-              {{ min_value | money }} - {{ max_value | money }} X
-            </a>
-          </p>
-        {%- endif -%}
-      {%- else -%}
-        {%- for filter_value in filter.active_values -%}
-          <p>
-            <a href="{{ filter_value.url_to_remove }}">
-              {{ filter.label }}: {{ filter_value.label }} X
-            </a>
-          </p>
-        {%- endfor -%}
-      {%- endif -%}
-    {%- endfor -%} -->
-  </div>
-
-  <details class="store_filtering">
+<details class="store_filtering">
       <summary class="summary-global">
         <div class="heading-filters">
           <span class="headss">Availability</span>
@@ -555,6 +521,40 @@ var collectionHandle = "{{ collection.handle }}";
         </ul>
       </div>
     </details>
+      
+  <div class="both-btns">
+  <div class="apply-btn">
+              <input type="submit" value="Apply">
+            </div>
+
+      <p>
+      <a class="clear-all-btn clearn-btn-div" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
+    </p>
+
+    <!-- {%- for filter in collection.filters -%}
+      {%- if filter.type == "price_range" -%}
+        {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+          <p>
+            <a href="{{ filter.url_to_remove }}">
+              {%- assign min_value = filter.min_value.value | default: 0 -%}
+              {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+              {{ min_value | money }} - {{ max_value | money }} X
+            </a>
+          </p>
+        {%- endif -%}
+      {%- else -%}
+        {%- for filter_value in filter.active_values -%}
+          <p>
+            <a href="{{ filter_value.url_to_remove }}">
+              {{ filter.label }}: {{ filter_value.label }} X
+            </a>
+          </p>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%} -->
+  </div>
+
+  
 </form>
 
 
