@@ -269,3 +269,13 @@ REBASE.theme = REBASE.theme || {};
     callbacks.splice(0); // clear callbacks array
   }
 })()
+
+
+// avaiabilty filter
+  const all_variants_dom = document.querySelectorAll('.custom-all-variants');
+    console.log("test", all_variants_dom);
+  
+  all_variants_dom.forEach((variant_div) => {
+    let variant_availability = variant_div.getAttribute('data-availability');
+    console.log(variant_availability);
+  })
