@@ -576,6 +576,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     availabilityCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
+          console.log(checkbox);
             // Update the array of checked values
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
