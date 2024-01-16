@@ -588,38 +588,6 @@ window.onload = function() {
     });
 }
 
-
-
-
-   
- inStockCheckbox.addEventListener('change', handleCheckboxChange);
-    outOfStockCheckbox.addEventListener('change', handleCheckboxChange);
-
-function handleCheckboxChange() {
-
-    var inStockSelected = inStockCheckbox.checked;
-    var outOfStockSelected = outOfStockCheckbox.checked;
-
-    filterProductsByAvailability(inStockSelected, outOfStockSelected);
-}
-
-function filterProductsByAvailability(inStockSelected, outOfStockSelected) {
-    var products = document.querySelectorAll('.custom-all-variants'); // Adjust the selector based on your HTML structure
-
-    products.forEach(function (product) {
-        var productAvailability = product.dataset.availability; // Use a data attribute to store the availability information
-
-        var isInStock = productAvailability === 'in_stock';
-        var isOutOfStock = productAvailability === 'out_of_stock';
-
-        if ((inStockSelected && isInStock) || (outOfStockSelected && isOutOfStock)) {
-            product.style.display = 'block';
-        } else {
-            product.style.display = 'none';
-        }
-    });
-}
-
 </script>
 
 </div>
