@@ -537,7 +537,7 @@ var collectionHandle = "{{ collection.handle }}";
           
           <li>
           <label class="custom-checkbox-label" for="">
-            <input class="myCheckbox" id="instock-variant" type="checkbox" value="true">
+            <input class="myCheckbox" id="instock_variant" type="checkbox" value="true">
               <span class="checkmark"></span>
                 <span><span class="visual-display__child"></span></span>
                   <span>In stock</span>
@@ -546,7 +546,7 @@ var collectionHandle = "{{ collection.handle }}";
           
           <li>
               <label class="custom-checkbox-label" for="">
-                <input class="myCheckbox" id="instock-variant" type="checkbox" value="false">
+                <input class="myCheckbox" id="outofstock_variant" type="checkbox" value="false">
                   <span class="checkmark"></span>
                   <span><span class="visual-display__child"></span></span>
                   <span>Out of stock</span>
@@ -560,12 +560,51 @@ var collectionHandle = "{{ collection.handle }}";
   window.onload = function() {
     const all_variants_dom = document.querySelectorAll('.custom-all-variants');
     console.log("test", all_variants_dom);
-  
+     let inStockCheckbox = document.getElementById('instock_variant');
+    let outOfStockCheckbox = document.getElementById('outofstock_variant');
+    
   all_variants_dom.forEach((variant_div) => {
     let variant_availability = variant_div.getAttribute('data-availability');
     console.log(variant_availability);
   })
 }
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var inStockCheckbox = document.getElementById('instock_variant');
+    var outOfStockCheckbox = document.getElementById('outofstock_variant');
+
+    inStockCheckbox.addEventListener('change', handleCheckboxChange);
+    outOfStockCheckbox.addEventListener('change', handleCheckboxChange);
+});
+
+function handleCheckboxChange() {
+    var inStockCheckbox = document.getElementById('instock_variant');
+    var outOfStockCheckbox = document.getElementById('outofstock_variant');
+
+    var inStockSelected = inStockCheckbox.checked;
+    var outOfStockSelected = outOfStockCheckbox.checked;
+
+    filterProductsByAvailability(inStockSelected, outOfStockSelected);
+}
+
+function filterProductsByAvailability(inStockSelected, outOfStockSelected) {
+    var products = document.querySelectorAll('.custom-all-variants'); // Adjust the selector based on your HTML structure
+
+    products.forEach(function (product) {
+        var productAvailability = product.dataset.availability; // Use a data attribute to store the availability information
+
+        var isInStock = productAvailability === 'in_stock';
+        var isOutOfStock = productAvailability === 'out_of_stock';
+
+        if ((inStockSelected && isInStock) || (outOfStockSelected && isOutOfStock)) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+}
+
 </script>
 
 </div>
