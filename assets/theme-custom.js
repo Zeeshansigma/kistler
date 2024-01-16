@@ -272,10 +272,12 @@ REBASE.theme = REBASE.theme || {};
 
 
 // avaiabilty filter
-  const all_variants_dom = document.querySelectorAll('.custom-all-variants');
+window.onload = function() {
+    const all_variants_dom = document.querySelectorAll('.custom-all-variants');
     console.log("test", all_variants_dom);
   
   all_variants_dom.forEach((variant_div) => {
     let variant_availability = variant_div.getAttribute('data-availability');
     console.log(variant_availability);
   })
+}
