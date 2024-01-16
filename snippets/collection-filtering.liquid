@@ -558,35 +558,44 @@ var collectionHandle = "{{ collection.handle }}";
     </details>
 <script>
    
-window.onload = function () {
-        const all_variants_dom = document.querySelectorAll('.custom-all-variants');
+document.addEventListener('DOMContentLoaded', function () {
+    const allVariantsDom = document.querySelectorAll('.custom-all-variants');
+    const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
+    const checkedValues = [];
 
+    availabilityCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            // Update the array of checked values
+            if (checkbox.checked) {
+                checkedValues.push(checkbox.value);
+            } else {
+                const index = checkedValues.indexOf(checkbox.value);
+                if (index !== -1) {
+                    checkedValues.splice(index, 1);
+                }
+            }
 
-        let availability_checks = document.querySelectorAll('.available_checkboxes');
-
-
-        all_variants_dom.forEach((variant_div) => {
-            let variant_availability = variant_div.getAttribute('data-availability');
-
-            availability_checks.forEach(function (check) {
-                check.addEventListener('change', function () {
-                    if (check.checked) {
-                        console.log("check", check);
-
-
-                        if (check.value === variant_availability) {
-                            variant_div.style.display = 'block';
-                        } else {
-                            variant_div.style.display = 'none';
-                        }
+            // Handle the display of variant divs
+            if (checkedValues.length === 0) {
+                // If no checkboxes are checked, show all variant divs
+                allVariantsDom.forEach(function (variantDiv) {
+                    variantDiv.style.display = 'block';
+                });
+            } else {
+                // If checkboxes are checked, filter variant divs based on checked values
+                allVariantsDom.forEach(function (variantDiv) {
+                    const variantAvailability = variantDiv.getAttribute('data-availability');
+                    if (checkedValues.includes(variantAvailability)) {
+                        variantDiv.style.display = 'block';
                     } else {
-                        variant_div.style.display = 'block';
-
+                        variantDiv.style.display = 'none';
                     }
                 });
-            });
+            }
         });
-    }
+    });
+});
+
 </script>
 
 </div>
