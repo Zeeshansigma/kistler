@@ -565,24 +565,28 @@ window.onload = function() {
     let availability_checks = document.querySelectorAll('.available_checkboxes');
     console.log('availability_checks', availability_checks);
 
-    all_variants_dom.forEach((variant_div) => {
+              availability_checks.forEach(function(check) {
+            check.addEventListener('change', function() {
+               
+
+           
+  all_variants_dom.forEach((variant_div) => {
         let variant_availability = variant_div.getAttribute('data-availability');
 
-        availability_checks.forEach(function(check) {
-            check.addEventListener('change', function() {
-             
-              
-                if (check.value === variant_availability) {
+    if (check.value === variant_availability) {
                   variant_div.style.display = 'block';
                 } 
                 else {
                   variant_div.style.display = 'none';
                   }
-                
-            
-
-            });
+                }
+                else {
+                    variant_div.style.display = 'block';
+                }
+             
+   
         });
+                 });
     });
 }
 
