@@ -558,29 +558,27 @@ var collectionHandle = "{{ collection.handle }}";
     </details>
 <script>
    
-  window.onload = function() {
+window.onload = function() {
     const all_variants_dom = document.querySelectorAll('.custom-all-variants');
     console.log("test", all_variants_dom);
-  let availability_checks = document.querySelectorAll('.available_checkboxes');
-console.log('availability_checks', availability_checks);
 
+    let availability_checks = document.querySelectorAll('.available_checkboxes');
+    console.log('availability_checks', availability_checks);
 
-    
-  all_variants_dom.forEach((variant_div) => {
-    let variant_availability = variant_div.getAttribute('data-availability');
+    all_variants_dom.forEach((variant_div) => {
+        let variant_availability = variant_div.getAttribute('data-availability');
 
-       availability_checks.forEach(function(check) {
-        check.addEventListener('change', function() {
-          if(check.value === variant_availability){
-            variant_div.style.display = 'block'
-          console.log(check.value + ' == '+ variant_availability);
-        }
-          else{
-             variant_div.style.display = 'none'
-          }
+        availability_checks.forEach(function(check) {
+            check.addEventListener('change', function() {
+                if (check.value === variant_availability) {
+                    variant_div.style.display = 'block';
+                    console.log(check.value + ' === ' + variant_availability);
+                } else {
+                    variant_div.style.display = 'none';
+                }
+            });
         });
     });
-  })
 }
 
 
