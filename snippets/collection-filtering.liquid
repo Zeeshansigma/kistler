@@ -579,11 +579,16 @@ window.onload = function() {
                     variant_div.style.display = 'block';
                 } else {
                     // Check individual checkbox value
-                    if (check.checked && check.value === variant_availability) {
+                  if (check.checked){
+                    if (check.value === variant_availability) {
                         variant_div.style.display = 'block';
                     } else {
                         variant_div.style.display = 'none';
                     }
+                  }else{
+                    variant_div.style.display = 'block';
+                    
+                  }
                 }
             });
         });
