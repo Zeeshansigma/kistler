@@ -571,7 +571,7 @@ window.onload = function() {
         availability_checks.forEach(function(check) {
             check.addEventListener('change', function() {
              
-
+                if(checkbox.checked){
                 if (check.value === variant_availability) {
                   variant_div.style.display = 'block';
                 } 
