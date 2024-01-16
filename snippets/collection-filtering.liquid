@@ -557,7 +557,7 @@ var collectionHandle = "{{ collection.handle }}";
       </div>
     </details>
 <script>
-     let availability_checks = document.getElementsByClassName('available_checkboxes');
+     let availability_checks = document.querySelectorAll('available_checkboxes');
 console.log('availability_checks', availability_checks);
   window.onload = function() {
     const all_variants_dom = document.querySelectorAll('.custom-all-variants');
