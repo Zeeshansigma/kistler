@@ -520,6 +520,35 @@ var collectionHandle = "{{ collection.handle }}";
     {%- endfor -%} -->
   </div>
 </form>
+
+  <details class="store_filtering">
+      <summary class="summary-global">
+        <div class="heading-filters">
+          <span class="headss">Availability my</span>
+           <div class="cust-icons"><span class="one-plus ">+</span>
+              <span class="one-minus">-</span>  
+           </div>
+        </div>
+      </summary>
+
+      <div>
+        <div></div>
+        <ul class="store-filter-ul"><li>
+          <label class="custom-checkbox-label" for="">
+            <input class="myCheckbox" type="checkbox">
+              <span class="checkmark"></span>
+                <span><span class="visual-display__child"></span></span>
+                  <span>In stock</span>
+                </label>
+              </li><li>
+                <label class="custom-checkbox-label" for="">
+                  <input class="myCheckbox" type="checkbox" >
+              <span class="checkmark"></span>
+                    <span><span class="visual-display__child"></span></span>
+                  <span>Out of stock</span>
+                </label>
+              </li></ul></div>
+    </details>
 </div>
 <script>
   var detailsElements = document.querySelectorAll('.summary-global[data-disabled]');
