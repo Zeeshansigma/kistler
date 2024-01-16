@@ -564,7 +564,12 @@ var collectionHandle = "{{ collection.handle }}";
   let availability_checks = document.querySelectorAll('.available_checkboxes');
 console.log('availability_checks', availability_checks);
 
-    
+       availability_checks.forEach(function(check) {
+        check.addEventListener('change', function() {
+
+          console.log(check.value);
+        });
+    });
     
   all_variants_dom.forEach((variant_div) => {
     let variant_availability = variant_div.getAttribute('data-availability');
@@ -572,19 +577,7 @@ console.log('availability_checks', availability_checks);
   })
 }
 
-   availability_checks.forEach(function(check) {
-        check.addEventListener('change', function() {
-            // Get label element
-          console.log(check.value);
 
-            // Add or remove 'checked' class based on checkbox status
-            if (this.checked) {
-                label.classList.add('checked');
-            } else {
-                label.classList.remove('checked');
-            }
-        });
-    });
 
    
  inStockCheckbox.addEventListener('change', handleCheckboxChange);
