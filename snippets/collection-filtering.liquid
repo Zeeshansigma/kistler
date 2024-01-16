@@ -520,7 +520,6 @@ var collectionHandle = "{{ collection.handle }}";
     {%- endfor -%} -->
   </div>
 </form>
-
 <details class="store_filtering">
       <summary class="summary-global">
         <div class="heading-filters">
@@ -537,8 +536,8 @@ var collectionHandle = "{{ collection.handle }}";
           
           <li>
           <label class="custom-checkbox-label" for="">
-            <input class="myCheckbox available_checkboxes" id="instock_variant" type="checkbox" value="true">
-              <span class="checkmark"></span>
+            <input class=" available_checkboxes" id="instock_variant" type="checkbox" value="true">
+              <!-- <span class="checkmark"></span> -->
                 <span><span class="visual-display__child"></span></span>
                   <span>In stock</span>
                 </label>
@@ -546,8 +545,8 @@ var collectionHandle = "{{ collection.handle }}";
           
           <li>
               <label class="custom-checkbox-label" for="">
-                <input class="myCheckbox available_checkboxes" id="outofstock_variant" type="checkbox" value="false">
-                  <span class="checkmark"></span>
+                <input class=" available_checkboxes" id="outofstock_variant" type="checkbox" value="false">
+                  <!-- <span class="checkmark"></span> -->
                   <span><span class="visual-display__child"></span></span>
                   <span>Out of stock</span>
               </label>
@@ -568,8 +567,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Update the array of checked values
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
-            }
-            else {
+            }else {
                 const index = checkedValues.indexOf(checkbox.value);
                 if (index !== -1) {
                     checkedValues.splice(index, 1);
