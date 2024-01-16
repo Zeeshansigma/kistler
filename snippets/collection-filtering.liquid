@@ -276,13 +276,6 @@ ul.store-filter-ul {
     color: #000;
     font-family: "GT America Compressed Bold","proxima-nova-extra-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-    .store-filter-ul li .myCheckbox.available_checkboxes {
-    z-index: 999;
-    left: 0;
-    width: auto;
-    height: auto;
-}
-
 </style>
 
 
@@ -542,22 +535,22 @@ var collectionHandle = "{{ collection.handle }}";
         <div></div>
         <ul class="store-filter-ul">
           
-        <li>
+          <li>
           <label class="custom-checkbox-label" for="">
             <input class="myCheckbox available_checkboxes" id="instock_variant" type="checkbox" value="true">
               <span class="checkmark"></span>
                 <span><span class="visual-display__child"></span></span>
-              <span>In stock</span>
-          </label>
-        </li>
+                  <span>In stock</span>
+                </label>
+              </li>
           
           <li>
-            <label class="custom-checkbox-label" for="">
-              <input class="myCheckbox available_checkboxes" id="outofstock_variant" type="checkbox" value="false">
-                <span class="checkmark"></span>
+              <label class="custom-checkbox-label" for="">
+                <input class="myCheckbox available_checkboxes" id="outofstock_variant" type="checkbox" value="false">
+                  <span class="checkmark"></span>
                   <span><span class="visual-display__child"></span></span>
-                <span>Out of stock</span>
-            </label>
+                  <span>Out of stock</span>
+              </label>
           </li>
         
         </ul>
