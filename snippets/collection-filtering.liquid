@@ -557,11 +557,14 @@ var collectionHandle = "{{ collection.handle }}";
       </div>
     </details>
 <script>
+     let inStockCheckbox = document.getElementById('instock_variant');
+    let outOfStockCheckbox = document.getElementById('outofstock_variant');
   window.onload = function() {
     const all_variants_dom = document.querySelectorAll('.custom-all-variants');
     console.log("test", all_variants_dom);
-     let inStockCheckbox = document.getElementById('instock_variant');
-    let outOfStockCheckbox = document.getElementById('outofstock_variant');
+
+
+    
     
   all_variants_dom.forEach((variant_div) => {
     let variant_availability = variant_div.getAttribute('data-availability');
@@ -570,13 +573,9 @@ var collectionHandle = "{{ collection.handle }}";
 }
 
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var inStockCheckbox = document.getElementById('instock_variant');
-    var outOfStockCheckbox = document.getElementById('outofstock_variant');
-
-    inStockCheckbox.addEventListener('change', handleCheckboxChange);
+   
+ inStockCheckbox.addEventListener('change', handleCheckboxChange);
     outOfStockCheckbox.addEventListener('change', handleCheckboxChange);
-});
 
 function handleCheckboxChange() {
     var inStockCheckbox = document.getElementById('instock_variant');
