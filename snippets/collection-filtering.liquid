@@ -568,7 +568,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Update the array of checked values
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
-            } else {
+            }
+            else {
                 const index = checkedValues.indexOf(checkbox.value);
                 if (index !== -1) {
                     checkedValues.splice(index, 1);
