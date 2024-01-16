@@ -54,7 +54,7 @@
 
 
 /* When the checkbox is checked, add a blue background */
-  .store-filter-ul li .myCheckbox:checked ~ .checkmark {
+  .store-filter-ul li .myCheckbox:checked ~ .checkmark, .store-filter-ul li .available_checkboxes:checked ~ .checkmark{
   background-color: #000;
   outline: 1px solid #000;
   outline-offset: 1px;
@@ -67,7 +67,7 @@
 }
 
 /* Show the checkmark when checked */
-  .store-filter-ul li .myCheckbox:checked ~ .checkmark:after {
+  .store-filter-ul li .myCheckbox:checked ~ .checkmark:after, .store-filter-ul li .available_checkboxes:checked ~ .checkmark:after {
   display: block;
 }
 
