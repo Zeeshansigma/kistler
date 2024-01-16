@@ -572,7 +572,7 @@ console.log('availability_checks', availability_checks);
            availability_checks.forEach(function(check) {
         check.addEventListener('change', function() {
           if(check.value == variant_availability)
-          console.log("matched divs", variant_div);
+          console.log(check.value + ' == '+ variant_availability);
         });
     });
   })
