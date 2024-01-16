@@ -537,7 +537,7 @@ var collectionHandle = "{{ collection.handle }}";
           
           <li>
           <label class="custom-checkbox-label" for="">
-            <input class="myCheckbox" id="instock_variant" type="checkbox" value="true">
+            <input class="myCheckbox available_checkboxes" id="instock_variant" type="checkbox" value="true">
               <span class="checkmark"></span>
                 <span><span class="visual-display__child"></span></span>
                   <span>In stock</span>
@@ -546,7 +546,7 @@ var collectionHandle = "{{ collection.handle }}";
           
           <li>
               <label class="custom-checkbox-label" for="">
-                <input class="myCheckbox" id="outofstock_variant" type="checkbox" value="false">
+                <input class="myCheckbox available_checkboxes" id="outofstock_variant" type="checkbox" value="false">
                   <span class="checkmark"></span>
                   <span><span class="visual-display__child"></span></span>
                   <span>Out of stock</span>
@@ -557,8 +557,8 @@ var collectionHandle = "{{ collection.handle }}";
       </div>
     </details>
 <script>
-     let inStockCheckbox = document.getElementById('instock_variant');
-    let outOfStockCheckbox = document.getElementById('outofstock_variant');
+     let availability_checks = document.getElementsByClassName('available_checkboxes');
+console.log('availability_checks', availability_checks);
   window.onload = function() {
     const all_variants_dom = document.querySelectorAll('.custom-all-variants');
     console.log("test", all_variants_dom);
