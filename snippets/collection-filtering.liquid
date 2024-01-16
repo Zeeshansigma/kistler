@@ -575,7 +575,7 @@ console.log('availability_checks', availability_checks);
    availability_checks.forEach(function(check) {
         check.addEventListener('change', function() {
             // Get label element
-          console.log(check.val());
+          console.log(check.value);
 
             // Add or remove 'checked' class based on checkbox status
             if (this.checked) {
