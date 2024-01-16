@@ -564,16 +564,17 @@ var collectionHandle = "{{ collection.handle }}";
   let availability_checks = document.querySelectorAll('.available_checkboxes');
 console.log('availability_checks', availability_checks);
 
-       availability_checks.forEach(function(check) {
-        check.addEventListener('change', function() {
 
-          console.log(check.value);
-        });
-    });
     
   all_variants_dom.forEach((variant_div) => {
     let variant_availability = variant_div.getAttribute('data-availability');
-    console.log(variant_availability);
+
+           availability_checks.forEach(function(check) {
+        check.addEventListener('change', function() {
+          if(check.value == variant_availability)
+          console.log("matched divs", variant_div);
+        });
+    });
   })
 }
 
