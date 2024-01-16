@@ -573,6 +573,8 @@ window.onload = function() {
              
                 if(check.checked){
                   console.log("check", check);
+                check.Attribute('disable', 'disabled').remove;
+                  
                 if (check.value === variant_availability) {
                   variant_div.style.display = 'block';
                 } 
