@@ -570,24 +570,19 @@ window.onload = function() {
 
         availability_checks.forEach(function(check) {
             check.addEventListener('change', function() {
-             
-                if(check.checked){
-                  console.log("check", check);
-                                 check.setAttribute('disabled', 'disabled');
-                if (check.value === variant_availability) {
-                  variant_div.style.display = 'block';
-                } 
-                else {
-                  variant_div.style.display = 'none';
-                  }
+                if (check.checked) {
+                    console.log("check", check);
+                    check.setAttribute('disabled', 'disabled');
+                    
+                    if (check.value === variant_availability) {
+                        variant_div.style.display = 'block';
+                    } else {
+                        variant_div.style.display = 'none';
+                    }
+                } else {
+                    variant_div.style.display = 'block';
+                    check.removeAttribute('disabled');
                 }
-              else{
-                  variant_div.style.display = 'block';
-                  check.removeAttribute('disabled');
-                
-              }
-             
-
             });
         });
     });
