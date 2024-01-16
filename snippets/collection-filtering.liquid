@@ -572,7 +572,7 @@ window.onload = function () {
                 check.addEventListener('change', function () {
                     if (check.checked) {
                         console.log("check", check);
-                        check.setAttribute('disabled', 'disabled');
+
 
                         if (check.value === variant_availability) {
                             variant_div.style.display = 'block';
@@ -581,7 +581,7 @@ window.onload = function () {
                         }
                     } else {
                         variant_div.style.display = 'block';
-                        check.removeAttribute('disabled');
+
                     }
                 });
             });
