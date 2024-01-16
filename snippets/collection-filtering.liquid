@@ -573,15 +573,16 @@ window.onload = function() {
              
                 if(check.checked){
                      console.log('Checkbox value:', check.value);
-                // console.log('Variant availability:', variant_availability);
-                }
-                if (check.value === variant_availability) {
+               
+                  if (check.value === variant_availability) {
                     variant_div.style.display = 'block';
                     // console.log('Match found!');
                 } else {
                     variant_div.style.display = 'none';
                     // console.log('No match.');
+                }// console.log('Variant availability:', variant_availability);
                 }
+                
             });
         });
     });
