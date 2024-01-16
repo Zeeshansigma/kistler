@@ -546,7 +546,7 @@ var collectionHandle = "{{ collection.handle }}";
           
           <li>
               <label class="custom-checkbox-label" for="">
-                <input class=" available_checkboxes" id="outofstock_variant" type="checkbox" disabled value="false">
+                <input class=" available_checkboxes" id="outofstock_variant" type="checkbox" value="false">
                   <!-- <span class="checkmark"></span> -->
                   <span><span class="visual-display__child"></span></span>
                   <span>Out of stock</span>
@@ -582,7 +582,7 @@ window.onload = function() {
                 }
               else{
                   variant_div.style.display = 'block';
-                check.
+                check.setAttribute('disabled');
                 
               }
              
