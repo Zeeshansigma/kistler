@@ -557,6 +557,7 @@ var collectionHandle = "{{ collection.handle }}";
       </div>
     </details>
 <script>
+   
 window.onload = function() {
     const all_variants_dom = document.querySelectorAll('.custom-all-variants');
     console.log("test", all_variants_dom);
@@ -564,32 +565,24 @@ window.onload = function() {
     let availability_checks = document.querySelectorAll('.available_checkboxes');
     console.log('availability_checks', availability_checks);
 
-    // Function to check if all checkboxes are checked
-    function areAllCheckboxesChecked() {
-        return Array.from(availability_checks).every(check => check.checked);
-    }
-
     all_variants_dom.forEach((variant_div) => {
         let variant_availability = variant_div.getAttribute('data-availability');
 
         availability_checks.forEach(function(check) {
             check.addEventListener('change', function() {
-                if (areAllCheckboxesChecked()) {
-                    // If all checkboxes are checked, display all elements
-                    variant_div.style.display = 'block';
-                } else {
-                    // Check individual checkbox value
-                  if (check.checked){
-                    if (check.value === variant_availability) {
-                        variant_div.style.display = 'block';
-                    } else {
-                        variant_div.style.display = 'none';
-                    }
-                  }else{
-                    variant_div.style.display = 'block';
-                    
+             
+                if(check.checked){
+                if (check.value === variant_availability) {
+                  variant_div.style.display = 'block';
+                } 
+                else {
+                  variant_div.style.display = 'none';
                   }
                 }
+                else {
+                    variant_div.style.display = 'block';
+                }
+
             });
         });
     });
