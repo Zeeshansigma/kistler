@@ -521,7 +521,7 @@ var collectionHandle = "{{ collection.handle }}";
   </div>
 </form>
 
-  <!-- <details class="store_filtering">
+<details class="store_filtering">
       <summary class="summary-global">
         <div class="heading-filters">
           <span class="headss">Availability</span>
@@ -533,26 +533,33 @@ var collectionHandle = "{{ collection.handle }}";
 
       <div>
         <div></div>
-        <ul class="store-filter-ul"><li>
+        <ul class="store-filter-ul">
+          
+          <li>
           <label class="custom-checkbox-label" for="">
-            <input class="myCheckbox" type="checkbox" name="filter.v.availability" value="true">
+            <input class="myCheckbox" type="checkbox" value="true">
               <span class="checkmark"></span>
                 <span><span class="visual-display__child"></span></span>
                   <span>In stock</span>
                 </label>
-              </li><li>
-                <label class="custom-checkbox-label" for="">
-                  <input class="myCheckbox" type="checkbox" name="filter.v.availability" value="false">
-              <span class="checkmark"></span>
-                    <span><span class="visual-display__child"></span></span>
+              </li>
+          
+          <li>
+              <label class="custom-checkbox-label" for="">
+                <input class="myCheckbox" type="checkbox" value="false">
+                  <span class="checkmark"></span>
+                  <span><span class="visual-display__child"></span></span>
                   <span>Out of stock</span>
-                </label>
-              </li></ul></div>
-    </details> -->
+              </label>
+          </li>
+        
+        </ul>
+      </div>
+    </details>
 
   <label for="availability-filter">Filter by Availability:</label>
 <select id="availability-filter">
-    <option value="in_stock">In Stock</option>
+    <input value="in_stock">In Stock</optio>
     <option value="out_of_stock">Out of Stock</option>
 </select>
 
