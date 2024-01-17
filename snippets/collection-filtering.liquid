@@ -541,8 +541,8 @@ var collectionHandle = "{{ collection.handle }}";
       <p>
       <a class="clear-all-btn clearn-btn-div" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
     </p>
-
-    <!-- {%- for filter in collection.filters -%}
+{% comment %}}
+    {%- for filter in collection.filters -%}
       {%- if filter.type == "price_range" -%}
         {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
           <p>
@@ -562,7 +562,9 @@ var collectionHandle = "{{ collection.handle }}";
           </p>
         {%- endfor -%}
       {%- endif -%}
-    {%- endfor -%} -->
+    {%- endfor -%}
+    {% endcomment %}
+    
   </div>
   
 </form>
