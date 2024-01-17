@@ -189,5 +189,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   {% render 'banana-stand-footer' %}
 {% if content_for_header contains 'store-locator.bsscommerce.com' %}{% include 'bss-store-locator-js-liquid' %}{% endif %}{% if content_for_header contains 'store-locator-api.bsscommerce.com' %}{% include 'bss-store-locator-js-liquid' %}{% endif %}
   {%- render 'flits_capture_code' with 'load_snippet',template:'flits_snippet' -%}
+
+  <script>
+    const Allcheckedfilterr = document.querySelectorAll(".custom-checkbox-label.checked");
+console.log("hii", Allcheckedfilterr);
+  </script>
 </body>
 </html>
