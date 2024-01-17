@@ -573,13 +573,13 @@ var collectionHandle = "{{ collection.handle }}";
    
 document.addEventListener('DOMContentLoaded', function () {
 
-
+     const allVariantsDom = document.querySelectorAll('.custom-all-variants');
+    const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
     const checkedValues = [];
 
     availabilityCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
-              const allVariantsDom = document.querySelectorAll('.custom-all-variants');
-    const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
+         
 
             // Update the array of checked values
             if (checkbox.checked) {
