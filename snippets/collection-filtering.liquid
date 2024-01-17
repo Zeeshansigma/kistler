@@ -574,6 +574,9 @@ var collectionHandle = "{{ collection.handle }}";
 document.addEventListener('DOMContentLoaded', function () {
     const allVariantsDom = document.querySelectorAll('.custom-all-variants');
     const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
+
+const Allcheckedfilter = document.querySelectorAll(".custom-checkbox-label.checked");
+console.log("hii", Allcheckedfilter)
     const checkedValues = [];
 
     availabilityCheckboxes.forEach(function (checkbox) {
