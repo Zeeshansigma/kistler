@@ -191,8 +191,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   {%- render 'flits_capture_code' with 'load_snippet',template:'flits_snippet' -%}
 
   <script>
-    const Allcheckedfilterr = document.querySelectorAll(".custom-checkbox-label.checked");
+    setTimeout(()=>{
+      const Allcheckedfilterr = document.querySelectorAll(".custom-checkbox-label.checked");
 console.log("hii", Allcheckedfilterr);
+    },500);
+    
   </script>
 </body>
 </html>
