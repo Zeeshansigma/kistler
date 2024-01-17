@@ -497,41 +497,7 @@ var collectionHandle = "{{ collection.handle }}";
   {%- endfor -%}
 
 
-<details class="store_filtering">
-      <summary class="summary-global">
-        <div class="heading-filters">
-          <span class="headss">Availability</span>
-           <div class="cust-icons"><span class="one-plus ">+</span>
-              <span class="one-minus">-</span>  
-           </div>
-        </div>
-      </summary>
 
-      <div>
-        <div></div>
-        <ul class="store-filter-ul ">
-          
-          <li>
-          <label class="custom-checkbox-label" for="instock_variants">
-            <input class="available_checkboxes" id="instock_variants" type="checkbox" value="true">
-              <span class="checkmark"></span>
-                <span><span class="visual-display__child"></span></span>
-                  <span>In stock</span>
-                </label>
-              </li>
-          
-          <li>
-              <label class="custom-checkbox-label" for="outofstock_variants">
-                <input class="available_checkboxes" id="outofstock_variants" type="checkbox" value="false">
-                  <span class="checkmark"></span>
-                  <span><span class="visual-display__child"></span></span>
-                  <span>Out of stock</span>
-              </label>
-          </li>
-        
-        </ul>
-      </div>
-    </details>
       
   <div class="both-btns">
   <div class="apply-btn">
@@ -568,7 +534,41 @@ var collectionHandle = "{{ collection.handle }}";
   </div>
   
 </form>
+<details class="store_filtering">
+      <summary class="summary-global">
+        <div class="heading-filters">
+          <span class="headss">Availability</span>
+           <div class="cust-icons"><span class="one-plus ">+</span>
+              <span class="one-minus">-</span>  
+           </div>
+        </div>
+      </summary>
 
+      <div>
+        <div></div>
+        <ul class="store-filter-ul ">
+          
+          <li>
+          <label class="custom-checkbox-label" for="instock_variants">
+            <input class="available_checkboxes" id="instock_variants" type="checkbox" value="true">
+              <span class="checkmark"></span>
+                <span><span class="visual-display__child"></span></span>
+                  <span>In stock</span>
+                </label>
+              </li>
+          
+          <li>
+              <label class="custom-checkbox-label" for="outofstock_variants">
+                <input class="available_checkboxes" id="outofstock_variants" type="checkbox" value="false">
+                  <span class="checkmark"></span>
+                  <span><span class="visual-display__child"></span></span>
+                  <span>Out of stock</span>
+              </label>
+          </li>
+        
+        </ul>
+      </div>
+    </details>
 <script>
    
 document.addEventListener('DOMContentLoaded', function () {
