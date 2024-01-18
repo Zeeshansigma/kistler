@@ -587,6 +587,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Trigger the initial display update on page load
     updateVariantDisplay();
+
+    // Add event listener for "filter-update" event
+    document.addEventListener('filter-update', updateVariantDisplay);
 });
 
 
