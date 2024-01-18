@@ -571,21 +571,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateVariantDisplay() {
+        console.log('Updating variant display');
         const allVariantsDom = getVariantDivs();
 
         if (checkedValues.length === 0) {
             // If no checkboxes are checked, show all variant divs
             allVariantsDom.forEach(function (variantDiv) {
-                  variantDiv.classList.remove('hidden');
+                variantDiv.style.display = 'block';
             });
         } else {
             // If checkboxes are checked, filter variant divs based on checked values
             allVariantsDom.forEach(function (variantDiv) {
                 const variantAvailability = variantDiv.getAttribute('data-availability');
                 if (checkedValues.includes(variantAvailability)) {
-                    variantDiv.classList.remove('hidden');
+                    variantDiv.style.display = 'block';
                 } else {
-                   variantDiv.classList.add('hidden');
+                    variantDiv.style.display = 'none';
                 }
             });
         }
@@ -594,6 +595,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Attach change event listeners to checkboxes
     availabilityCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
+            console.log('Checkbox change event');
             // Update the array of checked values
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
@@ -613,7 +615,10 @@ document.addEventListener('DOMContentLoaded', function () {
     updateVariantDisplay();
 
     // Add event listener for "filter-updated" event
-    document.addEventListener('filter-updated', updateVariantDisplay);
+    document.addEventListener('filter-updated', function () {
+        console.log('"filter-updated" event received');
+        updateVariantDisplay();
+    });
 });
 
 </script>
