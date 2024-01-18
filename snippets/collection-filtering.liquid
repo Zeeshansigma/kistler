@@ -564,45 +564,48 @@ background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation
    
 document.addEventListener('DOMContentLoaded', function () {
     const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
-
-    availabilityCheckboxes.forEach(function (checkbox) {
-        checkbox.addEventListener('change', function () {
-            updateVariantDisplay();
-        });
-    });
+    const checkedValues = [];
 
     function getVariantDivs() {
         // Fetch and return the latest variant_div elements from the DOM
         return document.querySelectorAll('.custom-all-variants');
     }
 
-    function updateVariantDisplay() {
-        const allVariantsDom = getVariantDivs();
-        const checkedAvailabilityValues = Array.from(availabilityCheckboxes)
-            .filter((checkbox) => checkbox.checked)
-            .map((checkbox) => checkbox.value);
+    availabilityCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            // Update the array of checked values
+            if (checkbox.checked) {
+                checkedValues.push(checkbox.value);
+            } else {
+                const index = checkedValues.indexOf(checkbox.value);
+                if (index !== -1) {
+                    checkedValues.splice(index, 1);
+                }
+            }
 
-        allVariantsDom.forEach(function (variantDiv) {
-            const variantAvailability = variantDiv.getAttribute('data-availability');
-            const availabilityMatch = checkedAvailabilityValues.length === 0 || checkedAvailabilityValues.includes(variantAvailability);
+            // Handle the display of variant divs
+            const allVariantsDom = getVariantDivs();
+            if (checkedValues.length === 0) {
+                // If no checkboxes are checked, show all variant divs
+                allVariantsDom.forEach(function (variantDiv) {
+                    variantDiv.style.display = 'block';
+                });
+            } else {
+                console.log(checkedValues);
 
-            variantDiv.style.display = availabilityMatch ? 'block' : 'none';
+                // If checkboxes are checked, filter variant divs based on checked values
+                allVariantsDom.forEach(function (variantDiv) {
+                    const variantAvailability = variantDiv.getAttribute('data-availability');
+                    if (checkedValues.includes(variantAvailability)) {
+                        variantDiv.style.display = 'block';
+                        console.log("test", variantDiv);
+                    } else {
+                        variantDiv.style.display = 'none';
+                        console.log("test", variantDiv);
+                    }
+                });
+            }
         });
-    }
-
-    // Initial update on page load
-    updateVariantDisplay();
-
-    // Listen for the custom 'filter-updated' event
-    window.addEventListener('filter-updated', function () {
-        // Update the variant display when the filters are updated
-        updateVariantDisplay();
-    });
-
-    // Listen for the 'popstate' event to handle changes in the browser history
-    window.addEventListener('popstate', function () {
-        // Update the variant display when the URL changes
-        updateVariantDisplay();
     });
 });
 
