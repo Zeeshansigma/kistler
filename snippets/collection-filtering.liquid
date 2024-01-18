@@ -567,7 +567,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function getVariantDivs() {
         // Fetch and return the latest variant_div elements from the DOM
-        return document.querySelectorAll('.custom-all-variants');
+        const variantDivs = document.querySelectorAll('.custom-all-variants');
+
+        // Update the display of variant divs based on checked values
+        updateVariantDisplay();
+
+        return variantDivs;
     }
 
     function updateVariantDisplay() {
