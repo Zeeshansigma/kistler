@@ -619,6 +619,11 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('"filter-updated" event received');
         updateVariantDisplay();
     });
+  window.addEventListener('filter-updated', function(event) {
+    console.log('Filter updated event received!', event);
+    // Your custom code to handle the event goes here
+});
+
 });
 
 </script>
