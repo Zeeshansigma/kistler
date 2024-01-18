@@ -685,6 +685,53 @@ elements.forEach(function(element) {
             var paramName = this.nextElementSibling.getAttribute('data-param-name');
             var paramValue = this.nextElementSibling.getAttribute('data-value');
           window.dispatchEvent(new Event('filter-updated'));
+               const allVariantsDom = document.querySelectorAll('.custom-all-variants');
+    const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
+    const checkedValues = [];
+
+    availabilityCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+         
+
+            // Update the array of checked values
+            if (checkbox.checked) {
+                checkedValues.push(checkbox.value);
+            }
+            else {
+                const index = checkedValues.indexOf(checkbox.value);
+                if (index !== -1) {
+                    checkedValues.splice(index, 1);
+                }
+            }
+
+            // Handle the display of variant divs
+            if (checkedValues.length === 0) {
+                // If no checkboxes are checked, show all variant divs
+                allVariantsDom.forEach(function (variantDiv) {
+                    variantDiv.style.display = 'block';
+                });
+              
+            } else {
+          console.log(checkedValues);
+              
+                // If checkboxes are checked, filter variant divs based on checked values
+                allVariantsDom.forEach(function (variantDiv) {
+                    const variantAvailability = variantDiv.getAttribute('data-availability');
+                    if (checkedValues.includes(variantAvailability)) {
+                        variantDiv.style.display = 'block';
+                        variantDiv.classList.add('block');
+                        // console.log("test",variantDiv)
+                    } else {
+                        variantDiv.style.display = 'none';
+                        // console.log("test", variantDiv)
+                        variantDiv.classList.add('none');
+                      
+                      
+                    }
+                });
+            }
+        });
+    });
         });
     });
 
