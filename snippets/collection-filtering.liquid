@@ -578,16 +578,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateVariantDisplay() {
         const allVariantsDom = getVariantDivs();
-
-        const checkedValues = Array.from(availabilityCheckboxes)
+        const checkedAvailabilityValues = Array.from(availabilityCheckboxes)
             .filter((checkbox) => checkbox.checked)
             .map((checkbox) => checkbox.value);
 
         allVariantsDom.forEach(function (variantDiv) {
             const variantAvailability = variantDiv.getAttribute('data-availability');
-            variantDiv.style.display = checkedValues.length === 0 || checkedValues.includes(variantAvailability)
-                ? 'block'
-                : 'none';
+            const availabilityMatch = checkedAvailabilityValues.length === 0 || checkedAvailabilityValues.includes(variantAvailability);
+
+            variantDiv.style.display = availabilityMatch ? 'block' : 'none';
         });
     }
 
