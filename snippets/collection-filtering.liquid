@@ -563,8 +563,6 @@ background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation
 <script>
    
 document.addEventListener('DOMContentLoaded', function () {
-
-document.addEventListener('DOMContentLoaded', function () {
     const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
 
     availabilityCheckboxes.forEach(function (checkbox) {
@@ -573,10 +571,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    function getVariantDivs() {
+        // Fetch and return the latest variant_div elements from the DOM
+        return document.querySelectorAll('.custom-all-variants');
+    }
+
     function updateVariantDisplay() {
-        // Fetch the latest variant_div elements from the DOM
-        const allVariantsDom = document.querySelectorAll('.custom-all-variants');
-        
+        const allVariantsDom = getVariantDivs();
+
         const checkedValues = Array.from(availabilityCheckboxes)
             .filter((checkbox) => checkbox.checked)
             .map((checkbox) => checkbox.value);
@@ -604,6 +606,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateVariantDisplay();
     });
 });
+
 
 </script>
 
