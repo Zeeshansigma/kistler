@@ -607,10 +607,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     const variantAvailability = variantDiv.getAttribute('data-availability');
                     if (checkedValues.includes(variantAvailability)) {
                         variantDiv.style.display = 'block';
-                      console.log("test",variantDiv)
+                        variantDiv.classList.add('block');
+                        console.log("test",variantDiv)
                     } else {
                         variantDiv.style.display = 'none';
-                      console.log("test", variantDiv)
+                        console.log("test", variantDiv)
+                        variantDiv.classList.add('none');
+                      
                       
                     }
                 });
