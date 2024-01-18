@@ -424,7 +424,9 @@ var collectionHandle = "{{ collection.handle }}";
                           {%- endunless -%}
                         {%- endfor -%}
                       {%- endcapture -%}
-                      <span style="width: 25px; height: 25px; border-radius: 50%; display: flex; justify-content: center; align-items: center; background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});"></span>
+                      <span style="width: 25px; height: 25px; border-radius: 50%; display: flex; justify-content: center;align-items: center;
+background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+"></span>
                       {%- when 'image' -%}
                       {{
                          filter_value.display.value
@@ -561,51 +563,43 @@ var collectionHandle = "{{ collection.handle }}";
 <script>
    
 document.addEventListener('DOMContentLoaded', function () {
+    const allVariantsDom = document.querySelectorAll('.custom-all-variants');
+    const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
+    const checkedValues = [];
 
-    //  const allVariantsDom = document.querySelectorAll('.custom-all-variants');
-    // const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
-    // const checkedValues = [];
+    availabilityCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            // Update the array of checked values
+            if (checkbox.checked) {
+                checkedValues.push(checkbox.value);
+            } else {
+                const index = checkedValues.indexOf(checkbox.value);
+                if (index !== -1) {
+                    checkedValues.splice(index, 1);
+                }
+            }
 
-    // availabilityCheckboxes.forEach(function (checkbox) {
-    //     checkbox.addEventListener('change', function () {
-         
-
-    //         // Update the array of checked values
-    //         if (checkbox.checked) {
-    //             checkedValues.push(checkbox.value);
-    //         }
-    //         else {
-    //             const index = checkedValues.indexOf(checkbox.value);
-    //             if (index !== -1) {
-    //                 checkedValues.splice(index, 1);
-    //             }
-    //         }
-
-    //         // Handle the display of variant divs
-    //         if (checkedValues.length === 0) {
-    //             // If no checkboxes are checked, show all variant divs
-    //             allVariantsDom.forEach(function (variantDiv) {
-    //                 variantDiv.style.display = 'block';
-    //             });
-              
-    //         } else {
-    //       console.log(checkedValues);
-              
-    //             // If checkboxes are checked, filter variant divs based on checked values
-    //             allVariantsDom.forEach(function (variantDiv) {
-    //                 const variantAvailability = variantDiv.getAttribute('data-availability');
-    //                 if (checkedValues.includes(variantAvailability)) {
-    //                     variantDiv.style.display = 'block';
-    //                     console.log("test", variantDiv);
-    //                 } else {
-    //                     variantDiv.style.display = 'none';
-    //                     console.log("test", variantDiv)
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
+            // Handle the display of variant divs
+            if (checkedValues.length === 0) {
+                // If no checkboxes are checked, show all variant divs
+                allVariantsDom.forEach(function (variantDiv) {
+                    variantDiv.style.display = 'block';
+                });
+            } else {
+                // If checkboxes are checked, filter variant divs based on checked values
+                allVariantsDom.forEach(function (variantDiv) {
+                    const variantAvailability = variantDiv.getAttribute('data-availability');
+                    if (checkedValues.includes(variantAvailability)) {
+                        variantDiv.style.display = 'block';
+                    } else {
+                        variantDiv.style.display = 'none';
+                    }
+                });
+            }
+        });
+    });
 });
+
 
 </script>
 
@@ -664,8 +658,6 @@ elements.forEach(function(element) {
             }
         });
     });
-    const checkedValues = [];
-  
   document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
             // Get filter information from data attributes
@@ -675,6 +667,7 @@ elements.forEach(function(element) {
           
      const allVariantsDom = document.querySelectorAll('.custom-all-variants');
     const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
+    const checkedValues = [];
 
     availabilityCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
