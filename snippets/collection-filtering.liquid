@@ -316,6 +316,8 @@ var collectionHandle = "{{ collection.handle }}";
   } finally {
     loading = false;
   }
+        updateVariantDisplay();
+    
  });
 
 </script>
@@ -690,7 +692,6 @@ elements.forEach(function(element) {
             var paramName = this.nextElementSibling.getAttribute('data-param-name');
             var paramValue = this.nextElementSibling.getAttribute('data-value');
           window.dispatchEvent(new Event('filter-updated'));
-        updateVariantDisplay();
           
         });
     });
