@@ -561,7 +561,6 @@ background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation
 </form>
 
 <script>
-   
 document.addEventListener('DOMContentLoaded', function () {
     const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
     const checkedValues = [];
@@ -571,6 +570,28 @@ document.addEventListener('DOMContentLoaded', function () {
         return document.querySelectorAll('.custom-all-variants');
     }
 
+    function updateVariantDisplay() {
+        const allVariantsDom = getVariantDivs();
+
+        if (checkedValues.length === 0) {
+            // If no checkboxes are checked, show all variant divs
+            allVariantsDom.forEach(function (variantDiv) {
+                variantDiv.style.display = 'block';
+            });
+        } else {
+            // If checkboxes are checked, filter variant divs based on checked values
+            allVariantsDom.forEach(function (variantDiv) {
+                const variantAvailability = variantDiv.getAttribute('data-availability');
+                if (checkedValues.includes(variantAvailability)) {
+                    variantDiv.style.display = 'block';
+                } else {
+                    variantDiv.style.display = 'none';
+                }
+            });
+        }
+    }
+
+    // Attach change event listeners to checkboxes
     availabilityCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
             // Update the array of checked values
@@ -584,30 +605,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // Handle the display of variant divs
-            const allVariantsDom = getVariantDivs();
-            if (checkedValues.length === 0) {
-                // If no checkboxes are checked, show all variant divs
-                allVariantsDom.forEach(function (variantDiv) {
-                    variantDiv.style.display = 'block';
-                });
-            } else {
-                console.log(checkedValues);
-
-                // If checkboxes are checked, filter variant divs based on checked values
-                allVariantsDom.forEach(function (variantDiv) {
-                    const variantAvailability = variantDiv.getAttribute('data-availability');
-                    if (checkedValues.includes(variantAvailability)) {
-                        variantDiv.style.display = 'block';
-                        console.log("test", variantDiv);
-                    } else {
-                        variantDiv.style.display = 'none';
-                        console.log("test", variantDiv);
-                    }
-                });
-            }
+            updateVariantDisplay();
         });
     });
+
+    // Trigger the change event to apply the functionality on page load
+    updateVariantDisplay();
 });
+
 
 
 </script>
