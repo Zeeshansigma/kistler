@@ -589,7 +589,7 @@ document.addEventListener('DOMContentLoaded', function () {
     updateVariantDisplay();
 
     // Add event listener for "filter-update" event
-    document.addEventListener('filter-updated', updateVariantDisplay);
+    document.addEventListener('filter-update', updateVariantDisplay);
 });
 
 
@@ -658,6 +658,7 @@ elements.forEach(function(element) {
             var paramValue = this.nextElementSibling.getAttribute('data-value');
           window.dispatchEvent(new Event('filter-updated'));
           
+
         });
     });
 
