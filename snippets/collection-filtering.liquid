@@ -563,58 +563,29 @@ background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
-    const checkedValues = [];
-
-    function getVariantDivs() {
-        // Fetch and return the latest variant_div elements from the DOM
-        const variantDivs = document.querySelectorAll('.custom-all-variants');
-
-        // Update the display of variant divs based on checked values
-        updateVariantDisplay();
-
-        return variantDivs;
-    }
+    const variantDivs = document.querySelectorAll('.custom-all-variants');
 
     function updateVariantDisplay() {
-        const allVariantsDom = getVariantDivs();
+        const checkedValues = Array.from(availabilityCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
 
-        if (checkedValues.length === 0) {
-            // If no checkboxes are checked, show all variant divs
-            allVariantsDom.forEach(function (variantDiv) {
+        variantDivs.forEach(function (variantDiv) {
+            const variantAvailability = variantDiv.getAttribute('data-availability');
+            if (checkedValues.length === 0 || checkedValues.includes(variantAvailability)) {
                 variantDiv.style.display = 'block';
-            });
-        } else {
-            // If checkboxes are checked, filter variant divs based on checked values
-            allVariantsDom.forEach(function (variantDiv) {
-                const variantAvailability = variantDiv.getAttribute('data-availability');
-                if (checkedValues.includes(variantAvailability)) {
-                    variantDiv.style.display = 'block';
-                } else {
-                    variantDiv.style.display = 'none';
-                }
-            });
-        }
+            } else {
+                variantDiv.style.display = 'none';
+            }
+        });
     }
 
     // Attach change event listeners to checkboxes
     availabilityCheckboxes.forEach(function (checkbox) {
-        checkbox.addEventListener('change', function () {
-            // Update the array of checked values
-            if (checkbox.checked) {
-                checkedValues.push(checkbox.value);
-            } else {
-                const index = checkedValues.indexOf(checkbox.value);
-                if (index !== -1) {
-                    checkedValues.splice(index, 1);
-                }
-            }
-
-            // Handle the display of variant divs
-            updateVariantDisplay();
-        });
+        checkbox.addEventListener('change', updateVariantDisplay);
     });
 
-    // Trigger the change event to apply the functionality on page load
+    // Trigger the initial display update on page load
     updateVariantDisplay();
 });
 
