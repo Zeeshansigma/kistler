@@ -573,49 +573,49 @@ var collectionHandle = "{{ collection.handle }}";
    
 document.addEventListener('DOMContentLoaded', function () {
 
-     const allVariantsDom = document.querySelectorAll('.custom-all-variants');
-    const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
-    const checkedValues = [];
+    //  const allVariantsDom = document.querySelectorAll('.custom-all-variants');
+    // const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
+    // const checkedValues = [];
 
-    availabilityCheckboxes.forEach(function (checkbox) {
-        checkbox.addEventListener('change', function () {
+    // availabilityCheckboxes.forEach(function (checkbox) {
+    //     checkbox.addEventListener('change', function () {
          
 
-            // Update the array of checked values
-            if (checkbox.checked) {
-                checkedValues.push(checkbox.value);
-            }
-            else {
-                const index = checkedValues.indexOf(checkbox.value);
-                if (index !== -1) {
-                    checkedValues.splice(index, 1);
-                }
-            }
+    //         // Update the array of checked values
+    //         if (checkbox.checked) {
+    //             checkedValues.push(checkbox.value);
+    //         }
+    //         else {
+    //             const index = checkedValues.indexOf(checkbox.value);
+    //             if (index !== -1) {
+    //                 checkedValues.splice(index, 1);
+    //             }
+    //         }
 
-            // Handle the display of variant divs
-            if (checkedValues.length === 0) {
-                // If no checkboxes are checked, show all variant divs
-                allVariantsDom.forEach(function (variantDiv) {
-                    variantDiv.style.display = 'block';
-                });
+    //         // Handle the display of variant divs
+    //         if (checkedValues.length === 0) {
+    //             // If no checkboxes are checked, show all variant divs
+    //             allVariantsDom.forEach(function (variantDiv) {
+    //                 variantDiv.style.display = 'block';
+    //             });
               
-            } else {
-          console.log(checkedValues);
+    //         } else {
+    //       console.log(checkedValues);
               
-                // If checkboxes are checked, filter variant divs based on checked values
-                allVariantsDom.forEach(function (variantDiv) {
-                    const variantAvailability = variantDiv.getAttribute('data-availability');
-                    if (checkedValues.includes(variantAvailability)) {
-                        variantDiv.style.display = 'block';
-                        console.log("test", variantDiv);
-                    } else {
-                        variantDiv.style.display = 'none';
-                        console.log("test", variantDiv)
-                    }
-                });
-            }
-        });
-    });
+    //             // If checkboxes are checked, filter variant divs based on checked values
+    //             allVariantsDom.forEach(function (variantDiv) {
+    //                 const variantAvailability = variantDiv.getAttribute('data-availability');
+    //                 if (checkedValues.includes(variantAvailability)) {
+    //                     variantDiv.style.display = 'block';
+    //                     console.log("test", variantDiv);
+    //                 } else {
+    //                     variantDiv.style.display = 'none';
+    //                     console.log("test", variantDiv)
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
 });
 
 </script>
