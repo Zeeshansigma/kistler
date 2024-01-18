@@ -587,12 +587,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 const variantAvailability = variantDiv.getAttribute('data-availability');
                 if (checkedValues.includes(variantAvailability)) {
                     variantDiv.style.display = 'block';
-
+                    console.log("test", variantDiv);
                 } else {
                     variantDiv.style.display = 'none';
+                    console.log("test", variantDiv);
                 }
             });
         }
+    }
+
+    function updateCheckedValuesFromURL() {
+        // Logic to extract checkbox values or other relevant data from the URL
+        // and update the checkedValues array accordingly
+        // For example, you can parse the URL and extract values from query parameters.
+        // Assume the URL is like "?checkedValues=value1,value2"
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlCheckedValues = urlParams.get('checkedValues');
+        checkedValues = urlCheckedValues ? urlCheckedValues.split(',') : [];
     }
 
     availabilityCheckboxes.forEach(function (checkbox) {
@@ -612,10 +623,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Update checkedValues from URL when the page loads
+    updateCheckedValuesFromURL();
+
     // Initial update when the page loads
     updateVariantDisplay();
 });
-
 
 
 </script>
