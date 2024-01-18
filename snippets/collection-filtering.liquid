@@ -664,6 +664,8 @@ elements.forEach(function(element) {
             }
         });
     });
+    const checkedValues = [];
+  
   document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
             // Get filter information from data attributes
@@ -673,7 +675,6 @@ elements.forEach(function(element) {
           
      const allVariantsDom = document.querySelectorAll('.custom-all-variants');
     const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
-    const checkedValues = [];
 
     availabilityCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
