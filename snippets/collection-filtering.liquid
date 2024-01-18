@@ -563,16 +563,20 @@ background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation
 <script>
    
 document.addEventListener('DOMContentLoaded', function () {
-    const allVariantsDom = document.querySelectorAll('.custom-all-variants');
+
+     const allVariantsDom = document.querySelectorAll('.custom-all-variants');
     const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
     const checkedValues = [];
 
     availabilityCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
+         
+
             // Update the array of checked values
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
-            } else {
+            }
+            else {
                 const index = checkedValues.indexOf(checkbox.value);
                 if (index !== -1) {
                     checkedValues.splice(index, 1);
@@ -585,23 +589,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 allVariantsDom.forEach(function (variantDiv) {
                     variantDiv.style.display = 'block';
                 });
+              
             } else {
+          console.log(checkedValues);
+              
                 // If checkboxes are checked, filter variant divs based on checked values
                 allVariantsDom.forEach(function (variantDiv) {
                     const variantAvailability = variantDiv.getAttribute('data-availability');
                     if (checkedValues.includes(variantAvailability)) {
                         variantDiv.style.display = 'block';
+                        console.log("test", variantDiv);
                     } else {
                         variantDiv.style.display = 'none';
+                        console.log("test", variantDiv)
                     }
                 });
             }
         });
-    });
-});
-  window.addEventListener('filter-updated', function () {
-        // Update the variant display when the filters are updated
-        updateVariantDisplay();
     });
 });
 
