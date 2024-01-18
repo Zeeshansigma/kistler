@@ -599,7 +599,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
+  window.addEventListener('filter-updated', function () {
+        // Update the variant display when the filters are updated
+        updateVariantDisplay();
+    });
+});
 
 </script>
 
