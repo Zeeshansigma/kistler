@@ -611,8 +611,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Trigger the change event to apply the functionality on page load
     updateVariantDisplay();
+  
 });
-
+document.addEventListener('filter-updated', updateVariantDisplay);
 </script>
 
 </div>
