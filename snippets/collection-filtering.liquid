@@ -583,9 +583,9 @@ document.addEventListener('DOMContentLoaded', function () {
             allVariantsDom.forEach(function (variantDiv) {
                 const variantAvailability = variantDiv.getAttribute('data-availability');
                 if (checkedValues.includes(variantAvailability)) {
-                    variantDiv.style.display = 'block';
+                    variantDiv.classList.remove('hidden');
                 } else {
-                    variantDiv.style.display = 'none';
+                   variantDiv.classList.add('hidden');
                 }
             });
         }
