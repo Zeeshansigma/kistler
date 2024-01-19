@@ -1,746 +1,779 @@
+<script></script>
 
+<div class="widget widget--filtering">
+  {% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
+  {% assign for_swatches = settings.swatches_filtering | split: ',' %}
+  {% assign for_accordion = settings.accordion_filtering | split: ',' %}
 
-<script>
+  <form id="filter_form">
+    {%- for filter in collection.filters -%}
+      <details
+        class="store_filtering "
+        style="display: block;"
+        {% for accordion in for_accordion %}
+          {%- if filter.label == accordion %}open data-disabled="true"{% endif -%}
+        {% endfor %}
+      >
+        <summary
+          class="summary-global"
+          {% for accordion in for_accordion %}
+            {%- if filter.label == accordion %} data-disabled="true" {% endif -%}
+          {% endfor %}
+        >
+          <div class="heading-filters">
+            <span class="headss">{{ filter.label }}</span>
 
+            <div class="cust-icons">
+              {%- if filter.active_values.size > 0 -%}
+                <span>({{ filter.active_values.size }})</span>
+              {%- endif -%}
 
+              <span class="one-plus {% for accordion in for_accordion %}{% if filter.label == accordion %}hide{% endif %}{% endfor %}"
+                >+</span
+              >
+              <span class="one-minus{% for accordion in for_accordion %}{% if filter.label == accordion %} hide{% endif %}{% endfor %}"
+                >-</span
+              >
+            </div>
+          </div>
+        </summary>
 
-</script>
-
-<div class="widget widget--filtering"> 
-{% assign for_checkboxes = settings.checkbox_filtering | split: ',' %}
-{% assign for_swatches = settings.swatches_filtering | split: ',' %}
-{% assign for_accordion = settings.accordion_filtering | split: ',' %}
-
-<form id="filter_form">
-
-  {%- for filter in collection.filters -%}
-    <details class="store_filtering " style="display: block;" {% for accordion in for_accordion %}{% if filter.label == accordion %}open data-disabled="true"{% endif %}{% endfor %}>
-      <summary class="summary-global" {% for accordion in for_accordion %}{% if filter.label == accordion %} data-disabled="true" {% endif %}{% endfor %}>
-        <div class="heading-filters">
-          <span class="headss">{{ filter.label }}</span>
- 
-          <div class="cust-icons">
-        
-    {%- if filter.active_values.size > 0 -%}
-            <span>({{ filter.active_values.size }})</span>
-          {%- endif -%}
-    
-   <span class="one-plus {% for accordion in for_accordion %}{% if filter.label == accordion %}hide{% endif %}{% endfor %}">+</span>
-          <span class="one-minus{% for accordion in for_accordion %}{% if filter.label == accordion %} hide{% endif %}{% endfor %}">-</span>  
-    </div>
-        </div>
-      </summary>
-
-      <div>
         <div>
-          <!-- <p>{{ filter.active_values.size }} selected</p> -->
-          {%- if filter.active_values.size > 0 -%}
-            <p><a href="{{ filter.url_to_remove }}">Reset</a></p>
-          {%- endif -%}
-        </div>
-        {%- case filter.type -%}
-          {%- when 'boolean' -%}
-            <ul class="{{ filter.label }}">
+          <div>
+            <!-- <p>{{ filter.active_values.size }} selected</p> -->
+            {%- if filter.active_values.size > 0 -%}
+              <p><a href="{{ filter.url_to_remove }}">Reset</a></p>
+            {%- endif -%}
+          </div>
+          {%- case filter.type -%}
+            {%- when 'boolean' -%}
+              <ul class="{{ filter.label }}">
                 <li class="{{ filter.true_value.value }}">
                   <label for="Filter-{{ filter.param_name }}-{{ filter.true_value.value }}">
-                  <input type="checkbox" 
-                    name="{{ filter.param_name }}"
-                    value="{{ filter.true_value.value }}"
-                    id="Filter-{{ filter.param_name }}"
-                    {% if filter.true_value.active -%}checked{%- endif %}
-                    {% if filter.true_value.count == 0 and filter.true_value.active == false -%}disabled{%- endif -%}
-                  >{{ filter.true_value.label }}</label>
+                    <input
+                      type="checkbox"
+                      name="{{ filter.param_name }}"
+                      value="{{ filter.true_value.value }}"
+                      id="Filter-{{ filter.param_name }}"
+                      {% if filter.true_value.active -%}
+                        checked
+                      {%- endif %}
+                      {% if filter.true_value.count == 0 and filter.true_value.active == false -%}
+                        disabled
+                      {%- endif -%}
+                    >
+                    {{- filter.true_value.label -}}
+                  </label>
                 </li>
                 <li class="{{ filter.true_value.value }}">
                   <label for="Filter-{{ filter.param_name }}-{{ filter.false_value.value }}">
-                  <input type="checkbox" 
-                    name="{{ filter.param_name }}"
-                    value="{{ filter.false_value.value }}"
-                    id="Filter-{{ filter.param_name }}"
-                    {% if filter.false_value.active -%}checked{%- endif %}
-                    {% if filter.false_value.count == 0 and filter.false_value.active == false -%}disabled{%- endif %}
-                  >{{ filter.false_value.label }}</label>
+                    <input
+                      type="checkbox"
+                      name="{{ filter.param_name }}"
+                      value="{{ filter.false_value.value }}"
+                      id="Filter-{{ filter.param_name }}"
+                      {% if filter.false_value.active -%}
+                        checked
+                      {%- endif %}
+                      {% if filter.false_value.count == 0 and filter.false_value.active == false -%}
+                        disabled
+                      {%- endif %}
+                    >
+                    {{- filter.false_value.label -}}
+                  </label>
                 </li>
-            </ul>
+              </ul>
 
-            <div class="clearn-btn-div">
-              <input type="submit" value="Apply">
-            </div>
+              <div class="clearn-btn-div">
+                <input type="submit" value="Apply">
+              </div>
 
+            {%- when 'list' -%}
+              <ul
+                class="
+                  store-filter-ul{% for checkb in for_checkboxes %}{% if filter.label == checkb %} apply_checkbox{% endif %}{% endfor %}
+                  {% for checks in for_swatches %}{% if filter.label == checks %} apply_swatches{% endif %}{% endfor %}
+                "
+              >
+                {%- for filter_value in filter.values -%}
+                  <li>
+                    <label
+                      class="custom-checkbox-label"
+                      for="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                      {% if filter_value.count == 0 and filter_value.active == false -%}
+                        disabled
+                      {%- endif %}
+                    >
+                      <input
+                        class="myCheckbox"
+                        type="checkbox"
+                        name="{{ filter_value.param_name }}"
+                        value="{{ filter_value.value }}"
+                        id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
+                        {% if filter_value.active -%}
+                          checked
+                        {%- endif %}
+                        {% if filter_value.count == 0 and filter_value.active == false -%}
+                          disabled
+                        {%- endif %}
+                      >
 
+                      <span class="checkmark"></span>
+                      <span>
+                        {%- case filter_value.display.type -%}
+                          {%- when 'colors' -%}
+                            {% liquid
+                              assign size_limit = filter_value.display.value.size | at_most: 4
+                              assign rotation = '0deg'
+                              if size_limit == 2
+                                assign rotation = '45deg'
+                              endif
 
-
-          
-          {%- when 'list' -%}
-          <ul class="store-filter-ul{% for checkb in for_checkboxes %}{% if filter.label == checkb %} apply_checkbox{% endif %}{% endfor %}
-            {% for checks in for_swatches %}{% if filter.label == checks %} apply_swatches{% endif %}{% endfor %}">
-              {%- for filter_value in filter.values -%}
-              
-              <li>
-                <label class="custom-checkbox-label" for="Filter-{{ filter.param_name }}-{{ forloop.index }}" {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
-       
-                  <input
-                    class="myCheckbox"
-                    type="checkbox"
-                    name="{{ filter_value.param_name }}"
-                    value="{{ filter_value.value }}"
-                    id="Filter-{{ filter.param_name }}-{{ forloop.index }}"
-                    {% if filter_value.active -%}checked{%- endif %}
-                    {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
-                  >
-  
-                  
-              <span class="checkmark"></span>
-                    <span>
-                      {%- case filter_value.display.type -%}
-                        {%- when 'colors' -%}
-                          {% liquid
-                            assign size_limit = filter_value.display.value.size | at_most: 4
-                            assign rotation = '0deg'
-                            if size_limit == 2
-                              assign rotation = '45deg'
-                            endif
-
-                            assign angle_increment = 360 | divided_by: size_limit
-                            assign angle = 0
-                          %}
-                      {%- capture conic_gradient -%}
+                              assign angle_increment = 360 | divided_by: size_limit
+                              assign angle = 0
+                            %}
+                            {%- capture conic_gradient -%}
                         {%- for color in filter_value.display.value limit: size_limit -%}
                           {{ color }} {{ angle }}deg{%- assign angle = angle | plus: angle_increment %} {{ angle }}deg{%- unless forloop.last %},
                           {%- endunless -%}
                         {%- endfor -%}
                       {%- endcapture -%}
-                      <span style="width: 25px; height: 25px; border-radius: 50%; display: flex; justify-content: center;align-items: center;
-background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
-"></span>
-                      {%- when 'image' -%}
-                      {{
-                         filter_value.display.value
-                       | image_url: width: 25
-                       | image_tag: alt: filter_value.display.value.alt }}
-                    {%- else -%}
-                      <span class="visual-display__child"></span>
-                    {%- endcase -%}
-                  </span>
-                  <span>{{ filter_value.label }}</span>
-                </label>
-              </li>
-            {%- endfor -%}
-          </ul>
+                            <span
+                              style="
+                                width: 25px; height: 25px; border-radius: 50%; display: flex; justify-content: center;align-items: center;
+                                background: conic-gradient({{ conic_gradient }}); transform: rotateZ({{ rotation }});
+                              "
+                            ></span>
+                          {%- when 'image' -%}
+                            {{
+                              filter_value.display.value
+                              | image_url: width: 25
+                              | image_tag: alt: filter_value.display.value.alt
+                            }}
+                          {%- else -%}
+                            <span class="visual-display__child"></span>
+                        {%- endcase -%}
+                      </span>
+                      <span>{{ filter_value.label }}</span>
+                    </label>
+                  </li>
+                {%- endfor -%}
+              </ul>
 
-            
-          {%- when 'price_range' -%}
-            <div class="filter-group-display__price-range">
-              <div class="filter-group-display__price-range-from">
-                <span>{{ cart.currency.symbol }}</span>
+            {%- when 'price_range' -%}
+              <div class="filter-group-display__price-range">
+                <div class="filter-group-display__price-range-from">
+                  <span>{{ cart.currency.symbol }}</span>
 
-                <input name="{{ filter.min_value.param_name }}"
-                  id="Filter-{{ filter.min_value.param_name }}"
-                  {% if filter.min_value.value -%}
-                    value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
-                  {%- endif %}
-                  type="number"
-                  placeholder="0"
-                  min="0"
-                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                >
+                  <input
+                    name="{{ filter.min_value.param_name }}"
+                    id="Filter-{{ filter.min_value.param_name }}"
+                    {% if filter.min_value.value -%}
+                      value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                    {%- endif %}
+                    type="number"
+                    placeholder="0"
+                    min="0"
+                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  >
 
-                <label for="Filter-{{ filter.min_value.param_name }}">From</label>
+                  <label for="Filter-{{ filter.min_value.param_name }}">From</label>
+                </div>
+                <div class="filter-group-display__price-range-to">
+                  <span>{{ cart.currency.symbol }}</span>
+
+                  <input
+                    name="{{ filter.max_value.param_name }}"
+                    id="Filter-{{ filter.max_value.param_name }}"
+                    {% if filter.max_value.value -%}
+                      value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                    {%- endif %}
+                    type="number"
+                    placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                    min="0"
+                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  >
+
+                  <label for="Filter-{{ filter.max_value.param_name }}">To</label>
+                </div>
               </div>
-              <div class="filter-group-display__price-range-to">
-                <span>{{ cart.currency.symbol }}</span>
 
-                <input name="{{ filter.max_value.param_name }}"
-                  id="Filter-{{ filter.max_value.param_name }}"
-                  {% if filter.max_value.value -%}
-                    value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
-                  {%- endif %}
-                  type="number"
-                  placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                  min="0"
-                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                >
+              <!--
+                <div class="filter-group-display__submit">
+                  <input type="submit" value="Apply">
+                </div>
+              -->
+          {%- endcase -%}
+        </div>
+      </details>
+    {%- endfor -%}
 
-                <label for="Filter-{{ filter.max_value.param_name }}">To</label>
-              </div>
-            </div>
-
-            <!-- <div class="filter-group-display__submit">
-              <input type="submit" value="Apply">
-            </div> -->
-        {%- endcase -%}
-      </div>
-    </details>
-  {%- endfor -%}
-
-
-<details class="store_filtering">
+    <details class="store_filtering">
       <summary class="summary-global">
         <div class="heading-filters">
           <span class="headss">Availability</span>
-           <div class="cust-icons"><span class="one-plus ">+</span>
-              <span class="one-minus">-</span>  
-           </div>
+          <div class="cust-icons">
+            <span class="one-plus ">+</span>
+            <span class="one-minus">-</span>
+          </div>
         </div>
       </summary>
 
       <div>
         <div></div>
         <ul class="store-filter-ul">
-          
           <li>
-          <label class="custom-checkbox-label" for="instock_variants">
-            <input class="available_checkboxes" id="instock_variants" type="checkbox" value="true">
+            <label class="custom-checkbox-label" for="instock_variants">
+              <input class="available_checkboxes" id="instock_variants" type="checkbox" value="true">
               <span class="checkmark"></span>
-                <span><span class="visual-display__child"></span></span>
-                  <span>In stock</span>
-                </label>
-              </li>
-          
-          <li>
-              <label class="custom-checkbox-label" for="outofstock_variants">
-                <input class="available_checkboxes" id="outofstock_variants" type="checkbox" value="false">
-                  <span class="checkmark"></span>
-                  <span><span class="visual-display__child"></span></span>
-                  <span>Out of stock</span>
-              </label>
+              <span><span class="visual-display__child"></span></span>
+              <span>In stock</span>
+            </label>
           </li>
-        
+
+          <li>
+            <label class="custom-checkbox-label" for="outofstock_variants">
+              <input class="available_checkboxes" id="outofstock_variants" type="checkbox" value="false">
+              <span class="checkmark"></span>
+              <span><span class="visual-display__child"></span></span>
+              <span>Out of stock</span>
+            </label>
+          </li>
         </ul>
       </div>
     </details>
-      
-  <div class="both-btns">
-  <!-- <div class="apply-btn">
-              <input type="submit" value="Apply">
-            </div> -->
+
+    <div class="both-btns">
+      <!--
+        <div class="apply-btn">
+          <input type="submit" value="Apply">
+        </div>
+      -->
 
       <p>
-      <a class="clear-all-btn clearn-btn-div" href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear all</a>
-    </p>
-{% comment %}}
-    {%- for filter in collection.filters -%}
-      {%- if filter.type == "price_range" -%}
-        {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
-          <p>
-            <a href="{{ filter.url_to_remove }}">
-              {%- assign min_value = filter.min_value.value | default: 0 -%}
-              {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
-              {{ min_value | money }} - {{ max_value | money }} X
-            </a>
-          </p>
-        {%- endif -%}
-      {%- else -%}
-        {%- for filter_value in filter.active_values -%}
-          <p>
-            <a href="{{ filter_value.url_to_remove }}">
-              {{ filter.label }}: {{ filter_value.label }} X
-            </a>
-          </p>
-        {%- endfor -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {% endcomment %}
-    
-  </div>
-  
-</form>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
-    const checkedValues = [];
-
-    function getVariantDivs() {
-        // Fetch and return the latest variant_div elements from the DOM
-        return document.querySelectorAll('.custom-all-variants');
-    }
-
-    function updateVariantDisplay() {
-        console.log('Updating variant display');
-        const allVariantsDom = getVariantDivs();
-
-        if (checkedValues.length === 0) {
-            // If no checkboxes are checked, show all variant divs
-            allVariantsDom.forEach(function (variantDiv) {
-                variantDiv.style.display = 'block';
-            });
-        } else {
-            // If checkboxes are checked, filter variant divs based on checked values
-            allVariantsDom.forEach(function (variantDiv) {
-                const variantAvailability = variantDiv.getAttribute('data-availability');
-                if (checkedValues.includes(variantAvailability)) {
-                    variantDiv.style.display = 'block';
-                } else {
-                    variantDiv.style.display = 'none';
-                }
-            });
+        <a class="clear-all-btn clearn-btn-div" href="{{ collection.url }}?sort_by={{ collection.sort_by }}"
+          >Clear all</a
+        >
+      </p>
+      {% comment %}
         }
-    }
+        {%- for filter in collection.filters -%}
+          {%- if filter.type == "price_range" -%}
+            {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+              <p>
+                <a href="{{ filter.url_to_remove }}">
+                  {%- assign min_value = filter.min_value.value | default: 0 -%}
+                  {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+                  {{ min_value | money }} - {{ max_value | money }} X
+                </a>
+              </p>
+            {%- endif -%}
+          {%- else -%}
+            {%- for filter_value in filter.active_values -%}
+              <p>
+                <a href="{{ filter_value.url_to_remove }}">
+                  {{ filter.label }}: {{ filter_value.label }} X
+                </a>
+              </p>
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {% endcomment %}
+    </div>
+  </form>
 
-    // Attach change event listeners to checkboxes
-    availabilityCheckboxes.forEach(function (checkbox) {
-        checkbox.addEventListener('change', function () {
-            console.log('Checkbox change event');
-            // Update the array of checked values
-            if (checkbox.checked) {
-                checkedValues.push(checkbox.value);
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const availabilityCheckboxes = document.querySelectorAll('.available_checkboxes');
+        const checkedValues = [];
+
+        function getVariantDivs() {
+            // Fetch and return the latest variant_div elements from the DOM
+            return document.querySelectorAll('.custom-all-variants');
+        }
+
+        function updateVariantDisplay() {
+            console.log('Updating variant display');
+            const allVariantsDom = getVariantDivs();
+
+            if (checkedValues.length === 0) {
+                // If no checkboxes are checked, show all variant divs
+                allVariantsDom.forEach(function (variantDiv) {
+                    variantDiv.style.display = 'block';
+                });
             } else {
-                const index = checkedValues.indexOf(checkbox.value);
-                if (index !== -1) {
-                    checkedValues.splice(index, 1);
-                }
+                // If checkboxes are checked, filter variant divs based on checked values
+                allVariantsDom.forEach(function (variantDiv) {
+                    const variantAvailability = variantDiv.getAttribute('data-availability');
+                    if (checkedValues.includes(variantAvailability)) {
+                        variantDiv.style.display = 'block';
+                    } else {
+                        variantDiv.style.display = 'none';
+                    }
+                });
             }
-            updateVariantDisplay();
+        }
+
+        // Attach change event listeners to checkboxes
+        availabilityCheckboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                console.log('Checkbox change event');
+                // Update the array of checked values
+                if (checkbox.checked) {
+                    checkedValues.push(checkbox.value);
+                } else {
+                    const index = checkedValues.indexOf(checkbox.value);
+                    if (index !== -1) {
+                        checkedValues.splice(index, 1);
+                    }
+                }
+                updateVariantDisplay();
+            });
         });
+        updateVariantDisplay();
+
+
+
+      var collectionHandle = "{{ collection.handle }}";
+
+      window.addEventListener('filter-updated', async () => {
+        let form = document.querySelector('#filter_form');
+      const queryString = new URLSearchParams(new FormData(form)).toString();
+      // console.log(queryString);
+      // loading = true
+
+      try {
+        const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
+        // console.log("response", response);
+        const data = await response.text();
+        // console.log("data", data);
+        let html_div = document.createElement('div');
+        html_div.innerHTML = data;
+        let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
+        // console.log("html_dom", html_dom);
+        document.querySelector('#ProductGridContainer').innerHTML = html_dom;
+
+        // Update URL without refreshing the page
+        history.replaceState(null, null, '?' + queryString);
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        loading = false;
+      }
+        updateVariantDisplay();
+     });
     });
-    updateVariantDisplay();
-
-
-
-  var collectionHandle = "{{ collection.handle }}";
-
-  window.addEventListener('filter-updated', async () => {
-    let form = document.querySelector('#filter_form');
-  const queryString = new URLSearchParams(new FormData(form)).toString();
-  // console.log(queryString);
-  // loading = true
-
-  try {
-    const response = await fetch('/collections/' + collectionHandle + '?' + queryString);
-    // console.log("response", response);
-    const data = await response.text();
-    // console.log("data", data);
-    let html_div = document.createElement('div');
-    html_div.innerHTML = data;
-    let html_dom = html_div.querySelector('#ProductGridContainer').innerHTML;
-    // console.log("html_dom", html_dom);
-    document.querySelector('#ProductGridContainer').innerHTML = html_dom;
-
-    // Update URL without refreshing the page 
-    history.replaceState(null, null, '?' + queryString);
-  } catch (error) {
-    console.error('Error:', error);
-  } finally {
-    loading = false;
-  }
-    updateVariantDisplay();
- });
-});
-</script>
-
+  </script>
 </div>
 
-
 <script>
-  var detailsElements = document.querySelectorAll('.summary-global[data-disabled]');
+    var detailsElements = document.querySelectorAll('.summary-global[data-disabled]');
 
-  // Add an event listener to each element
-  detailsElements.forEach(function(detailsElement) {
-    detailsElement.addEventListener('click', function(event) {
-      // Prevent the default behavior of the details element
-      event.preventDefault();
+    // Add an event listener to each element
+    detailsElements.forEach(function(detailsElement) {
+      detailsElement.addEventListener('click', function(event) {
+        // Prevent the default behavior of the details element
+        event.preventDefault();
+      });
     });
+
+  // Assuming you have elements with the class 'heading-filters'
+  var elements = document.querySelectorAll('.summary-global');
+  elements.forEach(function(element) {
+      element.addEventListener('click', function() {
+          this.classList.toggle('heading-clicked');
+      });
   });
-  
-// Assuming you have elements with the class 'heading-filters'
-var elements = document.querySelectorAll('.summary-global');
-elements.forEach(function(element) {
-    element.addEventListener('click', function() {
-        this.classList.toggle('heading-clicked');
-    });
-});
 
- const all_checkboxes = document.querySelectorAll('.apply_checkbox input[type="checkbox"], .apply_checkbox input[type="checkbox"]');
- function applyStyles(checkbox) {
-      if (checkbox.checked) {
-        checkbox.classList.add("checked");
-      } else {
-        checkbox.classList.remove("checked");
+   const all_checkboxes = document.querySelectorAll('.apply_checkbox input[type="checkbox"], .apply_checkbox input[type="checkbox"]');
+   function applyStyles(checkbox) {
+        if (checkbox.checked) {
+          checkbox.classList.add("checked");
+        } else {
+          checkbox.classList.remove("checked");
+        }
       }
-    }
 
-   document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            // Get label element
-            var label = this.parentElement;
+     document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+          checkbox.addEventListener('change', function() {
+              // Get label element
+              var label = this.parentElement;
 
-            // Add or remove 'checked' class based on checkbox status
-            if (this.checked) {
-                label.classList.add('checked');
-            } else {
-                label.classList.remove('checked');
-            }
-        });
-    });
-    document.querySelectorAll('.available_checkboxes').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            // Get label element
-            var label = this.parentElement;
+              // Add or remove 'checked' class based on checkbox status
+              if (this.checked) {
+                  label.classList.add('checked');
+              } else {
+                  label.classList.remove('checked');
+              }
+          });
+      });
+      document.querySelectorAll('.available_checkboxes').forEach(function(checkbox) {
+          checkbox.addEventListener('change', function() {
+              // Get label element
+              var label = this.parentElement;
 
-            // Add or remove 'checked' class based on checkbox status
-            if (this.checked) {
-                label.classList.add('checked');
-            } else {
-                label.classList.remove('checked');
-            }
-        });
-    });
-  document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            // Get filter information from data attributes
-            var paramName = this.nextElementSibling.getAttribute('data-param-name');
-            var paramValue = this.nextElementSibling.getAttribute('data-value');
-          window.dispatchEvent(new Event('filter-updated'));
-          
-        });
-    });
+              // Add or remove 'checked' class based on checkbox status
+              if (this.checked) {
+                  label.classList.add('checked');
+              } else {
+                  label.classList.remove('checked');
+              }
+          });
+      });
+    document.querySelectorAll('.myCheckbox').forEach(function(checkbox) {
+          checkbox.addEventListener('change', function() {
+              // Get filter information from data attributes
+              var paramName = this.nextElementSibling.getAttribute('data-param-name');
+              var paramValue = this.nextElementSibling.getAttribute('data-value');
+            window.dispatchEvent(new Event('filter-updated'));
 
-  // document.addEventListener("DOMContentLoaded", function() {
-  //   // Get all checkboxes with the class 'myCheckbox'
-  //   const checkboxes = document.querySelectorAll('.myCheckbox');
+          });
+      });
 
-  //   // Add event listeners to each checkbox
-  //   checkboxes.forEach(function(checkbox) {
-  //     checkbox.addEventListener('change', function() {
-  //       // Get the associated label
-      
-  //     });
+    // document.addEventListener("DOMContentLoaded", function() {
+    //   // Get all checkboxes with the class 'myCheckbox'
+    //   const checkboxes = document.querySelectorAll('.myCheckbox');
 
-  //     // Trigger the change event initially to handle pre-checked checkboxes
-  //     checkbox.dispatchEvent(new Event('change'));
-  //   });
-  // });
-                // var filterValueCounts = '{{ filter_value.count }}';
-                //   var filterValueActive = '{{ filter_value.active }}';
-                //   console.log("filterValueCounts", filterValueCounts);
-                //   console.log("filterValueActive", filterValueActive);
-                  
-                //   var element = document.querySelector('.custom-checkbox-label');
-                //   console.log("element", element);
-                  
-                //   if (filterValueCounts == 0 && filterValueActive == 'false') {
-                //       console.log("Entering the if block");
-                //       console.log("filterValueActive", filterValueActive);
-                //       element.classList.add('disabled');
-                //       element.setAttribute('disabled', true);
-                //   } else {
-                //       console.log("Entering the else block");
-                //       element.classList.remove('disabled');
-                //       element.removeAttribute('disabled');
-                //   }
-              
-  
+    //   // Add event listeners to each checkbox
+    //   checkboxes.forEach(function(checkbox) {
+    //     checkbox.addEventListener('change', function() {
+    //       // Get the associated label
 
-// for Sorting filter values in reverse order
- 
-  /*
-  var ul = document.querySelectorAll('.store-filter-ul');
-  ul.forEach((item) =>{
-var lis =  Array.from(item.getElementsByTagName('li'));
+    //     });
 
-    lis.sort(function(a, b) {
-        return b.textContent.localeCompare(a.textContent);
-    });
-    
-    lis.forEach(function(li) {
-        item.removeChild(li);
-    });
+    //     // Trigger the change event initially to handle pre-checked checkboxes
+    //     checkbox.dispatchEvent(new Event('change'));
+    //   });
+    // });
+                  // var filterValueCounts = '{{ filter_value.count }}';
+                  //   var filterValueActive = '{{ filter_value.active }}';
+                  //   console.log("filterValueCounts", filterValueCounts);
+                  //   console.log("filterValueActive", filterValueActive);
 
-    lis.forEach(function(li) {
-        item.appendChild(li);
-    });
-    
-  })
-  */
+                  //   var element = document.querySelector('.custom-checkbox-label');
+                  //   console.log("element", element);
 
+                  //   if (filterValueCounts == 0 && filterValueActive == 'false') {
+                  //       console.log("Entering the if block");
+                  //       console.log("filterValueActive", filterValueActive);
+                  //       element.classList.add('disabled');
+                  //       element.setAttribute('disabled', true);
+                  //   } else {
+                  //       console.log("Entering the else block");
+                  //       element.classList.remove('disabled');
+                  //       element.removeAttribute('disabled');
+                  //   }
+
+
+
+  // for Sorting filter values in reverse order
+
+    /*
+    var ul = document.querySelectorAll('.store-filter-ul');
+    ul.forEach((item) =>{
+  var lis =  Array.from(item.getElementsByTagName('li'));
+
+      lis.sort(function(a, b) {
+          return b.textContent.localeCompare(a.textContent);
+      });
+
+      lis.forEach(function(li) {
+          item.removeChild(li);
+      });
+
+      lis.forEach(function(li) {
+          item.appendChild(li);
+      });
+
+    })
+    */
 </script>
 
 <style>
-.store-filter-ul li {
-  list-style-type: none;
-}
-.store-filter-ul li label{
-  font-family: unset !important;
-  font-weight: 400 !important;
-  font-size: 1.4rem;
-  margin-bottom: 0px;
-  color: #66646B;
-}
-
-
-
-.store-filter-ul li .custom-checkbox-label {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.store-filter-ul li .myCheckbox {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.store-filter-ul li .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 13px;
-  height: 13px;
-  border: 1px solid #d6d6d6;
-  background: #fff;
-  -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
-  transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
-  -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
-  transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
-  transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
-}
-
-/* On mouse-over, add a grey background color */
-
-
-/* When the checkbox is checked, add a blue background */
-  .store-filter-ul li .myCheckbox:checked ~ .checkmark, .store-filter-ul li .available_checkboxes:checked ~ .checkmark{
-  background-color: #000;
-  outline: 1px solid #000;
-  outline-offset: 1px;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-  .store-filter-ul li .checkmark:after {
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-  .store-filter-ul li .myCheckbox:checked ~ .checkmark:after, .store-filter-ul li .available_checkboxes:checked ~ .checkmark:after {
-  display: block;
-}
-
-  .apply_swatches {
-  display: flex;
-  flex-wrap: wrap;
-}
-.apply_swatches li label input {
-  width: 0;
-  height: 0;
-  margin: 0;
-  visibility: hidden;
-}
-.apply_swatches li label {
-  width: auto;
-  margin-right: 0.6rem;
-  margin-top: 0.4rem;
-  border: 1px solid #EFEFEF;
-  background: #fff;
-  padding: 0.8rem;
-  min-width: 4rem;
-  text-align: center;
-  -webkit-transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
-  transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
-  -o-transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
-  transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
-  transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
-}
-.apply_checkbox li {
-  font-size: 1.4rem;
-  font-weight: 400;
-  font-family: "GT America Regular","proxima-nova","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-style: normal;
-  margin-bottom: 0px;
-}
-.heading-filters span {
-  display: block;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: .03em;
-  margin-bottom: 0;
-  font-weight: 700;
-  color: #000;
-}
-.clear-all-btn{
-  background: #ef3f1e;
-  color: #fff !important;
-  cursor: pointer;
-  display: inline-block;
-  height: 41px;
-  line-height: 40px;
-  width: auto;
-  padding: 0 1em;
-  font-size: 1.5rem;
-  font-style: normal;
-  font-family: "proxima-nova-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-  font-weight: 900;
-  text-align: center;
-  border: 0;
-  outline: 0;
-  -webkit-transition: color .3s ease,background .3s ease;
-  -o-transition: color .3s ease,background .3s ease;
-  transition: color .3s ease,background .3s ease;
-  text-decoration: none;
-}
-summary::marker{
-  font-size: 0px;
-}
-.heading-filters {
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-}
-span.one-minus {
-  display: none;
-}
-.heading-clicked .one-minus{
-  display: block;
-}
-.heading-clicked .one-plus{
-  display: none;
-}
-.apply_checkbox li label input[type="checkbox"]:checked {
-  color: black; 
-  background-color: black; 
-}
-ul.store-filter-ul {
-  margin-top: 14px;
-}
-.cust-icons{
-  display: flex;
-}
-.one-plus, .one-minus {
-  margin-left: 10px;
-}
-.apply_swatches li .custom-checkbox-label.checked{
-  background: black;
-  color: #fff;
-  outline: 1px solid #000;
-  outline-offset: 1px;
-}
-.one-plus.hide, .one-minus.hide {
-  display: none;
-}
-
-
-
-.apply_checkbox li .custom-checkbox-label {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.apply_checkbox li .myCheckbox {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.apply_checkbox li .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 13px;
-  height: 13px;
-  border: 1px solid #d6d6d6;
-  background: #fff;
-  -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
-  transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
-  -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
-  transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
-  transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
-}
-
-/* On mouse-over, add a grey background color */
-
-
-/* When the checkbox is checked, add a blue background */
-.apply_checkbox li .myCheckbox:checked ~ .checkmark {
-  background-color: #000;
-  outline: 1px solid #000;
-  outline-offset: 1px;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.apply_checkbox li .checkmark:after {
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.apply_checkbox li .myCheckbox:checked ~ .checkmark:after {
-  display: block;
-}
-.apply_swatches li label span.checkmark {
-  display: none;
-}
-.apply_swatches li .custom-checkbox-label {
-  padding-left: 0px !important
-}
-.apply_swatches li .custom-checkbox-label {
-  padding-left: 0.8rem !important;
-  margin-bottom: 0px;
-}
-
-.clearn-btn-div {
-  margin-top: 20px;
-}
-.filter-group-display__submit {
-    margin-top: 15px;
-}
-  label.custom-checkbox-label {
-    text-transform: capitalize;
-}
-  .custom-checkbox-label[disabled] {
-  opacity: 0.5; 
-  pointer-events: none; 
+  .store-filter-ul li {
+    list-style-type: none;
   }
-  .apply-btn {
-    margin-top: 20px;
-}
-.both-btns {
+  .store-filter-ul li label{
+    font-family: unset !important;
+    font-weight: 400 !important;
+    font-size: 1.4rem;
+    margin-bottom: 0px;
+    color: #66646B;
+  }
+
+
+
+  .store-filter-ul li .custom-checkbox-label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Hide the browser's default checkbox */
+  .store-filter-ul li .myCheckbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Create a custom checkbox */
+  .store-filter-ul li .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #d6d6d6;
+    background: #fff;
+    -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+    -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
+  }
+
+  /* On mouse-over, add a grey background color */
+
+
+  /* When the checkbox is checked, add a blue background */
+    .store-filter-ul li .myCheckbox:checked ~ .checkmark, .store-filter-ul li .available_checkboxes:checked ~ .checkmark{
+    background-color: #000;
+    outline: 1px solid #000;
+    outline-offset: 1px;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+    .store-filter-ul li .checkmark:after {
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+    .store-filter-ul li .myCheckbox:checked ~ .checkmark:after, .store-filter-ul li .available_checkboxes:checked ~ .checkmark:after {
+    display: block;
+  }
+
+    .apply_swatches {
     display: flex;
-    align-items: self-start;
-    justify-content: space-between;
-}
-  .heading-filters .headss {
+    flex-wrap: wrap;
+  }
+  .apply_swatches li label input {
+    width: 0;
+    height: 0;
+    margin: 0;
+    visibility: hidden;
+  }
+  .apply_swatches li label {
+    width: auto;
+    margin-right: 0.6rem;
+    margin-top: 0.4rem;
+    border: 1px solid #EFEFEF;
+    background: #fff;
+    padding: 0.8rem;
+    min-width: 4rem;
+    text-align: center;
+    -webkit-transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+    transition: border 0.2s ease-in, background 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+    -o-transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
+    transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in;
+    transition: border 0.2s ease-in, background 0.2s ease-in, box-shadow 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+  }
+  .apply_checkbox li {
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-family: "GT America Regular","proxima-nova","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-style: normal;
+    margin-bottom: 0px;
+  }
+  .heading-filters span {
+    display: block;
+    font-size: 20px;
     text-transform: uppercase;
     letter-spacing: .03em;
     margin-bottom: 0;
-    font-size: 2rem;
     font-weight: 700;
     color: #000;
-    font-family: "GT America Compressed Bold","proxima-nova-extra-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
+  }
+  .clear-all-btn{
+    background: #ef3f1e;
+    color: #fff !important;
+    cursor: pointer;
+    display: inline-block;
+    height: 41px;
+    line-height: 40px;
+    width: auto;
+    padding: 0 1em;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-family: "proxima-nova-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    border: 0;
+    outline: 0;
+    -webkit-transition: color .3s ease,background .3s ease;
+    -o-transition: color .3s ease,background .3s ease;
+    transition: color .3s ease,background .3s ease;
+    text-decoration: none;
+  }
+  summary::marker{
+    font-size: 0px;
+  }
+  .heading-filters {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+  }
+  span.one-minus {
+    display: none;
+  }
+  .heading-clicked .one-minus{
+    display: block;
+  }
+  .heading-clicked .one-plus{
+    display: none;
+  }
+  .apply_checkbox li label input[type="checkbox"]:checked {
+    color: black;
+    background-color: black;
+  }
+  ul.store-filter-ul {
+    margin-top: 14px;
+  }
+  .cust-icons{
+    display: flex;
+  }
+  .one-plus, .one-minus {
+    margin-left: 10px;
+  }
+  .apply_swatches li .custom-checkbox-label.checked{
+    background: black;
+    color: #fff;
+    outline: 1px solid #000;
+    outline-offset: 1px;
+  }
+  .one-plus.hide, .one-minus.hide {
+    display: none;
+  }
 
-.available_checkboxes {
-    left: -2px;
-    z-index: 2;
-    width: auto !important;
-    height: auto !important;
+
+
+  .apply_checkbox li .custom-checkbox-label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Hide the browser's default checkbox */
+  .apply_checkbox li .myCheckbox {
     position: absolute;
     opacity: 0;
-}
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  /* Create a custom checkbox */
+  .apply_checkbox li .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #d6d6d6;
+    background: #fff;
+    -webkit-transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,-webkit-box-shadow .2s ease-in;
+    -o-transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in;
+    transition: border .2s ease-in,background .2s ease-in,box-shadow .2s ease-in,-webkit-box-shadow .2s ease-in;
+  }
+
+  /* On mouse-over, add a grey background color */
+
+
+  /* When the checkbox is checked, add a blue background */
+  .apply_checkbox li .myCheckbox:checked ~ .checkmark {
+    background-color: #000;
+    outline: 1px solid #000;
+    outline-offset: 1px;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .apply_checkbox li .checkmark:after {
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+  .apply_checkbox li .myCheckbox:checked ~ .checkmark:after {
+    display: block;
+  }
+  .apply_swatches li label span.checkmark {
+    display: none;
+  }
+  .apply_swatches li .custom-checkbox-label {
+    padding-left: 0px !important
+  }
+  .apply_swatches li .custom-checkbox-label {
+    padding-left: 0.8rem !important;
+    margin-bottom: 0px;
+  }
+
+  .clearn-btn-div {
+    margin-top: 20px;
+  }
+  .filter-group-display__submit {
+      margin-top: 15px;
+  }
+    label.custom-checkbox-label {
+      text-transform: capitalize;
+  }
+    .custom-checkbox-label[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+    }
+    .apply-btn {
+      margin-top: 20px;
+  }
+  .both-btns {
+      display: flex;
+      align-items: self-start;
+      justify-content: space-between;
+  }
+    .heading-filters .headss {
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      margin-bottom: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #000;
+      font-family: "GT America Compressed Bold","proxima-nova-extra-condensed","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+
+  .available_checkboxes {
+      left: -2px;
+      z-index: 2;
+      width: auto !important;
+      height: auto !important;
+      position: absolute;
+      opacity: 0;
+  }
 </style>
